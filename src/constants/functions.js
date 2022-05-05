@@ -1,19 +1,19 @@
-import { Image } from 'react-native';
-import { Asset } from 'expo-asset';
-import * as Font from 'expo-font';
+import { Image } from "react-native";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
 
-import preloadFonts from './preloadFonts';
+// import preloadFonts from './preloadFonts';
 // import preloadImages from './preloadImages';
 
 // cache fonts
 // /////////////////////////////////////////////////////////////////////////////
-const cacheFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
+const cacheFonts = fonts => fonts.map(font => Font.loadAsync(font));
 
 // cache images
 // /////////////////////////////////////////////////////////////////////////////
-const cacheImages = (images) =>
-  Object.values(images).map((image) => {
-    if (typeof image === 'string') {
+const cacheImages = images =>
+  Object.values(images).map(image => {
+    if (typeof image === "string") {
       return Image.prefetch(image);
     }
 
@@ -22,18 +22,18 @@ const cacheImages = (images) =>
 
 // preload async
 // /////////////////////////////////////////////////////////////////////////////
-const loadAssetsAsync = async () => {
-  // preload assets
-  const fontAssets = await cacheFonts(preloadFonts);
-  // const imageAssets = cacheImages(preloadImages);
+// const loadAssetsAsync = async () => {
+//   // preload assets
+//   // const fontAssets = await cacheFonts(preloadFonts);
+//   // const imageAssets = cacheImages(preloadImages);
 
-  // promise load all
-  return Promise.all([...fontAssets]);
-};
+//   // promise load all
+//   return Promise.all([...fontAssets]);
+// };
 
 // format seconds
 // /////////////////////////////////////////////////////////////////////////////
-const formatTime = (sec) => {
+const formatTime = sec => {
   const padTime = (num, size) => `000${num}`.slice(size * -1);
   const time = parseFloat(sec).toFixed(3);
   const minutes = Math.floor(time / 60) % 60;
@@ -45,6 +45,6 @@ const formatTime = (sec) => {
 export default {
   cacheFonts,
   cacheImages,
-  loadAssetsAsync,
+  // loadAssetsAsync,
   formatTime
 };

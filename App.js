@@ -1,7 +1,7 @@
-import 'react-native-gesture-handler';
-import React, {Component, Fragment} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import NavigationContainer from './src/navigation/Stack';
+import "react-native-gesture-handler";
+import React, { Component, Fragment } from "react";
+import { StatusBar } from "expo-status-bar";
+import NavigationContainer from "./src/navigation/Stack";
 
 class App extends Component {
   constructor() {
@@ -9,11 +9,11 @@ class App extends Component {
 
     this.state = {
       currentSongData: {
-        album: 'Swimming',
-        artist: 'Mac Miller',
-        image: 'swimming',
+        album: "Swimming",
+        artist: "Mac Miller",
+        image: "swimming",
         length: 312,
-        title: 'So It Goes'
+        title: "So It Goes"
       },
       isLoading: true,
       toggleTabBar: false
@@ -36,33 +36,22 @@ class App extends Component {
   }
 
   render() {
-    const { currentSongData, isLoading, toggleTabBar } = this.state;
-
-    // if (isLoading) {
-    //   return (
-    //     <AppLoading
-    //       startAsync={() => func.loadAssetsAsync}
-    //       onFinish={() => this.setState({ isLoading: false })}
-    //       onError={() => {
-    //         // console.warn
-    //       }}
-    //     />
-    //   );
-    // }
+    const { currentSongData, toggleTabBar } = this.state;
 
     return (
       <Fragment>
-       <StatusBar barStyle="light-content" />
-       <NavigationContainer screenProps={{
+        <StatusBar barStyle="light-content" />
+        <NavigationContainer
+          screenProps={{
             currentSongData,
             changeSong: this.setCurrentSongData,
             toggleTabBarState: toggleTabBar,
             setToggleTabBar: this.setToggleTabBar
-          }} />
+          }}
+        />
       </Fragment>
     );
   }
 }
 
-export default App
-
+export default App;

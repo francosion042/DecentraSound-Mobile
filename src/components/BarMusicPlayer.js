@@ -1,9 +1,9 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import { FontAwesome } from '@expo/vector-icons';
-import { colors, device, gStyle } from '../constants';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { withNavigation } from "react-navigation";
+import { FontAwesome } from "@expo/vector-icons";
+import { colors, device, gStyle } from "../constants";
 
 class BarMusicPlayer extends React.Component {
   constructor() {
@@ -19,13 +19,13 @@ class BarMusicPlayer extends React.Component {
   }
 
   toggleFavorite() {
-    this.setState((prev) => ({
+    this.setState(prev => ({
       favorited: !prev.favorited
     }));
   }
 
   togglePlay() {
-    this.setState((prev) => ({
+    this.setState(prev => ({
       paused: !prev.paused
     }));
   }
@@ -35,13 +35,13 @@ class BarMusicPlayer extends React.Component {
     const { favorited, paused } = this.state;
 
     const favoriteColor = favorited ? colors.brandPrimary : colors.white;
-    const favoriteIcon = favorited ? 'heart' : 'heart-o';
-    const iconPlay = paused ? 'play-circle' : 'pause-circle';
+    const favoriteIcon = favorited ? "heart" : "heart-o";
+    const iconPlay = paused ? "play-circle" : "pause-circle";
 
     return (
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => navigation.navigate('ModalMusicPlayer')}
+        onPress={() => navigation.navigate("ModalMusicPlayer")}
         style={styles.container}
       >
         <TouchableOpacity
@@ -98,14 +98,14 @@ BarMusicPlayer.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'center',
+    alignSelf: "center",
     backgroundColor: colors.grey,
     borderBottomColor: colors.blackBg,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingVertical: 8,
-    width: '100%'
+    width: "100%"
   },
   containerIcon: {
     ...gStyle.flexCenter,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   containerSong: {
     ...gStyle.flexRowCenter,
-    overflow: 'hidden',
+    overflow: "hidden",
     width: device.width - 100
   },
   title: {
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     ...gStyle.text10,
     color: colors.brandPrimary,
     marginLeft: 4,
-    textTransform: 'uppercase'
+    textTransform: "uppercase"
   }
 });
 

@@ -1,11 +1,11 @@
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform } from "react-native";
 
 // android
-const android = Platform.OS === 'android';
+const android = Platform.OS === "android";
 
-const iOS = Platform.OS === 'ios';
-const web = Platform.OS === 'web';
-const windowInfo = Dimensions.get('window');
+const iOS = Platform.OS === "ios";
+const web = Platform.OS === "web";
+const windowInfo = Dimensions.get("window");
 const { height, width } = windowInfo;
 const aspectRatio = height / width;
 

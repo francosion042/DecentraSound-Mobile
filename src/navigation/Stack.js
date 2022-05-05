@@ -1,12 +1,12 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
 // navigation
-import TabNavigation from './TabNavigation';
+import TabNavigation from "./TabNavigation";
 
 // screens
-import ModalMusicPlayer from '../screens/playing/ModalMusicPlayer';
-import ModalMoreOptions from '../screens/playing/ModalMoreOptions';
+import ModalMusicPlayer from "../screens/playing/ModalMusicPlayer";
+import ModalMoreOptions from "../screens/playing/ModalMoreOptions";
 
 const StackNavigator = createStackNavigator(
   {
@@ -20,14 +20,14 @@ const StackNavigator = createStackNavigator(
     ModalMoreOptions: {
       screen: ModalMoreOptions,
       navigationOptions: {
-        cardStyle: { backgroundColor: 'transparent' }
+        cardStyle: { backgroundColor: "transparent" }
       }
     }
   },
   {
-    headerMode: 'none',
-    initialRouteName: 'TabNavigation',
-    mode: 'modal'
+    headerMode: "none",
+    initialRouteName: "TabNavigation",
+    mode: "modal"
   }
 );
 

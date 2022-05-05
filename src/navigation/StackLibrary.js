@@ -1,12 +1,12 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { createStackNavigator } from 'react-navigation-stack';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { createStackNavigator } from "react-navigation-stack";
 
 // screens
-import LibraryScreen from '../screens/library/Library';
+import LibraryScreen from "../screens/library/Library";
 
 // icons
-import SvgTabLibrary from '../components/icons/Svg.TabLibrary';
+import SvgTabLibrary from "../components/icons/Svg.TabLibrary";
 
 const Icon = ({ focused }) => <SvgTabLibrary active={focused} />;
 
@@ -22,9 +22,9 @@ export default createStackNavigator(
     }
   },
   {
-    headerMode: 'none',
+    headerMode: "none",
     navigationOptions: {
-      tabBarLabel: 'Library',
+      tabBarLabel: "Library",
       tabBarIcon: Icon
     }
   }

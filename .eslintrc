@@ -1,0 +1,7 @@
+{
+    "extends": "@react-native-community",
+    "rules": {
+        "quotes": ["off", "double"],
+        "comma-dangle": "off"
+    }
+}

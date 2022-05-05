@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import Slider from '@react-native-community/slider';
-import { colors, device, func, gStyle } from '../../constants';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { Feather, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import Slider from "@react-native-community/slider";
+import { colors, device, func, gStyle } from "../../constants";
 
 // components
-import ModalHeader from '../../components/ModalHeader';
-import TouchIcon from '../../components/TouchIcon';
+import ModalHeader from "../../components/ModalHeader";
+import TouchIcon from "../../components/TouchIcon";
 
 class ModalMusicPlayer extends Component {
   constructor() {
@@ -23,13 +23,13 @@ class ModalMusicPlayer extends Component {
   }
 
   toggleFavorite() {
-    this.setState((prev) => ({
+    this.setState(prev => ({
       favorited: !prev.favorited
     }));
   }
 
   togglePlay() {
-    this.setState((prev) => ({
+    this.setState(prev => ({
       paused: !prev.paused
     }));
   }
@@ -40,8 +40,8 @@ class ModalMusicPlayer extends Component {
     const { favorited, paused } = this.state;
 
     const favoriteColor = favorited ? colors.brandPrimary : colors.white;
-    const favoriteIcon = favorited ? 'heart' : 'heart-o';
-    const iconPlay = paused ? 'play-circle' : 'pause-circle';
+    const favoriteIcon = favorited ? "heart" : "heart-o";
+    const iconPlay = paused ? "play-circle" : "pause-circle";
 
     const timePast = func.formatTime(0);
     const timeLeft = func.formatTime(currentSongData.length);
@@ -56,7 +56,10 @@ class ModalMusicPlayer extends Component {
         />
 
         <View style={gStyle.p3}>
-          <Image source={require("../../../assets/icon.png")} style={styles.image} />
+          <Image
+            source={require("../../../assets/icon.png")}
+            style={styles.image}
+          />
 
           <View style={[gStyle.flexRowSpace, styles.containerDetails]}>
             <View style={styles.containerSong}>
@@ -161,9 +164,9 @@ const styles = StyleSheet.create({
     color: colors.greyInactive
   },
   containerFavorite: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: "center"
   },
   containerTime: {
     ...gStyle.flexRowSpace

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
+import * as React from "react";
+import PropTypes from "prop-types";
 import {
   FlatList,
   Image,
@@ -7,9 +7,9 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { withNavigation } from 'react-navigation';
-import { colors, gStyle } from '../constants';
+} from "react-native";
+import { withNavigation } from "react-navigation";
+import { colors, gStyle } from "../constants";
 
 const AlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
   <View style={styles.container}>
@@ -25,12 +25,15 @@ const AlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
         <TouchableOpacity
           activeOpacity={gStyle.activeOpacity}
           hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-          onPress={() => navigation.navigate('Album', { title: item.title })}
+          onPress={() => navigation.navigate("Album", { title: item.title })}
           style={styles.item}
         >
           <View style={styles.image}>
             {item.image && (
-              <Image source={require("../../assets/icon.png")} style={styles.image} />
+              <Image
+                source={require("../../assets/icon.png")}
+                style={styles.image}
+              />
             )}
           </View>
           <Text style={styles.title}>{item.title}</Text>
@@ -59,7 +62,7 @@ AlbumsHorizontal.propTypes = {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 32,
-    width: '100%'
+    width: "100%"
   },
   containerContent: {
     paddingLeft: 16
@@ -68,13 +71,13 @@ const styles = StyleSheet.create({
     ...gStyle.textBold18,
     color: colors.white,
     paddingBottom: 6,
-    textAlign: 'center'
+    textAlign: "center"
   },
   tagline: {
     ...gStyle.text12,
     color: colors.greyInactive,
     paddingBottom: 6,
-    textAlign: 'center'
+    textAlign: "center"
   },
   item: {
     marginRight: 16,
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     ...gStyle.textBold12,
     color: colors.white,
     marginTop: 4,
-    textAlign: 'center'
+    textAlign: "center"
   }
 });
 

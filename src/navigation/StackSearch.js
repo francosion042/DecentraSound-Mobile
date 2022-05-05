@@ -1,12 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types';
-import { createStackNavigator } from 'react-navigation-stack';
+import React from "react";
+import PropTypes from "prop-types";
+import { createStackNavigator } from "react-navigation-stack";
 
 // screens
-import SearchScreen from '../screens/search/Search';
+import SearchScreen from "../screens/search/Search";
 
 // icons
-import SvgTabSearch from '../components/icons/Svg.TabSearch';
+import SvgTabSearch from "../components/icons/Svg.TabSearch";
 
 const Icon = ({ focused }) => <SvgTabSearch active={focused} />;
 
@@ -22,9 +22,9 @@ export default createStackNavigator(
     }
   },
   {
-    headerMode: 'none',
+    headerMode: "none",
     navigationOptions: {
-      tabBarLabel: 'Search',
+      tabBarLabel: "Search",
       tabBarIcon: Icon
     }
   }

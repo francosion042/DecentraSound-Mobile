@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { colors } from '../constants';
+import * as React from "react";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import { colors } from "../constants";
 
 // navigation stacks
-import StackHome from './StackHome';
-import StackSearch from './StackSearch';
-import StackLibrary from './StackLibrary';
+import StackHome from "./StackHome";
+import StackSearch from "./StackSearch";
+import StackLibrary from "./StackLibrary";
 
 // components
-import CustomTabBar from '../components/CustomTabBar';
+import CustomTabBar from "../components/CustomTabBar";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
@@ -17,8 +17,8 @@ const BottomTabNavigator = createBottomTabNavigator(
     StackLibrary
   },
   {
-    initialRouteName: 'StackHome',
-    tabBarComponent: (props) => <CustomTabBar {...props} />,
+    initialRouteName: "StackHome",
+    tabBarComponent: props => <CustomTabBar {...props} />,
     tabBarOptions: {
       activeTintColor: colors.white,
       inactiveTintColor: colors.greyInactive,

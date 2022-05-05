@@ -1,7 +1,7 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { TouchableOpacity } from 'react-native';
-import { gStyle } from '../constants';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { TouchableOpacity } from "react-native";
+import { gStyle } from "../constants";
 
 const TouchIcon = ({ icon, iconSize, onPress, style }) => (
   <TouchableOpacity

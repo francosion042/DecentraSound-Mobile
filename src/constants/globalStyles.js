@@ -1,5 +1,5 @@
-import colors from './colors';
-import fonts from './fonts';
+import colors from "./colors";
+import fonts from "./fonts";
 
 // space grid, some use 8pt grid, some 5pt, this is setting one place then done
 const spaceGrid = 8;
@@ -11,34 +11,34 @@ export default {
     flex: 1
   },
   containerAbsolute: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    width: '100%',
+    width: "100%",
     zIndex: 50
   },
 
   // flex
   // ///////////////////////////////////////////////////////////////////////////
   flexCenter: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   },
   flexRow: {
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   flexRowCenterAlign: {
-    alignItems: 'center',
-    flexDirection: 'row'
+    alignItems: "center",
+    flexDirection: "row"
   },
   flexRowCenter: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center'
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center"
   },
   flexRowSpace: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   flex1: { flex: 1 },
   flex2: { flex: 2 },

@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, View } from 'react-native';
-import { colors, device, gStyle } from '../constants';
+import React from "react";
+import PropTypes from "prop-types";
+import { StyleSheet, Text, View } from "react-native";
+import { colors, device, gStyle } from "../constants";
 
 // components
-import TouchIcon from './TouchIcon';
+import TouchIcon from "./TouchIcon";
 
 const ModalHeader = ({ left, leftPress, right, rightPress, style, text }) => (
   <View style={[styles.container, style]}>
@@ -49,30 +49,30 @@ ModalHeader.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingHorizontal: 24,
     paddingTop: device.iPhoneNotch ? 48 : 24
   },
   containerText: {
-    alignItems: 'center',
+    alignItems: "center",
     flex: 5,
-    justifyContent: 'center'
+    justifyContent: "center"
   },
   text: {
     ...gStyle.textBold16,
     color: colors.white,
-    textAlign: 'center'
+    textAlign: "center"
   },
   left: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: "center"
   },
   right: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: "center"
   }
 });
 

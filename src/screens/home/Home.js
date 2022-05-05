@@ -1,15 +1,15 @@
-import React, {Component, Fragment} from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import { colors, device, gStyle } from '../../constants';
+import React, { Component, Fragment } from "react";
+import { Animated, StyleSheet, View } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { colors, device, gStyle } from "../../constants";
 
 // components
-import AlbumsHorizontal from '../../components/AlbumsHorizontal';
+import AlbumsHorizontal from "../../components/AlbumsHorizontal";
 
 // mock data
-import heavyRotation from '../../mockdata/heavyRotation.json';
-import jumpBackIn from '../../mockdata/jumpBackIn.json';
-import recentlyPlayed from '../../mockdata/recentlyPlayed.json';
+import heavyRotation from "../../mockdata/heavyRotation.json";
+import jumpBackIn from "../../mockdata/jumpBackIn.json";
+import recentlyPlayed from "../../mockdata/recentlyPlayed.json";
 
 class Home extends Component {
   constructor() {
@@ -26,13 +26,13 @@ class Home extends Component {
     const opacityIn = scrollY.interpolate({
       inputRange: [0, 128],
       outputRange: [0, 1],
-      extrapolate: 'clamp'
+      extrapolate: "clamp"
     });
 
     const opacityOut = scrollY.interpolate({
       inputRange: [0, 88],
       outputRange: [1, 0],
-      extrapolate: 'clamp'
+      extrapolate: "clamp"
     });
 
     return (
@@ -81,20 +81,20 @@ const styles = StyleSheet.create({
   iPhoneNotch: {
     backgroundColor: colors.black70,
     height: 44,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
-    width: '100%',
+    width: "100%",
     zIndex: 20
   },
   containerHeader: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    alignItems: "flex-end",
+    flexDirection: "row",
+    justifyContent: "flex-end",
     paddingHorizontal: 16,
     paddingTop: device.iPhoneNotch ? 60 : 36,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
-    width: '100%',
+    width: "100%",
     zIndex: 10
   }
 });

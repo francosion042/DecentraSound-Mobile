@@ -1,7 +1,7 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
-import { colors } from '../constants';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Svg, { Defs, LinearGradient, Rect, Stop } from "react-native-svg";
+import { colors } from "../constants";
 
 const SvgLinearGradient = ({ fill, height }) => (
   <Svg height={height} width="100%">

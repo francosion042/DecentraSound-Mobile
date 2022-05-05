@@ -1,8 +1,8 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Feather, Ionicons } from '@expo/vector-icons';
-import { colors, gStyle } from '../constants';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Feather, Ionicons } from "@expo/vector-icons";
+import { colors, gStyle } from "../constants";
 
 const LineItemSong = ({ active, downloaded, onPress, songData }) => {
   const activeColor = active ? colors.brandPrimary : colors.white;
@@ -57,11 +57,11 @@ LineItemSong.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     padding: 16,
-    width: '100%'
+    width: "100%"
   },
   title: {
     ...gStyle.text16,
@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
     marginBottom: 4
   },
   circleDownloaded: {
-    alignItems: 'center',
+    alignItems: "center",
     backgroundColor: colors.brandPrimary,
     borderRadius: 7,
     height: 14,
-    justifyContent: 'center',
+    justifyContent: "center",
     marginRight: 8,
     width: 14
   },
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     color: colors.greyInactive
   },
   containerRight: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
     flex: 1
   }
 });

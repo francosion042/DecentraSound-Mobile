@@ -1,14 +1,14 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {
   Feather,
   Entypo,
   MaterialIcons,
   MaterialCommunityIcons,
   FontAwesome
-} from '@expo/vector-icons';
-import { colors, gStyle } from '../constants';
+} from "@expo/vector-icons";
+import { colors, gStyle } from "../constants";
 
 const LineItemCategory = ({
   icon,
@@ -21,22 +21,22 @@ const LineItemCategory = ({
 
   switch (iconLibrary) {
     default:
-    case 'Feather':
+    case "Feather":
       iconDisplay = (
         <Feather color={colors.greyInactive} name={icon} size={24} />
       );
       break;
-    case 'Entypo':
+    case "Entypo":
       iconDisplay = (
         <Entypo color={colors.greyInactive} name={icon} size={24} />
       );
       break;
-    case 'MaterialIcons':
+    case "MaterialIcons":
       iconDisplay = (
         <MaterialIcons color={colors.greyInactive} name={icon} size={24} />
       );
       break;
-    case 'MaterialCommunityIcons':
+    case "MaterialCommunityIcons":
       iconDisplay = (
         <MaterialCommunityIcons
           color={colors.greyInactive}
@@ -45,7 +45,7 @@ const LineItemCategory = ({
         />
       );
       break;
-    case 'FontAwesome':
+    case "FontAwesome":
       iconDisplay = (
         <FontAwesome color={colors.greyInactive} name={icon} size={24} />
       );
@@ -74,7 +74,7 @@ const LineItemCategory = ({
 
 LineItemCategory.defaultProps = {
   disableRightSide: null,
-  iconLibrary: 'Feather'
+  iconLibrary: "Feather"
 };
 
 LineItemCategory.propTypes = {
@@ -90,12 +90,12 @@ LineItemCategory.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingHorizontal: 24,
     paddingVertical: 10,
-    width: '100%'
+    width: "100%"
   },
   title: {
     ...gStyle.text14,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     marginLeft: 16
   },
   containerRight: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
     flex: 1
   }
 });

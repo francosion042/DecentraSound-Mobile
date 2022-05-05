@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {
   Text,
   View,
@@ -8,17 +8,17 @@ import {
   ScrollView,
   StyleSheet,
   Image
-} from 'react-native';
-import { device, gStyle, images, colors, fonts } from '../../constants';
+} from "react-native";
+import { device, gStyle, images, colors, fonts } from "../../constants";
 
 // components
-import LineItemCategory from '../../components/LineItemCategory';
+import LineItemCategory from "../../components/LineItemCategory";
 
 // mock data
-import moreOptions from '../../mockdata/menuMoreOptions.json';
+import moreOptions from "../../mockdata/menuMoreOptions.json";
 
 const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
-  const album = navigation.getParam('album');
+  const album = navigation.getParam("album");
 
   return (
     <React.Fragment>
@@ -52,7 +52,7 @@ const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
           </Text>
         </View>
 
-        {Object.keys(moreOptions).map((index) => {
+        {Object.keys(moreOptions).map(index => {
           const item = moreOptions[index];
 
           return (
@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   transparent: {
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent"
   },
   container: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingTop: device.iPhoneNotch ? 94 : 50
   },
   containerImage: {
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 8,
     paddingHorizontal: 24,
-    textAlign: 'center'
+    textAlign: "center"
   },
   albumInfo: {
     color: colors.greyInactive,
