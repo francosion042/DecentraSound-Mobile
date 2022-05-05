@@ -1,46 +1,68 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {Component, Fragment} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import AppLoading from 'expo-app-loading';
-import { func } from './src/constants';
 import NavigationContainer from './src/navigation/Stack';
 
-export default function App() {
+class App extends Component {
+  constructor() {
+    super();
 
-
-  const [currentSongData, setCurrentSongData] = useState({
+    this.state = {
+      currentSongData: {
         album: 'Swimming',
         artist: 'Mac Miller',
         image: 'swimming',
         length: 312,
         title: 'So It Goes'
-      })
-  const [toggleTabBar, setToggleTabBar] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+      },
+      isLoading: true,
+      toggleTabBar: false
+    };
 
-  if (isLoading) {
-      return (
-        <AppLoading
-          onError={() => {
-            // console.warn
-          }}
-          onFinish={() => setIsLoading(false)}
-          startAsync={func.loadAssetsAsync}
-        />
-      );
-    }
+    this.setCurrentSongData = this.setCurrentSongData.bind(this);
+    this.setToggleTabBar = this.setToggleTabBar.bind(this);
+  }
 
-  return (
-    <>
-      <StatusBar barStyle="light-content" />
-      <NavigationContainer screenProps={{
+  setToggleTabBar() {
+    this.setState(({ toggleTabBar }) => ({
+      toggleTabBar: !toggleTabBar
+    }));
+  }
+
+  setCurrentSongData(data) {
+    this.setState({
+      currentSongData: data
+    });
+  }
+
+  render() {
+    const { currentSongData, isLoading, toggleTabBar } = this.state;
+
+    // if (isLoading) {
+    //   return (
+    //     <AppLoading
+    //       startAsync={() => func.loadAssetsAsync}
+    //       onFinish={() => this.setState({ isLoading: false })}
+    //       onError={() => {
+    //         // console.warn
+    //       }}
+    //     />
+    //   );
+    // }
+
+    return (
+      <Fragment>
+       <StatusBar barStyle="light-content" />
+       <NavigationContainer screenProps={{
             currentSongData,
-            changeSong: setCurrentSongData,
+            changeSong: this.setCurrentSongData,
             toggleTabBarState: toggleTabBar,
-            setToggleTabBar: setToggleTabBar
+            setToggleTabBar: this.setToggleTabBar
           }} />
-    </>
-    
-  );
+      </Fragment>
+    );
+  }
 }
+
+export default App
 

@@ -56,17 +56,17 @@ export default {
 
   // text
   // ///////////////////////////////////////////////////////////////////////////
-  textSpotify10: { fontFamily: fonts.spotifyRegular, fontSize: 10 },
-  textSpotify12: { fontFamily: fonts.spotifyRegular, fontSize: 12 },
-  textSpotify14: { fontFamily: fonts.spotifyRegular, fontSize: 14 },
-  textSpotify16: { fontFamily: fonts.spotifyRegular, fontSize: 16 },
-  textSpotify18: { fontFamily: fonts.spotifyRegular, fontSize: 18 },
-  textSpotifyBold12: { fontFamily: fonts.spotifyBold, fontSize: 12 },
-  textSpotifyBold16: { fontFamily: fonts.spotifyBold, fontSize: 16 },
-  textSpotifyBold18: { fontFamily: fonts.spotifyBold, fontSize: 18 },
-  textSpotifyBold20: { fontFamily: fonts.spotifyBold, fontSize: 20 },
-  textSpotifyBold22: { fontFamily: fonts.spotifyBold, fontSize: 22 },
-  textSpotifyBold24: { fontFamily: fonts.spotifyBold, fontSize: 24 },
+  text10: { fontFamily: fonts.regular, fontSize: 10 },
+  text12: { fontFamily: fonts.regular, fontSize: 12 },
+  text14: { fontFamily: fonts.regular, fontSize: 14 },
+  text16: { fontFamily: fonts.regular, fontSize: 16 },
+  text18: { fontFamily: fonts.regular, fontSize: 18 },
+  textBold12: { fontFamily: fonts.bold, fontSize: 12 },
+  textBold16: { fontFamily: fonts.bold, fontSize: 16 },
+  textBold18: { fontFamily: fonts.bold, fontSize: 18 },
+  textBold20: { fontFamily: fonts.bold, fontSize: 20 },
+  textBold22: { fontFamily: fonts.bold, fontSize: 22 },
+  textBold24: { fontFamily: fonts.bold, fontSize: 24 },
 
   // spacers
   // ///////////////////////////////////////////////////////////////////////////

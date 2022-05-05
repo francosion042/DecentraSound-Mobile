@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     paddingTop: 12
   },
   playlistTitle: {
-    ...gStyle.textSpotifyBold22,
+    ...gStyle.textBold22,
     color: colors.white
   }
 });

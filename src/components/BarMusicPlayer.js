@@ -117,15 +117,15 @@ const styles = StyleSheet.create({
     width: device.width - 100
   },
   title: {
-    ...gStyle.textSpotify12,
+    ...gStyle.text12,
     color: colors.white
   },
   artist: {
-    ...gStyle.textSpotify12,
+    ...gStyle.text12,
     color: colors.greyLight
   },
   device: {
-    ...gStyle.textSpotify10,
+    ...gStyle.text10,
     color: colors.brandPrimary,
     marginLeft: 4,
     textTransform: 'uppercase'

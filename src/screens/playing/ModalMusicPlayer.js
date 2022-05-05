@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
@@ -9,7 +9,7 @@ import { colors, device, func, gStyle } from '../../constants';
 import ModalHeader from '../../components/ModalHeader';
 import TouchIcon from '../../components/TouchIcon';
 
-class ModalMusicPlayer extends React.Component {
+class ModalMusicPlayer extends Component {
   constructor() {
     super();
 
@@ -153,11 +153,11 @@ const styles = StyleSheet.create({
     flex: 6
   },
   song: {
-    ...gStyle.textSpotifyBold24,
+    ...gStyle.textBold24,
     color: colors.white
   },
   artist: {
-    ...gStyle.textSpotify18,
+    ...gStyle.text18,
     color: colors.greyInactive
   },
   containerFavorite: {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     ...gStyle.flexRowSpace
   },
   time: {
-    ...gStyle.textSpotify10,
+    ...gStyle.text10,
     color: colors.greyInactive
   },
   containerControls: {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, View } from 'react-native';
 import { colors, device, gStyle } from '../constants';
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   text: {
-    ...gStyle.textSpotifyBold16,
+    ...gStyle.textBold16,
     color: colors.white,
     textAlign: 'center'
   },

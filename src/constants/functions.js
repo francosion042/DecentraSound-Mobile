@@ -24,11 +24,11 @@ const cacheImages = (images) =>
 // /////////////////////////////////////////////////////////////////////////////
 const loadAssetsAsync = async () => {
   // preload assets
-  const fontAssets = cacheFonts(preloadFonts);
+  const fontAssets = await cacheFonts(preloadFonts);
   // const imageAssets = cacheImages(preloadImages);
 
   // promise load all
-  return Promise.all([...fontAssets, ...imageAssets]);
+  return Promise.all([...fontAssets]);
 };
 
 // format seconds

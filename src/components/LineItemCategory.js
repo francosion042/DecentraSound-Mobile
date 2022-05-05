@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   title: {
-    ...gStyle.textSpotify14,
+    ...gStyle.text14,
     color: colors.white,
     marginLeft: 16
   },

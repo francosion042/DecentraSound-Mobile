@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   text: {
-    ...gStyle.textSpotifyBold16,
+    ...gStyle.textBold16,
     color: colors.white,
     textAlign: 'center'
   },

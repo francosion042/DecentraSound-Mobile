@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { colors, gStyle, images } from '../constants';
+import { colors, gStyle } from '../constants';
 
 const AlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
   <View style={styles.container}>
@@ -30,7 +30,7 @@ const AlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
         >
           <View style={styles.image}>
             {item.image && (
-              <Image source={images[item.image]} style={styles.image} />
+              <Image source={require("../../assets/icon.png")} style={styles.image} />
             )}
           </View>
           <Text style={styles.title}>{item.title}</Text>
@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
     paddingLeft: 16
   },
   heading: {
-    ...gStyle.textSpotifyBold18,
+    ...gStyle.textBold18,
     color: colors.white,
     paddingBottom: 6,
     textAlign: 'center'
   },
   tagline: {
-    ...gStyle.textSpotify12,
+    ...gStyle.text12,
     color: colors.greyInactive,
     paddingBottom: 6,
     textAlign: 'center'
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     width: 148
   },
   title: {
-    ...gStyle.textSpotifyBold12,
+    ...gStyle.textBold12,
     color: colors.white,
     marginTop: 4,
     textAlign: 'center'

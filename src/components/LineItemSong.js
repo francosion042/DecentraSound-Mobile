@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   title: {
-    ...gStyle.textSpotify16,
+    ...gStyle.text16,
     color: colors.white,
     marginBottom: 4
   },
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     width: 14
   },
   artist: {
-    ...gStyle.textSpotify12,
+    ...gStyle.text12,
     color: colors.greyInactive
   },
   containerRight: {
