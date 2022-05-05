@@ -9,7 +9,7 @@ import {
   StyleSheet,
   Image
 } from "react-native";
-import { device, gStyle, images, colors, fonts } from "../../constants";
+import { device, gStyle, colors, fonts } from "../../constants";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
@@ -42,7 +42,10 @@ const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
       >
         <View style={styles.container}>
           <View style={styles.containerImage}>
-            <Image source={images[album.image]} style={styles.image} />
+            <Image
+              source={require("../../../assets/icon.png")}
+              style={styles.image}
+            />
           </View>
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
             {album.title}
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   transparent: {
-    backgroundColor: "transparent"
+    backgroundColor: colors.black80
   },
   container: {
     alignItems: "center",

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { createStackNavigator } from "react-navigation-stack";
 
 // screens
-import LibraryScreen from "../screens/library/Library";
+import Library from "../screens/library/Library";
+import Album from "../screens/album/Album";
 
 // icons
 import SvgTabLibrary from "../components/icons/Svg.TabLibrary";
@@ -18,8 +19,9 @@ Icon.propTypes = {
 export default createStackNavigator(
   {
     LibraryMain: {
-      screen: LibraryScreen
-    }
+      screen: Library
+    },
+    Album
   },
   {
     headerMode: "none",

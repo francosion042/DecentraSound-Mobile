@@ -1,11 +1,11 @@
-import * as React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { withNavigation } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../constants";
 
-class BarMusicPlayer extends React.Component {
+class BarMusicPlayer extends Component {
   constructor() {
     super();
 
@@ -55,16 +55,8 @@ class BarMusicPlayer extends React.Component {
         {song && (
           <View>
             <View style={styles.containerSong}>
-              <Text style={styles.title}>{`${song.title} · `}</Text>
+              <Text style={styles.title}>{`${song.title} - `}</Text>
               <Text style={styles.artist}>{song.artist}</Text>
-            </View>
-            <View style={[gStyle.flexRowCenter, gStyle.mTHalf]}>
-              <FontAwesome
-                color={colors.brandPrimary}
-                name="bluetooth-b"
-                size={14}
-              />
-              <Text style={styles.device}>Caleb&apos;s Beatsx</Text>
             </View>
           </View>
         )}
@@ -117,7 +109,7 @@ const styles = StyleSheet.create({
     width: device.width - 100
   },
   title: {
-    ...gStyle.text12,
+    ...gStyle.text14,
     color: colors.white
   },
   artist: {

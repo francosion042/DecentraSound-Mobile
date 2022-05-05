@@ -4,7 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 
 // screens
 import Home from "../screens/home/Home";
-// import Album from '../screens/Album';
+import Album from "../screens/album/Album";
 
 // icons
 import SvgTabHome from "../components/icons/Svg.TabHome";
@@ -18,8 +18,8 @@ Icon.propTypes = {
 
 export default createStackNavigator(
   {
-    Home
-    // Album
+    Home,
+    Album
   },
   {
     headerMode: "none",

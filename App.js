@@ -40,7 +40,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <StatusBar barStyle="light-content" />
+        <StatusBar style="light" />
         <NavigationContainer
           screenProps={{
             currentSongData,
