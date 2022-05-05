@@ -5,8 +5,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import TabNavigation from './TabNavigation';
 
 // screens
-import ModalMusicPlayer from '../screens/ModalMusicPlayer';
-import ModalMoreOptions from '../screens/ModalMoreOptions';
+import ModalMusicPlayer from '../screens/playing/ModalMusicPlayer';
+import ModalMoreOptions from '../screens/playing/ModalMoreOptions';
 
 const StackNavigator = createStackNavigator(
   {
@@ -31,6 +31,6 @@ const StackNavigator = createStackNavigator(
   }
 );
 
-const App = createAppContainer(StackNavigator);
+const NavigationContainer = createAppContainer(StackNavigator);
 
-export default App;
+export default NavigationContainer;

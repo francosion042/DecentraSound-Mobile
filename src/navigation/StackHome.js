@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { createStackNavigator } from 'react-navigation-stack';
 
 // screens
-import Home from '../screens/Home';
-import Album from '../screens/Album';
+import Home from '../screens/home/Home';
+// import Album from '../screens/Album';
 
 // icons
 import SvgTabHome from '../components/icons/Svg.TabHome';
@@ -19,7 +19,7 @@ Icon.propTypes = {
 export default createStackNavigator(
   {
     Home,
-    Album
+    // Album
   },
   {
     headerMode: 'none',

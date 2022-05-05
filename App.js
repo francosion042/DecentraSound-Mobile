@@ -1,13 +1,20 @@
+import 'react-native-gesture-handler';
+import { registerRootComponent } from 'expo';
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { 
   Text, 
   View
  } from 'react-native';
- import Playing from './src/screens/playing/Playing';
+ import NavigationContainer from './src/navigation/Stack';
 
 export default function App() {
   return (
-    <Playing />
+    <>
+      <StatusBar barStyle="light-content" />
+      <NavigationContainer />
+    </>
+    
   );
 }
 
