@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { BottomTabBar } from 'react-navigation-tabs';
+import React from "react";
+import PropTypes from "prop-types";
+import { BottomTabBar } from "react-navigation-tabs";
 
 // components
-import BarMusicPlayer from './BarMusicPlayer';
+import BarMusicPlayer from "./BarMusicPlayer";
 
 const CustomTabBar = props => {
   const { screenProps } = props;
