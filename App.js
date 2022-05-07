@@ -1,57 +1,61 @@
 import "react-native-gesture-handler";
-import React, { Component, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { StatusBar } from "expo-status-bar";
+import { Button, Platform } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  useWalletConnect,
+  withWalletConnect
+} from "@walletconnect/react-native-dapp";
 import NavigationContainer from "./src/navigation/Stack";
+import "./shim.js";
 
-class App extends Component {
-  constructor() {
-    super();
+const App = () => {
+  const [currentSongData, setCurrentSongData] = useState({
+    album: "Swimming",
+    artist: "Mac Miller",
+    image: "swimming",
+    length: 312,
+    title: "So It Goes"
+  });
+  const [toggleTabBar, setToggleTabBar] = useState(false);
 
-    this.state = {
-      currentSongData: {
-        album: "Swimming",
-        artist: "Mac Miller",
-        image: "swimming",
-        length: 312,
-        title: "So It Goes"
-      },
-      isLoading: true,
-      toggleTabBar: false
-    };
-
-    this.setCurrentSongData = this.setCurrentSongData.bind(this);
-    this.setToggleTabBar = this.setToggleTabBar.bind(this);
+  const connector = useWalletConnect();
+  if (!connector.connected) {
+    /**
+     *  Connect! 🎉
+     */
+    return <Button title="Connect" onPress={() => connector.connect()} />;
   }
+  console.log(connector.connected);
+  // return <Button title="Kill Session" onPress={() => connector.killSession()} />;
 
-  setToggleTabBar() {
-    this.setState(({ toggleTabBar }) => ({
-      toggleTabBar: !toggleTabBar
-    }));
+  const changeToggleTabBar = () => {
+    setToggleTabBar(!toggleTabBar);
+  };
+
+  const changeCurrentSongData = data => {
+    setCurrentSongData(data);
+  };
+
+  return (
+    <Fragment>
+      <StatusBar style="light" />
+      <NavigationContainer
+        screenProps={{
+          currentSongData,
+          changeSong: changeCurrentSongData,
+          toggleTabBarState: toggleTabBar,
+          setToggleTabBar: changeToggleTabBar
+        }}
+      />
+    </Fragment>
+  );
+};
+
+export default withWalletConnect(App, {
+  redirectUrl: Platform.OS === "web" ? window.location.origin : "https://",
+  storageOptions: {
+    asyncStorage: AsyncStorage
   }
-
-  setCurrentSongData(data) {
-    this.setState({
-      currentSongData: data
-    });
-  }
-
-  render() {
-    const { currentSongData, toggleTabBar } = this.state;
-
-    return (
-      <Fragment>
-        <StatusBar style="light" />
-        <NavigationContainer
-          screenProps={{
-            currentSongData,
-            changeSong: this.setCurrentSongData,
-            toggleTabBarState: toggleTabBar,
-            setToggleTabBar: this.setToggleTabBar
-          }}
-        />
-      </Fragment>
-    );
-  }
-}
-
-export default App;
+});
