@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Alert,
@@ -22,44 +22,27 @@ import TouchText from "../../components/TouchText";
 // mock data
 import albums from "../../mockdata/albums";
 
-class Album extends Component {
-  constructor() {
-    super();
+const Album = ({ navigation, screenProps }) => {
+  const [album, setAlbum] = useState(null);
+  const [downloaded, setDownloaded] = useState(false);
+  const [scrollY] = useState(new Animated.Value(0));
+  const [song, setSong] = useState(null);
+  const [title, setTitle] = useState(null);
 
-    this.state = {
-      album: null,
-      downloaded: false,
-      scrollY: new Animated.Value(0),
-      song: null,
-      title: null
-    };
-
-    this.toggleDownloaded = this.toggleDownloaded.bind(this);
-    this.changeSong = this.changeSong.bind(this);
-    this.toggleBlur = this.toggleBlur.bind(this);
-  }
-
-  componentDidMount() {
-    const { navigation, screenProps } = this.props;
-
+  useEffect(() => {
     const { currentSongData } = screenProps;
     // const albumTitle = navigation.getParam('title', 'ALBUM NOT FOUND?!');
     const albumTitle = navigation.getParam("title", "Extraordinary Machine");
 
-    this.setState({
-      album: albums[albumTitle] || null,
-      song: currentSongData.title,
-      title: albumTitle
-    });
-  }
+    setAlbum(albums[albumTitle] || null);
+    setSong(currentSongData.title);
+    setTitle(albumTitle);
+  }, [navigation, screenProps]);
 
-  toggleDownloaded(val) {
+  const toggleDownloaded = val => {
     // if web
     if (device.web) {
-      this.setState({
-        downloaded: val
-      });
-
+      setDownloaded(val);
       return;
     }
 
@@ -72,9 +55,7 @@ class Album extends Component {
           { text: "Cancel" },
           {
             onPress: () => {
-              this.setState({
-                downloaded: false
-              });
+              setDownloaded(false);
             },
             text: "Remove"
           }
@@ -82,182 +63,170 @@ class Album extends Component {
         { cancelable: false }
       );
     } else {
-      this.setState({
-        downloaded: val
-      });
+      setDownloaded(val);
     }
-  }
+  };
 
-  changeSong(songData) {
-    const {
-      screenProps: { changeSong }
-    } = this.props;
+  const changeSongData = songData => {
+    const { changeSong } = screenProps;
 
     changeSong(songData);
+    setSong(songData.title);
+  };
 
-    this.setState({
-      song: songData.title
-    });
-  }
+  // const toggleBlur = () => {
+  //   const { setToggleTabBar } = screenProps;
 
-  toggleBlur() {
-    const {
-      screenProps: { setToggleTabBar }
-    } = this.props;
+  //   setToggleTabBar();
+  // };
 
-    setToggleTabBar();
-  }
+  const { toggleTabBarState, setToggleTabBar } = screenProps;
 
-  render() {
-    const {
-      navigation,
-      screenProps: { toggleTabBarState, setToggleTabBar }
-    } = this.props;
-    const { album, downloaded, scrollY, song, title } = this.state;
-
-    // album data not set?
-    if (album === null) {
-      return (
-        <View style={[gStyle.container, gStyle.flexCenter]}>
-          <Text style={{ color: colors.white }}>{`Album: ${title}`}</Text>
-        </View>
-      );
-    }
-
-    const stickyArray = device.web ? [] : [0];
-    const headingRange = device.web ? [140, 200] : [230, 280];
-    const shuffleRange = device.web ? [40, 80] : [40, 80];
-
-    const opacityHeading = scrollY.interpolate({
-      inputRange: headingRange,
-      outputRange: [0, 1],
-      extrapolate: "clamp"
-    });
-
-    const opacityShuffle = scrollY.interpolate({
-      inputRange: shuffleRange,
-      outputRange: [0, 1],
-      extrapolate: "clamp"
-    });
-
+  // album data not set?
+  if (album === null) {
     return (
-      <View style={gStyle.container}>
-        {toggleTabBarState ? (
-          <BlurView intensity={99} style={styles.blurview} tint="dark" />
-        ) : null}
-
-        <View style={styles.containerHeader}>
-          <Animated.View
-            style={[styles.headerLinear, { opacity: opacityHeading }]}
-          >
-            <LinearGradient fill={album.backgroundColor} height={89} />
-          </Animated.View>
-          <View style={styles.header}>
-            <TouchIcon
-              icon={<Feather color={colors.white} name="chevron-left" />}
-              onPress={() => navigation.goBack(null)}
-            />
-            <Animated.View style={{ opacity: opacityShuffle }}>
-              <Text style={styles.headerTitle}>{album.title}</Text>
-            </Animated.View>
-            <TouchIcon
-              icon={<Feather color={colors.white} name="more-horizontal" />}
-              onPress={() => {
-                setToggleTabBar();
-
-                navigation.navigate("ModalMoreOptions", {
-                  album
-                });
-              }}
-            />
-          </View>
-        </View>
-
-        <View style={styles.containerFixed}>
-          <View style={styles.containerLinear}>
-            <LinearGradient fill={album.backgroundColor} />
-          </View>
-          <View style={styles.containerImage}>
-            <Image
-              source={require("../../../assets/icon.png")}
-              style={styles.image}
-            />
-          </View>
-          <View style={styles.containerTitle}>
-            <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
-              {album.title}
-            </Text>
-          </View>
-          <View style={styles.containerAlbum}>
-            <Text style={styles.albumInfo}>
-              {`Album by ${album.artist} · ${album.released}`}
-            </Text>
-          </View>
-        </View>
-
-        <Animated.ScrollView
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: true }
-          )}
-          scrollEventThrottle={16}
-          showsVerticalScrollIndicator={false}
-          stickyHeaderIndices={stickyArray}
-          style={styles.containerScroll}
-        >
-          <View style={styles.containerSticky}>
-            <Animated.View
-              style={[
-                styles.containerStickyLinear,
-                { opacity: opacityShuffle }
-              ]}
-            >
-              <LinearGradient fill={colors.black20} height={50} />
-            </Animated.View>
-            <View style={styles.containerShuffle}>
-              <TouchText
-                onPress={() => null}
-                style={styles.btn}
-                styleText={styles.btnText}
-                text="Shuffle Play"
-              />
-            </View>
-          </View>
-          <View style={styles.containerSongs}>
-            <View style={styles.row}>
-              <Text style={styles.downloadText}>
-                {downloaded ? "Downloaded" : "Download"}
-              </Text>
-              <Switch
-                trackColor={colors.greySwitchBorder}
-                onValueChange={val => this.toggleDownloaded(val)}
-                value={downloaded}
-              />
-            </View>
-
-            {album.tracks &&
-              album.tracks.map((track, index) => (
-                <LineItemSong
-                  active={song === track.title}
-                  downloaded={downloaded}
-                  key={index.toString()}
-                  onPress={this.changeSong}
-                  songData={{
-                    album: album.title,
-                    artist: album.artist,
-                    image: album.image,
-                    length: track.seconds,
-                    title: track.title
-                  }}
-                />
-              ))}
-          </View>
-          <View style={gStyle.spacer16} />
-        </Animated.ScrollView>
+      <View style={[gStyle.container, gStyle.flexCenter]}>
+        <Text style={{ color: colors.white }}>{`Album: ${title}`}</Text>
       </View>
     );
   }
-}
+
+  const stickyArray = device.web ? [] : [0];
+  const headingRange = device.web ? [140, 200] : [230, 280];
+  const shuffleRange = device.web ? [40, 80] : [40, 80];
+
+  const opacityHeading = scrollY.interpolate({
+    inputRange: headingRange,
+    outputRange: [0, 1],
+    extrapolate: "clamp"
+  });
+
+  const opacityShuffle = scrollY.interpolate({
+    inputRange: shuffleRange,
+    outputRange: [0, 1],
+    extrapolate: "clamp"
+  });
+
+  return (
+    <View style={gStyle.container}>
+      {toggleTabBarState ? (
+        <BlurView intensity={99} style={styles.blurview} tint="dark" />
+      ) : null}
+
+      <View style={styles.containerHeader}>
+        <Animated.View
+          style={[styles.headerLinear, { opacity: opacityHeading }]}
+        >
+          <LinearGradient fill={album.backgroundColor} height={89} />
+        </Animated.View>
+        <View style={styles.header}>
+          <TouchIcon
+            icon={<Feather color={colors.white} name="chevron-left" />}
+            onPress={() => navigation.goBack(null)}
+          />
+          <Animated.View style={{ opacity: opacityShuffle }}>
+            <Text style={styles.headerTitle}>{album.title}</Text>
+          </Animated.View>
+          <TouchIcon
+            icon={<Feather color={colors.white} name="more-horizontal" />}
+            onPress={() => {
+              setToggleTabBar();
+
+              navigation.navigate("ModalMoreOptions", {
+                album
+              });
+            }}
+          />
+        </View>
+      </View>
+
+      <View style={styles.containerFixed}>
+        <View style={styles.containerLinear}>
+          <LinearGradient fill={album.backgroundColor} />
+        </View>
+        <View style={styles.containerImage}>
+          <Image
+            source={require("../../../assets/icon.png")}
+            style={styles.image}
+          />
+        </View>
+        <View style={styles.containerTitle}>
+          <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
+            {album.title}
+          </Text>
+        </View>
+        <View style={styles.containerAlbum}>
+          <Text style={styles.albumInfo}>
+            {`Album by ${album.artist} · ${album.released}`}
+          </Text>
+        </View>
+      </View>
+
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={stickyArray}
+        style={styles.containerScroll}
+      >
+        <View style={styles.containerSticky}>
+          <Animated.View
+            style={[styles.containerStickyLinear, { opacity: opacityShuffle }]}
+          >
+            <LinearGradient fill={colors.black20} height={50} />
+          </Animated.View>
+          <View style={styles.containerShuffle}>
+            <TouchText
+              onPress={() => null}
+              style={styles.btn}
+              styleText={styles.btnText}
+              text="Shuffle Play"
+            />
+          </View>
+        </View>
+        <View style={styles.containerSongs}>
+          <View style={styles.row}>
+            <Text style={styles.downloadText}>
+              {downloaded ? "Downloaded" : "Download"}
+            </Text>
+            <Switch
+              trackColor={colors.greySwitchBorder}
+              onValueChange={val => toggleDownloaded(val)}
+              value={downloaded}
+            />
+          </View>
+
+          {album.tracks &&
+            album.tracks.map((track, index) => (
+              <LineItemSong
+                active={song === track.title}
+                downloaded={downloaded}
+                key={index.toString()}
+                onPress={changeSongData({
+                  album: album.title,
+                  artist: album.artist,
+                  image: album.image,
+                  length: track.seconds,
+                  title: track.title
+                })}
+                songData={{
+                  album: album.title,
+                  artist: album.artist,
+                  image: album.image,
+                  length: track.seconds,
+                  title: track.title
+                }}
+              />
+            ))}
+        </View>
+        <View style={gStyle.spacer16} />
+      </Animated.ScrollView>
+    </View>
+  );
+};
 
 Album.propTypes = {
   // required
