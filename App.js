@@ -8,7 +8,6 @@ import {
   withWalletConnect
 } from "@walletconnect/react-native-dapp";
 import NavigationContainer from "./src/navigation/Stack";
-import "./shim.js";
 
 const App = () => {
   const [currentSongData, setCurrentSongData] = useState({
