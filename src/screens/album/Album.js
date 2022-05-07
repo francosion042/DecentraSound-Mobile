@@ -18,6 +18,7 @@ import LinearGradient from "../../components/LinearGradient";
 import LineItemSong from "../../components/LineItemSong";
 import TouchIcon from "../../components/TouchIcon";
 import TouchText from "../../components/TouchText";
+import Loading from "../utils/Loading";
 
 // mock data
 import albums from "../../mockdata/albums";
@@ -27,7 +28,7 @@ const Album = ({ navigation, screenProps }) => {
   const [downloaded, setDownloaded] = useState(false);
   const [scrollY] = useState(new Animated.Value(0));
   const [song, setSong] = useState(null);
-  const [title, setTitle] = useState(null);
+  // const [title, setTitle] = useState(null);
 
   useEffect(() => {
     const { currentSongData } = screenProps;
@@ -36,7 +37,7 @@ const Album = ({ navigation, screenProps }) => {
 
     setAlbum(albums[albumTitle] || null);
     setSong(currentSongData.title);
-    setTitle(albumTitle);
+    // setTitle(albumTitle);
   }, [navigation, screenProps]);
 
   const toggleDownloaded = val => {
@@ -84,11 +85,7 @@ const Album = ({ navigation, screenProps }) => {
 
   // album data not set?
   if (album === null) {
-    return (
-      <View style={[gStyle.container, gStyle.flexCenter]}>
-        <Text style={{ color: colors.white }}>{`Album: ${title}`}</Text>
-      </View>
-    );
+    return <Loading loading={true} />;
   }
 
   const stickyArray = device.web ? [] : [0];
@@ -205,13 +202,7 @@ const Album = ({ navigation, screenProps }) => {
                 active={song === track.title}
                 downloaded={downloaded}
                 key={index.toString()}
-                onPress={changeSongData({
-                  album: album.title,
-                  artist: album.artist,
-                  image: album.image,
-                  length: track.seconds,
-                  title: track.title
-                })}
+                onPress={changeSongData}
                 songData={{
                   album: album.title,
                   artist: album.artist,
