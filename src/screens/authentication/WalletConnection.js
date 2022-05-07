@@ -1,14 +1,12 @@
-import { Text, View } from "react-native";
-import React, { Component } from "react";
+import { View, Text } from "react-native";
+import React from "react";
 
-export class WalletConnection extends Component {
-  render() {
-    return (
-      <View>
-        <Text>WalletConnection</Text>
-      </View>
-    );
-  }
-}
+const WalletConnection = () => {
+  return (
+    <View>
+      <Text>WalletConnection</Text>
+    </View>
+  );
+};
 
 export default WalletConnection;

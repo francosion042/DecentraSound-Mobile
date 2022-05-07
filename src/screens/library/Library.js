@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { device, gStyle } from "../../constants";
 
@@ -9,30 +9,28 @@ import ScreenHeader from "../../components/ScreenHeader";
 // mock data
 import yourLibrary from "../../mockdata/menuYourLibrary.json";
 
-export class Library extends Component {
-  render() {
-    return (
-      <View style={gStyle.container}>
-        <View style={styles.containerHeader}>
-          <ScreenHeader title="Your Library" />
-        </View>
-
-        <FlatList
-          contentContainerStyle={styles.containerFlatlist}
-          data={yourLibrary}
-          keyExtractor={({ id }) => id.toString()}
-          renderItem={({ item }) => (
-            <LineItemCategory
-              icon={item.icon}
-              onPress={() => null}
-              title={item.title}
-            />
-          )}
-        />
+const Library = () => {
+  return (
+    <View style={gStyle.container}>
+      <View style={styles.containerHeader}>
+        <ScreenHeader title="Your Library" />
       </View>
-    );
-  }
-}
+
+      <FlatList
+        contentContainerStyle={styles.containerFlatlist}
+        data={yourLibrary}
+        keyExtractor={({ id }) => id.toString()}
+        renderItem={({ item }) => (
+          <LineItemCategory
+            icon={item.icon}
+            onPress={() => null}
+            title={item.title}
+          />
+        )}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   containerHeader: {
