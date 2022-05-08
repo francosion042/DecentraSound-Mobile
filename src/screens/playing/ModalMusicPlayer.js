@@ -130,7 +130,8 @@ const styles = StyleSheet.create({
   image: {
     height: device.width - 48,
     marginVertical: device.iPhoneNotch ? 36 : 8,
-    width: device.width - 48
+    width: device.width - 48,
+    marginBottom: "10%"
   },
   containerDetails: {
     marginBottom: 16
@@ -160,11 +161,11 @@ const styles = StyleSheet.create({
   },
   containerControls: {
     ...gStyle.flexRowSpace,
-    marginTop: device.iPhoneNotch ? 24 : 8
+    marginTop: device.iPhoneNotch ? 24 : "20%"
   },
   containerBottom: {
     ...gStyle.flexRowSpace,
-    marginTop: device.iPhoneNotch ? 32 : 8
+    marginTop: device.iPhoneNotch ? 32 : "10%"
   }
 });
 

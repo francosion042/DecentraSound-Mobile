@@ -2,6 +2,7 @@ import React, { useState, Fragment } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../../constants";
+import { BlurView } from "expo-blur";
 
 // components
 import AlbumsHorizontal from "../../components/AlbumsHorizontal";
@@ -10,9 +11,11 @@ import AlbumsHorizontal from "../../components/AlbumsHorizontal";
 import heavyRotation from "../../mockdata/heavyRotation.json";
 import jumpBackIn from "../../mockdata/jumpBackIn.json";
 import recentlyPlayed from "../../mockdata/recentlyPlayed.json";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Home = () => {
+const Home = ({ navigation, screenProps }) => {
   const [scrollY] = useState(new Animated.Value(0));
+  const { toggleTabBarState, setToggleTabBar } = screenProps;
 
   const opacityIn = scrollY.interpolate({
     inputRange: [0, 128],
@@ -32,8 +35,20 @@ const Home = () => {
         <Animated.View style={[styles.iPhoneNotch, { opacity: opacityIn }]} />
       )}
 
+      {toggleTabBarState ? (
+        <BlurView intensity={99} style={styles.blurview} tint="dark" />
+      ) : null}
+
       <Animated.View style={[styles.containerHeader, { opacity: opacityOut }]}>
-        <FontAwesome color={colors.white} name="cog" size={28} />
+        <TouchableOpacity
+          onPress={() => {
+            setToggleTabBar();
+
+            navigation.navigate("ModalAccountOptions");
+          }}
+        >
+          <FontAwesome color={colors.white} name="user-circle-o" size={28} />
+        </TouchableOpacity>
       </Animated.View>
 
       <Animated.ScrollView

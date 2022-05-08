@@ -8,6 +8,7 @@ export default {
   black90: "rgba(0, 0, 0, 0.9)",
   white: "#fff",
   blackBlur: "#161616",
+  red: "red",
 
   blackBg: "#121212",
   transparent: "rgba(52, 52, 52, 0.8)",

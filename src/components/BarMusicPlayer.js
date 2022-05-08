@@ -92,11 +92,11 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
     backgroundColor: colors.grey,
-    borderBottomColor: colors.blackBg,
+    borderBottomColor: colors.greyLight,
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 8,
+    paddingVertical: 15,
     width: "100%"
   },
   containerIcon: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     width: device.width - 100
   },
   title: {
-    ...gStyle.text14,
+    ...gStyle.text18,
     color: colors.white
   },
   artist: {

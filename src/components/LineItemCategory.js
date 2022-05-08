@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   title: {
-    ...gStyle.text14,
+    ...gStyle.text16,
     color: colors.white,
     marginLeft: 16
   },

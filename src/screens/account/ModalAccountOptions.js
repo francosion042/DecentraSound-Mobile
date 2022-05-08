@@ -9,16 +9,18 @@ import {
   StyleSheet,
   Image
 } from "react-native";
+import { Feather } from "@expo/vector-icons";
 import { device, gStyle, colors, fonts } from "../../constants";
+import ModalHeader from "../../components/ModalHeader";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
 
 // mock data
-import moreOptions from "../../mockdata/menuMoreOptions.json";
+import accountOptions from "../../mockdata/menuAccountOptions.json";
 
-const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
-  const album = navigation.getParam("album");
+const ModalAccountOptions = ({ navigation, screenProps }) => {
+  const { setToggleTabBar } = screenProps;
 
   return (
     <React.Fragment>
@@ -30,7 +32,7 @@ const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
           }}
         >
           <View style={styles.containerButton}>
-            <Text style={styles.buttonText}>Close</Text>
+            <Text style={styles.buttonText}>Disconnect Wallet</Text>
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
@@ -40,6 +42,14 @@ const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
         showsVerticalScrollIndicator={false}
         style={[gStyle.container, styles.transparent]}
       >
+        <ModalHeader
+          left={<Feather color={colors.brandPrimary} name="chevron-down" />}
+          leftPress={() => {
+            navigation.goBack(null);
+            setToggleTabBar();
+          }}
+          text={"Your Account"}
+        />
         <View style={styles.container}>
           <View style={styles.containerImage}>
             <Image
@@ -48,15 +58,15 @@ const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
             />
           </View>
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
-            {album.title}
+            Your Account
           </Text>
-          <Text style={styles.albumInfo}>
+          {/* <Text style={styles.albumInfo}>
             {`Album by ${album.artist} · ${album.released}`}
-          </Text>
+          </Text> */}
         </View>
 
-        {Object.keys(moreOptions).map(index => {
-          const item = moreOptions[index];
+        {Object.keys(accountOptions).map(index => {
+          const item = accountOptions[index];
 
           return (
             <LineItemCategory
@@ -74,7 +84,7 @@ const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
   );
 };
 
-ModalMoreOptions.propTypes = {
+ModalAccountOptions.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
   screenProps: PropTypes.object.isRequired
@@ -87,11 +97,13 @@ const styles = StyleSheet.create({
   },
   containerButton: {
     ...gStyle.flexCenter,
-    ...gStyle.spacer6
+    ...gStyle.spacer6,
+    height: 70
   },
   buttonText: {
-    color: colors.white,
-    fontSize: 18
+    color: colors.red,
+    fontSize: 20,
+    fontWeight: "bold"
   },
   transparent: {
     backgroundColor: colors.black80
@@ -127,4 +139,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ModalMoreOptions;
+export default ModalAccountOptions;

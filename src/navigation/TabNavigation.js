@@ -22,11 +22,15 @@ const BottomTabNavigator = createBottomTabNavigator(
     initialRouteName: "StackHome",
     tabBarComponent: props => <CustomTabBar {...props} />,
     tabBarOptions: {
-      activeTintColor: colors.white,
+      activeTintColor: colors.brandPrimary,
       inactiveTintColor: colors.greyInactive,
       style: {
         backgroundColor: colors.grey,
-        borderTopWidth: 0
+        borderTopWidth: 0,
+        height: 60
+      },
+      labelStyle: {
+        fontSize: 15
       }
     }
   }
