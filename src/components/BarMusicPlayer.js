@@ -34,9 +34,9 @@ class BarMusicPlayer extends Component {
     const { navigation, song } = this.props;
     const { favorited, paused } = this.state;
 
-    const favoriteColor = favorited ? colors.brandPrimary : colors.white;
+    const favoriteColor = favorited ? colors.brandPrimary : colors.greyInactive;
     const favoriteIcon = favorited ? "heart" : "heart-o";
-    const iconPlay = paused ? "play-circle" : "pause-circle";
+    const iconPlay = paused ? "play" : "pause";
 
     return (
       <TouchableOpacity
@@ -48,15 +48,14 @@ class BarMusicPlayer extends Component {
           activeOpacity={gStyle.activeOpacity}
           hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
           onPress={this.toggleFavorite}
-          style={styles.containerIcon}
+          style={styles.containerIconLeft}
         >
           <FontAwesome color={favoriteColor} name={favoriteIcon} size={20} />
         </TouchableOpacity>
         {song && (
           <View>
             <View style={styles.containerSong}>
-              <Text style={styles.title}>{`${song.title} - `}</Text>
-              <Text style={styles.artist}>{song.artist}</Text>
+              <Text style={styles.title}>{`${song.title}`}</Text>
             </View>
           </View>
         )}
@@ -64,9 +63,15 @@ class BarMusicPlayer extends Component {
           activeOpacity={gStyle.activeOpacity}
           hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
           onPress={this.togglePlay}
-          style={styles.containerIcon}
         >
           <FontAwesome color={colors.white} name={iconPlay} size={28} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={gStyle.activeOpacity}
+          hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+          style={styles.containerIconRight}
+        >
+          <FontAwesome color={colors.white} name="step-forward" size={28} />
         </TouchableOpacity>
       </TouchableOpacity>
     );
@@ -99,14 +104,17 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     width: "100%"
   },
-  containerIcon: {
+  containerIconLeft: {
+    ...gStyle.flexCenter,
+    width: 50
+  },
+  containerIconRight: {
     ...gStyle.flexCenter,
     width: 50
   },
   containerSong: {
-    ...gStyle.flexRowCenter,
     overflow: "hidden",
-    width: device.width - 100
+    width: device.width - 130
   },
   title: {
     ...gStyle.text18,

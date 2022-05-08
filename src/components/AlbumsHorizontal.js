@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
   image: {
     backgroundColor: colors.greyLight,
     height: 148,
-    width: 148
+    width: 148,
+    borderRadius: 5
   },
   title: {
     ...gStyle.textBold12,

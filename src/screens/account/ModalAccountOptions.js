@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { device, gStyle, colors, fonts } from "../../constants";
@@ -19,7 +20,7 @@ import LineItemCategory from "../../components/LineItemCategory";
 // mock data
 import accountOptions from "../../mockdata/menuAccountOptions.json";
 
-const ModalAccountOptions = ({ navigation, screenProps }) => {
+const ModalAccountOptions = ({ navigation, screenProps, connector }) => {
   const { setToggleTabBar } = screenProps;
 
   return (
@@ -27,8 +28,20 @@ const ModalAccountOptions = ({ navigation, screenProps }) => {
       <SafeAreaView style={styles.containerSafeArea}>
         <TouchableWithoutFeedback
           onPress={() => {
-            navigation.goBack();
-            setToggleTabBar();
+            Alert.alert(
+              "Disconnect Your Wallet?",
+              "You won't be able to Use This Player.",
+              [
+                { text: "Cancel" },
+                {
+                  onPress: () => {
+                    connector.killSession();
+                  },
+                  text: "Disconnect"
+                }
+              ],
+              { cancelable: true }
+            );
           }}
         >
           <View style={styles.containerButton}>
