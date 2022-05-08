@@ -26,7 +26,7 @@ const App = () => {
      */
     return <Button title="Connect" onPress={() => connector.connect()} />;
   }
-  console.log(connector.connected);
+  console.log(connector.accounts);
   // return <Button title="Kill Session" onPress={() => connector.killSession()} />;
 
   const changeToggleTabBar = () => {
