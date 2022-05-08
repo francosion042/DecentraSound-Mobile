@@ -69,6 +69,8 @@ export default {
   textBold20: { fontFamily: fonts.bold, fontSize: 20 },
   textBold22: { fontFamily: fonts.bold, fontSize: 22 },
   textBold24: { fontFamily: fonts.bold, fontSize: 24 },
+  textBold30: { fontFamily: fonts.bold, fontSize: 30 },
+  textBold40: { fontFamily: fonts.bold, fontSize: 40 },
 
   // spacers
   // ///////////////////////////////////////////////////////////////////////////

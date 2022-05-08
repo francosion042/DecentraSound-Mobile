@@ -6,6 +6,7 @@ import { BlurView } from "expo-blur";
 
 // components
 import AlbumsHorizontal from "../../components/AlbumsHorizontal";
+import BigAlbumsHorizontal from "../../components/BigAlbumsHorizontal";
 
 // mock data
 import heavyRotation from "../../mockdata/heavyRotation.json";
@@ -62,11 +63,11 @@ const Home = ({ navigation, screenProps }) => {
       >
         <View style={gStyle.spacer16} />
 
-        <AlbumsHorizontal data={recentlyPlayed} heading="Recently played" />
+        <BigAlbumsHorizontal data={recentlyPlayed} heading="Top Collections" />
 
         <AlbumsHorizontal
-          data={heavyRotation}
-          heading="Your heavy rotation"
+          data={recentlyPlayed}
+          heading="Recently Played"
           tagline="The music you've had on repeat this month."
         />
 
@@ -75,6 +76,8 @@ const Home = ({ navigation, screenProps }) => {
           heading="Jump back in"
           tagline="Your top listens from the past few months."
         />
+
+        <BigAlbumsHorizontal data={heavyRotation} heading="Made For You" />
       </Animated.ScrollView>
     </Fragment>
   );

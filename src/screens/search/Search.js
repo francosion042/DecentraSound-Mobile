@@ -11,7 +11,7 @@ import { colors, device, gStyle } from "../../constants";
 
 // components
 import PlaylistItem from "../../components/PlaylistItem";
-import TouchIcon from "../../components/TouchIcon";
+// import TouchIcon from "../../components/TouchIcon";
 
 // icons
 import SvgSearch from "../../components/icons/Svg.Search";
@@ -20,7 +20,8 @@ import SvgSearch from "../../components/icons/Svg.Search";
 import browseAll from "../../mockdata/searchBrowseAll.json";
 import topGenres from "../../mockdata/searchTopGenres.json";
 
-const Search = () => {
+const Search = ({ navigation, screenProps }) => {
+  const { setToggleTabBar } = screenProps;
   const [scrollY] = useState(new Animated.Value(0));
   const [searchStart] = useState(device.width - 48);
   const [searchEnd] = useState(searchStart - 40);
@@ -97,10 +98,14 @@ const Search = () => {
       </Animated.ScrollView>
 
       <View style={styles.iconRight}>
-        <TouchIcon
-          icon={<FontAwesome color={colors.white} name="microphone" />}
-          onPress={() => null}
-        />
+        <TouchableOpacity
+          onPress={() => {
+            setToggleTabBar();
+            navigation.navigate("ModalAccountOptions");
+          }}
+        >
+          <FontAwesome color={colors.white} name="user-circle-o" size={28} />
+        </TouchableOpacity>
       </View>
     </Fragment>
   );
@@ -147,7 +152,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
     right: 24,
-    top: device.web ? 40 : 78,
+    top: device.web ? 40 : 40,
     width: 28
   }
 });
