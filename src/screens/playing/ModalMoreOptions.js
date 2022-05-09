@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Text,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  BackHandler,
 } from "react-native";
 import { device, gStyle, colors, fonts } from "../../constants";
 
@@ -19,6 +20,16 @@ import moreOptions from "../../mockdata/menuMoreOptions.json";
 
 const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
   const album = navigation.getParam("album");
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      navigation.goBack(null);
+      setToggleTabBar();
+      return true;
+    });
+
+    return () => BackHandler.removeEventListener("hardwareBackPress", true);
+  });
 
   return (
     <React.Fragment>

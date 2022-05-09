@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Text,
@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Image,
   Alert,
+  BackHandler,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { device, gStyle, colors, fonts } from "../../constants";
@@ -22,6 +23,16 @@ import accountOptions from "../../mockdata/menuAccountOptions.json";
 
 const ModalAccountOptions = ({ navigation, screenProps, connector }) => {
   const { setToggleTabBar } = screenProps;
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      navigation.goBack(null);
+      setToggleTabBar();
+      return true;
+    });
+
+    return () => BackHandler.removeEventListener("hardwareBackPress", true);
+  });
 
   return (
     <React.Fragment>
