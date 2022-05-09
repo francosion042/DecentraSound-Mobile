@@ -1,82 +1,64 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { withNavigation } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../constants";
 
-class BarMusicPlayer extends Component {
-  constructor() {
-    super();
+const BarMusicPlayer = ({ navigation, song }) => {
+  const [favorited, setfavourited] = useState(false);
+  const [paused, setPaused] = useState(true);
 
-    this.state = {
-      favorited: false,
-      paused: true,
-    };
+  const toggleFavorite = () => {
+    setfavourited(!favorited);
+  };
 
-    this.toggleFavorite = this.toggleFavorite.bind(this);
-    this.togglePlay = this.togglePlay.bind(this);
-  }
+  const togglePlay = () => {
+    setPaused(!paused);
+  };
 
-  toggleFavorite() {
-    this.setState((prev) => ({
-      favorited: !prev.favorited,
-    }));
-  }
+  const favoriteColor = favorited ? colors.brandPrimary : colors.greyInactive;
+  const favoriteIcon = favorited ? "heart" : "heart-o";
+  const iconPlay = paused ? "play" : "pause";
 
-  togglePlay() {
-    this.setState((prev) => ({
-      paused: !prev.paused,
-    }));
-  }
-
-  render() {
-    const { navigation, song } = this.props;
-    const { favorited, paused } = this.state;
-
-    const favoriteColor = favorited ? colors.brandPrimary : colors.greyInactive;
-    const favoriteIcon = favorited ? "heart" : "heart-o";
-    const iconPlay = paused ? "play" : "pause";
-
-    return (
+  return (
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => navigation.navigate("ModalMusicPlayer")}
+      style={styles.container}
+    >
       <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => navigation.navigate("ModalMusicPlayer")}
-        style={styles.container}
+        activeOpacity={gStyle.activeOpacity}
+        hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+        onPress={toggleFavorite}
+        style={styles.containerIconLeft}
       >
-        <TouchableOpacity
-          activeOpacity={gStyle.activeOpacity}
-          hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
-          onPress={this.toggleFavorite}
-          style={styles.containerIconLeft}
-        >
-          <FontAwesome color={favoriteColor} name={favoriteIcon} size={20} />
-        </TouchableOpacity>
-        {song && (
-          <View>
-            <View style={styles.containerSong}>
-              <Text style={styles.title}>{`${song.title}`}</Text>
-            </View>
-          </View>
-        )}
-        <TouchableOpacity
-          activeOpacity={gStyle.activeOpacity}
-          hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
-          onPress={this.togglePlay}
-        >
-          <FontAwesome color={colors.white} name={iconPlay} size={28} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={gStyle.activeOpacity}
-          hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
-          style={styles.containerIconRight}
-        >
-          <FontAwesome color={colors.white} name="step-forward" size={28} />
-        </TouchableOpacity>
+        <FontAwesome color={favoriteColor} name={favoriteIcon} size={20} />
       </TouchableOpacity>
-    );
-  }
-}
+      {song && (
+        <View>
+          <View style={styles.containerSong}>
+            <Text style={styles.title}>{`${song.title}`}</Text>
+          </View>
+        </View>
+      )}
+      <TouchableOpacity
+        activeOpacity={gStyle.activeOpacity}
+        hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+        onPress={togglePlay}
+      >
+        <FontAwesome color={colors.white} name={iconPlay} size={28} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={gStyle.activeOpacity}
+        hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+        style={styles.containerIconRight}
+      >
+        <FontAwesome color={colors.white} name="step-forward" size={28} />
+      </TouchableOpacity>
+    </TouchableOpacity>
+  );
+};
 
 BarMusicPlayer.defaultProps = {
   song: null,
