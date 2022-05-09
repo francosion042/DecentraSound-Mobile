@@ -14,7 +14,7 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { device, gStyle, colors, fonts } from "../../constants";
 import ModalHeader from "../../components/ModalHeader";
-import { ConnectionContext } from "../../contexts";
+import { ConnectionContext, ScreenContext } from "../../contexts";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
@@ -22,15 +22,14 @@ import LineItemCategory from "../../components/LineItemCategory";
 // mock data
 import accountOptions from "../../mockdata/menuAccountOptions.json";
 
-const ModalAccountOptions = ({ navigation, screenProps }) => {
+const ModalAccountOptions = ({ navigation }) => {
   const { connection } = useContext(ConnectionContext);
-
-  const { setToggleTabBar } = screenProps;
+  const { updateTabBarState } = useContext(ScreenContext);
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", () => {
       navigation.goBack(null);
-      setToggleTabBar();
+      updateTabBarState();
       return true;
     });
 
@@ -73,7 +72,7 @@ const ModalAccountOptions = ({ navigation, screenProps }) => {
           left={<Feather color={colors.brandPrimary} name="chevron-down" />}
           leftPress={() => {
             navigation.goBack(null);
-            setToggleTabBar();
+            updateTabBarState();
           }}
           text={"Your Account"}
         />
@@ -114,7 +113,6 @@ const ModalAccountOptions = ({ navigation, screenProps }) => {
 ModalAccountOptions.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

@@ -11,23 +11,23 @@ const ScreenContextProvider = ({ children }) => {
     length: 312,
     title: "So It Goes",
   });
-  const [toggleTabBar, setToggleTabBar] = useState(false);
+  const [tabBarState, setTabBar] = useState(false);
 
-  const updateCurrentSongDate = (data) => {
+  const updateCurrentSongData = (data) => {
     setCurrentSongData(data);
   };
 
-  const updateToggleTabBar = () => {
-    setToggleTabBar(!toggleTabBar);
+  const updateTabBarState = () => {
+    setTabBar(!tabBarState);
   };
 
   return (
     <ScreenContext.Provider
       value={{
         currentSongData,
-        updateCurrentSongDate,
-        toggleTabBar,
-        updateToggleTabBar,
+        updateCurrentSongData,
+        tabBarState,
+        updateTabBarState,
       }}
     >
       {children}

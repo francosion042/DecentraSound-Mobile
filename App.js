@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useState, useContext, Fragment } from "react";
+import React, { useContext, Fragment } from "react";
 // import { StatusBar } from "expo-status-bar";
 import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -9,19 +9,14 @@ import {
 } from "@walletconnect/react-native-dapp";
 import NavigationContainer from "./src/navigation/Stack";
 import WalletConnection from "./src/screens/authentication/WalletConnection";
-import { ConnectionContext, ConnectionContextProvider } from "./src/contexts";
+import {
+  ConnectionContext,
+  ConnectionContextProvider,
+  ScreenContextProvider,
+} from "./src/contexts";
 
 const App = () => {
   const { updateConnection } = useContext(ConnectionContext);
-
-  const [currentSongData, setCurrentSongData] = useState({
-    album: "Swimming",
-    artist: "Mac Miller",
-    image: "swimming",
-    length: 312,
-    title: "So It Goes",
-  });
-  const [toggleTabBar, setToggleTabBar] = useState(false);
 
   const connector = useWalletConnect();
   if (!connector.connected) {
@@ -29,25 +24,10 @@ const App = () => {
   }
   updateConnection(connector);
 
-  const changeToggleTabBar = () => {
-    setToggleTabBar(!toggleTabBar);
-  };
-
-  const changeCurrentSongData = (data) => {
-    setCurrentSongData(data);
-  };
-
   return (
     <Fragment>
       {/* <StatusBar style="light" backgroundColor="black" /> */}
-      <NavigationContainer
-        screenProps={{
-          currentSongData,
-          changeSong: changeCurrentSongData,
-          toggleTabBarState: toggleTabBar,
-          setToggleTabBar: changeToggleTabBar,
-        }}
-      />
+      <NavigationContainer />
     </Fragment>
   );
 };
@@ -55,7 +35,9 @@ const App = () => {
 const app = (props) => {
   return (
     <ConnectionContextProvider>
-      <App navigation={props.navigation} />
+      <ScreenContextProvider>
+        <App navigation={props.navigation} />
+      </ScreenContextProvider>
     </ConnectionContextProvider>
   );
 };

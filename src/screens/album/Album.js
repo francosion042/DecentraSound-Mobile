@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import {
   Alert,
@@ -12,6 +12,7 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { colors, device, gStyle } from "../../constants";
+import { ScreenContext } from "../../contexts";
 
 // components
 import LinearGradient from "../../components/LinearGradient";
@@ -23,7 +24,14 @@ import Loading from "../utils/Loading";
 // mock data
 import albums from "../../mockdata/albums";
 
-const Album = ({ navigation, screenProps }) => {
+const Album = ({ navigation }) => {
+  const {
+    currentSongData,
+    updateCurrentSongData,
+    tabBarState,
+    updateTabBarState,
+  } = useContext(ScreenContext);
+
   const [album, setAlbum] = useState(null);
   const [downloaded, setDownloaded] = useState(false);
   const [scrollY] = useState(new Animated.Value(0));
@@ -31,14 +39,13 @@ const Album = ({ navigation, screenProps }) => {
   // const [title, setTitle] = useState(null);
 
   useEffect(() => {
-    const { currentSongData } = screenProps;
     // const albumTitle = navigation.getParam('title', 'ALBUM NOT FOUND?!');
     const albumTitle = navigation.getParam("title", "Extraordinary Machine");
 
     setAlbum(albums[albumTitle] || null);
     setSong(currentSongData.title);
     // setTitle(albumTitle);
-  }, [navigation, screenProps]);
+  }, [navigation, currentSongData]);
 
   const toggleDownloaded = (val) => {
     // if web
@@ -69,9 +76,7 @@ const Album = ({ navigation, screenProps }) => {
   };
 
   const changeSongData = (songData) => {
-    const { changeSong } = screenProps;
-
-    changeSong(songData);
+    updateCurrentSongData(songData);
     setSong(songData.title);
   };
 
@@ -80,8 +85,6 @@ const Album = ({ navigation, screenProps }) => {
 
   //   setToggleTabBar();
   // };
-
-  const { toggleTabBarState, setToggleTabBar } = screenProps;
 
   // album data not set?
   if (album === null) {
@@ -106,7 +109,7 @@ const Album = ({ navigation, screenProps }) => {
 
   return (
     <View style={gStyle.container}>
-      {toggleTabBarState ? (
+      {tabBarState ? (
         <BlurView intensity={99} style={styles.blurview} tint="dark" />
       ) : null}
 
@@ -127,7 +130,7 @@ const Album = ({ navigation, screenProps }) => {
           <TouchIcon
             icon={<Feather color={colors.white} name="more-horizontal" />}
             onPress={() => {
-              setToggleTabBar();
+              updateTabBarState();
 
               navigation.navigate("ModalMoreOptions", {
                 album,
@@ -222,7 +225,6 @@ const Album = ({ navigation, screenProps }) => {
 Album.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

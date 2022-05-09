@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { BottomTabBar } from "react-navigation-tabs";
+import { ScreenContext } from "../contexts";
 
 // components
 import BarMusicPlayer from "./BarMusicPlayer";
 
 const CustomTabBar = (props) => {
-  const { screenProps } = props;
-  const { currentSongData, toggleTabBarState } = screenProps;
+  const { currentSongData, tabBarState } = useContext(ScreenContext);
 
-  return toggleTabBarState ? null : (
+  return tabBarState ? null : (
     <React.Fragment>
       <BarMusicPlayer song={currentSongData} />
       <BottomTabBar {...props} />
@@ -20,7 +20,6 @@ const CustomTabBar = (props) => {
 CustomTabBar.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired,
 };
 
 export default CustomTabBar;

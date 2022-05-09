@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import {
   Text,
@@ -11,6 +11,7 @@ import {
   BackHandler,
 } from "react-native";
 import { device, gStyle, colors, fonts } from "../../constants";
+import { ScreenContext } from "../../contexts";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
@@ -18,13 +19,15 @@ import LineItemCategory from "../../components/LineItemCategory";
 // mock data
 import moreOptions from "../../mockdata/menuMoreOptions.json";
 
-const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
+const ModalMoreOptions = ({ navigation }) => {
   const album = navigation.getParam("album");
+
+  const { updateTabBarState } = useContext(ScreenContext);
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", () => {
       navigation.goBack(null);
-      setToggleTabBar();
+      updateTabBarState();
       return true;
     });
 
@@ -37,7 +40,7 @@ const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
         <TouchableWithoutFeedback
           onPress={() => {
             navigation.goBack();
-            setToggleTabBar();
+            updateTabBarState();
           }}
         >
           <View style={styles.containerButton}>
@@ -88,7 +91,6 @@ const ModalMoreOptions = ({ navigation, screenProps: { setToggleTabBar } }) => {
 ModalMoreOptions.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

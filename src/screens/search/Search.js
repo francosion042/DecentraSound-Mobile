@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import {
   Animated,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../../constants";
+import { ScreenContext } from "../../contexts";
 
 // components
 import PlaylistItem from "../../components/PlaylistItem";
@@ -20,8 +21,8 @@ import SvgSearch from "../../components/icons/Svg.Search";
 import browseAll from "../../mockdata/searchBrowseAll.json";
 import topGenres from "../../mockdata/searchTopGenres.json";
 
-const Search = ({ navigation, screenProps }) => {
-  const { setToggleTabBar } = screenProps;
+const Search = ({ navigation }) => {
+  const { updateTabBarState } = useContext(ScreenContext);
   const [scrollY] = useState(new Animated.Value(0));
   const [searchStart] = useState(device.width - 48);
   const [searchEnd] = useState(searchStart - 40);
@@ -100,7 +101,7 @@ const Search = ({ navigation, screenProps }) => {
       <View style={styles.iconRight}>
         <TouchableOpacity
           onPress={() => {
-            setToggleTabBar();
+            updateTabBarState();
             navigation.navigate("ModalAccountOptions");
           }}
         >

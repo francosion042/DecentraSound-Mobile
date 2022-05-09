@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Feather, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import Slider from "@react-native-community/slider";
 import { colors, device, func, gStyle } from "../../constants";
+import { ScreenContext } from "../../contexts";
 
 // components
 import ModalHeader from "../../components/ModalHeader";
 import TouchIcon from "../../components/TouchIcon";
 
-const ModalMusicPlayer = ({ navigation, screenProps }) => {
+const ModalMusicPlayer = ({ navigation }) => {
+  const { currentSongData } = useContext(ScreenContext);
   const [favorited, setFavorited] = useState(false);
   const [paused, setPaused] = useState(true);
 
@@ -20,8 +22,6 @@ const ModalMusicPlayer = ({ navigation, screenProps }) => {
   const togglePlay = () => {
     setPaused(!paused);
   };
-
-  const { currentSongData } = screenProps;
 
   const favoriteColor = favorited ? colors.brandPrimary : colors.white;
   const favoriteIcon = favorited ? "heart" : "heart-o";
@@ -123,7 +123,6 @@ const ModalMusicPlayer = ({ navigation, screenProps }) => {
 ModalMusicPlayer.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

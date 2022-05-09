@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../../constants";
@@ -13,10 +13,11 @@ import heavyRotation from "../../mockdata/heavyRotation.json";
 import jumpBackIn from "../../mockdata/jumpBackIn.json";
 import recentlyPlayed from "../../mockdata/recentlyPlayed.json";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScreenContext } from "../../contexts";
 
-const Home = ({ navigation, screenProps }) => {
+const Home = ({ navigation }) => {
+  const { tabBarState, updateTabBarState } = useContext(ScreenContext);
   const [scrollY] = useState(new Animated.Value(0));
-  const { toggleTabBarState, setToggleTabBar } = screenProps;
 
   const opacityIn = scrollY.interpolate({
     inputRange: [0, 128],
@@ -36,14 +37,14 @@ const Home = ({ navigation, screenProps }) => {
         <Animated.View style={[styles.iPhoneNotch, { opacity: opacityIn }]} />
       )}
 
-      {toggleTabBarState ? (
+      {tabBarState ? (
         <BlurView intensity={99} style={styles.blurview} tint="dark" />
       ) : null}
 
       <Animated.View style={[styles.containerHeader, { opacity: opacityOut }]}>
         <TouchableOpacity
           onPress={() => {
-            setToggleTabBar();
+            updateTabBarState();
 
             navigation.navigate("ModalAccountOptions");
           }}
