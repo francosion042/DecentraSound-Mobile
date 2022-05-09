@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import {
   Text,
@@ -14,6 +14,7 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { device, gStyle, colors, fonts } from "../../constants";
 import ModalHeader from "../../components/ModalHeader";
+import { ConnectionContext } from "../../contexts";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
@@ -21,7 +22,9 @@ import LineItemCategory from "../../components/LineItemCategory";
 // mock data
 import accountOptions from "../../mockdata/menuAccountOptions.json";
 
-const ModalAccountOptions = ({ navigation, screenProps, connector }) => {
+const ModalAccountOptions = ({ navigation, screenProps }) => {
+  const { connection } = useContext(ConnectionContext);
+
   const { setToggleTabBar } = screenProps;
 
   useEffect(() => {
@@ -46,7 +49,7 @@ const ModalAccountOptions = ({ navigation, screenProps, connector }) => {
                 { text: "Cancel" },
                 {
                   onPress: () => {
-                    connector.killSession();
+                    connection.killSession();
                   },
                   text: "Disconnect",
                 },
