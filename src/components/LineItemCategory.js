@@ -6,7 +6,7 @@ import {
   Entypo,
   MaterialIcons,
   MaterialCommunityIcons,
-  FontAwesome
+  FontAwesome,
 } from "@expo/vector-icons";
 import { colors, gStyle } from "../constants";
 
@@ -15,7 +15,7 @@ const LineItemCategory = ({
   onPress,
   title,
   disableRightSide,
-  iconLibrary
+  iconLibrary,
 }) => {
   let iconDisplay;
 
@@ -74,7 +74,7 @@ const LineItemCategory = ({
 
 LineItemCategory.defaultProps = {
   disableRightSide: null,
-  iconLibrary: "Feather"
+  iconLibrary: "Feather",
 };
 
 LineItemCategory.propTypes = {
@@ -85,7 +85,7 @@ LineItemCategory.propTypes = {
 
   // optional
   disableRightSide: PropTypes.bool,
-  iconLibrary: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+  iconLibrary: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 const styles = StyleSheet.create({
@@ -95,17 +95,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 24,
     paddingVertical: 10,
-    width: "100%"
+    width: "100%",
   },
   title: {
     ...gStyle.text16,
     color: colors.white,
-    marginLeft: 16
+    marginLeft: 16,
   },
   containerRight: {
     alignItems: "flex-end",
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default LineItemCategory;

@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
-    zIndex: 10
+    zIndex: 10,
   },
   containerFlatlist: {
-    marginTop: device.iPhoneNotch ? 88 : 64
-  }
+    marginTop: device.iPhoneNotch ? 88 : 64,
+  },
 });
 
 export default Library;

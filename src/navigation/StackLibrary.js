@@ -13,21 +13,21 @@ const Icon = ({ focused }) => <SvgTabLibrary active={focused} />;
 
 Icon.propTypes = {
   // required
-  focused: PropTypes.bool.isRequired
+  focused: PropTypes.bool.isRequired,
 };
 
 export default createStackNavigator(
   {
     LibraryMain: {
-      screen: Library
+      screen: Library,
     },
-    Album
+    Album,
   },
   {
     headerMode: "none",
     navigationOptions: {
       tabBarLabel: "Library",
-      tabBarIcon: Icon
-    }
+      tabBarIcon: Icon,
+    },
   }
 );

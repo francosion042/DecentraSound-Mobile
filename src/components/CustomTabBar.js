@@ -5,7 +5,7 @@ import { BottomTabBar } from "react-navigation-tabs";
 // components
 import BarMusicPlayer from "./BarMusicPlayer";
 
-const CustomTabBar = props => {
+const CustomTabBar = (props) => {
   const { screenProps } = props;
   const { currentSongData, toggleTabBarState } = screenProps;
 
@@ -20,7 +20,7 @@ const CustomTabBar = props => {
 CustomTabBar.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired
+  screenProps: PropTypes.object.isRequired,
 };
 
 export default CustomTabBar;

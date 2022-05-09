@@ -17,7 +17,7 @@ PlaylistItem.propTypes = {
   // required
   bgColor: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -28,12 +28,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     marginRight: 24,
     paddingLeft: 12,
-    paddingTop: 12
+    paddingTop: 12,
   },
   playlistTitle: {
     ...gStyle.textBold22,
-    color: colors.white
-  }
+    color: colors.white,
+  },
 });
 
 export default PlaylistItem;

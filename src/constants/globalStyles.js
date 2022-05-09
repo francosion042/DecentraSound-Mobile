@@ -8,37 +8,37 @@ export default {
   activeOpacity: 0.7,
   container: {
     backgroundColor: colors.blackBg,
-    flex: 1
+    flex: 1,
   },
   containerAbsolute: {
     position: "absolute",
     bottom: 0,
     width: "100%",
-    zIndex: 50
+    zIndex: 50,
   },
 
   // flex
   // ///////////////////////////////////////////////////////////////////////////
   flexCenter: {
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   flexRow: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   flexRowCenterAlign: {
     alignItems: "center",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   flexRowCenter: {
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   flexRowSpace: {
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   flex1: { flex: 1 },
   flex2: { flex: 2 },
@@ -51,7 +51,7 @@ export default {
   navHeaderStyle: {
     backgroundColor: colors.black,
     borderBottomWidth: 0,
-    elevation: 0
+    elevation: 0,
   },
 
   // text
@@ -165,5 +165,5 @@ export default {
   pHHalf: { paddingHorizontal: spaceGrid / 2 },
   pH1: { paddingHorizontal: spaceGrid },
   pH2: { paddingHorizontal: spaceGrid * 2 },
-  pH3: { paddingHorizontal: spaceGrid * 3 }
+  pH3: { paddingHorizontal: spaceGrid * 3 },
 };

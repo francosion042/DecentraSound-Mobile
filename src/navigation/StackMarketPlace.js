@@ -12,20 +12,20 @@ const Icon = ({ focused }) => <SvgTabMarketPlace active={focused} />;
 
 Icon.propTypes = {
   // required
-  focused: PropTypes.bool.isRequired
+  focused: PropTypes.bool.isRequired,
 };
 
 export default createStackNavigator(
   {
     SearchMain: {
-      screen: MarketPlace
-    }
+      screen: MarketPlace,
+    },
   },
   {
     headerMode: "none",
     navigationOptions: {
       tabBarLabel: "MarketPlace",
-      tabBarIcon: Icon
-    }
+      tabBarIcon: Icon,
+    },
   }
 );

@@ -31,5 +31,5 @@ export default {
   iPhoneNotch,
   isPad,
   web,
-  width
+  width,
 };

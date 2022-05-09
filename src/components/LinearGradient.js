@@ -18,13 +18,13 @@ const SvgLinearGradient = ({ fill, height }) => (
 
 SvgLinearGradient.defaultProps = {
   fill: colors.brandPrimary,
-  height: 320
+  height: 320,
 };
 
 SvgLinearGradient.propTypes = {
   // optional
   fill: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.number
+  height: PropTypes.number,
 };
 
 export default SvgLinearGradient;

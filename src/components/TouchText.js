@@ -16,7 +16,7 @@ const TouchText = ({ onPress, style, styleText, text }) => (
 
 TouchText.defaultProps = {
   style: {},
-  styleText: {}
+  styleText: {},
 };
 
 TouchText.propTypes = {
@@ -28,13 +28,13 @@ TouchText.propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number,
-    PropTypes.object
+    PropTypes.object,
   ]),
   styleText: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number,
-    PropTypes.object
-  ])
+    PropTypes.object,
+  ]),
 };
 
 export default TouchText;

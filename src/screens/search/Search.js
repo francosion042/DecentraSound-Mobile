@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../../constants";
@@ -29,7 +29,7 @@ const Search = ({ navigation, screenProps }) => {
   const opacity = scrollY.interpolate({
     inputRange: [0, 48],
     outputRange: [searchStart, searchEnd],
-    extrapolate: "clamp"
+    extrapolate: "clamp",
   });
 
   return (
@@ -64,7 +64,7 @@ const Search = ({ navigation, screenProps }) => {
 
         <Text style={styles.sectionHeading}>Your top genres</Text>
         <View style={styles.containerRow}>
-          {Object.keys(topGenres).map(index => {
+          {Object.keys(topGenres).map((index) => {
             const item = topGenres[index];
 
             return (
@@ -81,7 +81,7 @@ const Search = ({ navigation, screenProps }) => {
 
         <Text style={styles.sectionHeading}>Browse all</Text>
         <View style={styles.containerRow}>
-          {Object.keys(browseAll).map(index => {
+          {Object.keys(browseAll).map((index) => {
             const item = browseAll[index];
 
             return (
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     ...gStyle.pH3,
     backgroundColor: colors.blackBg,
     paddingBottom: 16,
-    paddingTop: device.iPhoneNotch ? 64 : 24
+    paddingTop: device.iPhoneNotch ? 64 : 24,
   },
   searchPlaceholder: {
     alignItems: "center",
@@ -124,27 +124,27 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     flexDirection: "row",
     paddingLeft: 16,
-    paddingVertical: 16
+    paddingVertical: 16,
   },
   searchPlaceholderText: {
     ...gStyle.textSpotify16,
-    color: colors.blackBg
+    color: colors.blackBg,
   },
   sectionHeading: {
     ...gStyle.textSpotifyBold18,
     color: colors.white,
     marginBottom: 24,
     marginLeft: 24,
-    marginTop: 16
+    marginTop: 16,
   },
   containerRow: {
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
-    marginLeft: 24
+    marginLeft: 24,
   },
   containerColumn: {
-    width: "50%"
+    width: "50%",
   },
   iconRight: {
     alignItems: "center",
@@ -153,8 +153,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 24,
     top: device.web ? 40 : 40,
-    width: 28
-  }
+    width: 28,
+  },
 });
 
 export default Search;

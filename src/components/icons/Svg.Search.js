@@ -15,13 +15,13 @@ const SvgSearch = ({ fill, size }) => (
 
 SvgSearch.defaultProps = {
   fill: colors.blackBg,
-  size: 24
+  size: 24,
 };
 
 SvgSearch.propTypes = {
   // optional
   fill: PropTypes.string,
-  size: PropTypes.number
+  size: PropTypes.number,
 };
 
 export default SvgSearch;

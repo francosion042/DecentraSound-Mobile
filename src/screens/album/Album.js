@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Switch,
   Text,
-  View
+  View,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
@@ -40,7 +40,7 @@ const Album = ({ navigation, screenProps }) => {
     // setTitle(albumTitle);
   }, [navigation, screenProps]);
 
-  const toggleDownloaded = val => {
+  const toggleDownloaded = (val) => {
     // if web
     if (device.web) {
       setDownloaded(val);
@@ -58,8 +58,8 @@ const Album = ({ navigation, screenProps }) => {
             onPress: () => {
               setDownloaded(false);
             },
-            text: "Remove"
-          }
+            text: "Remove",
+          },
         ],
         { cancelable: false }
       );
@@ -68,7 +68,7 @@ const Album = ({ navigation, screenProps }) => {
     }
   };
 
-  const changeSongData = songData => {
+  const changeSongData = (songData) => {
     const { changeSong } = screenProps;
 
     changeSong(songData);
@@ -95,13 +95,13 @@ const Album = ({ navigation, screenProps }) => {
   const opacityHeading = scrollY.interpolate({
     inputRange: headingRange,
     outputRange: [0, 1],
-    extrapolate: "clamp"
+    extrapolate: "clamp",
   });
 
   const opacityShuffle = scrollY.interpolate({
     inputRange: shuffleRange,
     outputRange: [0, 1],
-    extrapolate: "clamp"
+    extrapolate: "clamp",
   });
 
   return (
@@ -130,7 +130,7 @@ const Album = ({ navigation, screenProps }) => {
               setToggleTabBar();
 
               navigation.navigate("ModalMoreOptions", {
-                album
+                album,
               });
             }}
           />
@@ -191,7 +191,7 @@ const Album = ({ navigation, screenProps }) => {
             </Text>
             <Switch
               trackColor={colors.greySwitchBorder}
-              onValueChange={val => toggleDownloaded(val)}
+              onValueChange={(val) => toggleDownloaded(val)}
               value={downloaded}
             />
           </View>
@@ -208,7 +208,7 @@ const Album = ({ navigation, screenProps }) => {
                   artist: album.artist,
                   image: album.image,
                   length: track.seconds,
-                  title: track.title
+                  title: track.title,
                 }}
               />
             ))}
@@ -222,24 +222,24 @@ const Album = ({ navigation, screenProps }) => {
 Album.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired
+  screenProps: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
   blurview: {
     ...StyleSheet.absoluteFill,
-    zIndex: 101
+    zIndex: 101,
   },
   containerHeader: {
     height: 89,
     position: "absolute",
     top: 0,
     width: "100%",
-    zIndex: 100
+    zIndex: 100,
   },
   headerLinear: {
     height: 89,
-    width: "100%"
+    width: "100%",
   },
   header: {
     alignItems: "center",
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     paddingTop: device.iPhoneNotch ? 48 : 24,
     position: "absolute",
     top: 0,
-    width: "100%"
+    width: "100%",
   },
   headerTitle: {
     ...gStyle.textBold16,
@@ -257,56 +257,56 @@ const styles = StyleSheet.create({
     marginTop: 2,
     paddingHorizontal: 8,
     textAlign: "center",
-    width: device.width - 100
+    width: device.width - 100,
   },
   containerFixed: {
     alignItems: "center",
     paddingTop: device.iPhoneNotch ? 94 : 60,
     position: "absolute",
-    width: "100%"
+    width: "100%",
   },
   containerLinear: {
     position: "absolute",
     top: 0,
     width: "100%",
-    zIndex: device.web ? 5 : 0
+    zIndex: device.web ? 5 : 0,
   },
   containerImage: {
     shadowColor: colors.black,
     shadowOffset: { height: 8, width: 0 },
     shadowOpacity: 0.8,
     shadowRadius: 6,
-    zIndex: device.web ? 20 : 0
+    zIndex: device.web ? 20 : 0,
   },
   image: {
     height: 148,
     marginBottom: device.web ? 0 : 16,
-    width: 148
+    width: 148,
   },
   containerTitle: {
     marginTop: device.web ? 8 : 0,
-    zIndex: device.web ? 20 : 0
+    zIndex: device.web ? 20 : 0,
   },
   title: {
     ...gStyle.textBold20,
     color: colors.white,
     marginBottom: 8,
     paddingHorizontal: 24,
-    textAlign: "center"
+    textAlign: "center",
   },
   containerAlbum: {
-    zIndex: device.web ? 20 : 0
+    zIndex: device.web ? 20 : 0,
   },
   albumInfo: {
     ...gStyle.text12,
     color: colors.greyInactive,
-    marginBottom: 48
+    marginBottom: 48,
   },
   containerScroll: {
-    paddingTop: 89
+    paddingTop: 89,
   },
   containerSticky: {
-    marginTop: device.iPhoneNotch ? 238 : 194
+    marginTop: device.iPhoneNotch ? 238 : 194,
   },
   containerShuffle: {
     alignItems: "center",
@@ -314,41 +314,41 @@ const styles = StyleSheet.create({
     shadowColor: colors.blackBg,
     shadowOffset: { height: -10, width: 0 },
     shadowOpacity: 0.2,
-    shadowRadius: 20
+    shadowRadius: 20,
   },
   containerStickyLinear: {
     position: "absolute",
     top: 0,
-    width: "100%"
+    width: "100%",
   },
   btn: {
     backgroundColor: colors.brandPrimary,
     borderRadius: 25,
     height: 50,
-    width: 220
+    width: 220,
   },
   btnText: {
     ...gStyle.textBold16,
     color: colors.white,
     letterSpacing: 1,
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   },
   containerSongs: {
     alignItems: "center",
     backgroundColor: colors.blackBg,
-    minHeight: 540
+    minHeight: 540,
   },
   row: {
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 16,
-    width: "100%"
+    width: "100%",
   },
   downloadText: {
     ...gStyle.textBold18,
-    color: colors.white
-  }
+    color: colors.white,
+  },
 });
 
 export default Album;

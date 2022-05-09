@@ -16,23 +16,23 @@ const BottomTabNavigator = createBottomTabNavigator(
     StackHome,
     StackMarketPlace,
     StackSearch,
-    StackLibrary
+    StackLibrary,
   },
   {
     initialRouteName: "StackHome",
-    tabBarComponent: props => <CustomTabBar {...props} />,
+    tabBarComponent: (props) => <CustomTabBar {...props} />,
     tabBarOptions: {
       activeTintColor: colors.brandPrimary,
       inactiveTintColor: colors.greyInactive,
       style: {
         backgroundColor: colors.grey,
         borderTopWidth: 0,
-        height: 60
+        height: 60,
       },
       labelStyle: {
-        fontSize: 15
-      }
-    }
+        fontSize: 15,
+      },
+    },
   }
 );
 

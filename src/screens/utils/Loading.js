@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Modal, ActivityIndicator } from "react-native";
 import { colors } from "../../constants";
 
-const Loading = props => {
+const Loading = (props) => {
   const { loading } = props;
 
   return (
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "space-around",
-    backgroundColor: colors.black80
+    backgroundColor: colors.black80,
   },
   activityIndicatorWrapper: {
     backgroundColor: "#ffff",
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-around"
-  }
+    justifyContent: "space-around",
+  },
 });
 
 export default Loading;

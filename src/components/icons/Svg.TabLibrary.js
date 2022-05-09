@@ -17,13 +17,13 @@ const SvgTabLibrary = ({ active, size }) => {
 
 SvgTabLibrary.defaultProps = {
   active: false,
-  size: 24
+  size: 24,
 };
 
 SvgTabLibrary.propTypes = {
   // optional
   active: PropTypes.bool,
-  size: PropTypes.number
+  size: PropTypes.number,
 };
 
 export default SvgTabLibrary;

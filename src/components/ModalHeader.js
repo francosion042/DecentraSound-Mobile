@@ -30,7 +30,7 @@ ModalHeader.defaultProps = {
   right: null,
   rightPress: () => null,
   style: {},
-  text: null
+  text: null,
 };
 
 ModalHeader.propTypes = {
@@ -42,9 +42,9 @@ ModalHeader.propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number,
-    PropTypes.object
+    PropTypes.object,
   ]),
-  text: PropTypes.string
+  text: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -52,28 +52,28 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 24,
-    paddingTop: device.iPhoneNotch ? 48 : 24
+    paddingTop: device.iPhoneNotch ? 48 : 24,
   },
   containerText: {
     alignItems: "center",
     flex: 5,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   text: {
     ...gStyle.textBold16,
     color: colors.white,
-    textAlign: "center"
+    textAlign: "center",
   },
   left: {
     alignItems: "flex-start",
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   right: {
     alignItems: "flex-end",
     flex: 1,
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
 
 export default ModalHeader;

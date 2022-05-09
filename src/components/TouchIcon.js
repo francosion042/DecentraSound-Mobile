@@ -16,7 +16,7 @@ const TouchIcon = ({ icon, iconSize, onPress, style }) => (
 
 TouchIcon.defaultProps = {
   iconSize: 24,
-  style: {}
+  style: {},
 };
 
 TouchIcon.propTypes = {
@@ -29,8 +29,8 @@ TouchIcon.propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number,
-    PropTypes.object
-  ])
+    PropTypes.object,
+  ]),
 };
 
 export default TouchIcon;

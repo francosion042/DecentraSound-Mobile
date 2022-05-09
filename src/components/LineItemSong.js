@@ -36,7 +36,7 @@ const LineItemSong = ({ active, downloaded, onPress, songData }) => {
 
 LineItemSong.defaultProps = {
   active: false,
-  downloaded: false
+  downloaded: false,
 };
 
 LineItemSong.propTypes = {
@@ -47,12 +47,12 @@ LineItemSong.propTypes = {
     artist: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     length: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
   }).isRequired,
 
   // optional
   active: PropTypes.bool,
-  downloaded: PropTypes.bool
+  downloaded: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
@@ -61,12 +61,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 16,
-    width: "100%"
+    width: "100%",
   },
   title: {
     ...gStyle.text16,
     color: colors.white,
-    marginBottom: 4
+    marginBottom: 4,
   },
   circleDownloaded: {
     alignItems: "center",
@@ -75,16 +75,16 @@ const styles = StyleSheet.create({
     height: 14,
     justifyContent: "center",
     marginRight: 8,
-    width: 14
+    width: 14,
   },
   artist: {
     ...gStyle.text12,
-    color: colors.greyInactive
+    color: colors.greyInactive,
   },
   containerRight: {
     alignItems: "flex-end",
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default LineItemSong;

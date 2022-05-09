@@ -8,7 +8,7 @@ import {
   ScrollView,
   StyleSheet,
   Image,
-  Alert
+  Alert,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { device, gStyle, colors, fonts } from "../../constants";
@@ -37,8 +37,8 @@ const ModalAccountOptions = ({ navigation, screenProps, connector }) => {
                   onPress: () => {
                     connector.killSession();
                   },
-                  text: "Disconnect"
-                }
+                  text: "Disconnect",
+                },
               ],
               { cancelable: true }
             );
@@ -78,7 +78,7 @@ const ModalAccountOptions = ({ navigation, screenProps, connector }) => {
           </Text> */}
         </View>
 
-        {Object.keys(accountOptions).map(index => {
+        {Object.keys(accountOptions).map((index) => {
           const item = accountOptions[index];
 
           return (
@@ -100,41 +100,41 @@ const ModalAccountOptions = ({ navigation, screenProps, connector }) => {
 ModalAccountOptions.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired
+  screenProps: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
   containerSafeArea: {
     ...gStyle.containerAbsolute,
-    backgroundColor: colors.blackBlur
+    backgroundColor: colors.blackBlur,
   },
   containerButton: {
     ...gStyle.flexCenter,
     ...gStyle.spacer6,
-    height: 70
+    height: 70,
   },
   buttonText: {
     color: colors.red,
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   transparent: {
-    backgroundColor: colors.black80
+    backgroundColor: colors.black80,
   },
   container: {
     alignItems: "center",
-    paddingTop: device.iPhoneNotch ? 94 : 50
+    paddingTop: device.iPhoneNotch ? 94 : 50,
   },
   containerImage: {
     shadowColor: colors.black,
     shadowOffset: { height: 8, width: 0 },
     shadowOpacity: 0.8,
-    shadowRadius: 6
+    shadowRadius: 6,
   },
   image: {
     height: 148,
     marginBottom: 16,
-    width: 148
+    width: 148,
   },
   title: {
     color: colors.white,
@@ -142,14 +142,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 8,
     paddingHorizontal: 24,
-    textAlign: "center"
+    textAlign: "center",
   },
   albumInfo: {
     color: colors.greyInactive,
     fontFamily: fonts.regular,
     fontSize: 12,
-    marginBottom: 48
-  }
+    marginBottom: 48,
+  },
 });
 
 export default ModalAccountOptions;

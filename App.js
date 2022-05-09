@@ -5,7 +5,7 @@ import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   useWalletConnect,
-  withWalletConnect
+  withWalletConnect,
 } from "@walletconnect/react-native-dapp";
 import NavigationContainer from "./src/navigation/Stack";
 import WalletConnection from "./src/screens/authentication/WalletConnection";
@@ -16,7 +16,7 @@ const App = () => {
     artist: "Mac Miller",
     image: "swimming",
     length: 312,
-    title: "So It Goes"
+    title: "So It Goes",
   });
   const [toggleTabBar, setToggleTabBar] = useState(false);
 
@@ -31,7 +31,7 @@ const App = () => {
     setToggleTabBar(!toggleTabBar);
   };
 
-  const changeCurrentSongData = data => {
+  const changeCurrentSongData = (data) => {
     setCurrentSongData(data);
   };
 
@@ -43,7 +43,7 @@ const App = () => {
           currentSongData,
           changeSong: changeCurrentSongData,
           toggleTabBarState: toggleTabBar,
-          setToggleTabBar: changeToggleTabBar
+          setToggleTabBar: changeToggleTabBar,
         }}
       />
     </Fragment>
@@ -53,6 +53,6 @@ const App = () => {
 export default withWalletConnect(App, {
   redirectUrl: Platform.OS === "web" ? window.location.origin : "https://",
   storageOptions: {
-    asyncStorage: AsyncStorage
-  }
+    asyncStorage: AsyncStorage,
+  },
 });

@@ -28,14 +28,14 @@ const WalletConnection = ({ connector }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: "25%"
+    paddingTop: "25%",
   },
   rect2: {
     width: 151,
     height: 139,
     opacity: 10,
     marginTop: 87,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   icon: {
     color: "rgba(255,255,255,1)",
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     height: 124,
     width: 107,
     marginTop: 7,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   intro: {
     fontFamily: "roboto-700",
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 52,
     alignSelf: "center",
-    marginBottom: 52
+    marginBottom: 52,
   },
   button: {
     width: "50%",
@@ -60,14 +60,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.brandPrimary,
     alignSelf: "center",
     borderRadius: 5,
-    padding: 5
+    padding: 5,
   },
   btnText: {
     textAlign: "center",
     textAlignVertical: "center",
     fontSize: 20,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
 export default WalletConnection;

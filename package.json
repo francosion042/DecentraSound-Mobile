@@ -5,10 +5,9 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "web": "expo start --web",
-    "eject": "expo eject",
+    "web": "react-native start --web",
     "commit": "cz",
-    "lint": "eslint . --ext=.js",
+    "lint": "eslint --fix --ext .js .",
     "postinstall": "node_modules/.bin/rn-nodeify --install crypto,assert,url,stream,events --hack"
   },
   "dependencies": {

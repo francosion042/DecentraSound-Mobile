@@ -13,20 +13,20 @@ const Icon = ({ focused }) => <SvgTabHome active={focused} />;
 
 Icon.propTypes = {
   // required
-  focused: PropTypes.bool.isRequired
+  focused: PropTypes.bool.isRequired,
 };
 
 export default createStackNavigator(
   {
     Home,
-    Album
+    Album,
   },
   {
     headerMode: "none",
     initialRouteName: "Home",
     navigationOptions: {
       tabBarLabel: "Home",
-      tabBarIcon: Icon
-    }
+      tabBarIcon: Icon,
+    },
   }
 );

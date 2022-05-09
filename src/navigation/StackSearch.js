@@ -12,20 +12,20 @@ const Icon = ({ focused }) => <SvgTabSearch active={focused} />;
 
 Icon.propTypes = {
   // required
-  focused: PropTypes.bool.isRequired
+  focused: PropTypes.bool.isRequired,
 };
 
 export default createStackNavigator(
   {
     SearchMain: {
-      screen: SearchScreen
-    }
+      screen: SearchScreen,
+    },
   },
   {
     headerMode: "none",
     navigationOptions: {
       tabBarLabel: "Search",
-      tabBarIcon: Icon
-    }
+      tabBarIcon: Icon,
+    },
   }
 );

@@ -21,20 +21,20 @@ const StackNavigator = createStackNavigator(
     ModalMoreOptions: {
       screen: ModalMoreOptions,
       navigationOptions: {
-        cardStyle: { backgroundColor: "transparent" }
-      }
+        cardStyle: { backgroundColor: "transparent" },
+      },
     },
     ModalAccountOptions: {
       screen: ModalAccountOptions,
       navigationOptions: {
-        cardStyle: { backgroundColor: "transparent" }
-      }
-    }
+        cardStyle: { backgroundColor: "transparent" },
+      },
+    },
   },
   {
     headerMode: "none",
     initialRouteName: "TabNavigation",
-    mode: "modal"
+    mode: "modal",
   }
 );
 

@@ -17,13 +17,13 @@ const SvgTabSearch = ({ active, size }) => {
 
 SvgTabSearch.defaultProps = {
   active: false,
-  size: 24
+  size: 24,
 };
 
 SvgTabSearch.propTypes = {
   // optional
   active: PropTypes.bool,
-  size: PropTypes.number
+  size: PropTypes.number,
 };
 
 export default SvgTabSearch;

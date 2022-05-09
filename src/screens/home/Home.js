@@ -21,13 +21,13 @@ const Home = ({ navigation, screenProps }) => {
   const opacityIn = scrollY.interpolate({
     inputRange: [0, 128],
     outputRange: [0, 1],
-    extrapolate: "clamp"
+    extrapolate: "clamp",
   });
 
   const opacityOut = scrollY.interpolate({
     inputRange: [0, 88],
     outputRange: [1, 0],
-    extrapolate: "clamp"
+    extrapolate: "clamp",
   });
 
   return (
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
-    zIndex: 20
+    zIndex: 20,
   },
   containerHeader: {
     alignItems: "flex-end",
@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
-    zIndex: 10
-  }
+    zIndex: 10,
+  },
 });
 
 export default Home;

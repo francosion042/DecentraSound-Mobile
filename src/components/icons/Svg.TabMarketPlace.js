@@ -23,13 +23,13 @@ const SvgTabMarketPlace = ({ active, size }) => {
 
 SvgTabMarketPlace.defaultProps = {
   active: false,
-  size: 24
+  size: 24,
 };
 
 SvgTabMarketPlace.propTypes = {
   // optional
   active: PropTypes.bool,
-  size: PropTypes.number
+  size: PropTypes.number,
 };
 
 export default SvgTabMarketPlace;

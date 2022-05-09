@@ -29,7 +29,7 @@ const ScreenHeader = ({ navigation, showBack, title }) => (
 );
 
 ScreenHeader.defaultProps = {
-  showBack: false
+  showBack: false,
 };
 
 ScreenHeader.propTypes = {
@@ -38,7 +38,7 @@ ScreenHeader.propTypes = {
   title: PropTypes.string.isRequired,
 
   // optional
-  showBack: PropTypes.bool
+  showBack: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
@@ -48,22 +48,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingBottom: 16,
     paddingHorizontal: 24,
-    paddingTop: device.iPhoneNotch ? 48 : 24
+    paddingTop: device.iPhoneNotch ? 48 : 24,
   },
   containerText: {
     ...gStyle.flex5,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   text: {
     ...gStyle.textBold16,
     color: colors.white,
-    textAlign: "center"
+    textAlign: "center",
   },
   left: {
     ...gStyle.flex1,
-    alignItems: "flex-start"
-  }
+    alignItems: "flex-start",
+  },
 });
 
 export default withNavigation(ScreenHeader);

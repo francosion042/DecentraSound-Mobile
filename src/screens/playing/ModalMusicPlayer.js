@@ -123,7 +123,7 @@ const ModalMusicPlayer = ({ navigation, screenProps }) => {
 ModalMusicPlayer.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired
+  screenProps: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -131,42 +131,42 @@ const styles = StyleSheet.create({
     height: device.width - 48,
     marginVertical: device.iPhoneNotch ? 36 : 8,
     width: device.width - 48,
-    marginBottom: "10%"
+    marginBottom: "10%",
   },
   containerDetails: {
-    marginBottom: 16
+    marginBottom: 16,
   },
   containerSong: {
-    flex: 6
+    flex: 6,
   },
   song: {
     ...gStyle.textBold24,
-    color: colors.white
+    color: colors.white,
   },
   artist: {
     ...gStyle.text18,
-    color: colors.greyInactive
+    color: colors.greyInactive,
   },
   containerFavorite: {
     alignItems: "flex-end",
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   containerTime: {
-    ...gStyle.flexRowSpace
+    ...gStyle.flexRowSpace,
   },
   time: {
     ...gStyle.text10,
-    color: colors.greyInactive
+    color: colors.greyInactive,
   },
   containerControls: {
     ...gStyle.flexRowSpace,
-    marginTop: device.iPhoneNotch ? 24 : "20%"
+    marginTop: device.iPhoneNotch ? 24 : "20%",
   },
   containerBottom: {
     ...gStyle.flexRowSpace,
-    marginTop: device.iPhoneNotch ? 32 : "10%"
-  }
+    marginTop: device.iPhoneNotch ? 32 : "10%",
+  },
 });
 
 export default ModalMusicPlayer;

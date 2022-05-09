@@ -11,7 +11,7 @@ class BarMusicPlayer extends Component {
 
     this.state = {
       favorited: false,
-      paused: true
+      paused: true,
     };
 
     this.toggleFavorite = this.toggleFavorite.bind(this);
@@ -19,14 +19,14 @@ class BarMusicPlayer extends Component {
   }
 
   toggleFavorite() {
-    this.setState(prev => ({
-      favorited: !prev.favorited
+    this.setState((prev) => ({
+      favorited: !prev.favorited,
     }));
   }
 
   togglePlay() {
-    this.setState(prev => ({
-      paused: !prev.paused
+    this.setState((prev) => ({
+      paused: !prev.paused,
     }));
   }
 
@@ -79,7 +79,7 @@ class BarMusicPlayer extends Component {
 }
 
 BarMusicPlayer.defaultProps = {
-  song: null
+  song: null,
 };
 
 BarMusicPlayer.propTypes = {
@@ -89,8 +89,8 @@ BarMusicPlayer.propTypes = {
   // optional
   song: PropTypes.shape({
     artist: PropTypes.string,
-    title: PropTypes.string
-  })
+    title: PropTypes.string,
+  }),
 };
 
 const styles = StyleSheet.create({
@@ -102,34 +102,34 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 15,
-    width: "100%"
+    width: "100%",
   },
   containerIconLeft: {
     ...gStyle.flexCenter,
-    width: 50
+    width: 50,
   },
   containerIconRight: {
     ...gStyle.flexCenter,
-    width: 50
+    width: 50,
   },
   containerSong: {
     overflow: "hidden",
-    width: device.width - 130
+    width: device.width - 130,
   },
   title: {
     ...gStyle.text18,
-    color: colors.white
+    color: colors.white,
   },
   artist: {
     ...gStyle.text12,
-    color: colors.greyLight
+    color: colors.greyLight,
   },
   device: {
     ...gStyle.text10,
     color: colors.brandPrimary,
     marginLeft: 4,
-    textTransform: "uppercase"
-  }
+    textTransform: "uppercase",
+  },
 });
 
 export default withNavigation(BarMusicPlayer);

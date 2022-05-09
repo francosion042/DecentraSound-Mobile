@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { withNavigation } from "react-navigation";
 import { colors, gStyle } from "../constants";
@@ -46,7 +46,7 @@ const AlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
 
 AlbumsHorizontal.defaultProps = {
   heading: null,
-  tagline: null
+  tagline: null,
 };
 
 AlbumsHorizontal.propTypes = {
@@ -56,45 +56,45 @@ AlbumsHorizontal.propTypes = {
 
   // optional
   heading: PropTypes.string,
-  tagline: PropTypes.string
+  tagline: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
   container: {
     marginBottom: 32,
-    width: "100%"
+    width: "100%",
   },
   containerContent: {
-    paddingLeft: 16
+    paddingLeft: 16,
   },
   heading: {
     ...gStyle.textBold18,
     color: colors.white,
     paddingBottom: 6,
-    textAlign: "center"
+    textAlign: "center",
   },
   tagline: {
     ...gStyle.text12,
     color: colors.greyInactive,
     paddingBottom: 6,
-    textAlign: "center"
+    textAlign: "center",
   },
   item: {
     marginRight: 16,
-    width: 148
+    width: 148,
   },
   image: {
     backgroundColor: colors.greyLight,
     height: 148,
     width: 148,
-    borderRadius: 5
+    borderRadius: 5,
   },
   title: {
     ...gStyle.textBold12,
     color: colors.white,
     marginTop: 4,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default withNavigation(AlbumsHorizontal);
