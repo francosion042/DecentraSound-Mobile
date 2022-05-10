@@ -22,12 +22,12 @@ import moreOptions from "../../mockdata/menuMoreOptions.json";
 const ModalMoreOptions = ({ navigation }) => {
   const album = navigation.getParam("album");
 
-  const { updateTabBarState } = useContext(ScreenContext);
+  const { updateShowTabBarState } = useContext(ScreenContext);
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", () => {
       navigation.goBack(null);
-      updateTabBarState();
+      updateShowTabBarState(true);
       return true;
     });
 
@@ -40,7 +40,7 @@ const ModalMoreOptions = ({ navigation }) => {
         <TouchableWithoutFeedback
           onPress={() => {
             navigation.goBack();
-            updateTabBarState();
+            updateShowTabBarState(true);
           }}
         >
           <View style={styles.containerButton}>

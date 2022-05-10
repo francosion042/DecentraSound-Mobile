@@ -4,21 +4,27 @@ import React, { createContext, useState } from "react";
 const ScreenContext = createContext();
 
 const ScreenContextProvider = ({ children }) => {
-  const [currentSongData, setCurrentSongData] = useState({
-    album: "Swimming",
-    artist: "Mac Miller",
-    image: "swimming",
-    length: 312,
-    title: "So It Goes",
-  });
-  const [tabBarState, setTabBar] = useState(false);
+  const [currentSongData, setCurrentSongData] = useState(null);
+  //   const songDataFormat = {
+  //     album: "Swimming",
+  //     artist: "Mac Miller",
+  //     image: "swimming",
+  //     length: 312,
+  //     title: "So It Goes",
+  //   };
+  const [showTabBarState, setShowTabBarState] = useState(true);
 
   const updateCurrentSongData = (data) => {
     setCurrentSongData(data);
   };
 
-  const updateTabBarState = () => {
-    setTabBar(!tabBarState);
+  const updateShowTabBarState = (bool) => {
+    setShowTabBarState(bool);
+  };
+
+  const resetScreenData = () => {
+    setCurrentSongData(null);
+    setShowTabBarState(true);
   };
 
   return (
@@ -26,8 +32,9 @@ const ScreenContextProvider = ({ children }) => {
       value={{
         currentSongData,
         updateCurrentSongData,
-        tabBarState,
-        updateTabBarState,
+        showTabBarState,
+        updateShowTabBarState,
+        resetScreenData,
       }}
     >
       {children}

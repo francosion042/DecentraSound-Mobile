@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useContext, Fragment } from "react";
+import React, { useContext, Fragment, useEffect } from "react";
 // import { StatusBar } from "expo-status-bar";
 import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,10 +19,14 @@ const App = () => {
   const { updateConnection } = useContext(ConnectionContext);
 
   const connector = useWalletConnect();
+
+  useEffect(() => {
+    updateConnection(connector);
+  }, [updateConnection, connector]);
+
   if (!connector.connected) {
     return <WalletConnection connector={connector} />;
   }
-  updateConnection(connector);
 
   return (
     <Fragment>

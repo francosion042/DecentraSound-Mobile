@@ -24,12 +24,12 @@ import accountOptions from "../../mockdata/menuAccountOptions.json";
 
 const ModalAccountOptions = ({ navigation }) => {
   const { connection } = useContext(ConnectionContext);
-  const { updateTabBarState } = useContext(ScreenContext);
+  const { updateShowTabBarState, resetScreenData } = useContext(ScreenContext);
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", () => {
       navigation.goBack(null);
-      updateTabBarState();
+      updateShowTabBarState(true);
       return true;
     });
 
@@ -49,6 +49,7 @@ const ModalAccountOptions = ({ navigation }) => {
                 {
                   onPress: () => {
                     connection.killSession();
+                    resetScreenData();
                   },
                   text: "Disconnect",
                 },
@@ -72,7 +73,7 @@ const ModalAccountOptions = ({ navigation }) => {
           left={<Feather color={colors.brandPrimary} name="chevron-down" />}
           leftPress={() => {
             navigation.goBack(null);
-            updateTabBarState();
+            updateShowTabBarState(true);
           }}
           text={"Your Account"}
         />

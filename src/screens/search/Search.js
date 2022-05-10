@@ -22,7 +22,7 @@ import browseAll from "../../mockdata/searchBrowseAll.json";
 import topGenres from "../../mockdata/searchTopGenres.json";
 
 const Search = ({ navigation }) => {
-  const { updateTabBarState } = useContext(ScreenContext);
+  const { updateShowTabBarState } = useContext(ScreenContext);
   const [scrollY] = useState(new Animated.Value(0));
   const [searchStart] = useState(device.width - 48);
   const [searchEnd] = useState(searchStart - 40);
@@ -101,7 +101,7 @@ const Search = ({ navigation }) => {
       <View style={styles.iconRight}>
         <TouchableOpacity
           onPress={() => {
-            updateTabBarState();
+            updateShowTabBarState(false);
             navigation.navigate("ModalAccountOptions");
           }}
         >

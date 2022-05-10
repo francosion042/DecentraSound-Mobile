@@ -7,11 +7,11 @@ import { ScreenContext } from "../contexts";
 import BarMusicPlayer from "./BarMusicPlayer";
 
 const CustomTabBar = (props) => {
-  const { currentSongData, tabBarState } = useContext(ScreenContext);
+  const { currentSongData, showTabBarState } = useContext(ScreenContext);
 
-  return tabBarState ? null : (
+  return !showTabBarState ? null : (
     <React.Fragment>
-      <BarMusicPlayer song={currentSongData} />
+      {currentSongData ? <BarMusicPlayer song={currentSongData} /> : null}
       <BottomTabBar {...props} />
     </React.Fragment>
   );

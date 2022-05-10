@@ -28,8 +28,8 @@ const Album = ({ navigation }) => {
   const {
     currentSongData,
     updateCurrentSongData,
-    tabBarState,
-    updateTabBarState,
+    showTabBarState,
+    updateShowTabBarState,
   } = useContext(ScreenContext);
 
   const [album, setAlbum] = useState(null);
@@ -39,11 +39,10 @@ const Album = ({ navigation }) => {
   // const [title, setTitle] = useState(null);
 
   useEffect(() => {
-    // const albumTitle = navigation.getParam('title', 'ALBUM NOT FOUND?!');
-    const albumTitle = navigation.getParam("title", "Extraordinary Machine");
+    const albumTitle = navigation.getParam("title");
 
     setAlbum(albums[albumTitle] || null);
-    setSong(currentSongData.title);
+    setSong(albumTitle);
     // setTitle(albumTitle);
   }, [navigation, currentSongData]);
 
@@ -109,7 +108,7 @@ const Album = ({ navigation }) => {
 
   return (
     <View style={gStyle.container}>
-      {tabBarState ? (
+      {!showTabBarState ? (
         <BlurView intensity={99} style={styles.blurview} tint="dark" />
       ) : null}
 
@@ -130,7 +129,7 @@ const Album = ({ navigation }) => {
           <TouchIcon
             icon={<Feather color={colors.white} name="more-horizontal" />}
             onPress={() => {
-              updateTabBarState();
+              updateShowTabBarState(false);
 
               navigation.navigate("ModalMoreOptions", {
                 album,

@@ -16,7 +16,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenContext } from "../../contexts";
 
 const Home = ({ navigation }) => {
-  const { tabBarState, updateTabBarState } = useContext(ScreenContext);
+  const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
   const [scrollY] = useState(new Animated.Value(0));
 
   const opacityIn = scrollY.interpolate({
@@ -37,14 +37,14 @@ const Home = ({ navigation }) => {
         <Animated.View style={[styles.iPhoneNotch, { opacity: opacityIn }]} />
       )}
 
-      {tabBarState ? (
+      {showTabBarState ? (
         <BlurView intensity={99} style={styles.blurview} tint="dark" />
       ) : null}
 
       <Animated.View style={[styles.containerHeader, { opacity: opacityOut }]}>
         <TouchableOpacity
           onPress={() => {
-            updateTabBarState();
+            updateShowTabBarState(false);
 
             navigation.navigate("ModalAccountOptions");
           }}
