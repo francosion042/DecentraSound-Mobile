@@ -6,7 +6,7 @@ import TabNavigation from "./TabNavigation";
 
 // screens
 import ModalMusicPlayer from "../screens/playing/ModalMusicPlayer";
-import ModalMoreOptions from "../screens/playing/ModalMoreOptions";
+import ModalMoreOptions from "../screens/utils/ModalMoreOptions";
 import ModalAccountOptions from "../screens/account/ModalAccountOptions";
 
 const StackNavigator = createStackNavigator(
