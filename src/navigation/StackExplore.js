@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import { createStackNavigator } from "react-navigation-stack";
 
 // screens
-import MarketPlace from "../screens/marketPlace/MarketPlace";
+import Explore from "../screens/explore/Explore";
 
 // icons
-import SvgTabMarketPlace from "../components/icons/Svg.TabMarketPlace";
+import SvgTabExplore from "../components/icons/Svg.TabExplore";
 
-const Icon = ({ focused }) => <SvgTabMarketPlace active={focused} />;
+const Icon = ({ focused }) => <SvgTabExplore active={focused} />;
 
 Icon.propTypes = {
   // required
@@ -18,13 +18,13 @@ Icon.propTypes = {
 export default createStackNavigator(
   {
     SearchMain: {
-      screen: MarketPlace,
+      screen: Explore,
     },
   },
   {
     headerMode: "none",
     navigationOptions: {
-      tabBarLabel: "MarketPlace",
+      tabBarLabel: "Explore",
       tabBarIcon: Icon,
     },
   }

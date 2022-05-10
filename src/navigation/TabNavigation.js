@@ -6,7 +6,8 @@ import { colors } from "../constants";
 import StackHome from "./StackHome";
 import StackSearch from "./StackSearch";
 import StackLibrary from "./StackLibrary";
-import StackMarketPlace from "./StackMarketPlace";
+import StackExplore from "./StackExplore";
+import StackRadio from "./StackRadio";
 
 // components
 import CustomTabBar from "../components/CustomTabBar";
@@ -14,7 +15,8 @@ import CustomTabBar from "../components/CustomTabBar";
 const BottomTabNavigator = createBottomTabNavigator(
   {
     StackHome,
-    StackMarketPlace,
+    StackExplore,
+    StackRadio,
     StackSearch,
     StackLibrary,
   },

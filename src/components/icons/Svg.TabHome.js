@@ -6,10 +6,10 @@ import { colors } from "../../constants";
 const SvgTabHome = ({ active, size }) => {
   const fill = active ? colors.brandPrimary : colors.greyInactive;
   const dPath =
-    "M256.274 60.84L84.324 166.237v276.826H193.27V293.73h126.958v149.333h107.994V165.476L256.274 60.84zm0-24.89l192.178 113.195v315.25H300V315.062h-86.501v149.333H64.095V150.161L256.274 35.95z";
+    "M6 19h12V9.157l-6-5.454-6 5.454V19zm13 2H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346 0L23 11h-3v9a1 1 0 0 1-1 1zM8 10a7 7 0 0 1 7 7h-2a5 5 0 0 0-5-5v-2zm0 4a3 3 0 0 1 3 3H8v-3z";
 
   return (
-    <Svg height={size} width={size} viewBox="0 0 512 512">
+    <Svg height={size} width={size} viewBox="0 0 24 24">
       <Path d={dPath} fill={fill} />
     </Svg>
   );
