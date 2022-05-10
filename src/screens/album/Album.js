@@ -79,12 +79,6 @@ const Album = ({ navigation }) => {
     setSong(songData.title);
   };
 
-  // const toggleBlur = () => {
-  //   const { setToggleTabBar } = screenProps;
-
-  //   setToggleTabBar();
-  // };
-
   // album data not set?
   if (album === null) {
     return <Loading loading={true} />;

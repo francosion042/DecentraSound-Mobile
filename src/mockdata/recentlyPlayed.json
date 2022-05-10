@@ -8,6 +8,5 @@
   },
   { "id": 4, "image": "seaOfCowards", "title": "Sea Of Cowards" },
   { "id": 5, "image": "wishYouWereHere", "title": "Wish You Were Here" },
-  { "id": 6, "image": "extraMachine", "title": "Extraordinary Machine" },
-  { "id": 7, "image": "theCreekDrank", "title": "The Creek Drank The Cradle" }
+  { "id": 6, "image": "extraMachine", "title": "Extraordinary Machine" }
 ]
