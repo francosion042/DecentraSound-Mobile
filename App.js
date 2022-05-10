@@ -31,7 +31,7 @@ const App = () => {
   return (
     <Fragment>
       {/* <StatusBar style="light" backgroundColor="black" /> */}
-      <NavigationContainer />
+      <NavigationContainer theme="dark" />
     </Fragment>
   );
 };

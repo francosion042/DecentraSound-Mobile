@@ -10,6 +10,10 @@ export default {
     backgroundColor: colors.blackBg,
     flex: 1,
   },
+  containerWhite: {
+    backgroundColor: colors.white,
+    flex: 1,
+  },
   containerAbsolute: {
     position: "absolute",
     bottom: 0,
