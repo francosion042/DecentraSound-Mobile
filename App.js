@@ -14,6 +14,7 @@ import {
   ConnectionContextProvider,
   ScreenContextProvider,
 } from "./src/contexts";
+import { createUser } from "./src/api";
 
 const App = () => {
   const { updateConnection } = useContext(ConnectionContext);
@@ -22,6 +23,10 @@ const App = () => {
 
   useEffect(() => {
     updateConnection(connector);
+
+    if (connector.connected) {
+      createUser({ address: connector.accounts[0] });
+    }
   }, [updateConnection, connector]);
 
   if (!connector.connected) {

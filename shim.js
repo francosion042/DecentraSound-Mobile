@@ -21,11 +21,11 @@ if (typeof Buffer === "undefined") {
 }
 
 // global.location = global.location || { port: 80 }
-const isDev = typeof __DEV__ === "boolean" && __DEV__;
-process.env.NODE_ENV = isDev ? "development" : "production";
+// const isDev = typeof __DEV__ === "boolean" && __DEV__;
+// process.env.NODE_ENV = isDev ? "development" : "production";
 if (typeof localStorage !== "undefined") {
   // eslint-disable-next-line no-undef
-  localStorage.debug = isDev ? "*" : "";
+  localStorage.debug = process.env.NODE_ENV === "development" ? "*" : "";
 }
 
 // If using the crypto shim, uncomment the following line to ensure
