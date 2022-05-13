@@ -23,14 +23,14 @@ const App = () => {
 
   useEffect(() => {
     updateConnection(connector);
-
-    if (connector.connected) {
-      createUser({ address: connector.accounts[0] });
-    }
   }, [updateConnection, connector]);
 
   if (!connector.connected) {
     return <WalletConnection connector={connector} />;
+  }
+
+  if (connector.connected) {
+    createUser({ address: connector.accounts[0] });
   }
 
   return (
