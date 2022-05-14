@@ -1,9 +1,12 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { FontAwesome } from "@expo/vector-icons";
 import { gStyle, colors } from "../../constants";
 
-const WalletConnection = ({ connector }) => {
+const WalletConnection = () => {
+  const connector = useWalletConnect();
+
   return (
     <View style={gStyle.container}>
       <View style={styles.container}>

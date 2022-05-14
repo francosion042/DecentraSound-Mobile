@@ -8,7 +8,7 @@ export const createUser = async ({ address }) => {
   try {
     const response = await axios.post(`${BACKEND_BASE_URL}/users`, data);
 
-    return response.data;
+    return await response.data;
   } catch (error) {
     console.log(error);
   }

@@ -12,9 +12,10 @@ import {
   BackHandler,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { device, gStyle, colors, fonts } from "../../constants";
 import ModalHeader from "../../components/ModalHeader";
-import { ConnectionContext, ScreenContext } from "../../contexts";
+import { ScreenContext } from "../../contexts";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
@@ -23,7 +24,7 @@ import LineItemCategory from "../../components/LineItemCategory";
 import accountOptions from "../../mockdata/menuAccountOptions.json";
 
 const ModalAccountOptions = ({ navigation }) => {
-  const { connection } = useContext(ConnectionContext);
+  const connector = useWalletConnect();
   const { updateShowTabBarState, resetScreenData } = useContext(ScreenContext);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const ModalAccountOptions = ({ navigation }) => {
                 { text: "Cancel" },
                 {
                   onPress: () => {
-                    connection.killSession();
+                    connector.killSession();
                     resetScreenData();
                   },
                   text: "Disconnect",
