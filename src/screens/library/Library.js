@@ -9,7 +9,7 @@ import ScreenHeader from "../../components/ScreenHeader";
 // mock data
 import yourLibrary from "../../mockdata/menuYourLibrary.json";
 
-const Library = () => {
+const Library = ({ navigation }) => {
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
@@ -23,7 +23,7 @@ const Library = () => {
         renderItem={({ item }) => (
           <LineItemCategory
             icon={item.icon}
-            onPress={() => null}
+            onPress={() => navigation.navigate("MySongs")}
             title={item.title}
           />
         )}

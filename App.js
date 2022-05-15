@@ -14,7 +14,7 @@ import {
   ScreenContextProvider,
   UserContext,
 } from "./src/contexts";
-import { createUser } from "./src/api/userRequests";
+import { createUser } from "./src/api/user";
 
 const App = () => {
   const { getUser, storeUser } = useContext(UserContext);
@@ -25,14 +25,13 @@ const App = () => {
     console.log(user);
 
     if (connector.connected && user === null) {
-      createUser({ address: connector.accounts[0] })
-        .then((response) => {
-          storeUser(response.data.data);
-          console.log("called");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const response = await createUser({ address: connector.accounts[0] });
+        storeUser(response.data.data);
+        console.log("called");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
