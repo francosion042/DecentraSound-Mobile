@@ -10,29 +10,35 @@ import {
 import NavigationContainer from "./src/navigation/Stack";
 import WalletConnection from "./src/screens/authentication/WalletConnection";
 import {
-  ConnectionContextProvider,
+  UserContextProvider,
   ScreenContextProvider,
-  ConnectionContext,
+  UserContext,
 } from "./src/contexts";
 import { createUser } from "./src/api/userRequests";
 
 const App = () => {
-  const { updateConnection, connection } = useContext(ConnectionContext);
+  const { getUser, storeUser } = useContext(UserContext);
   const connector = useWalletConnect();
 
+  const handleUser = async () => {
+    const user = await getUser();
+    console.log(user);
+
+    if (connector.connected && user === null) {
+      createUser({ address: connector.accounts[0] })
+        .then((response) => {
+          storeUser(response.data.data);
+          console.log("called");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   useEffect(() => {
-    updateConnection(connector);
-  }, [connector, updateConnection]);
-
-  if (connector.connected && connection === null) {
-    console.log(connection);
-    console.log(connector.accounts[0]);
-
-    const response = createUser({ address: connector.accounts[0] });
-    response.then((data) => console.log(data));
-
-    console.log("got here");
-  }
+    handleUser();
+  });
 
   if (!connector.connected) {
     return <WalletConnection />;
@@ -48,11 +54,11 @@ const App = () => {
 
 const app = (props) => {
   return (
-    <ConnectionContextProvider>
+    <UserContextProvider>
       <ScreenContextProvider>
         <App navigation={props.navigation} />
       </ScreenContextProvider>
-    </ConnectionContextProvider>
+    </UserContextProvider>
   );
 };
 

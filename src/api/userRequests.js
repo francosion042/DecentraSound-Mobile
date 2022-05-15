@@ -1,16 +1,14 @@
 import axios from "axios";
 import { BACKEND_BASE_URL } from "@env";
 
-console.log(BACKEND_BASE_URL);
-
 export const createUser = async ({ address }) => {
   const data = { address };
   try {
     const response = await axios.post(`${BACKEND_BASE_URL}/users`, data);
 
-    return await response.data;
+    return response;
   } catch (error) {
-    console.log(error);
+    console.log(error).data;
   }
 };
 
