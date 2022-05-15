@@ -23,7 +23,7 @@ const Library = ({ navigation }) => {
         renderItem={({ item }) => (
           <LineItemCategory
             icon={item.icon}
-            onPress={() => navigation.navigate("MySongs")}
+            onPress={() => navigation.navigate(item.screen)}
             title={item.title}
           />
         )}

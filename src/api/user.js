@@ -6,20 +6,10 @@ export const createUser = async ({ address }) => {
   try {
     const response = await axios.post(`${BACKEND_BASE_URL}/users`, data);
 
-    return response;
+    if (response.status === 200 && response.data) {
+      return response;
+    }
   } catch (error) {
     console.log(error).data;
-  }
-};
-
-export const getUserOwnedSongs = async ({ userid }) => {
-  try {
-    const response = await axios.get(
-      `${BACKEND_BASE_URL}/users/${userid}/songs/owned`
-    );
-
-    console.log(response.data);
-  } catch (error) {
-    console.log(error);
   }
 };

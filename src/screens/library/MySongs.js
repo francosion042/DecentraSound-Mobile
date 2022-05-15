@@ -3,7 +3,8 @@ import { device, gStyle } from "../../constants";
 import React, { useContext, useEffect, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
 import { ScreenContext, UserContext } from "../../contexts";
-import { getUserOwnedSongs } from "../../api/user";
+import { getUserOwnedSongs } from "../../api";
+import LineItemSong from "../../components/LineItemSong";
 
 const MySongs = () => {
   const {
@@ -16,51 +17,60 @@ const MySongs = () => {
 
   const [songs, setSongs] = useState([]);
   const [downloaded, setDownloaded] = useState(false);
+  const [songTitle, setSongTitle] = useState(null);
 
   const handleSongs = async () => {
     const user = await getUser();
 
     console.log(user.id);
 
-    try {
-      const response = await getUserOwnedSongs({ userid: 1 });
-      console.log(response.data.data);
-      // setSongs(response.data);
-    } catch (error) {
-      console.log(error);
+    if (songs.length === 0) {
+      try {
+        const response = await getUserOwnedSongs({ userid: 1 });
+        setSongs(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
+  };
+
+  const changeSongData = (songData) => {
+    updateCurrentSongData(songData);
+    setSongTitle(songData.title);
   };
 
   useEffect(() => {
     handleSongs();
   });
 
+  console.log(songs);
+
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
-        <ScreenHeader title="Your Library" />
+        <ScreenHeader title="Your Songs" />
       </View>
 
-      {/* <FlatList
+      <FlatList
         contentContainerStyle={styles.containerFlatlist}
         data={songs}
-        keyExtractor={({ id }) => id.toString()}
-        renderItem={({ item }) => (
+        keyExtractor={({ tokenId }) => tokenId.toString()}
+        renderItem={({ song }) => (
           <LineItemSong
-            active={song === track.title}
+            active={songTitle === song.title}
             downloaded={downloaded}
-            key={index.toString()}
+            key={song.tokenId.toString()}
             onPress={changeSongData}
             songData={{
-              album: album.title,
-              artist: album.artist,
-              image: album.image,
-              length: track.seconds,
-              title: track.title,
+              album: song.contractAddress,
+              artist: "Anthony",
+              image: song.imageUrl,
+              length: 5555555,
+              title: song.title,
             }}
           />
         )}
-      /> */}
+      />
     </View>
   );
 };

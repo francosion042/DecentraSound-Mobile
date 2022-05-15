@@ -46,7 +46,7 @@ LineItemSong.propTypes = {
     album: PropTypes.string.isRequired,
     artist: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    length: PropTypes.number.isRequired,
+    // length: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
 

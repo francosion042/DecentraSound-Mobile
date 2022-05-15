@@ -6,7 +6,9 @@ export const getUserOwnedSongs = async ({ userid }) => {
     const response = await axios.get(
       `${BACKEND_BASE_URL}/users/${userid}/songs/owned`
     );
-    return response;
+    if (response.status === 200 && response.data) {
+      return response;
+    }
   } catch (error) {
     console.log(error);
   }
