@@ -15,7 +15,7 @@ import { Feather } from "@expo/vector-icons";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { device, gStyle, colors, fonts } from "../../constants";
 import ModalHeader from "../../components/ModalHeader";
-import { ScreenContext, UserContext } from "../../contexts";
+import { PlayingContext, ScreenContext, UserContext } from "../../contexts";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
@@ -26,6 +26,7 @@ import accountOptions from "../../mockdata/menuAccountOptions.json";
 const ModalAccountOptions = ({ navigation }) => {
   const connector = useWalletConnect();
   const { updateShowTabBarState, resetScreenData } = useContext(ScreenContext);
+  const { resetSongData } = useContext(PlayingContext);
   const { clearUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const ModalAccountOptions = ({ navigation }) => {
                   onPress: () => {
                     connector.killSession();
                     resetScreenData();
+                    resetSongData();
                     clearUser();
                   },
                   text: "Disconnect",

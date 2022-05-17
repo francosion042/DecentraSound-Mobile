@@ -2,19 +2,24 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { device, gStyle } from "../../constants";
 import React, { useContext, useEffect, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
-import { ScreenContext, UserContext } from "../../contexts";
+import { UserContext, PlayingContext } from "../../contexts";
 import { getUserOwnedSongs } from "../../api";
 import LineItemSong from "../../components/LineItemSong";
 import Loading from "../utils/Loading";
+import TrackPlayer from "react-native-track-player";
+import SetupPlayer from "../playing/SetupPlayer";
 
 const MySongs = () => {
-  const { updateCurrentSongData, showTabBarState, updateShowTabBarState } =
-    useContext(ScreenContext);
+  //   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
+  const { updateCurrentSongData, songs, updateSongs, currentSongData } =
+    useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
 
-  const [songs, setSongs] = useState([]);
   const [downloaded, setDownloaded] = useState(false);
-  const [songTitle, setSongTitle] = useState(null);
+
+  useEffect(() => {
+    SetupPlayer(songs);
+  }, [songs]);
 
   const handleSongs = async () => {
     const user = await getUser();
@@ -24,23 +29,27 @@ const MySongs = () => {
     if (songs.length === 0) {
       try {
         const response = await getUserOwnedSongs({ userid: 1 });
-        setSongs(response.data.data);
+        updateSongs(response.data.data);
       } catch (error) {
         console.log(error);
       }
     }
   };
 
-  const changeSongData = (songData) => {
+  const handlePress = async (songData) => {
     updateCurrentSongData(songData);
-    setSongTitle(songData.title);
+
+    const songIndex = songs.findIndex(
+      (song) => song.tokenId === songData.tokenId
+    );
+
+    await TrackPlayer.skip(songIndex);
+    await TrackPlayer.play();
   };
 
   useEffect(() => {
     handleSongs();
   });
-
-  console.log(songs);
 
   return (
     <View style={gStyle.container}>
@@ -56,11 +65,12 @@ const MySongs = () => {
           keyExtractor={(song) => song.tokenId}
           renderItem={({ item }) => (
             <LineItemSong
-              active={songTitle === item.title}
+              active={currentSongData.title === item.title}
               downloaded={downloaded}
               key={item.tokenId}
-              onPress={changeSongData}
+              onPress={handlePress}
               songData={{
+                tokenId: item.tokenId,
                 album: item.contractAddress,
                 artist: "Anthony",
                 image: item.imageUrl,

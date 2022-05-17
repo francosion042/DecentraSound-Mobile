@@ -8,18 +8,19 @@ import TrackPlayer, {
   usePlaybackState,
   State,
 } from "react-native-track-player";
-import SetupPlayer from "./SetupPlayer";
 import { colors, device, func, gStyle } from "../../constants";
-import { ScreenContext } from "../../contexts";
+import { PlayingContext } from "../../contexts";
 
 // components
 import ModalHeader from "../../components/ModalHeader";
 import TouchIcon from "../../components/TouchIcon";
 
 const ModalMusicPlayer = ({ navigation }) => {
-  const { currentSongData } = useContext(ScreenContext);
+  const { currentSongData, songs, updateCurrentSongData } =
+    useContext(PlayingContext);
   const [favorited, setFavorited] = useState(false);
   const playBackState = usePlaybackState();
+  const progress = useProgress();
 
   const toggleFavorite = () => {
     setFavorited(!favorited);
@@ -37,13 +38,45 @@ const ModalMusicPlayer = ({ navigation }) => {
     }
   };
 
+  const handlePrevious = async () => {
+    const songIndex = songs.findIndex(
+      (songItem) => songItem.tokenId === currentSongData.tokenId
+    );
+    const currentTrackIndex = await TrackPlayer.getCurrentTrack();
+
+    const song = songs[songIndex - 1];
+
+    if (currentTrackIndex !== 0) {
+      await TrackPlayer.skipToPrevious();
+      await TrackPlayer.play();
+
+      updateCurrentSongData(song);
+    }
+  };
+
+  const handleNext = async () => {
+    const songIndex = songs.findIndex(
+      (songItem) => songItem.tokenId === currentSongData.tokenId
+    );
+    const currentTrackIndex = await TrackPlayer.getCurrentTrack();
+
+    const song = songs[songIndex + 1];
+
+    if (currentTrackIndex < songs.length - 1) {
+      await TrackPlayer.skipToNext();
+      await TrackPlayer.play();
+
+      updateCurrentSongData(song);
+    }
+  };
+
   const favoriteColor = favorited ? colors.brandPrimary : colors.white;
   const favoriteIcon = favorited ? "heart" : "heart-o";
   const iconPlay =
-    playBackState === State.Paused ? "play-circle" : "pause-circle";
+    playBackState !== State.Playing ? "play-circle" : "pause-circle";
 
-  const timePast = func.formatTime(0);
-  const timeLeft = func.formatTime(currentSongData.length);
+  const timePast = func.formatTime(progress.position);
+  const timeTotal = func.formatTime(progress.duration);
 
   return (
     <View style={gStyle.container}>
@@ -82,13 +115,17 @@ const ModalMusicPlayer = ({ navigation }) => {
         <View style={styles.containerVolume}>
           <Slider
             minimumValue={0}
-            maximumValue={currentSongData.length}
+            value={progress.position}
+            maximumValue={progress.duration}
+            onSlidingComplete={async (value) => {
+              await TrackPlayer.seekTo(value);
+            }}
             minimumTrackTintColor={colors.white}
             maximumTrackTintColor={colors.grey3}
           />
           <View style={styles.containerTime}>
             <Text style={styles.time}>{timePast}</Text>
-            <Text style={styles.time}>{`-${timeLeft}`}</Text>
+            <Text style={styles.time}>{`${timeTotal}`}</Text>
           </View>
         </View>
 
@@ -101,7 +138,7 @@ const ModalMusicPlayer = ({ navigation }) => {
             <TouchIcon
               icon={<FontAwesome color={colors.white} name="step-backward" />}
               iconSize={32}
-              onPress={() => null}
+              onPress={handlePrevious}
             />
             <View style={gStyle.pH3}>
               <TouchIcon
@@ -113,7 +150,7 @@ const ModalMusicPlayer = ({ navigation }) => {
             <TouchIcon
               icon={<FontAwesome color={colors.white} name="step-forward" />}
               iconSize={32}
-              onPress={() => null}
+              onPress={handleNext}
             />
           </View>
           <TouchIcon

@@ -5,8 +5,10 @@ const PlayingContext = createContext();
 
 const PlayingContextProvider = ({ children }) => {
   const [currentSongData, setCurrentSongData] = useState(null);
+  const [paused, setpaused] = useState(true);
   const [songs, setSongs] = useState([]);
   //   const songDataFormat = {
+  //    tokenId: 1111,
   //     album: "Swimming",
   //     artist: "Mac Miller",
   //     image: "swimming",
@@ -22,6 +24,15 @@ const PlayingContextProvider = ({ children }) => {
     setSongs(data);
   };
 
+  const togglePaused = () => {
+    setpaused(!paused);
+  };
+
+  const resetSongData = () => {
+    setCurrentSongData(null);
+    setSongs([]);
+  };
+
   return (
     <PlayingContext.Provider
       value={{
@@ -29,6 +40,9 @@ const PlayingContextProvider = ({ children }) => {
         updateSongs,
         currentSongData,
         updateCurrentSongData,
+        resetSongData,
+        paused,
+        togglePaused,
       }}
     >
       {children}

@@ -1,19 +1,24 @@
-import TrackPlayer, { RepeatMode } from "react-native-track-player";
+import TrackPlayer from "react-native-track-player";
 
 // Creates the player
 const SetupPlayer = async (songs) => {
   await TrackPlayer.setupPlayer();
 
-  for (const song of songs) {
-    await TrackPlayer.add({
+  const tracks = songs.map((song) => {
+    const track = {
       url: song.audioUrl,
       title: song.title,
       artist: "Track Artist",
       artwork: song.imageurl
         ? song.imageurl
         : require("../../../assets/icon.png"),
-    });
-  }
+    };
+    return track;
+  });
+
+  console.log(tracks);
+
+  await TrackPlayer.add(tracks);
 
   //   TrackPlayer.setRepeatMode(RepeatMode.Queue);
 };

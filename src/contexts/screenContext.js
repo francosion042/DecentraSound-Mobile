@@ -4,7 +4,6 @@ import React, { createContext, useState } from "react";
 const ScreenContext = createContext();
 
 const ScreenContextProvider = ({ children }) => {
-  const [currentSongData, setCurrentSongData] = useState(null);
   //   const songDataFormat = {
   //     album: "Swimming",
   //     artist: "Mac Miller",
@@ -14,16 +13,11 @@ const ScreenContextProvider = ({ children }) => {
   //   };
   const [showTabBarState, setShowTabBarState] = useState(true);
 
-  const updateCurrentSongData = (data) => {
-    setCurrentSongData(data);
-  };
-
   const updateShowTabBarState = (bool) => {
     setShowTabBarState(bool);
   };
 
   const resetScreenData = () => {
-    setCurrentSongData(null);
     setShowTabBarState(true);
   };
 

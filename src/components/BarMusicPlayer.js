@@ -1,25 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { withNavigation } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
+import TrackPlayer, {
+  usePlaybackState,
+  State,
+} from "react-native-track-player";
 import { colors, device, gStyle } from "../constants";
+import { PlayingContext } from "../contexts";
 
-const BarMusicPlayer = ({ navigation, song }) => {
+const BarMusicPlayer = ({ navigation }) => {
+  const { songs, updateCurrentSongData, currentSongData } =
+    useContext(PlayingContext);
   const [favorited, setfavourited] = useState(false);
-  const [paused, setPaused] = useState(true);
+  const playBackState = usePlaybackState();
 
   const toggleFavorite = () => {
     setfavourited(!favorited);
   };
 
-  const togglePlay = () => {
-    setPaused(!paused);
+  const togglePlay = async () => {
+    const currentTrack = await TrackPlayer.getCurrentTrack();
+
+    if (currentTrack !== null) {
+      if (playBackState === State.Paused) {
+        await TrackPlayer.play();
+      } else {
+        await TrackPlayer.pause();
+      }
+    }
+  };
+
+  const handleNext = async () => {
+    const songIndex = songs.findIndex(
+      (songItem) => songItem.tokenId === currentSongData.tokenId
+    );
+    const currentTrackIndex = await TrackPlayer.getCurrentTrack();
+
+    const song = songs[songIndex + 1];
+
+    if (currentTrackIndex < songs.length - 1) {
+      await TrackPlayer.skipToNext();
+      await TrackPlayer.play();
+
+      updateCurrentSongData(song);
+    }
   };
 
   const favoriteColor = favorited ? colors.brandPrimary : colors.greyInactive;
   const favoriteIcon = favorited ? "heart" : "heart-o";
-  const iconPlay = paused ? "play" : "pause";
+  const iconPlay = playBackState !== State.Playing ? "play" : "pause";
 
   return (
     <TouchableOpacity
@@ -35,10 +66,13 @@ const BarMusicPlayer = ({ navigation, song }) => {
       >
         <FontAwesome color={favoriteColor} name={favoriteIcon} size={20} />
       </TouchableOpacity>
-      {song && (
+      {currentSongData && (
         <View>
           <View style={styles.containerSong}>
-            <Text style={styles.title}>{`${song.title}`}</Text>
+            <Text
+              style={styles.title}
+              numberOfLines={1}
+            >{`${currentSongData.title}`}</Text>
           </View>
         </View>
       )}
@@ -53,6 +87,7 @@ const BarMusicPlayer = ({ navigation, song }) => {
         activeOpacity={gStyle.activeOpacity}
         hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
         style={styles.containerIconRight}
+        onPress={handleNext}
       >
         <FontAwesome color={colors.white} name="step-forward" size={28} />
       </TouchableOpacity>
@@ -95,12 +130,13 @@ const styles = StyleSheet.create({
     width: 50,
   },
   containerSong: {
-    overflow: "hidden",
+    overflow: "scroll",
     width: device.width - 130,
   },
   title: {
     ...gStyle.text18,
     color: colors.white,
+    overflow: "hidden",
   },
   artist: {
     ...gStyle.text12,

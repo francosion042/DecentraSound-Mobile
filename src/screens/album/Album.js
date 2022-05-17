@@ -12,7 +12,7 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { colors, device, gStyle } from "../../constants";
-import { ScreenContext } from "../../contexts";
+import { ScreenContext, PlayingContext } from "../../contexts";
 
 // components
 import LinearGradient from "../../components/LinearGradient";
@@ -25,8 +25,8 @@ import Loading from "../utils/Loading";
 import albums from "../../mockdata/albums";
 
 const Album = ({ navigation }) => {
-  const { updateCurrentSongData, showTabBarState, updateShowTabBarState } =
-    useContext(ScreenContext);
+  const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
+  const { updateCurrentSongData } = useContext(PlayingContext);
 
   const [album, setAlbum] = useState(null);
   const [downloaded, setDownloaded] = useState(false);

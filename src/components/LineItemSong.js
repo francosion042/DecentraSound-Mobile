@@ -14,7 +14,7 @@ const LineItemSong = ({ active, downloaded, onPress, songData }) => {
         onPress={() => onPress(songData)}
         style={{ ...gStyle.flex5 }}
       >
-        <Text style={[styles.title, { color: activeColor }]}>
+        <Text style={[styles.title, { color: activeColor }]} numberOfLines={1}>
           {songData.title}
         </Text>
         <View style={gStyle.flexRow}>
