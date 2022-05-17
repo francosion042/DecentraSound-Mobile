@@ -51,6 +51,8 @@ const MySongs = () => {
     handleSongs();
   });
 
+  const activeSongTitle = currentSongData ? currentSongData.title : "";
+
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
@@ -65,7 +67,7 @@ const MySongs = () => {
           keyExtractor={(song) => song.tokenId}
           renderItem={({ item }) => (
             <LineItemSong
-              active={currentSongData.title === item.title}
+              active={activeSongTitle === item.title}
               downloaded={downloaded}
               key={item.tokenId}
               onPress={handlePress}

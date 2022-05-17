@@ -1,8 +1,22 @@
-import TrackPlayer from "react-native-track-player";
+import TrackPlayer, { Capability } from "react-native-track-player";
 
 // Creates the player
 const SetupPlayer = async (songs) => {
   await TrackPlayer.setupPlayer();
+
+  TrackPlayer.updateOptions({
+    // Media controls capabilities
+    capabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+      Capability.Stop,
+    ],
+
+    // Capabilities that will show up when the notification is in the compact form on Android
+    compactCapabilities: [Capability.Play, Capability.Pause],
+  });
 
   const tracks = songs.map((song) => {
     const track = {
