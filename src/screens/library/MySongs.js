@@ -5,14 +5,11 @@ import ScreenHeader from "../../components/ScreenHeader";
 import { ScreenContext, UserContext } from "../../contexts";
 import { getUserOwnedSongs } from "../../api";
 import LineItemSong from "../../components/LineItemSong";
+import Loading from "../utils/Loading";
 
 const MySongs = () => {
-  const {
-    currentSongData,
-    updateCurrentSongData,
-    showTabBarState,
-    updateShowTabBarState,
-  } = useContext(ScreenContext);
+  const { updateCurrentSongData, showTabBarState, updateShowTabBarState } =
+    useContext(ScreenContext);
   const { getUser } = useContext(UserContext);
 
   const [songs, setSongs] = useState([]);
@@ -44,29 +41,32 @@ const MySongs = () => {
   });
 
   console.log(songs);
+  if (songs.length === 0) {
+    return <Loading />;
+  }
 
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
-        <ScreenHeader title="Your Songs" />
+        <ScreenHeader showBack={true} title="Your Songs" />
       </View>
 
       <FlatList
         contentContainerStyle={styles.containerFlatlist}
         data={songs}
-        keyExtractor={({ tokenId }) => tokenId.toString()}
-        renderItem={({ song }) => (
+        keyExtractor={(song) => song.tokenId}
+        renderItem={({ item }) => (
           <LineItemSong
-            active={songTitle === song.title}
+            active={songTitle === item.title}
             downloaded={downloaded}
-            key={song.tokenId.toString()}
+            key={item.tokenId}
             onPress={changeSongData}
             songData={{
-              album: song.contractAddress,
+              album: item.contractAddress,
               artist: "Anthony",
-              image: song.imageUrl,
-              length: 5555555,
-              title: song.title,
+              image: item.imageUrl,
+              length: 4214241,
+              title: item.title,
             }}
           />
         )}

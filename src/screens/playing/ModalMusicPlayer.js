@@ -41,7 +41,11 @@ const ModalMusicPlayer = ({ navigation }) => {
 
       <View style={gStyle.p3}>
         <Image
-          source={require("../../../assets/icon.png")}
+          source={
+            currentSongData.image
+              ? { uri: currentSongData.image }
+              : require("../../../assets/icon.png")
+          }
           style={styles.image}
         />
 

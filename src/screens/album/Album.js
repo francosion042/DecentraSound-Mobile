@@ -25,12 +25,8 @@ import Loading from "../utils/Loading";
 import albums from "../../mockdata/albums";
 
 const Album = ({ navigation }) => {
-  const {
-    currentSongData,
-    updateCurrentSongData,
-    showTabBarState,
-    updateShowTabBarState,
-  } = useContext(ScreenContext);
+  const { updateCurrentSongData, showTabBarState, updateShowTabBarState } =
+    useContext(ScreenContext);
 
   const [album, setAlbum] = useState(null);
   const [downloaded, setDownloaded] = useState(false);
@@ -44,7 +40,7 @@ const Album = ({ navigation }) => {
     setAlbum(albums[albumTitle] || null);
     setSong(albumTitle);
     // setTitle(albumTitle);
-  }, [navigation, currentSongData]);
+  }, [navigation]);
 
   const toggleDownloaded = (val) => {
     // if web
@@ -81,7 +77,7 @@ const Album = ({ navigation }) => {
 
   // album data not set?
   if (album === null) {
-    return <Loading loading={true} />;
+    return <Loading />;
   }
 
   const stickyArray = device.web ? [] : [0];
