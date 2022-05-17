@@ -12,7 +12,7 @@ const LineItemSong = ({ active, downloaded, onPress, songData }) => {
       <TouchableOpacity
         activeOpacity={gStyle.activeOpacity}
         onPress={() => onPress(songData)}
-        style={gStyle.flex5}
+        style={{ ...gStyle.flex5 }}
       >
         <Text style={[styles.title, { color: activeColor }]}>
           {songData.title}
@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 16,
     width: "100%",
+    borderBottomColor: colors.grey3,
+    borderBottomWidth: 1,
   },
   title: {
     ...gStyle.text16,
@@ -84,6 +86,10 @@ const styles = StyleSheet.create({
   containerRight: {
     alignItems: "flex-end",
     flex: 1,
+  },
+  itemStyle: {
+    borderBottomColor: colors.greyLight,
+    borderBottomWidth: 1,
   },
 });
 

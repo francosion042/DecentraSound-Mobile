@@ -1,10 +1,11 @@
 import React, { createContext, useState } from "react";
 // import AsyncStorage from "@react-native-community/async-storage";
 
-const ScreenContext = createContext();
+const PlayingContext = createContext();
 
-const ScreenContextProvider = ({ children }) => {
+const PlayingContextProvider = ({ children }) => {
   const [currentSongData, setCurrentSongData] = useState(null);
+  const [songs, setSongs] = useState([]);
   //   const songDataFormat = {
   //     album: "Swimming",
   //     artist: "Mac Miller",
@@ -12,32 +13,27 @@ const ScreenContextProvider = ({ children }) => {
   //     length: 312,
   //     title: "So It Goes",
   //   };
-  const [showTabBarState, setShowTabBarState] = useState(true);
 
   const updateCurrentSongData = (data) => {
     setCurrentSongData(data);
   };
 
-  const updateShowTabBarState = (bool) => {
-    setShowTabBarState(bool);
-  };
-
-  const resetScreenData = () => {
-    setCurrentSongData(null);
-    setShowTabBarState(true);
+  const updateSongs = (data) => {
+    setSongs(data);
   };
 
   return (
-    <ScreenContext.Provider
+    <PlayingContext.Provider
       value={{
-        showTabBarState,
-        updateShowTabBarState,
-        resetScreenData,
+        songs,
+        updateSongs,
+        currentSongData,
+        updateCurrentSongData,
       }}
     >
       {children}
-    </ScreenContext.Provider>
+    </PlayingContext.Provider>
   );
 };
 
-export { ScreenContext, ScreenContextProvider };
+export { PlayingContext, PlayingContextProvider };

@@ -15,6 +15,7 @@ import {
   UserContext,
 } from "./src/contexts";
 import { createUser } from "./src/api/user";
+import { PlayingContextProvider } from "./src/contexts/playingContext";
 
 const App = () => {
   const { getUser, storeUser } = useContext(UserContext);
@@ -55,7 +56,9 @@ const app = (props) => {
   return (
     <UserContextProvider>
       <ScreenContextProvider>
-        <App navigation={props.navigation} />
+        <PlayingContextProvider>
+          <App navigation={props.navigation} />
+        </PlayingContextProvider>
       </ScreenContextProvider>
     </UserContextProvider>
   );

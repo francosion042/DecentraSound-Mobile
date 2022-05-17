@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Feather, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import Slider from "@react-native-community/slider";
+import TrackPlayer, {
+  useProgress,
+  usePlaybackState,
+  State,
+} from "react-native-track-player";
+import SetupPlayer from "./SetupPlayer";
 import { colors, device, func, gStyle } from "../../constants";
 import { ScreenContext } from "../../contexts";
 
@@ -13,19 +19,28 @@ import TouchIcon from "../../components/TouchIcon";
 const ModalMusicPlayer = ({ navigation }) => {
   const { currentSongData } = useContext(ScreenContext);
   const [favorited, setFavorited] = useState(false);
-  const [paused, setPaused] = useState(true);
+  const playBackState = usePlaybackState();
 
   const toggleFavorite = () => {
     setFavorited(!favorited);
   };
 
-  const togglePlay = () => {
-    setPaused(!paused);
+  const togglePlay = async () => {
+    const currentTrack = await TrackPlayer.getCurrentTrack();
+
+    if (currentTrack !== null) {
+      if (playBackState === State.Paused) {
+        await TrackPlayer.play();
+      } else {
+        await TrackPlayer.pause();
+      }
+    }
   };
 
   const favoriteColor = favorited ? colors.brandPrimary : colors.white;
   const favoriteIcon = favorited ? "heart" : "heart-o";
-  const iconPlay = paused ? "play-circle" : "pause-circle";
+  const iconPlay =
+    playBackState === State.Paused ? "play-circle" : "pause-circle";
 
   const timePast = func.formatTime(0);
   const timeLeft = func.formatTime(currentSongData.length);

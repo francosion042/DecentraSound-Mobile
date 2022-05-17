@@ -41,36 +41,36 @@ const MySongs = () => {
   });
 
   console.log(songs);
-  if (songs.length === 0) {
-    return <Loading />;
-  }
 
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Your Songs" />
       </View>
-
-      <FlatList
-        contentContainerStyle={styles.containerFlatlist}
-        data={songs}
-        keyExtractor={(song) => song.tokenId}
-        renderItem={({ item }) => (
-          <LineItemSong
-            active={songTitle === item.title}
-            downloaded={downloaded}
-            key={item.tokenId}
-            onPress={changeSongData}
-            songData={{
-              album: item.contractAddress,
-              artist: "Anthony",
-              image: item.imageUrl,
-              length: 4214241,
-              title: item.title,
-            }}
-          />
-        )}
-      />
+      {songs.length === 0 ? (
+        <Loading />
+      ) : (
+        <FlatList
+          contentContainerStyle={styles.containerFlatlist}
+          data={songs}
+          keyExtractor={(song) => song.tokenId}
+          renderItem={({ item }) => (
+            <LineItemSong
+              active={songTitle === item.title}
+              downloaded={downloaded}
+              key={item.tokenId}
+              onPress={changeSongData}
+              songData={{
+                album: item.contractAddress,
+                artist: "Anthony",
+                image: item.imageUrl,
+                length: 4214241,
+                title: item.title,
+              }}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };
