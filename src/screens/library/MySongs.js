@@ -15,7 +15,7 @@ const MySongs = () => {
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
 
-  const [downloaded, setDownloaded] = useState(false);
+  const [downloaded] = useState(false);
 
   useEffect(() => {
     SetupPlayer(songs);

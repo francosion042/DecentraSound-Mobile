@@ -29,7 +29,6 @@ const App = () => {
       try {
         const response = await createUser({ address: connector.accounts[0] });
         storeUser(response.data.data);
-        console.log("called");
       } catch (error) {
         console.log(error);
       }

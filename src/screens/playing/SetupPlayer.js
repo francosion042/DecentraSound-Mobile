@@ -11,7 +11,6 @@ const SetupPlayer = async (songs) => {
       Capability.Pause,
       Capability.SkipToNext,
       Capability.SkipToPrevious,
-      Capability.Stop,
     ],
 
     // Capabilities that will show up when the notification is in the compact form on Android
