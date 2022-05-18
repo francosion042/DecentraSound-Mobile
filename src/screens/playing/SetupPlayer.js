@@ -1,7 +1,10 @@
-import TrackPlayer, { Capability } from "react-native-track-player";
+import TrackPlayer, { Capability, RepeatMode } from "react-native-track-player";
+import { useContext } from "react";
+import { PlayingContext } from "../../contexts";
 
 // Creates the player
 const SetupPlayer = async (songs) => {
+  const { repeat } = useContext(PlayingContext);
   await TrackPlayer.setupPlayer();
 
   TrackPlayer.updateOptions({
@@ -29,11 +32,17 @@ const SetupPlayer = async (songs) => {
     return track;
   });
 
-  console.log(tracks);
-
   await TrackPlayer.add(tracks);
 
-  //   TrackPlayer.setRepeatMode(RepeatMode.Queue);
+  if (repeat === "Off") {
+    TrackPlayer.setRepeatMode(RepeatMode.Off);
+  }
+  if (repeat === "Track") {
+    TrackPlayer.setRepeatMode(RepeatMode.Track);
+  }
+  if (repeat === "Queue") {
+    TrackPlayer.setRepeatMode(RepeatMode.Queue);
+  }
 };
 
 export default SetupPlayer;

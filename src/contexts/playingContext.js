@@ -5,6 +5,7 @@ const PlayingContext = createContext();
 
 const PlayingContextProvider = ({ children }) => {
   const [currentSongData, setCurrentSongData] = useState(null);
+  const [repeat, setRepeat] = useState("Off"); // [Off, Track, Queue]
   const [paused, setpaused] = useState(true);
   const [songs, setSongs] = useState([]);
   //   const songDataFormat = {
@@ -12,7 +13,6 @@ const PlayingContextProvider = ({ children }) => {
   //     album: "Swimming",
   //     artist: "Mac Miller",
   //     image: "swimming",
-  //     length: 312,
   //     title: "So It Goes",
   //   };
 
@@ -26,6 +26,18 @@ const PlayingContextProvider = ({ children }) => {
 
   const togglePaused = () => {
     setpaused(!paused);
+  };
+
+  const toggleRepeat = () => {
+    if (repeat === "Off") {
+      setRepeat("Track");
+    }
+    if (repeat === "Track") {
+      setRepeat("Queue");
+    }
+    if (repeat === "Queue") {
+      setRepeat("Off");
+    }
   };
 
   const resetSongData = () => {
@@ -43,6 +55,8 @@ const PlayingContextProvider = ({ children }) => {
         resetSongData,
         paused,
         togglePaused,
+        repeat,
+        toggleRepeat,
       }}
     >
       {children}

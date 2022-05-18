@@ -1,12 +1,18 @@
 import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { Feather, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import {
+  Feather,
+  FontAwesome,
+  MaterialIcons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import Slider from "@react-native-community/slider";
 import TrackPlayer, {
   useProgress,
   usePlaybackState,
   State,
+  RepeatMode,
 } from "react-native-track-player";
 import { colors, device, func, gStyle } from "../../constants";
 import { PlayingContext } from "../../contexts";
@@ -16,8 +22,13 @@ import ModalHeader from "../../components/ModalHeader";
 import TouchIcon from "../../components/TouchIcon";
 
 const ModalMusicPlayer = ({ navigation }) => {
-  const { currentSongData, songs, updateCurrentSongData } =
-    useContext(PlayingContext);
+  const {
+    currentSongData,
+    songs,
+    updateCurrentSongData,
+    toggleRepeat,
+    repeat,
+  } = useContext(PlayingContext);
   const [favorited, setFavorited] = useState(false);
   const playBackState = usePlaybackState();
   const progress = useProgress();
@@ -70,10 +81,31 @@ const ModalMusicPlayer = ({ navigation }) => {
     }
   };
 
+  const handleToggleRepeat = () => {
+    if (repeat === "Off") {
+      TrackPlayer.setRepeatMode(RepeatMode.Track);
+      toggleRepeat();
+    }
+    if (repeat === "Track") {
+      TrackPlayer.setRepeatMode(RepeatMode.Queue);
+      toggleRepeat();
+    }
+    if (repeat === "Queue") {
+      TrackPlayer.setRepeatMode(RepeatMode.Off);
+      toggleRepeat();
+    }
+  };
+
   const favoriteColor = favorited ? colors.brandPrimary : colors.white;
   const favoriteIcon = favorited ? "heart" : "heart-o";
   const iconPlay =
     playBackState !== State.Playing ? "play-circle" : "pause-circle";
+  const repeatIcon =
+    repeat === "Off"
+      ? "repeat-off"
+      : repeat === "Track"
+      ? "repeat-once"
+      : "repeat";
 
   const timePast = func.formatTime(progress.position);
   const timeTotal = func.formatTime(progress.duration);
@@ -154,8 +186,14 @@ const ModalMusicPlayer = ({ navigation }) => {
             />
           </View>
           <TouchIcon
-            icon={<Feather color={colors.greyLight} name="repeat" />}
-            onPress={() => null}
+            icon={
+              <MaterialCommunityIcons
+                color={colors.greyLight}
+                name={repeatIcon}
+              />
+            }
+            iconSize={32}
+            onPress={handleToggleRepeat}
           />
         </View>
 

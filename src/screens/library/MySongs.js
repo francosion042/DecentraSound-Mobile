@@ -29,7 +29,9 @@ const MySongs = () => {
     if (songs.length === 0) {
       try {
         const response = await getUserOwnedSongs({ userid: 1 });
-        updateSongs(response.data.data);
+        if (response.status === 200 && response.data) {
+          updateSongs(response.data.data);
+        }
       } catch (error) {
         console.log(error);
       }

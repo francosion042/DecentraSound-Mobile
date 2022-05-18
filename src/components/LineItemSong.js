@@ -1,6 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { colors, gStyle } from "../constants";
 
@@ -9,6 +9,14 @@ const LineItemSong = ({ active, downloaded, onPress, songData }) => {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={
+          songData.image
+            ? { uri: songData.image }
+            : require("../../assets/icon.png")
+        }
+        style={styles.image}
+      />
       <TouchableOpacity
         activeOpacity={gStyle.activeOpacity}
         onPress={() => onPress(songData)}
@@ -80,8 +88,14 @@ const styles = StyleSheet.create({
     width: 14,
   },
   artist: {
-    ...gStyle.text12,
+    ...gStyle.text10,
     color: colors.greyInactive,
+  },
+  image: {
+    height: 40,
+    width: 40,
+    borderRadius: 5,
+    marginRight: 10,
   },
   containerRight: {
     alignItems: "flex-end",
