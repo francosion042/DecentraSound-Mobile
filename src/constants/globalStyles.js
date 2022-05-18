@@ -170,4 +170,5 @@ export default {
   pH1: { paddingHorizontal: spaceGrid },
   pH2: { paddingHorizontal: spaceGrid * 2 },
   pH3: { paddingHorizontal: spaceGrid * 3 },
+  pH5: { paddingHorizontal: spaceGrid * 5 },
 };

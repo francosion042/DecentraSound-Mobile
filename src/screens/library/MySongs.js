@@ -17,10 +17,6 @@ const MySongs = () => {
 
   const [downloaded] = useState(false);
 
-  useEffect(() => {
-    SetupPlayer(songs, repeat);
-  }, [songs, repeat]);
-
   const handleSongs = async () => {
     const user = await getUser();
 
@@ -30,6 +26,7 @@ const MySongs = () => {
       try {
         const response = await getUserOwnedSongs({ userid: 1 });
         updateSongs(response.data.data);
+        SetupPlayer(response.data.data, repeat);
       } catch (error) {
         console.log(error);
       }

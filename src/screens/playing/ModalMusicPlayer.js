@@ -35,12 +35,10 @@ const ModalMusicPlayer = ({ navigation }) => {
   const playBackState = usePlaybackState();
   const progress = useProgress();
 
+  // THis is called anytime the a track is changed, either by pressing the next or previous buttons, or auto change
   useTrackPlayerEvents([Event.PlaybackTrackChanged], (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
-      const songIndex = songs.findIndex(
-        (songItem) => songItem.tokenId === currentSongData.tokenId
-      );
-      updateCurrentSongData(songs[songIndex + 1]);
+      updateCurrentSongData(songs[event.nextTrack]);
     }
   });
 
@@ -61,31 +59,18 @@ const ModalMusicPlayer = ({ navigation }) => {
   };
 
   const handlePrevious = async () => {
-    const songIndex = songs.findIndex(
-      (songItem) => songItem.tokenId === currentSongData.tokenId
-    );
     const currentTrackIndex = await TrackPlayer.getCurrentTrack();
-
-    const song = songs[songIndex - 1];
 
     if (currentTrackIndex !== 0) {
       await TrackPlayer.skipToPrevious();
       await TrackPlayer.play();
-
-      console.log(song);
     }
   };
 
   const handleNext = async () => {
-    const songIndex = songs.findIndex(
-      (songItem) => songItem.tokenId === currentSongData.tokenId
-    );
     const currentTrackIndex = await TrackPlayer.getCurrentTrack();
 
-    const song = songs[songIndex + 1];
-
     if (currentTrackIndex < songs.length - 1) {
-      updateCurrentSongData(song);
       await TrackPlayer.skipToNext();
       await TrackPlayer.play();
     }
@@ -182,10 +167,12 @@ const ModalMusicPlayer = ({ navigation }) => {
               iconSize={32}
               onPress={handlePrevious}
             />
-            <View style={gStyle.pH3}>
+            <View style={gStyle.pH5}>
               <TouchIcon
-                icon={<FontAwesome color={colors.white} name={iconPlay} />}
-                iconSize={64}
+                icon={
+                  <FontAwesome color={colors.brandPrimary} name={iconPlay} />
+                }
+                iconSize={80}
                 onPress={togglePlay}
               />
             </View>
@@ -231,10 +218,12 @@ ModalMusicPlayer.propTypes = {
 
 const styles = StyleSheet.create({
   image: {
-    height: device.width - 48,
-    marginVertical: device.iPhoneNotch ? 36 : 8,
-    width: device.width - 48,
+    height: device.width - 60,
+    marginVertical: device.iPhoneNotch ? 36 : 10,
+    width: device.width - 60,
     marginBottom: "10%",
+    borderRadius: 10,
+    alignSelf: "center",
   },
   containerDetails: {
     marginBottom: 16,
@@ -259,12 +248,12 @@ const styles = StyleSheet.create({
     ...gStyle.flexRowSpace,
   },
   time: {
-    ...gStyle.text10,
+    ...gStyle.text14,
     color: colors.greyInactive,
   },
   containerControls: {
     ...gStyle.flexRowSpace,
-    marginTop: device.iPhoneNotch ? 24 : "20%",
+    marginTop: device.iPhoneNotch ? 24 : "15%",
   },
   containerBottom: {
     ...gStyle.flexRowSpace,
