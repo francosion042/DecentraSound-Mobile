@@ -11,15 +11,15 @@ import SetupPlayer from "../playing/SetupPlayer";
 
 const MySongs = () => {
   //   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
-  const { updateCurrentSongData, songs, updateSongs, currentSongData } =
+  const { updateCurrentSongData, songs, updateSongs, currentSongData, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
 
   const [downloaded] = useState(false);
 
   useEffect(() => {
-    SetupPlayer(songs);
-  }, [songs]);
+    SetupPlayer(songs, repeat);
+  }, [songs, repeat]);
 
   const handleSongs = async () => {
     const user = await getUser();
@@ -29,9 +29,7 @@ const MySongs = () => {
     if (songs.length === 0) {
       try {
         const response = await getUserOwnedSongs({ userid: 1 });
-        if (response.status === 200 && response.data) {
-          updateSongs(response.data.data);
-        }
+        updateSongs(response.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -75,8 +73,10 @@ const MySongs = () => {
               onPress={handlePress}
               songData={{
                 tokenId: item.tokenId,
-                album: item.contractAddress,
-                artist: "Anthony",
+                contractAddress: item.contractAddress
+                  ? item.contractAddress
+                  : "Unknown Album",
+                artist: "Artist",
                 image: item.imageUrl,
                 length: 4214241,
                 title: item.title,

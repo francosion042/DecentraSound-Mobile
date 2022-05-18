@@ -51,10 +51,9 @@ LineItemSong.propTypes = {
   // required
   onPress: PropTypes.func.isRequired,
   songData: PropTypes.shape({
-    album: PropTypes.string.isRequired,
+    contractAddress: PropTypes.string.isRequired,
     artist: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    // length: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
 

@@ -1,10 +1,7 @@
 import TrackPlayer, { Capability, RepeatMode } from "react-native-track-player";
-import { useContext } from "react";
-import { PlayingContext } from "../../contexts";
 
 // Creates the player
-const SetupPlayer = async (songs) => {
-  const { repeat } = useContext(PlayingContext);
+const SetupPlayer = async (songs, repeat) => {
   await TrackPlayer.setupPlayer();
 
   TrackPlayer.updateOptions({
@@ -25,8 +22,8 @@ const SetupPlayer = async (songs) => {
       url: song.audioUrl,
       title: song.title,
       artist: "Track Artist",
-      artwork: song.imageurl
-        ? song.imageurl
+      artwork: song.imageUrl
+        ? song.imageUrl
         : require("../../../assets/icon.png"),
     };
     return track;

@@ -13,6 +13,8 @@ import TrackPlayer, {
   usePlaybackState,
   State,
   RepeatMode,
+  useTrackPlayerEvents,
+  Event,
 } from "react-native-track-player";
 import { colors, device, func, gStyle } from "../../constants";
 import { PlayingContext } from "../../contexts";
@@ -32,6 +34,15 @@ const ModalMusicPlayer = ({ navigation }) => {
   const [favorited, setFavorited] = useState(false);
   const playBackState = usePlaybackState();
   const progress = useProgress();
+
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], (event) => {
+    if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
+      const songIndex = songs.findIndex(
+        (songItem) => songItem.tokenId === currentSongData.tokenId
+      );
+      updateCurrentSongData(songs[songIndex + 1]);
+    }
+  });
 
   const toggleFavorite = () => {
     setFavorited(!favorited);
@@ -61,7 +72,7 @@ const ModalMusicPlayer = ({ navigation }) => {
       await TrackPlayer.skipToPrevious();
       await TrackPlayer.play();
 
-      updateCurrentSongData(song);
+      console.log(song);
     }
   };
 
@@ -74,10 +85,9 @@ const ModalMusicPlayer = ({ navigation }) => {
     const song = songs[songIndex + 1];
 
     if (currentTrackIndex < songs.length - 1) {
+      updateCurrentSongData(song);
       await TrackPlayer.skipToNext();
       await TrackPlayer.play();
-
-      updateCurrentSongData(song);
     }
   };
 
@@ -116,7 +126,7 @@ const ModalMusicPlayer = ({ navigation }) => {
         left={<Feather color={colors.greyLight} name="chevron-down" />}
         leftPress={() => navigation.goBack(null)}
         right={<Feather color={colors.greyLight} name="more-horizontal" />}
-        text={currentSongData.album}
+        text={currentSongData.contractAddress}
       />
 
       <View style={gStyle.p3}>

@@ -9,8 +9,8 @@ const PlayingContextProvider = ({ children }) => {
   const [paused, setpaused] = useState(true);
   const [songs, setSongs] = useState([]);
   //   const songDataFormat = {
-  //    tokenId: 1111,
-  //     album: "Swimming",
+  //     tokenId: 1111,
+  //     contractAddress: "0x9943434343434",
   //     artist: "Mac Miller",
   //     image: "swimming",
   //     title: "So It Goes",

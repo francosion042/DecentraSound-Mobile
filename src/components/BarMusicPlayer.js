@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   title: {
     ...gStyle.text18,
     color: colors.white,
-    overflow: "hidden",
+    paddingRight: 10,
   },
   artist: {
     ...gStyle.text12,
