@@ -7,8 +7,12 @@ import TrackPlayer, {
   usePlaybackState,
   State,
 } from "react-native-track-player";
+import * as Animatable from "react-native-animatable";
 import { colors, device, gStyle } from "../constants";
 import { PlayingContext } from "../contexts";
+
+// custom component
+const AnimatedFontAwesome = Animatable.createAnimatableComponent(FontAwesome);
 
 const BarMusicPlayer = ({ navigation }) => {
   const { songs, updateCurrentSongData, currentSongData } =
@@ -76,13 +80,29 @@ const BarMusicPlayer = ({ navigation }) => {
           </View>
         </View>
       )}
-      <TouchableOpacity
-        activeOpacity={gStyle.activeOpacity}
-        hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
-        onPress={togglePlay}
-      >
-        <FontAwesome color={colors.white} name={iconPlay} size={28} />
-      </TouchableOpacity>
+      {playBackState === State.Buffering ? (
+        <TouchableOpacity
+          activeOpacity={gStyle.activeOpacity}
+          hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+          onPress={() => {}}
+        >
+          <AnimatedFontAwesome
+            name="refresh"
+            color={colors.white}
+            animation="rotate"
+            duration={10000}
+            size={28}
+          />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          activeOpacity={gStyle.activeOpacity}
+          hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+          onPress={togglePlay}
+        >
+          <FontAwesome color={colors.white} name={iconPlay} size={28} />
+        </TouchableOpacity>
+      )}
       <TouchableOpacity
         activeOpacity={gStyle.activeOpacity}
         hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}

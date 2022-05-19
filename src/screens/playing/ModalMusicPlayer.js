@@ -16,12 +16,16 @@ import TrackPlayer, {
   useTrackPlayerEvents,
   Event,
 } from "react-native-track-player";
+import * as Animatable from "react-native-animatable";
 import { colors, device, func, gStyle } from "../../constants";
 import { PlayingContext } from "../../contexts";
 
 // components
 import ModalHeader from "../../components/ModalHeader";
 import TouchIcon from "../../components/TouchIcon";
+
+// custom component
+const AnimatedFontAwesome = Animatable.createAnimatableComponent(FontAwesome);
 
 const ModalMusicPlayer = ({ navigation }) => {
   const {
@@ -115,14 +119,16 @@ const ModalMusicPlayer = ({ navigation }) => {
       />
 
       <View style={gStyle.p3}>
-        <Image
-          source={
-            currentSongData.image
-              ? { uri: currentSongData.image }
-              : require("../../../assets/icon.png")
-          }
-          style={styles.image}
-        />
+        <View style={styles.imageContainer}>
+          <Image
+            source={
+              currentSongData.image
+                ? { uri: currentSongData.image }
+                : require("../../../assets/icon.png")
+            }
+            style={styles.image}
+          />
+        </View>
 
         <View style={[gStyle.flexRowSpace, styles.containerDetails]}>
           <View style={styles.containerSong}>
@@ -168,13 +174,28 @@ const ModalMusicPlayer = ({ navigation }) => {
               onPress={handlePrevious}
             />
             <View style={gStyle.pH5}>
-              <TouchIcon
-                icon={
-                  <FontAwesome color={colors.brandPrimary} name={iconPlay} />
-                }
-                iconSize={80}
-                onPress={togglePlay}
-              />
+              {playBackState === State.Buffering ? (
+                <TouchIcon
+                  iconSize={80}
+                  onPress={() => {}}
+                  icon={
+                    <AnimatedFontAwesome
+                      name="refresh"
+                      color={colors.brandPrimary}
+                      animation="rotate"
+                      duration={10000}
+                    />
+                  }
+                />
+              ) : (
+                <TouchIcon
+                  icon={
+                    <FontAwesome color={colors.brandPrimary} name={iconPlay} />
+                  }
+                  iconSize={80}
+                  onPress={togglePlay}
+                />
+              )}
             </View>
             <TouchIcon
               icon={<FontAwesome color={colors.white} name="step-forward" />}
@@ -218,6 +239,16 @@ ModalMusicPlayer.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    elevation: 5,
+    shadowColor: "#ccc",
+    shadowOffset: {
+      height: 5,
+      width: 5,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.5,
+  },
   image: {
     height: device.width - 60,
     marginVertical: device.iPhoneNotch ? 36 : 10,
