@@ -145,7 +145,7 @@ const ModalMusicPlayer = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={styles.containerVolume}>
+        <View style={styles.containerProgress}>
           <Slider
             minimumValue={0}
             value={progress.position}
@@ -155,6 +155,7 @@ const ModalMusicPlayer = ({ navigation }) => {
             }}
             minimumTrackTintColor={colors.white}
             maximumTrackTintColor={colors.grey3}
+            thumbTintColor={colors.brandPrimary}
           />
           <View style={styles.containerTime}>
             <Text style={styles.time}>{timePast}</Text>
@@ -228,6 +229,22 @@ const ModalMusicPlayer = ({ navigation }) => {
             onPress={() => null}
           />
         </View>
+        <View style={styles.containerBottomVolume}>
+          <View style={styles.containerVolume}>
+            <Slider
+              minimumValue={0}
+              value={0.5}
+              maximumValue={1}
+              onValueChange={async (value) => {
+                await TrackPlayer.setVolume(value);
+              }}
+              minimumTrackTintColor={colors.brandPrimary}
+              maximumTrackTintColor={colors.white}
+              thumbTintColor={colors.brandPrimary}
+              style={styles.sliderVolume}
+            />
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -290,6 +307,18 @@ const styles = StyleSheet.create({
   containerBottom: {
     ...gStyle.flexRowSpace,
     marginTop: device.iPhoneNotch ? 32 : "8%",
+  },
+  containerBottomVolume: {
+    marginTop: device.iPhoneNotch ? 32 : "8%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  containerVolume: {
+    width: "50%",
+    justifyContent: "center",
+  },
+  sliderVolume: {
+    backgroundColor: colors.grey,
   },
 });
 
