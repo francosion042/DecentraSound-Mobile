@@ -203,6 +203,7 @@ const ModalMusicPlayer = ({ navigation }) => {
             icon={
               <MaterialIcons color={colors.greyLight} name="playlist-play" />
             }
+            iconSize={32}
             onPress={() => null}
           />
         </View>
@@ -257,7 +258,7 @@ const styles = StyleSheet.create({
   },
   containerBottom: {
     ...gStyle.flexRowSpace,
-    marginTop: device.iPhoneNotch ? 32 : "10%",
+    marginTop: device.iPhoneNotch ? 32 : "8%",
   },
 });
 
