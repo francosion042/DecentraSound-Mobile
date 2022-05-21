@@ -30,7 +30,7 @@ const AnimatedFontAwesome = Animatable.createAnimatableComponent(FontAwesome);
 const ModalMusicPlayer = ({ navigation }) => {
   const {
     currentSongData,
-    songs,
+    playingSongs,
     updateCurrentSongData,
     toggleRepeat,
     repeat,
@@ -42,7 +42,7 @@ const ModalMusicPlayer = ({ navigation }) => {
   // THis is called anytime the a track is changed, either by pressing the next or previous buttons, or auto change
   useTrackPlayerEvents([Event.PlaybackTrackChanged], (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
-      updateCurrentSongData(songs[event.nextTrack]);
+      updateCurrentSongData(playingSongs[event.nextTrack]);
     }
   });
 
@@ -74,7 +74,7 @@ const ModalMusicPlayer = ({ navigation }) => {
   const handleNext = async () => {
     const currentTrackIndex = await TrackPlayer.getCurrentTrack();
 
-    if (currentTrackIndex < songs.length - 1) {
+    if (currentTrackIndex < playingSongs.length - 1) {
       await TrackPlayer.skipToNext();
       await TrackPlayer.play();
     }

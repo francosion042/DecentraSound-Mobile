@@ -1,37 +1,19 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import { device, gStyle } from "../../constants";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
-import { UserContext, PlayingContext } from "../../contexts";
-import { getUserOwnedSongs } from "../../api";
+import { PlayingContext, LibraryContext } from "../../contexts";
 import LineItemSong from "../../components/LineItemSong";
 import Loading from "../utils/Loading";
 import TrackPlayer from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
 
 const MySongs = () => {
-  //   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
-  const { updateCurrentSongData, songs, updateSongs, currentSongData, repeat } =
+  const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
-  const { getUser } = useContext(UserContext);
+  const { userOwnedSongs } = useContext(LibraryContext);
 
   const [downloaded] = useState(false);
-
-  const handleSongs = async () => {
-    const user = await getUser();
-
-    console.log(user.id);
-
-    if (songs.length === 0) {
-      try {
-        const response = await getUserOwnedSongs({ userid: 1 });
-        updateSongs(response.data.data);
-        SetupPlayer(response.data.data, repeat);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
   /**
    * @todo the setupPlayer() should be called when a user clicks a song, it checks if there's no active setup for mySongs
@@ -40,18 +22,17 @@ const MySongs = () => {
 
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
+    await SetupPlayer(userOwnedSongs, repeat);
 
-    const songIndex = songs.findIndex(
+    updatePlayingSongs(userOwnedSongs);
+
+    const songIndex = userOwnedSongs.findIndex(
       (song) => song.tokenId === songData.tokenId
     );
 
     await TrackPlayer.skip(songIndex);
     await TrackPlayer.play();
   };
-
-  useEffect(() => {
-    handleSongs();
-  });
 
   const activeSongTitle = currentSongData ? currentSongData.title : "";
 
@@ -60,12 +41,12 @@ const MySongs = () => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Your Songs" />
       </View>
-      {songs.length === 0 ? (
+      {userOwnedSongs.length === 0 ? (
         <Loading />
       ) : (
         <FlatList
           contentContainerStyle={styles.containerFlatlist}
-          data={songs}
+          data={userOwnedSongs}
           keyExtractor={(song) => song.tokenId}
           renderItem={({ item }) => (
             <LineItemSong

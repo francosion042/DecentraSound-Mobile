@@ -7,21 +7,14 @@ const PlayingContextProvider = ({ children }) => {
   const [currentSongData, setCurrentSongData] = useState(null);
   const [repeat, setRepeat] = useState("Off"); // [Off, Track, Queue]
   const [paused, setpaused] = useState(true);
-  const [songs, setSongs] = useState([]);
-  //   const songDataFormat = {
-  //     tokenId: 1111,
-  //     contractAddress: "0x9943434343434",
-  //     artist: "Mac Miller",
-  //     image: "swimming",
-  //     title: "So It Goes",
-  //   };
+  const [playingSongs, setPlayingSongs] = useState([]);
 
   const updateCurrentSongData = (data) => {
     setCurrentSongData(data);
   };
 
-  const updateSongs = (data) => {
-    setSongs(data);
+  const updatePlayingSongs = (data) => {
+    setPlayingSongs(data);
   };
 
   const togglePaused = () => {
@@ -42,14 +35,14 @@ const PlayingContextProvider = ({ children }) => {
 
   const resetSongData = () => {
     setCurrentSongData(null);
-    setSongs([]);
+    setPlayingSongs([]);
   };
 
   return (
     <PlayingContext.Provider
       value={{
-        songs,
-        updateSongs,
+        playingSongs,
+        updatePlayingSongs,
         currentSongData,
         updateCurrentSongData,
         resetSongData,

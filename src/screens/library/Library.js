@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { device, gStyle } from "../../constants";
+import { LibraryContext, UserContext } from "../../contexts";
+import { getUserOwnedSongs } from "../../api";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
@@ -10,6 +12,28 @@ import ScreenHeader from "../../components/ScreenHeader";
 import yourLibrary from "../../mockdata/menuYourLibrary.json";
 
 const Library = ({ navigation }) => {
+  const { getUser } = useContext(UserContext);
+  const { userOwnedSongs, updateUserOwnedSongs } = useContext(LibraryContext);
+
+  const handleUserOwnedSongs = async () => {
+    const user = await getUser();
+
+    console.log(user.id);
+
+    if (userOwnedSongs.length === 0) {
+      try {
+        const response = await getUserOwnedSongs({ userid: 1 });
+        updateUserOwnedSongs(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleUserOwnedSongs();
+  });
+
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
