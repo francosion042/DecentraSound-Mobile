@@ -5,13 +5,13 @@ import { colors, device, gStyle } from "../../constants";
 import { BlurView } from "expo-blur";
 import { HomeContext } from "../../contexts";
 import { getTrendingAlbums, getTrendingArtists } from "../../api";
-import Loading from "../utils/Loading";
+// import Loading from "../utils/Loading";
 
 // components
 import AlbumsHorizontal from "../../components/AlbumsHorizontal";
+import ArtistsHorizontal from "../../components/ArtistsHorizontal";
 import BigAlbumsHorizontal from "../../components/BigAlbumsHorizontal";
 
-import jumpBackIn from "../../mockdata/jumpBackIn.json";
 import recentlyPlayed from "../../mockdata/recentlyPlayed.json";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenContext } from "../../contexts";
@@ -43,8 +43,17 @@ const Home = ({ navigation }) => {
       try {
         const response = await getTrendingAlbums();
 
-        console.log(response.data.data.album);
         updateTrendingAlbums(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (trendingArtists.length === 0) {
+      try {
+        const response = await getTrendingArtists();
+
+        updateTrendingArtists(response.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -55,9 +64,9 @@ const Home = ({ navigation }) => {
     handleTrending();
   });
 
-  if (trendingAlbums.length === 0) {
-    return <Loading />;
-  }
+  // if (trendingAlbums.length === 0) {
+  //   return <Loading />;
+  // }
 
   return (
     <Fragment>
@@ -100,10 +109,10 @@ const Home = ({ navigation }) => {
           tagline="The music you've had on repeat this month."
         />
 
-        <AlbumsHorizontal
-          data={jumpBackIn}
-          heading="Jump back in"
-          tagline="Your top listens from the past few months."
+        <ArtistsHorizontal
+          data={trendingArtists}
+          heading="Top Artists"
+          tagline="Top Artists around the world."
         />
 
         <BigAlbumsHorizontal data={trendingAlbums} heading="Made For You" />
