@@ -42,9 +42,22 @@ const formatTime = (sec) => {
   return `${padTime(minutes, 1)}:${padTime(seconds, 2)}`;
 };
 
+const getRandomNumber = (maxNum) => {
+  return Math.floor(Math.random() * maxNum);
+};
+
+const getRandomColor = () => {
+  const h = getRandomNumber(360);
+  const s = getRandomNumber(100);
+  const l = getRandomNumber(100);
+
+  return `hsl(${h}, ${s}%, ${l}%)`;
+};
+
 export default {
   cacheFonts,
   cacheImages,
   // loadAssetsAsync,
   formatTime,
+  getRandomColor,
 };

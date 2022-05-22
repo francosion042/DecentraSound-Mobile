@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
-import { colors, device, gStyle } from "../../constants";
+import { colors, device, gStyle, func } from "../../constants";
 import { ScreenContext, PlayingContext } from "../../contexts";
 import TrackPlayer from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
@@ -111,7 +111,7 @@ const Album = ({ navigation }) => {
         <Animated.View
           style={[styles.headerLinear, { opacity: opacityHeading }]}
         >
-          <LinearGradient fill={album.backgroundColor} height={89} />
+          <LinearGradient fill={func.getRandomColor()} height={89} />
         </Animated.View>
         <View style={styles.header}>
           <TouchIcon
@@ -136,7 +136,7 @@ const Album = ({ navigation }) => {
 
       <View style={styles.containerFixed}>
         <View style={styles.containerLinear}>
-          <LinearGradient fill={album.backgroundColor} />
+          <LinearGradient fill={func.getRandomColor()} />
         </View>
         <View style={styles.containerImage}>
           <Image source={{ uri: album.coverImageUrl }} style={styles.image} />
