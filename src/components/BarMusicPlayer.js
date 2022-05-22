@@ -15,7 +15,7 @@ import { PlayingContext } from "../contexts";
 const AnimatedFontAwesome = Animatable.createAnimatableComponent(FontAwesome);
 
 const BarMusicPlayer = ({ navigation }) => {
-  const { songs, updateCurrentSongData, currentSongData } =
+  const { playingSongs, updateCurrentSongData, currentSongData } =
     useContext(PlayingContext);
   const [favorited, setfavourited] = useState(false);
   const playBackState = usePlaybackState();
@@ -37,14 +37,14 @@ const BarMusicPlayer = ({ navigation }) => {
   };
 
   const handleNext = async () => {
-    const songIndex = songs.findIndex(
+    const songIndex = playingSongs.findIndex(
       (songItem) => songItem.tokenId === currentSongData.tokenId
     );
     const currentTrackIndex = await TrackPlayer.getCurrentTrack();
 
-    const song = songs[songIndex + 1];
+    const song = playingSongs[songIndex + 1];
 
-    if (currentTrackIndex < songs.length - 1) {
+    if (currentTrackIndex < playingSongs.length - 1) {
       await TrackPlayer.skipToNext();
       await TrackPlayer.play();
 
@@ -133,13 +133,16 @@ BarMusicPlayer.propTypes = {
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
-    backgroundColor: colors.grey,
+    backgroundColor: colors.black,
     borderBottomColor: colors.greyLight,
     borderBottomWidth: StyleSheet.hairlineWidth,
+    borderTopColor: colors.grey,
+    borderTopWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 15,
     width: "100%",
+    elevation: 5,
   },
   containerIconLeft: {
     ...gStyle.flexCenter,

@@ -10,7 +10,7 @@ export default {
   blackBlur: "#161616",
   red: "red",
 
-  blackBg: "#121212",
+  blackBg: "#000",
   transparent: "rgba(52, 52, 52, 0.8)",
   brandPrimary: "#57b660",
   grey: "#282828",

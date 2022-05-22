@@ -1,15 +1,16 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../../constants";
 import { BlurView } from "expo-blur";
+import { HomeContext } from "../../contexts";
+import { getTrendingAlbums, getTrendingArtists } from "../../api";
+import Loading from "../utils/Loading";
 
 // components
 import AlbumsHorizontal from "../../components/AlbumsHorizontal";
 import BigAlbumsHorizontal from "../../components/BigAlbumsHorizontal";
 
-// mock data
-import heavyRotation from "../../mockdata/heavyRotation.json";
 import jumpBackIn from "../../mockdata/jumpBackIn.json";
 import recentlyPlayed from "../../mockdata/recentlyPlayed.json";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -17,6 +18,12 @@ import { ScreenContext } from "../../contexts";
 
 const Home = ({ navigation }) => {
   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
+  const {
+    trendingAlbums,
+    updateTrendingAlbums,
+    trendingArtists,
+    updateTrendingArtists,
+  } = useContext(HomeContext);
   const [scrollY] = useState(new Animated.Value(0));
 
   const opacityIn = scrollY.interpolate({
@@ -30,6 +37,27 @@ const Home = ({ navigation }) => {
     outputRange: [1, 0],
     extrapolate: "clamp",
   });
+
+  const handleTrending = async () => {
+    if (trendingAlbums.length === 0) {
+      try {
+        const response = await getTrendingAlbums();
+
+        console.log(response.data.data.album);
+        updateTrendingAlbums(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleTrending();
+  });
+
+  if (trendingAlbums.length === 0) {
+    return <Loading />;
+  }
 
   return (
     <Fragment>
@@ -64,7 +92,7 @@ const Home = ({ navigation }) => {
       >
         <View style={gStyle.spacer16} />
 
-        <BigAlbumsHorizontal data={recentlyPlayed} heading="Top Collections" />
+        <BigAlbumsHorizontal data={trendingAlbums} heading="Top Collections" />
 
         <AlbumsHorizontal
           data={recentlyPlayed}
@@ -78,7 +106,7 @@ const Home = ({ navigation }) => {
           tagline="Your top listens from the past few months."
         />
 
-        <BigAlbumsHorizontal data={heavyRotation} heading="Made For You" />
+        <BigAlbumsHorizontal data={trendingAlbums} heading="Made For You" />
       </Animated.ScrollView>
     </Fragment>
   );

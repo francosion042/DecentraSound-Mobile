@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   transparent: {
-    backgroundColor: colors.black80,
+    backgroundColor: colors.blackBg,
   },
   container: {
     alignItems: "center",

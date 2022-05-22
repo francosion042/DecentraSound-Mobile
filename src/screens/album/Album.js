@@ -13,6 +13,8 @@ import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { colors, device, gStyle } from "../../constants";
 import { ScreenContext, PlayingContext } from "../../contexts";
+import TrackPlayer from "react-native-track-player";
+import SetupPlayer from "../playing/SetupPlayer";
 
 // components
 import LinearGradient from "../../components/LinearGradient";
@@ -21,26 +23,20 @@ import TouchIcon from "../../components/TouchIcon";
 import TouchText from "../../components/TouchText";
 import Loading from "../utils/Loading";
 
-// mock data
-import albums from "../../mockdata/albums";
-
 const Album = ({ navigation }) => {
   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
-  const { updateCurrentSongData } = useContext(PlayingContext);
+  const { currentSongData, updateCurrentSongData, updatePlayingSongs, repeat } =
+    useContext(PlayingContext);
 
   const [album, setAlbum] = useState(null);
   const [downloaded, setDownloaded] = useState(false);
   const [scrollY] = useState(new Animated.Value(0));
-  const [song, setSong] = useState(null);
-  // const [title, setTitle] = useState(null);
+
+  const activeSongTitle = currentSongData ? currentSongData.title : "";
 
   useEffect(() => {
-    const albumTitle = navigation.getParam("title");
-
-    setAlbum(albums[albumTitle] || null);
-    setSong(albumTitle);
-    // setTitle(albumTitle);
-  }, [navigation]);
+    setAlbum(navigation.getParam("album") || null);
+  }, [navigation, album]);
 
   const toggleDownloaded = (val) => {
     // if web
@@ -70,15 +66,19 @@ const Album = ({ navigation }) => {
     }
   };
 
-  const changeSongData = (songData) => {
+  const handlePress = async (songData) => {
     updateCurrentSongData(songData);
-    setSong(songData.title);
-  };
+    await SetupPlayer(album.songs, repeat);
 
-  // album data not set?
-  if (album === null) {
-    return <Loading />;
-  }
+    updatePlayingSongs(album.songs);
+
+    const songIndex = album.songs.findIndex(
+      (song) => song.tokenId === songData.tokenId
+    );
+
+    await TrackPlayer.skip(songIndex);
+    await TrackPlayer.play();
+  };
 
   const stickyArray = device.web ? [] : [0];
   const headingRange = device.web ? [140, 200] : [230, 280];
@@ -95,6 +95,11 @@ const Album = ({ navigation }) => {
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
+
+  // album data not set?
+  if (album === null) {
+    return <Loading />;
+  }
 
   return (
     <View style={gStyle.container}>
@@ -134,19 +139,18 @@ const Album = ({ navigation }) => {
           <LinearGradient fill={album.backgroundColor} />
         </View>
         <View style={styles.containerImage}>
-          <Image
-            source={require("../../../assets/icon.png")}
-            style={styles.image}
-          />
+          <Image source={{ uri: album.coverImageUrl }} style={styles.image} />
         </View>
         <View style={styles.containerTitle}>
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
-            {album.title}
+            {album.name}
           </Text>
         </View>
         <View style={styles.containerAlbum}>
           <Text style={styles.albumInfo}>
-            {`Album by ${album.artist} · ${album.released}`}
+            {`Album by ${album.artist.name} · ${
+              album.releaseDate.split("T")[0]
+            }`}
           </Text>
         </View>
       </View>
@@ -188,19 +192,22 @@ const Album = ({ navigation }) => {
             />
           </View>
 
-          {album.tracks &&
-            album.tracks.map((track, index) => (
+          {album.songs &&
+            album.songs.map((song, index) => (
               <LineItemSong
-                active={song === track.title}
+                active={activeSongTitle === song.title}
                 downloaded={downloaded}
                 key={index.toString()}
-                onPress={changeSongData}
+                onPress={handlePress}
                 songData={{
-                  album: album.title,
-                  artist: album.artist,
-                  image: album.image,
-                  length: track.seconds,
-                  title: track.title,
+                  tokenId: song.tokenId,
+                  contractAddress: song.contractAddress
+                    ? song.contractAddress
+                    : "Unknown Album",
+                  album: album.name,
+                  artist: album.artist.name,
+                  image: song.imageUrl,
+                  title: song.title,
                 }}
               />
             ))}

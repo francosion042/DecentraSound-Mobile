@@ -56,16 +56,15 @@ const ModalMoreOptions = ({ navigation }) => {
       >
         <View style={styles.container}>
           <View style={styles.containerImage}>
-            <Image
-              source={require("../../../assets/icon.png")}
-              style={styles.image}
-            />
+            <Image source={{ uri: album.coverImageUrl }} style={styles.image} />
           </View>
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
-            {album.title}
+            {album.name}
           </Text>
           <Text style={styles.albumInfo}>
-            {`Album by ${album.artist} · ${album.released}`}
+            {`Album by ${album.artist.name} · ${
+              album.releaseDate.split("T")[0]
+            }`}
           </Text>
         </View>
 

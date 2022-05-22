@@ -27,7 +27,7 @@ const BottomTabNavigator = createBottomTabNavigator(
       activeTintColor: colors.brandPrimary,
       inactiveTintColor: colors.greyInactive,
       style: {
-        backgroundColor: colors.grey,
+        backgroundColor: colors.black,
         borderTopWidth: 0,
         height: 60,
       },

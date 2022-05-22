@@ -16,6 +16,7 @@ import TrackPlayer, {
   useTrackPlayerEvents,
   Event,
 } from "react-native-track-player";
+import SystemSetting from "react-native-system-setting";
 import * as Animatable from "react-native-animatable";
 import { colors, device, func, gStyle } from "../../constants";
 import { PlayingContext } from "../../contexts";
@@ -36,6 +37,7 @@ const ModalMusicPlayer = ({ navigation }) => {
     repeat,
   } = useContext(PlayingContext);
   const [favorited, setFavorited] = useState(false);
+  const [volume, setVolume] = useState(0.5);
   const playBackState = usePlaybackState();
   const progress = useProgress();
 
@@ -108,6 +110,10 @@ const ModalMusicPlayer = ({ navigation }) => {
 
   const timePast = func.formatTime(progress.position);
   const timeTotal = func.formatTime(progress.duration);
+
+  SystemSetting.getVolume().then((v) => {
+    setVolume(v);
+  });
 
   return (
     <View style={gStyle.container}>
@@ -230,20 +236,25 @@ const ModalMusicPlayer = ({ navigation }) => {
           />
         </View>
         <View style={styles.containerBottomVolume}>
+          <FontAwesome
+            color={colors.brandPrimary}
+            name="volume-down"
+            size={22}
+          />
           <View style={styles.containerVolume}>
             <Slider
               minimumValue={0}
-              value={0.5}
+              value={volume}
               maximumValue={1}
               onValueChange={async (value) => {
-                await TrackPlayer.setVolume(value);
+                await SystemSetting.setVolume(value);
               }}
               minimumTrackTintColor={colors.brandPrimary}
               maximumTrackTintColor={colors.white}
               thumbTintColor={colors.brandPrimary}
-              style={styles.sliderVolume}
             />
           </View>
+          <FontAwesome color={colors.brandPrimary} name="volume-up" size={20} />
         </View>
       </View>
     </View>
@@ -312,13 +323,11 @@ const styles = StyleSheet.create({
     marginTop: device.iPhoneNotch ? 32 : "8%",
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "row",
   },
   containerVolume: {
     width: "50%",
     justifyContent: "center",
-  },
-  sliderVolume: {
-    backgroundColor: colors.grey,
   },
 });
 

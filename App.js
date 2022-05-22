@@ -10,9 +10,10 @@ import {
 import NavigationContainer from "./src/navigation/Stack";
 import WalletConnection from "./src/screens/authentication/WalletConnection";
 import {
-  UserContextProvider,
-  ScreenContextProvider,
   UserContext,
+  UserContextProvider,
+  HomeContextProvider,
+  ScreenContextProvider,
   PlayingContextProvider,
   LibraryContextProvider,
 } from "./src/contexts";
@@ -55,13 +56,15 @@ const App = () => {
 const app = (props) => {
   return (
     <UserContextProvider>
-      <ScreenContextProvider>
-        <LibraryContextProvider>
-          <PlayingContextProvider>
-            <App navigation={props.navigation} />
-          </PlayingContextProvider>
-        </LibraryContextProvider>
-      </ScreenContextProvider>
+      <HomeContextProvider>
+        <ScreenContextProvider>
+          <LibraryContextProvider>
+            <PlayingContextProvider>
+              <App navigation={props.navigation} />
+            </PlayingContextProvider>
+          </LibraryContextProvider>
+        </ScreenContextProvider>
+      </HomeContextProvider>
     </UserContextProvider>
   );
 };
