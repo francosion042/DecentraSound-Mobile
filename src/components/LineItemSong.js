@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { colors, gStyle } from "../constants";
 
-const LineItemSong = ({ active, downloaded, onPress, songData }) => {
+const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
   const activeColor = active ? colors.brandPrimary : colors.white;
 
   return (
@@ -35,9 +35,11 @@ const LineItemSong = ({ active, downloaded, onPress, songData }) => {
         </View>
       </TouchableOpacity>
 
-      <View style={styles.containerRight}>
-        <Feather color={colors.greyLight} name="more-horizontal" size={20} />
-      </View>
+      {screen !== "artist" ? (
+        <View style={styles.containerRight}>
+          <Feather color={colors.greyLight} name="more-vertical" size={20} />
+        </View>
+      ) : null}
     </View>
   );
 };
