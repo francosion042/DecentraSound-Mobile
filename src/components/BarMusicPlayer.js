@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { withNavigation } from "react-navigation";
@@ -17,12 +17,8 @@ const AnimatedFontAwesome = Animatable.createAnimatableComponent(FontAwesome);
 const BarMusicPlayer = ({ navigation }) => {
   const { playingSongs, updateCurrentSongData, currentSongData } =
     useContext(PlayingContext);
-  const [favorited, setfavourited] = useState(false);
-  const playBackState = usePlaybackState();
 
-  const toggleFavorite = () => {
-    setfavourited(!favorited);
-  };
+  const playBackState = usePlaybackState();
 
   const togglePlay = async () => {
     const currentTrack = await TrackPlayer.getCurrentTrack();
@@ -52,8 +48,6 @@ const BarMusicPlayer = ({ navigation }) => {
     }
   };
 
-  const favoriteColor = favorited ? colors.brandPrimary : colors.greyInactive;
-  const favoriteIcon = favorited ? "heart" : "heart-o";
   const iconPlay = playBackState !== State.Playing ? "play" : "pause";
 
   return (
