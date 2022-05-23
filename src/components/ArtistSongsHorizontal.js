@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { FlatList, StyleSheet, Text, View } from "react-native";
@@ -6,7 +5,6 @@ import { withNavigation } from "react-navigation";
 import { colors, gStyle, device } from "../constants";
 import { PlayingContext } from "../contexts";
 import LineItemSong from "./LineItemSong";
-import { ScrollView } from "react-native-gesture-handler";
 
 const ArtistSongsHorizontal = ({ data, heading, navigation, handlePress }) => {
   const { currentSongData } = useContext(PlayingContext);
@@ -82,7 +80,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     ...gStyle.textBold22,
-    ...gStyle.pL3,
+    ...gStyle.pL2,
     color: colors.white,
     paddingBottom: 6,
     textAlign: "left",

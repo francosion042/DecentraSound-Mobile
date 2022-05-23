@@ -75,7 +75,7 @@ const ModalMusicPlayer = ({ navigation }) => {
 
   const boxInterpolation = animation.interpolate({
     inputRange: [0, 0.1, 0.3, 0.5, 0.7, 0.9, 1],
-    outputRange: ["black", "gray", "blue", "green", "pink", "white", "red"],
+    outputRange: ["black", "gray", "blue", "orange", "pink", "white", "red"],
   });
   const animatedStyle = {
     backgroundColor: boxInterpolation,
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerCover: {
-    backgroundColor: colors.black90,
+    backgroundColor: colors.black80,
     height: "100%",
   },
   imageContainer: {

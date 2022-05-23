@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { withNavigation } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 import TrackPlayer, {
@@ -62,14 +62,14 @@ const BarMusicPlayer = ({ navigation }) => {
       onPress={() => navigation.navigate("ModalMusicPlayer")}
       style={styles.container}
     >
-      <TouchableOpacity
-        activeOpacity={gStyle.activeOpacity}
-        hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
-        onPress={toggleFavorite}
-        style={styles.containerIconLeft}
-      >
-        <FontAwesome color={favoriteColor} name={favoriteIcon} size={20} />
-      </TouchableOpacity>
+      <Image
+        source={
+          currentSongData.image
+            ? { uri: currentSongData.image }
+            : require("../../assets/icon.png")
+        }
+        style={styles.image}
+      />
       {currentSongData && (
         <View>
           <View style={styles.containerSong}>
@@ -143,10 +143,14 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     width: "100%",
     elevation: 5,
+    alignItems: "center",
   },
-  containerIconLeft: {
-    ...gStyle.flexCenter,
-    width: 50,
+  image: {
+    height: 40,
+    width: 40,
+    borderRadius: 5,
+    marginRight: 5,
+    marginLeft: 15,
   },
   containerIconRight: {
     ...gStyle.flexCenter,
@@ -154,7 +158,7 @@ const styles = StyleSheet.create({
   },
   containerSong: {
     overflow: "scroll",
-    width: device.width - 130,
+    width: device.width - 160,
   },
   title: {
     ...gStyle.text18,
