@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
@@ -160,14 +161,20 @@ const ModalMusicPlayer = ({ navigation }) => {
 
         <View style={gStyle.p3}>
           <View style={styles.imageContainer}>
-            <Image
-              source={
-                currentSongData.image
-                  ? { uri: currentSongData.image }
-                  : require("../../../assets/icon.png")
-              }
-              style={styles.image}
-            />
+            {currentSongData.image ? (
+              <Image
+                source={{ uri: currentSongData.image }}
+                style={styles.image}
+              />
+            ) : (
+              <View style={{ justifyContent: "center", height: "100%" }}>
+                <FontAwesome
+                  name="music"
+                  size={200}
+                  style={{ alignSelf: "center", color: colors.greyOff }}
+                />
+              </View>
+            )}
           </View>
 
           <View style={[gStyle.flexRowSpace, styles.containerDetails]}>
@@ -317,6 +324,14 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   imageContainer: {
+    padding: 0,
+    backgroundColor: colors.greyInactive,
+    height: device.width - 60,
+    marginVertical: device.iPhoneNotch ? 36 : 10,
+    width: device.width - 60,
+    marginBottom: "10%",
+    borderRadius: 10,
+    alignSelf: "center",
     elevation: 5,
     shadowColor: "#ccc",
     shadowOffset: {
@@ -327,11 +342,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.5,
   },
   image: {
-    height: device.width - 60,
-    marginVertical: device.iPhoneNotch ? 36 : 10,
-    width: device.width - 60,
-    marginBottom: "10%",
-    borderRadius: 10,
+    height: "100%",
+    // marginVertical: device.iPhoneNotch ? 36 : 10,
+    width: "100%",
     alignSelf: "center",
   },
   containerDetails: {

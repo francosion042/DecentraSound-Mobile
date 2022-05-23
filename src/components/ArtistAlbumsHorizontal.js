@@ -11,10 +11,9 @@ import {
 import { withNavigation } from "react-navigation";
 import { colors, gStyle } from "../constants";
 
-const ArtistsHorizontal = ({ data, heading, navigation, tagline }) => (
+const ArtistAlbumsHorizontal = ({ data, heading, navigation }) => (
   <View style={styles.container}>
     {heading && <Text style={styles.heading}>{heading}</Text>}
-    {tagline && <Text style={styles.tagline}>{tagline}</Text>}
 
     <FlatList
       contentContainerStyle={styles.containerContent}
@@ -25,18 +24,23 @@ const ArtistsHorizontal = ({ data, heading, navigation, tagline }) => (
         <TouchableOpacity
           activeOpacity={gStyle.activeOpacity}
           hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-          onPress={() => navigation.navigate("Artist", { artist: item.artist })}
+          onPress={() => navigation.navigate("Album", { album: item })}
           style={styles.item}
         >
           <View style={styles.image}>
-            {item.artist.imageUrl && (
+            {item.coverImageUrl && (
               <Image
-                source={{ uri: item.artist.imageUrl }}
+                source={{ uri: item.coverImageUrl }}
                 style={styles.image}
               />
             )}
           </View>
-          <Text style={styles.title}>{item.artist.name}</Text>
+          <Text style={styles.title} numberOfLines={1}>
+            {item.name}
+          </Text>
+          <Text style={styles.releaseDate} numberOfLines={1}>
+            {item.releaseDate.split("T")[0]}
+          </Text>
         </TouchableOpacity>
       )}
       showsHorizontalScrollIndicator={false}
@@ -44,12 +48,12 @@ const ArtistsHorizontal = ({ data, heading, navigation, tagline }) => (
   </View>
 );
 
-ArtistsHorizontal.defaultProps = {
+ArtistAlbumsHorizontal.defaultProps = {
   heading: null,
   tagline: null,
 };
 
-ArtistsHorizontal.propTypes = {
+ArtistAlbumsHorizontal.propTypes = {
   // required
   data: PropTypes.array.isRequired,
   navigation: PropTypes.object.isRequired,
@@ -65,19 +69,14 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   containerContent: {
-    paddingLeft: 16,
+    ...gStyle.pL5,
   },
   heading: {
-    ...gStyle.textBold18,
+    ...gStyle.textBold22,
+    ...gStyle.pL5,
     color: colors.white,
     paddingBottom: 6,
-    textAlign: "center",
-  },
-  tagline: {
-    ...gStyle.text12,
-    color: colors.greyInactive,
-    paddingBottom: 6,
-    textAlign: "center",
+    textAlign: "left",
   },
   item: {
     marginRight: 16,
@@ -90,11 +89,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   title: {
-    ...gStyle.textBold12,
+    ...gStyle.textBold16,
     color: colors.white,
+    marginTop: 4,
+    textAlign: "center",
+  },
+  releaseDate: {
+    ...gStyle.textBold12,
+    color: colors.greyInactive,
     marginTop: 4,
     textAlign: "center",
   },
 });
 
-export default withNavigation(ArtistsHorizontal);
+export default withNavigation(ArtistAlbumsHorizontal);

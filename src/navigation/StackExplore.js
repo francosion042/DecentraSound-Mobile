@@ -17,7 +17,7 @@ Icon.propTypes = {
 
 export default createStackNavigator(
   {
-    SearchMain: {
+    ExploreMain: {
       screen: Explore,
     },
   },

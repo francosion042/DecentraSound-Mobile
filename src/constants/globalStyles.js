@@ -14,6 +14,10 @@ export default {
     backgroundColor: colors.white,
     flex: 1,
   },
+  containerGrey: {
+    backgroundColor: colors.grey,
+    flex: 1,
+  },
   containerAbsolute: {
     position: "absolute",
     bottom: 0,
@@ -115,6 +119,7 @@ export default {
   mR2: { marginRight: spaceGrid * 2 },
   mR3: { marginRight: spaceGrid * 3 },
   mR4: { marginRight: spaceGrid * 4 },
+  mR6: { marginRight: spaceGrid * 6 },
   mR8: { marginRight: spaceGrid * 8 },
   mR16: { marginRight: spaceGrid * 16 },
   mR24: { marginRight: spaceGrid * 24 },
@@ -133,6 +138,7 @@ export default {
   mH2: { marginHorizontal: spaceGrid * 2 },
   mH3: { marginHorizontal: spaceGrid * 3 },
   mH4: { marginHorizontal: spaceGrid * 4 },
+  mH5: { marginHorizontal: spaceGrid * 5 },
   mH24: { marginHorizontal: spaceGrid * 24 },
 
   mV1: { marginVertical: spaceGrid * 1 },
@@ -157,6 +163,7 @@ export default {
   pL1: { paddingLeft: spaceGrid },
   pL2: { paddingLeft: spaceGrid * 2 },
   pL3: { paddingLeft: spaceGrid * 3 },
+  pL5: { paddingLeft: spaceGrid * 5 },
 
   pR1: { paddingRight: spaceGrid },
   pR2: { paddingRight: spaceGrid * 2 },

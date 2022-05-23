@@ -5,6 +5,7 @@ import { createStackNavigator } from "react-navigation-stack";
 // screens
 import Home from "../screens/home/Home";
 import Album from "../screens/album/Album";
+import Artist from "../screens/artist/Artist";
 
 // icons
 import SvgTabHome from "../components/icons/Svg.TabHome";
@@ -20,6 +21,7 @@ export default createStackNavigator(
   {
     Home,
     Album,
+    Artist,
   },
   {
     headerMode: "none",
