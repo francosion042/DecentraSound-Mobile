@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../../constants";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -34,11 +34,11 @@ const Artist = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={gStyle.container}>
+    <View style={gStyle.container}>
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Artist" />
       </View>
-      <View style={styles.containerBody}>
+      <ScrollView style={styles.containerBody}>
         <View style={styles.artistHeader}>
           <View style={styles.artistIntro}>
             <Text style={styles.artistName} numberOfLines={1}>
@@ -92,8 +92,8 @@ const Artist = ({ navigation }) => {
           <Text style={styles.descriptionTitle}>About</Text>
           <Text style={styles.artistDescription}>{artist.description}</Text>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
   artistIntro: {
     ...gStyle.pH5,
     ...gStyle.mB3,
+    ...gStyle.pT3,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     ...gStyle.containerGrey,
     ...gStyle.pH5,
     paddingVertical: 15,
-    minHeight: 200,
+    minHeight: 100,
   },
   descriptionTitle: {
     ...gStyle.textBold22,

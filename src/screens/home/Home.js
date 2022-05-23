@@ -43,6 +43,8 @@ const Home = ({ navigation }) => {
       try {
         const response = await getTrendingAlbums();
 
+        console.log(response.data.data);
+
         updateTrendingAlbums(response.data.data);
       } catch (error) {
         console.log(error);
@@ -103,11 +105,11 @@ const Home = ({ navigation }) => {
 
         <BigAlbumsHorizontal data={trendingAlbums} heading="Top Collections" />
 
-        <AlbumsHorizontal
+        {/* <AlbumsHorizontal
           data={recentlyPlayed}
           heading="Recently Played"
           tagline="The music you've had on repeat this month."
-        />
+        /> */}
 
         <ArtistsHorizontal
           data={trendingArtists}

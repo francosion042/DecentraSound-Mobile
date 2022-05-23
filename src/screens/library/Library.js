@@ -22,7 +22,7 @@ const Library = ({ navigation }) => {
 
     if (userOwnedSongs.length === 0) {
       try {
-        const response = await getUserOwnedSongs({ userid: 2 });
+        const response = await getUserOwnedSongs({ userid: 1 });
         updateUserOwnedSongs(response.data.data);
       } catch (error) {
         console.log(error);

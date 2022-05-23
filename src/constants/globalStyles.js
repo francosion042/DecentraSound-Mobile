@@ -168,6 +168,7 @@ export default {
   pR1: { paddingRight: spaceGrid },
   pR2: { paddingRight: spaceGrid * 2 },
   pR3: { paddingRight: spaceGrid * 3 },
+  pR5: { paddingRight: spaceGrid * 5 },
 
   pT1: { paddingTop: spaceGrid },
   pT2: { paddingTop: spaceGrid * 2 },

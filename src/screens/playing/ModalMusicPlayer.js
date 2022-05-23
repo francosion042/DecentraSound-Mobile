@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerCover: {
-    backgroundColor: colors.black80,
+    backgroundColor: colors.black90,
     height: "100%",
   },
   imageContainer: {

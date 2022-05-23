@@ -3,9 +3,10 @@ import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { withNavigation } from "react-navigation";
-import { colors, gStyle } from "../constants";
+import { colors, gStyle, device } from "../constants";
 import { PlayingContext } from "../contexts";
 import LineItemSong from "./LineItemSong";
+import { ScrollView } from "react-native-gesture-handler";
 
 const ArtistSongsHorizontal = ({ data, heading, navigation, handlePress }) => {
   const { currentSongData } = useContext(PlayingContext);
@@ -20,35 +21,34 @@ const ArtistSongsHorizontal = ({ data, heading, navigation, handlePress }) => {
       <FlatList
         data={data}
         horizontal
-        renderItem={({ item, index }) => (
-          <View style={styles.container}>
-            <FlatList
-              contentContainerStyle={styles.containerContent}
-              data={item.songs.slice(0, 4)}
-              keyExtractor={({ id }) => id.toString()}
-              renderItem={({ item }) => (
+        pagingEnabled={false}
+        fadingEdgeLength={1}
+        keyExtractor={({ id }) => id.toString()}
+        renderItem={({ item }) => (
+          <View key={item.id} style={styles.containerContent}>
+            {item.songs.slice(0, 4).map((song) => (
+              <View key={song.id}>
                 <LineItemSong
-                  active={activeSongTitle === item.title}
+                  active={activeSongTitle === song.title}
                   downloaded={downloaded}
-                  key={item.tokenId}
+                  key={song.tokenId}
                   onPress={handlePress}
                   screen="artist"
                   songData={{
-                    tokenId: item.tokenId,
-                    contractAddress: item.contractAddress
-                      ? item.contractAddress
+                    tokenId: song.tokenId,
+                    contractAddress: song.contractAddress
+                      ? song.contractAddress
                       : "Unknown Album",
                     artist: "Artist",
-                    image: item.imageUrl,
+                    image: song.imageUrl,
                     length: 4214241,
-                    title: item.title,
+                    title: song.title,
                   }}
                 />
-              )}
-            />
+              </View>
+            ))}
           </View>
         )}
-        showsHorizontalScrollIndicator={false}
       />
     </View>
   );
@@ -71,15 +71,18 @@ ArtistSongsHorizontal.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
+    ...gStyle.pL3,
     marginBottom: 20,
-    width: "100%",
   },
   containerContent: {
-    ...gStyle.pL5,
+    ...gStyle.pR5,
+    width: device.width - 30,
+    flex: 1,
+    justifyContent: "space-between",
   },
   heading: {
     ...gStyle.textBold22,
-    ...gStyle.pL5,
+    ...gStyle.pL3,
     color: colors.white,
     paddingBottom: 6,
     textAlign: "left",

@@ -133,7 +133,7 @@ BarMusicPlayer.propTypes = {
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
-    backgroundColor: colors.black,
+    backgroundColor: colors.blackBlur,
     borderBottomColor: colors.greyLight,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.grey,
