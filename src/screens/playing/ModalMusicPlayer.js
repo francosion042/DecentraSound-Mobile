@@ -39,7 +39,7 @@ const ModalMusicPlayer = ({ navigation }) => {
     repeat,
   } = useContext(PlayingContext);
   const [favorited, setFavorited] = useState(false);
-  const [volume, setVolume] = useState(0.5);
+  const [volume, setVolume] = useState();
   const [animation] = useState(new Animated.Value(0));
   const playBackState = usePlaybackState();
   const progress = useProgress();
@@ -281,31 +281,33 @@ const ModalMusicPlayer = ({ navigation }) => {
               onPress={() => null}
             />
           </View>
-          <View style={styles.containerBottomVolume}>
-            <FontAwesome
-              color={colors.brandPrimary}
-              name="volume-down"
-              size={20}
-            />
-            <View style={styles.containerVolume}>
-              <Slider
-                minimumValue={0}
-                value={volume}
-                maximumValue={1}
-                onValueChange={async (value) => {
-                  await SystemSetting.setVolume(value);
-                }}
-                minimumTrackTintColor={colors.brandPrimary}
-                maximumTrackTintColor={colors.white}
-                thumbTintColor={colors.brandPrimary}
+          {volume && (
+            <View style={styles.containerBottomVolume}>
+              <FontAwesome
+                color={colors.brandPrimary}
+                name="volume-down"
+                size={20}
+              />
+              <View style={styles.containerVolume}>
+                <Slider
+                  minimumValue={0}
+                  value={volume}
+                  maximumValue={1}
+                  onValueChange={async (value) => {
+                    await SystemSetting.setVolume(value);
+                  }}
+                  minimumTrackTintColor={colors.brandPrimary}
+                  maximumTrackTintColor={colors.white}
+                  thumbTintColor={colors.brandPrimary}
+                />
+              </View>
+              <FontAwesome
+                color={colors.brandPrimary}
+                name="volume-up"
+                size={18}
               />
             </View>
-            <FontAwesome
-              color={colors.brandPrimary}
-              name="volume-up"
-              size={18}
-            />
-          </View>
+          )}
         </View>
       </View>
     </Animated.View>
