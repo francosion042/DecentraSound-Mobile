@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
-import { colors } from "../../constants";
+import { StyleSheet, View, Image } from "react-native";
+// import { colors } from "../../constants";
 
 const Loading = () => {
   return (
-    <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="large" color={colors.brandPrimary} />
+    <View style={styles.container}>
+      <Image source={require("../../../assets/network-loading.gif")} />
     </View>
   );
 };
@@ -14,11 +14,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-  },
-  horizontal: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
+    alignItems: "center",
   },
 });
 

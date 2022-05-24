@@ -5,7 +5,7 @@ import { colors, device, gStyle } from "../../constants";
 import { BlurView } from "expo-blur";
 import { HomeContext } from "../../contexts";
 import { getTrendingAlbums, getTrendingArtists } from "../../api";
-// import Loading from "../utils/Loading";
+import Loading from "../utils/Loading";
 
 // components
 import AlbumsHorizontal from "../../components/AlbumsHorizontal";
@@ -25,6 +25,7 @@ const Home = ({ navigation }) => {
     updateTrendingArtists,
   } = useContext(HomeContext);
   const [scrollY] = useState(new Animated.Value(0));
+  const [isLoading, setIsLoading] = useState(true);
 
   const opacityIn = scrollY.interpolate({
     inputRange: [0, 128],
@@ -43,9 +44,7 @@ const Home = ({ navigation }) => {
       try {
         const response = await getTrendingAlbums();
 
-        console.log(response.data.data);
-
-        updateTrendingAlbums(response.data.data);
+        updateTrendingAlbums(response?.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -55,20 +54,21 @@ const Home = ({ navigation }) => {
       try {
         const response = await getTrendingArtists();
 
-        updateTrendingArtists(response.data.data);
+        updateTrendingArtists(response?.data.data);
       } catch (error) {
         console.log(error);
       }
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     handleTrending();
   });
 
-  // if (trendingAlbums.length === 0) {
-  //   return <Loading />;
-  // }
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Fragment>

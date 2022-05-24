@@ -55,7 +55,7 @@ LineItemSong.propTypes = {
   songData: PropTypes.shape({
     contractAddress: PropTypes.string.isRequired,
     artist: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     title: PropTypes.string.isRequired,
   }).isRequired,
 

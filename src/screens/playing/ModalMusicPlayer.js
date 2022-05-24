@@ -55,6 +55,12 @@ const ModalMusicPlayer = ({ navigation }) => {
     LogBox.ignoreLogs(["Animated: `useNativeDriver`"]);
   }, []);
 
+  useEffect(() => {
+    SystemSetting.getVolume().then((v) => {
+      setVolume(v);
+    });
+  });
+
   // ////////////////////////////////////////////
   // generate random colors for background
   useEffect(() => {
@@ -144,10 +150,6 @@ const ModalMusicPlayer = ({ navigation }) => {
 
   const timePast = func.formatTime(progress.position);
   const timeTotal = func.formatTime(progress.duration);
-
-  SystemSetting.getVolume().then((v) => {
-    setVolume(v);
-  });
 
   return (
     <Animated.View style={{ ...styles.container, ...animatedStyle }}>
