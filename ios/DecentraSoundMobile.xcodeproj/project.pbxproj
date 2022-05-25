@@ -3,34 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080FC612CD0F408386DBF46A /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B33C0D31C52144F894F57738 /* MaterialIcons.ttf */; };
+		0D1FA2E36B784AC4848AA863 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C9BCF81DE064351B5B82E1C /* FontAwesome.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		36B6E8BA8A0E49588D6DC5A3 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E00D4F12EB194A25A1B8F6A3 /* FontAwesome5_Brands.ttf */; };
+		38C16E332FFE4D66BF94CC87 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2F7F59AD549ADA22F1581 /* MaterialCommunityIcons.ttf */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		47783A1AF85E478F851F86A1 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36CAFE3C454E4492B36E9B94 /* Feather.ttf */; };
+		56441D2432934EE5BC945CA7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546ADC64A2424C0494E444D1 /* Zocial.ttf */; };
+		62FCC76D9EED49F9A01DD184 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6D5C0377194450B80393E9A /* EvilIcons.ttf */; };
+		682A704B7670411983939054 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F903EC3B930E4C47BDD306EF /* AntDesign.ttf */; };
+		79505E3A27374D6ABF6BA414 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B5DF75F6E940D2824595A3 /* Octicons.ttf */; };
+		8474FBD887B04B12BFD338A5 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B74A142D86D41F99458B5E2 /* Foundation.ttf */; };
+		907C4F57FF7E4F2F82B088F7 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870A41B41FBE48B98B8C8CD3 /* noop-file.swift */; };
+		921B3433283EB7D30063139D /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921B3432283EB7D30063139D /* dummy.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-DecentraSoundMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-DecentraSoundMobile.a */; };
+		A6297EFC034346FC8FD2B919 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FC696A5079D49A8993878F9 /* FontAwesome5_Regular.ttf */; };
+		ADA481595D074151BF985DF9 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A12E2CAECE924586A6FCCA58 /* SimpleLineIcons.ttf */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		907C4F57FF7E4F2F82B088F7 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870A41B41FBE48B98B8C8CD3 /* noop-file.swift */; };
-		682A704B7670411983939054 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F903EC3B930E4C47BDD306EF /* AntDesign.ttf */; };
-		FAB53DF58FB74A9A9C1F3143 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1B06A1268D64365A990408E /* Entypo.ttf */; };
-		62FCC76D9EED49F9A01DD184 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6D5C0377194450B80393E9A /* EvilIcons.ttf */; };
-		47783A1AF85E478F851F86A1 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36CAFE3C454E4492B36E9B94 /* Feather.ttf */; };
-		0D1FA2E36B784AC4848AA863 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C9BCF81DE064351B5B82E1C /* FontAwesome.ttf */; };
-		36B6E8BA8A0E49588D6DC5A3 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E00D4F12EB194A25A1B8F6A3 /* FontAwesome5_Brands.ttf */; };
-		A6297EFC034346FC8FD2B919 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FC696A5079D49A8993878F9 /* FontAwesome5_Regular.ttf */; };
 		C0FA91873DFE420194650CFB /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9252E7AD847B4BA99AD910F4 /* FontAwesome5_Solid.ttf */; };
 		CE7EAE41BAB24E2BAB5D0D7E /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5E5748180C94D80AFDB862F /* Fontisto.ttf */; };
-		8474FBD887B04B12BFD338A5 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B74A142D86D41F99458B5E2 /* Foundation.ttf */; };
 		CFE5D004E0BB45D4941BA88A /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC8090EB17F24AA8ADB0B166 /* Ionicons.ttf */; };
-		38C16E332FFE4D66BF94CC87 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2F7F59AD549ADA22F1581 /* MaterialCommunityIcons.ttf */; };
-		080FC612CD0F408386DBF46A /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B33C0D31C52144F894F57738 /* MaterialIcons.ttf */; };
-		79505E3A27374D6ABF6BA414 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B5DF75F6E940D2824595A3 /* Octicons.ttf */; };
-		ADA481595D074151BF985DF9 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A12E2CAECE924586A6FCCA58 /* SimpleLineIcons.ttf */; };
-		56441D2432934EE5BC945CA7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 546ADC64A2424C0494E444D1 /* Zocial.ttf */; };
+		FAB53DF58FB74A9A9C1F3143 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1B06A1268D64365A990408E /* Entypo.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,31 +42,32 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DecentraSoundMobile/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DecentraSoundMobile/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DecentraSoundMobile/main.m; sourceTree = "<group>"; };
+		1B74A142D86D41F99458B5E2 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		2C9BCF81DE064351B5B82E1C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		36CAFE3C454E4492B36E9B94 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		546ADC64A2424C0494E444D1 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		54BBA600B75A48319D63D827 /* DecentraSoundMobile-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "DecentraSoundMobile-Bridging-Header.h"; path = "DecentraSoundMobile/DecentraSoundMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-DecentraSoundMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DecentraSoundMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-DecentraSoundMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecentraSoundMobile.debug.xcconfig"; path = "Target Support Files/Pods-DecentraSoundMobile/Pods-DecentraSoundMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-DecentraSoundMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecentraSoundMobile.release.xcconfig"; path = "Target Support Files/Pods-DecentraSoundMobile/Pods-DecentraSoundMobile.release.xcconfig"; sourceTree = "<group>"; };
+		7EA2F7F59AD549ADA22F1581 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		7FC696A5079D49A8993878F9 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		870A41B41FBE48B98B8C8CD3 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "DecentraSoundMobile/noop-file.swift"; sourceTree = "<group>"; };
+		921B3432283EB7D30063139D /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
+		9252E7AD847B4BA99AD910F4 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		A12E2CAECE924586A6FCCA58 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = DecentraSoundMobile/SplashScreen.storyboard; sourceTree = "<group>"; };
+		B33C0D31C52144F894F57738 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
+		D2B5DF75F6E940D2824595A3 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		E00D4F12EB194A25A1B8F6A3 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		E6D5C0377194450B80393E9A /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F1B06A1268D64365A990408E /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		F5E5748180C94D80AFDB862F /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		F903EC3B930E4C47BDD306EF /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DecentraSoundMobile/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		870A41B41FBE48B98B8C8CD3 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "DecentraSoundMobile/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		54BBA600B75A48319D63D827 /* DecentraSoundMobile-Bridging-Header.h */ = {isa = PBXFileReference; name = "DecentraSoundMobile-Bridging-Header.h"; path = "DecentraSoundMobile/DecentraSoundMobile-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		F903EC3B930E4C47BDD306EF /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F1B06A1268D64365A990408E /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E6D5C0377194450B80393E9A /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		36CAFE3C454E4492B36E9B94 /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2C9BCF81DE064351B5B82E1C /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E00D4F12EB194A25A1B8F6A3 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7FC696A5079D49A8993878F9 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9252E7AD847B4BA99AD910F4 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F5E5748180C94D80AFDB862F /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1B74A142D86D41F99458B5E2 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FC8090EB17F24AA8ADB0B166 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7EA2F7F59AD549ADA22F1581 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B33C0D31C52144F894F57738 /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D2B5DF75F6E940D2824595A3 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A12E2CAECE924586A6FCCA58 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		546ADC64A2424C0494E444D1 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FC8090EB17F24AA8ADB0B166 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		504A4677C55547AA85782052 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F903EC3B930E4C47BDD306EF /* AntDesign.ttf */,
+				F1B06A1268D64365A990408E /* Entypo.ttf */,
+				E6D5C0377194450B80393E9A /* EvilIcons.ttf */,
+				36CAFE3C454E4492B36E9B94 /* Feather.ttf */,
+				2C9BCF81DE064351B5B82E1C /* FontAwesome.ttf */,
+				E00D4F12EB194A25A1B8F6A3 /* FontAwesome5_Brands.ttf */,
+				7FC696A5079D49A8993878F9 /* FontAwesome5_Regular.ttf */,
+				9252E7AD847B4BA99AD910F4 /* FontAwesome5_Solid.ttf */,
+				F5E5748180C94D80AFDB862F /* Fontisto.ttf */,
+				1B74A142D86D41F99458B5E2 /* Foundation.ttf */,
+				FC8090EB17F24AA8ADB0B166 /* Ionicons.ttf */,
+				7EA2F7F59AD549ADA22F1581 /* MaterialCommunityIcons.ttf */,
+				B33C0D31C52144F894F57738 /* MaterialIcons.ttf */,
+				D2B5DF75F6E940D2824595A3 /* Octicons.ttf */,
+				A12E2CAECE924586A6FCCA58 /* SimpleLineIcons.ttf */,
+				546ADC64A2424C0494E444D1 /* Zocial.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +141,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				921B3432283EB7D30063139D /* dummy.swift */,
 				13B07FAE1A68108700A75B9A /* DecentraSoundMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -171,30 +197,6 @@
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
-		504A4677C55547AA85782052 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				F903EC3B930E4C47BDD306EF /* AntDesign.ttf */,
-				F1B06A1268D64365A990408E /* Entypo.ttf */,
-				E6D5C0377194450B80393E9A /* EvilIcons.ttf */,
-				36CAFE3C454E4492B36E9B94 /* Feather.ttf */,
-				2C9BCF81DE064351B5B82E1C /* FontAwesome.ttf */,
-				E00D4F12EB194A25A1B8F6A3 /* FontAwesome5_Brands.ttf */,
-				7FC696A5079D49A8993878F9 /* FontAwesome5_Regular.ttf */,
-				9252E7AD847B4BA99AD910F4 /* FontAwesome5_Solid.ttf */,
-				F5E5748180C94D80AFDB862F /* Fontisto.ttf */,
-				1B74A142D86D41F99458B5E2 /* Foundation.ttf */,
-				FC8090EB17F24AA8ADB0B166 /* Ionicons.ttf */,
-				7EA2F7F59AD549ADA22F1581 /* MaterialCommunityIcons.ttf */,
-				B33C0D31C52144F894F57738 /* MaterialIcons.ttf */,
-				D2B5DF75F6E940D2824595A3 /* Octicons.ttf */,
-				A12E2CAECE924586A6FCCA58 /* SimpleLineIcons.ttf */,
-				546ADC64A2424C0494E444D1 /* Zocial.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -225,7 +227,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
@@ -233,7 +235,7 @@
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DecentraSoundMobile" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -258,7 +260,6 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				451E5189E35A43DFA4456F36 /* DecentraSoundMobile-Bridging-Header.h in Resources */,
 				682A704B7670411983939054 /* AntDesign.ttf in Resources */,
 				FAB53DF58FB74A9A9C1F3143 /* Entypo.ttf in Resources */,
 				62FCC76D9EED49F9A01DD184 /* EvilIcons.ttf in Resources */,
@@ -319,20 +320,52 @@
 		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DecentraSoundMobile/Pods-DecentraSoundMobile-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DecentraSoundMobile/Pods-DecentraSoundMobile-resources.sh\"\n";
 			showEnvVarsInLog = 0;
@@ -364,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				921B3433283EB7D30063139D /* dummy.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
 				907C4F57FF7E4F2F82B088F7 /* noop-file.swift in Sources */,
@@ -379,6 +413,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = DecentraSoundMobile/DecentraSoundMobile.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -387,20 +422,22 @@
 				);
 				INFOPLIST_FILE = DecentraSoundMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.decentrasound";
-				PRODUCT_NAME = "DecentraSoundMobile";
+				PRODUCT_BUNDLE_IDENTIFIER = com.decentrasound;
+				PRODUCT_NAME = DecentraSoundMobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "DecentraSoundMobile/DecentraSoundMobile-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				SWIFT_OBJC_BRIDGING_HEADER = DecentraSoundMobile/DecentraSoundMobile-Bridging-Header.h;
-				CODE_SIGN_ENTITLEMENTS = "DecentraSoundMobile/DecentraSoundMobile.entitlements";
 			};
 			name = Debug;
 		};
@@ -410,22 +447,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = DecentraSoundMobile/DecentraSoundMobile.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = DecentraSoundMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.decentrasound";
-				PRODUCT_NAME = "DecentraSoundMobile";
+				PRODUCT_BUNDLE_IDENTIFIER = com.decentrasound;
+				PRODUCT_NAME = DecentraSoundMobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "DecentraSoundMobile/DecentraSoundMobile-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				SWIFT_OBJC_BRIDGING_HEADER = DecentraSoundMobile/DecentraSoundMobile-Bridging-Header.h;
-				CODE_SIGN_ENTITLEMENTS = "DecentraSoundMobile/DecentraSoundMobile.entitlements";
 			};
 			name = Release;
 		};
@@ -452,15 +492,18 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = DecentraSoundMobile/DecentraSoundMobile.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -477,12 +520,15 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				CODE_SIGN_ENTITLEMENTS = "DecentraSoundMobile/DecentraSoundMobile.entitlements";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -509,15 +555,18 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = DecentraSoundMobile/DecentraSoundMobile.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -527,12 +576,16 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
-				CODE_SIGN_ENTITLEMENTS = "DecentraSoundMobile/DecentraSoundMobile.entitlements";
 			};
 			name = Release;
 		};

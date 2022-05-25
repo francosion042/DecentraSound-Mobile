@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
     right: 24,
-    top: device.web ? 40 : 40,
+    top: device.web ? 40 : device.iPhoneNotch ? 75 : 40,
     width: 28,
   },
 });

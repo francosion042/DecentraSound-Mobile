@@ -55,10 +55,13 @@ const ModalMusicPlayer = ({ navigation }) => {
     LogBox.ignoreLogs(["Animated: `useNativeDriver`"]);
   }, []);
 
+  /**
+   * @dev TODO: fix issue with iOS and the reactivate feature
+   */
   useEffect(() => {
-    SystemSetting.getVolume().then((v) => {
-      setVolume(v);
-    });
+    // SystemSetting.getVolume().then((v) => {
+    //   setVolume(v);
+    // });
   });
 
   // ////////////////////////////////////////////

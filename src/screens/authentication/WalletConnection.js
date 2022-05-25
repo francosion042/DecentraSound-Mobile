@@ -49,10 +49,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   intro: {
-    fontFamily: "roboto-700",
+    ...gStyle.text16,
     color: "rgba(255,255,255,1)",
     textAlign: "center",
-    fontSize: 15,
     marginTop: 52,
     alignSelf: "center",
     marginBottom: 52,

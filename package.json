@@ -2,11 +2,11 @@
   "name": "decentrasound-mobile",
   "version": "1.0.0",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start:development": "NODE_ENV=development react-native start --reset-cache",
-    "start:production": "NODE_ENV=production react-native start --reset-cache",
-    "web": "react-native start --web",
+    "android": "npx react-native run-android",
+    "ios": "npx react-native run-ios",
+    "start:development": "NODE_ENV=development npx react-native start --reset-cache",
+    "start:production": "NODE_ENV=production npx react-native start --reset-cache",
+    "web": "npx react-native start --web",
     "commit": "cz",
     "lint": "eslint --fix --ext .js .",
     "postinstall": "node_modules/.bin/rn-nodeify --install crypto,assert,url,stream,events --hack"

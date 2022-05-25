@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React, { Fragment, useContext, useEffect } from "react";
-// import { StatusBar } from "expo-status-bar";
+import { StatusBar } from "expo-status-bar";
 import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -47,7 +47,7 @@ const App = () => {
 
   return (
     <Fragment>
-      {/* <StatusBar style="light" backgroundColor="black" /> */}
+      <StatusBar style="light" backgroundColor="black" />
       <NavigationContainer theme="dark" />
     </Fragment>
   );
