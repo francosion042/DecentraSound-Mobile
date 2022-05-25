@@ -7,6 +7,7 @@ import {
   useWalletConnect,
   withWalletConnect,
 } from "@walletconnect/react-native-dapp";
+import { device } from "./src/constants";
 import NavigationContainer from "./src/navigation/Stack";
 import WalletConnection from "./src/screens/authentication/WalletConnection";
 import {
@@ -47,7 +48,7 @@ const App = () => {
 
   return (
     <Fragment>
-      <StatusBar style="light" backgroundColor="black" />
+      {device.iOS ? <StatusBar style="light" backgroundColor="black" /> : null}
       <NavigationContainer theme="dark" />
     </Fragment>
   );
