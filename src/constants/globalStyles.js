@@ -72,6 +72,7 @@ export default {
   text20: { fontFamily: fonts.regular, fontSize: 20 },
   text24: { fontFamily: fonts.regular, fontSize: 24 },
   textBold12: { fontFamily: fonts.bold, fontSize: 12 },
+  textBold14: { fontFamily: fonts.bold, fontSize: 14 },
   textBold16: { fontFamily: fonts.bold, fontSize: 16 },
   textBold18: { fontFamily: fonts.bold, fontSize: 18 },
   textBold20: { fontFamily: fonts.bold, fontSize: 20 },

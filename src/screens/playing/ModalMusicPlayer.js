@@ -38,7 +38,7 @@ const ModalMusicPlayer = ({ navigation }) => {
     toggleRepeat,
     repeat,
   } = useContext(PlayingContext);
-  const [favorited, setFavorited] = useState(false);
+  const [liked, setLiked] = useState(false);
   const [volume, setVolume] = useState();
   const [animation] = useState(new Animated.Value(0));
   const playBackState = usePlaybackState();
@@ -59,9 +59,11 @@ const ModalMusicPlayer = ({ navigation }) => {
    * @dev TODO: fix issue with iOS and the reactivate feature
    */
   useEffect(() => {
-    // SystemSetting.getVolume().then((v) => {
-    //   setVolume(v);
-    // });
+    if (device.android) {
+      SystemSetting.getVolume().then((v) => {
+        setVolume(v);
+      });
+    }
   });
 
   // ////////////////////////////////////////////
@@ -84,14 +86,18 @@ const ModalMusicPlayer = ({ navigation }) => {
 
   const boxInterpolation = animation.interpolate({
     inputRange: [0, 0.1, 0.3, 0.5, 0.7, 0.9, 1],
-    outputRange: ["black", "gray", "blue", "orange", "pink", "white", "red"],
+    outputRange: ["black", "gray", "yellow", "orange", "pink", "white", "red"],
   });
   const animatedStyle = {
     backgroundColor: boxInterpolation,
   };
 
-  const toggleFavorite = () => {
-    setFavorited(!favorited);
+  const toggleLike = () => {
+    setLiked(!liked);
+
+    // setTimeout(async () => {
+    //   console.log(!liked);
+    // }, 5000);
   };
 
   const togglePlay = async () => {
@@ -140,8 +146,8 @@ const ModalMusicPlayer = ({ navigation }) => {
   };
 
   // //////////////////////////////////////////////
-  const favoriteColor = favorited ? colors.brandPrimary : colors.white;
-  const favoriteIcon = favorited ? "heart" : "heart-o";
+  const favoriteColor = liked ? colors.brandPrimary : colors.white;
+  const favoriteIcon = liked ? "heart" : "heart-o";
   const iconPlay =
     playBackState !== State.Playing ? "play-circle" : "pause-circle";
   const repeatIcon =
@@ -192,7 +198,7 @@ const ModalMusicPlayer = ({ navigation }) => {
             <View style={styles.containerFavorite}>
               <TouchIcon
                 icon={<FontAwesome color={favoriteColor} name={favoriteIcon} />}
-                onPress={toggleFavorite}
+                onPress={toggleLike}
               />
             </View>
           </View>
@@ -327,14 +333,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerCover: {
-    backgroundColor: colors.black80,
+    backgroundColor: colors.black90,
     height: "100%",
   },
   imageContainer: {
     padding: 0,
     backgroundColor: colors.greyInactive,
     height: device.width - 60,
-    marginVertical: device.iPhoneNotch ? 36 : 10,
+    marginVertical: 10,
     width: device.width - 60,
     marginBottom: "10%",
     borderRadius: 10,

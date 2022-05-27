@@ -122,7 +122,7 @@ const Album = ({ navigation }) => {
             <Text style={styles.headerTitle}>{album.title}</Text>
           </Animated.View>
           <TouchIcon
-            icon={<Feather color={colors.white} name="more-horizontal" />}
+            icon={<Feather color={colors.white} name="more-vertical" />}
             onPress={() => {
               updateShowTabBarState(false);
 
@@ -176,7 +176,13 @@ const Album = ({ navigation }) => {
               onPress={() => null}
               style={styles.btn}
               styleText={styles.btnText}
-              text="Shuffle Play"
+              text="Play"
+            />
+            <TouchText
+              onPress={() => null}
+              style={styles.btn}
+              styleText={styles.btnText}
+              text="Shuffle"
             />
           </View>
         </View>
@@ -307,7 +313,9 @@ const styles = StyleSheet.create({
     marginTop: device.iPhoneNotch ? 238 : 194,
   },
   containerShuffle: {
-    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    // alignItems: "center",
     height: 50,
     shadowColor: colors.blackBg,
     shadowOffset: { height: -10, width: 0 },
@@ -320,14 +328,14 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   btn: {
-    backgroundColor: colors.brandPrimary,
-    borderRadius: 25,
-    height: 50,
-    width: 220,
+    backgroundColor: colors.grey,
+    borderRadius: 5,
+    height: 40,
+    width: 150,
   },
   btnText: {
     ...gStyle.textBold16,
-    color: colors.white,
+    color: colors.brandPrimary,
     letterSpacing: 1,
     textTransform: "uppercase",
   },

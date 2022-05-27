@@ -18,8 +18,6 @@ const Library = ({ navigation }) => {
   const handleUserOwnedSongs = async () => {
     const user = await getUser();
 
-    console.log(user.id);
-
     if (userOwnedSongs.length === 0) {
       try {
         const response = await getUserOwnedSongs({ userid: 1 });
