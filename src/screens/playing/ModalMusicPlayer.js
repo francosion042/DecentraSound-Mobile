@@ -21,16 +21,18 @@ import TrackPlayer, {
 import SystemSetting from "react-native-system-setting";
 import * as Animatable from "react-native-animatable";
 import { colors, device, func, gStyle } from "../../constants";
-import { PlayingContext } from "../../contexts";
+import { PlayingContext, UserContext } from "../../contexts";
 
 // components
 import ModalHeader from "../../components/ModalHeader";
 import TouchIcon from "../../components/TouchIcon";
+import { likeSong, unlikeSong, verifySongLike } from "../../api";
 
 // custom component
 const AnimatedFontAwesome = Animatable.createAnimatableComponent(FontAwesome);
 
 const ModalMusicPlayer = ({ navigation }) => {
+  const { getUser } = useContext(UserContext);
   const {
     currentSongData,
     playingSongs,
@@ -66,6 +68,19 @@ const ModalMusicPlayer = ({ navigation }) => {
     }
   });
 
+  useEffect(async () => {
+    const user = await getUser();
+
+    const response = await verifySongLike({
+      userid: user.id,
+      songId: currentSongData.songId,
+    });
+    if (response && response.data) {
+      const isliked = response.data.data;
+      setLiked(isliked);
+    }
+  }, []);
+
   // ////////////////////////////////////////////
   // generate random colors for background
   useEffect(() => {
@@ -92,12 +107,32 @@ const ModalMusicPlayer = ({ navigation }) => {
     backgroundColor: boxInterpolation,
   };
 
-  const toggleLike = () => {
+  const toggleLike = async () => {
     setLiked(!liked);
 
-    // setTimeout(async () => {
-    //   console.log(!liked);
-    // }, 5000);
+    const user = await getUser();
+
+    if (!liked) {
+      console.log("liked");
+      try {
+        await likeSong({
+          userid: user.id,
+          songId: currentSongData.songId,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("unliked");
+      try {
+        await unlikeSong({
+          userid: user.id,
+          songId: currentSongData.songId,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   const togglePlay = async () => {
@@ -166,7 +201,7 @@ const ModalMusicPlayer = ({ navigation }) => {
         <ModalHeader
           left={<Feather color={colors.greyLight} name="chevron-down" />}
           leftPress={() => navigation.goBack(null)}
-          right={<Feather color={colors.greyLight} name="more-horizontal" />}
+          right={<Feather color={colors.greyLight} name="more-vertical" />}
           text={currentSongData.contractAddress}
         />
 

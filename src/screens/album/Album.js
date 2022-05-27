@@ -206,6 +206,7 @@ const Album = ({ navigation }) => {
                 key={index.toString()}
                 onPress={handlePress}
                 songData={{
+                  songId: song.id,
                   tokenId: song.tokenId,
                   contractAddress: song.contractAddress
                     ? song.contractAddress
@@ -331,7 +332,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grey,
     borderRadius: 5,
     height: 40,
-    width: 150,
+    width: "40%",
   },
   btnText: {
     ...gStyle.textBold16,

@@ -55,6 +55,7 @@ const MySongs = () => {
               key={item.tokenId}
               onPress={handlePress}
               songData={{
+                songId: item.id,
                 tokenId: item.tokenId,
                 contractAddress: item.contractAddress
                   ? item.contractAddress

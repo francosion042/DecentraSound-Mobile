@@ -33,13 +33,13 @@ const ArtistSongsHorizontal = ({ data, heading, navigation, handlePress }) => {
                   onPress={handlePress}
                   screen="artist"
                   songData={{
+                    songId: song.id,
                     tokenId: song.tokenId,
                     contractAddress: song.contractAddress
                       ? song.contractAddress
                       : "Unknown Album",
-                    artist: "Artist",
+                    artist: item.artist.name,
                     image: song.imageUrl,
-                    length: 4214241,
                     title: song.title,
                   }}
                 />
