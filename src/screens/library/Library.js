@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { device, gStyle } from "../../constants";
 import { LibraryContext, UserContext } from "../../contexts";
-import { getUserOwnedSongs } from "../../api";
+import { getUserLikedSongs, getUserOwnedSongs } from "../../api";
 
 // components
 import LineItemCategory from "../../components/LineItemCategory";
@@ -13,7 +13,12 @@ import yourLibrary from "../../mockdata/menuYourLibrary.json";
 
 const Library = ({ navigation }) => {
   const { getUser } = useContext(UserContext);
-  const { userOwnedSongs, updateUserOwnedSongs } = useContext(LibraryContext);
+  const {
+    userOwnedSongs,
+    updateUserOwnedSongs,
+    userLikedSongs,
+    updateUserLikedSongs,
+  } = useContext(LibraryContext);
 
   const handleUserOwnedSongs = async () => {
     const user = await getUser();
@@ -28,8 +33,25 @@ const Library = ({ navigation }) => {
     }
   };
 
+  const handleUserLikedSongs = async () => {
+    const user = await getUser();
+
+    if (userLikedSongs.length === 0) {
+      try {
+        const response = await getUserLikedSongs({ userid: user.id });
+
+        const songs = response.data.data.map((likedSong) => likedSong.song);
+
+        updateUserLikedSongs(songs);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   useEffect(() => {
     handleUserOwnedSongs();
+    handleUserLikedSongs();
   });
 
   return (

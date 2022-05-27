@@ -5,9 +5,19 @@ const LibraryContext = createContext();
 
 const LibraryContextProvider = ({ children }) => {
   const [userOwnedSongs, setUserOwnedSongs] = useState([]);
+  const [userLikedSongs, setUserLikedSongs] = useState([]);
+  const [userSavedSongs, setUserSavedSongs] = useState([]);
 
   const updateUserOwnedSongs = (data) => {
     setUserOwnedSongs(data);
+  };
+
+  const updateUserLikedSongs = (data) => {
+    setUserLikedSongs(data);
+  };
+
+  const updateUserSavedSongs = (data) => {
+    setUserSavedSongs(data);
   };
 
   const resetSongData = () => {
@@ -20,6 +30,10 @@ const LibraryContextProvider = ({ children }) => {
         userOwnedSongs,
         updateUserOwnedSongs,
         resetSongData,
+        userLikedSongs,
+        updateUserLikedSongs,
+        userSavedSongs,
+        updateUserSavedSongs,
       }}
     >
       {children}

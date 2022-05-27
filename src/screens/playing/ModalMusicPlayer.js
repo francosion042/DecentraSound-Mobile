@@ -53,6 +53,7 @@ const ModalMusicPlayer = ({ navigation }) => {
     }
   });
 
+  // /////////////////////////////////////////////
   useEffect(() => {
     LogBox.ignoreLogs(["Animated: `useNativeDriver`"]);
   }, []);
@@ -68,6 +69,7 @@ const ModalMusicPlayer = ({ navigation }) => {
     }
   });
 
+  // //////////////////////////////////////////////
   useEffect(async () => {
     const user = await getUser();
 
