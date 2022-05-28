@@ -31,6 +31,7 @@ const ModalSongOptions = ({ songData }) => {
         // this.closeButtonFunction()
       }}
     >
+      <View style={styles.overlayContainer} />
       <View style={styles.wraperContainer}>
         <View style={{ ...gStyle.flex1 }}>
           <View style={styles.container}>
@@ -86,11 +87,17 @@ const ModalSongOptions = ({ songData }) => {
 };
 
 const styles = StyleSheet.create({
+  overlayContainer: {
+    height: "60%",
+    backgroundColor: colors.black70,
+  },
   wraperContainer: {
-    height: "50%",
+    height: "40%",
     marginTop: "auto",
     backgroundColor: colors.grey,
     display: "flex",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   container: {
     alignItems: "center",
@@ -111,6 +118,10 @@ const styles = StyleSheet.create({
     width: 40,
     borderRadius: 5,
     marginRight: 10,
+  },
+  artist: {
+    ...gStyle.text10,
+    color: colors.greyInactive,
   },
   itemStyle: {
     borderBottomColor: colors.greyLight,
