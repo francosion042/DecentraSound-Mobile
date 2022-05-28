@@ -13,7 +13,7 @@ import { LibraryContext } from "../contexts";
 import LineItemCategory from "./LineItemCategory";
 
 // mock data
-import moreOptions from "../mockdata/menuMoreOptions.json";
+import menuSongMoreOptions from "../mockdata/menuSongMoreOptions.json";
 import { colors, gStyle } from "../constants";
 
 const ModalSongOptions = ({ songData }) => {
@@ -55,8 +55,8 @@ const ModalSongOptions = ({ songData }) => {
               </View>
             </TouchableOpacity>
           </View>
-          {Object.keys(moreOptions).map((index) => {
-            const item = moreOptions[index];
+          {Object.keys(menuSongMoreOptions).map((index) => {
+            const item = menuSongMoreOptions[index];
 
             return (
               <LineItemCategory

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "icon": "heart-o",
+    "title": "Like",
+    "lib": "FontAwesome"
+  },
+  {
+    "id": 2,
+    "icon": "account-music",
+    "title": "View artist",
+    "lib": "MaterialCommunityIcons"
+  },
+  {
+    "id": 3,
+    "icon": "share-alternative",
+    "title": "Share",
+    "lib": "Entypo"
+  },
+  {
+    "id": 5,
+    "icon": "queue-music",
+    "title": "Add to playlist",
+    "lib": "MaterialIcons"
+  },
+  {
+    "id": 6,
+    "icon": "playlist-add",
+    "title": "Add to queue",
+    "lib": "MaterialIcons"
+  }
+]
