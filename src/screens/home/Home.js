@@ -5,7 +5,7 @@ import { colors, device, gStyle } from "../../constants";
 import { BlurView } from "expo-blur";
 import { HomeContext } from "../../contexts";
 import { getTrendingAlbums, getTrendingArtists } from "../../api";
-import Loading from "../utils/Loading";
+import Loading from "../../components/Loading";
 
 // components
 import AlbumsHorizontal from "../../components/AlbumsHorizontal";

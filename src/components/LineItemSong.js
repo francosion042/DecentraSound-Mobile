@@ -1,10 +1,13 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { colors, gStyle } from "../constants";
+import { LibraryContext } from "../contexts";
 
 const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
+  const { toggleSongOptionsModalVisible, updateClickedSong } =
+    useContext(LibraryContext);
   const activeColor = active ? colors.brandPrimary : colors.white;
 
   return (
@@ -37,7 +40,14 @@ const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
 
       {screen !== "artist" ? (
         <View style={styles.containerRight}>
-          <Feather color={colors.greyLight} name="more-vertical" size={20} />
+          <TouchableOpacity
+            onPress={() => {
+              updateClickedSong(songData);
+              toggleSongOptionsModalVisible();
+            }}
+          >
+            <Feather color={colors.greyLight} name="more-vertical" size={20} />
+          </TouchableOpacity>
         </View>
       ) : null}
     </View>

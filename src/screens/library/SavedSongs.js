@@ -4,14 +4,14 @@ import React, { useContext, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
 import { PlayingContext, LibraryContext } from "../../contexts";
 import LineItemSong from "../../components/LineItemSong";
-import Loading from "../utils/Loading";
+import Loading from "../../components/Loading";
 import TrackPlayer from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
 
 const SavedSongs = () => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
-  const { userOwnedSongs } = useContext(LibraryContext);
+  const { userSavedSongs } = useContext(LibraryContext);
 
   const [downloaded] = useState(false);
 
@@ -22,11 +22,11 @@ const SavedSongs = () => {
 
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
-    await SetupPlayer(userOwnedSongs, repeat);
+    await SetupPlayer(userSavedSongs, repeat);
 
-    updatePlayingSongs(userOwnedSongs);
+    updatePlayingSongs(userSavedSongs);
 
-    const songIndex = userOwnedSongs.findIndex(
+    const songIndex = userSavedSongs.findIndex(
       (song) => song.tokenId === songData.tokenId
     );
 
@@ -41,12 +41,12 @@ const SavedSongs = () => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Your Songs" />
       </View>
-      {userOwnedSongs.length === 0 ? (
+      {userSavedSongs.length === 0 ? (
         <Loading />
       ) : (
         <FlatList
           contentContainerStyle={styles.containerFlatlist}
-          data={userOwnedSongs}
+          data={userSavedSongs}
           keyExtractor={(song) => song.tokenId}
           renderItem={({ item }) => (
             <LineItemSong

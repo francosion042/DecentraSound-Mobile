@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
 import { PlayingContext, LibraryContext } from "../../contexts";
 import LineItemSong from "../../components/LineItemSong";
-import Loading from "../utils/Loading";
+import Loading from "../../components/Loading";
 import TrackPlayer from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
 

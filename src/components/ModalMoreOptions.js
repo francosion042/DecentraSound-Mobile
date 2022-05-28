@@ -10,14 +10,14 @@ import {
   Image,
   BackHandler,
 } from "react-native";
-import { device, gStyle, colors, fonts } from "../../constants";
-import { ScreenContext } from "../../contexts";
+import { device, gStyle, colors, fonts } from "../constants";
+import { ScreenContext } from "../contexts";
 
 // components
-import LineItemCategory from "../../components/LineItemCategory";
+import LineItemCategory from "./LineItemCategory";
 
 // mock data
-import moreOptions from "../../mockdata/menuMoreOptions.json";
+import moreOptions from "../mockdata/menuMoreOptions.json";
 
 const ModalMoreOptions = ({ navigation }) => {
   const album = navigation.getParam("album");

@@ -21,7 +21,7 @@ import LinearGradient from "../../components/LinearGradient";
 import LineItemSong from "../../components/LineItemSong";
 import TouchIcon from "../../components/TouchIcon";
 import TouchText from "../../components/TouchText";
-import Loading from "../utils/Loading";
+import Loading from "../../components/Loading";
 
 const Album = ({ navigation }) => {
   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
