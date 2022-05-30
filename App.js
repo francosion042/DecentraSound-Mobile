@@ -43,7 +43,14 @@ const App = () => {
   });
 
   if (!connector.connected) {
-    return <WalletConnection />;
+    return (
+      <Fragment>
+        {device.iOS ? (
+          <StatusBar style="light" backgroundColor="black" />
+        ) : null}
+        <WalletConnection />
+      </Fragment>
+    );
   }
 
   return (
