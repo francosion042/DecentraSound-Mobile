@@ -22,6 +22,8 @@ const ModalSongOptions = ({ songData }) => {
     toggleSongOptionsModalVisible,
     clickedSong,
   } = useContext(LibraryContext);
+
+  const handlePress = (item) => {};
   return (
     <Modal
       animationType="slide"
@@ -65,7 +67,7 @@ const ModalSongOptions = ({ songData }) => {
                 disableRightSide
                 icon={item.icon}
                 iconLibrary={item.lib}
-                onPress={() => null}
+                onPress={handlePress(item)}
                 title={item.title}
               />
             );

@@ -26,7 +26,7 @@
   {
     "id": 6,
     "icon": "playlist-add",
-    "title": "Add to queue",
+    "title": "Save Song",
     "lib": "MaterialIcons"
   }
 ]

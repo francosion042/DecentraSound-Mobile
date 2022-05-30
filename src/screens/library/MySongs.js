@@ -17,11 +17,6 @@ const MySongs = ({ navigation }) => {
 
   const [downloaded] = useState(false);
 
-  /**
-   * @todo the setupPlayer() should be called when a user clicks a song, it checks if there's no active setup for mySongs
-   *
-   */
-
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
     await SetupPlayer(userOwnedSongs, repeat);
