@@ -50,14 +50,14 @@ const Search = ({ navigation }) => {
           <Animated.View style={{ width: opacity }}>
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() => null}
+              onPress={() => navigation.navigate("Searching")}
               style={styles.searchPlaceholder}
             >
               <View style={gStyle.mR1}>
                 <SvgSearch />
               </View>
               <Text style={styles.searchPlaceholderText}>
-                Artists, songs or podcasts
+                Artists, songs or Albums
               </Text>
             </TouchableOpacity>
           </Animated.View>

@@ -4,6 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 
 // screens
 import SearchScreen from "../screens/search/Search";
+import Searching from "../screens/search/Searching";
 
 // icons
 import SvgTabSearch from "../components/icons/Svg.TabSearch";
@@ -20,9 +21,11 @@ export default createStackNavigator(
     SearchMain: {
       screen: SearchScreen,
     },
+    Searching,
   },
   {
     headerMode: "none",
+    initialRouteName: "SearchMain",
     navigationOptions: {
       tabBarLabel: "Search",
       tabBarIcon: Icon,
