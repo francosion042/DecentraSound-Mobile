@@ -1,13 +1,29 @@
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, FlatList } from "react-native";
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import { colors, device } from "../../constants";
 
 // Components
 import TouchIcon from "../../components/TouchIcon";
+import LineItemAlbum from "../../components/LineItemAlbum";
+import LineItemSong from "../../components/LineItemSong";
+import LineItemArtist from "../../components/LineItemArtist";
+import { search } from "../../api/search";
 
 const Searching = ({ navigation }) => {
-  const [searchTerm, setSearchTerm] = useState();
+  //   const [searchTerm, setSearchTerm] = useState();
+  const [searchResult, setSearchResult] = useState([]);
+
+  const handleSearch = async (searchTerm) => {
+    try {
+      const response = await search(searchTerm);
+      setSearchResult(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlePress = () => {};
 
   return (
     <View style={styles.container}>
@@ -21,11 +37,52 @@ const Searching = ({ navigation }) => {
           style={styles.input}
           autoFocus={true}
           onChangeText={(searchString) => {
-            console.log(searchString);
+            handleSearch(searchString);
           }}
           underlineColorAndroid="transparent"
         />
       </View>
+      <FlatList
+        contentContainerStyle={styles.containerFlatlist}
+        data={searchResult}
+        renderItem={({ item }) => {
+          if (item.resultType === "album") {
+            return (
+              <LineItemAlbum
+                key={item.album.id}
+                onPress={handlePress}
+                album={item.album}
+              />
+            );
+          } else if (item.resultType === "song") {
+            return (
+              <LineItemSong
+                navigation={navigation}
+                key={item.song.tokenId}
+                onPress={handlePress}
+                songData={{
+                  songId: item.id,
+                  tokenId: item.tokenId,
+                  contractAddress: item.contractAddress
+                    ? item.contractAddress
+                    : "Unknown Album",
+                  artist: item.artist.name,
+                  image: item.imageUrl,
+                  title: item.title,
+                }}
+              />
+            );
+          } else {
+            return (
+              <LineItemArtist
+                key={item.artist.tokenId}
+                onPress={handlePress}
+                artist={item.artist}
+              />
+            );
+          }
+        }}
+      />
     </View>
   );
 };

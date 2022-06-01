@@ -60,7 +60,6 @@ const MySongs = ({ navigation }) => {
                   : "Unknown Album",
                 artist: "Artist",
                 image: item.imageUrl,
-                length: 4214241,
                 title: item.title,
               }}
             />
