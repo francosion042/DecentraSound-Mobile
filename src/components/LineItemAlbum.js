@@ -35,22 +35,6 @@ LineItemAlbum.defaultProps = {
   downloaded: false,
 };
 
-LineItemAlbum.propTypes = {
-  // required
-  onPress: PropTypes.func.isRequired,
-  songData: PropTypes.shape({
-    songId: PropTypes.number.isRequired,
-    contractAddress: PropTypes.string.isRequired,
-    artist: PropTypes.string.isRequired,
-    image: PropTypes.string,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-
-  // optional
-  active: PropTypes.bool,
-  downloaded: PropTypes.bool,
-};
-
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",

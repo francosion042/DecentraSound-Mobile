@@ -35,22 +35,6 @@ LineItemArtist.defaultProps = {
   downloaded: false,
 };
 
-LineItemArtist.propTypes = {
-  // required
-  onPress: PropTypes.func.isRequired,
-  songData: PropTypes.shape({
-    songId: PropTypes.number.isRequired,
-    contractAddress: PropTypes.string.isRequired,
-    artist: PropTypes.string.isRequired,
-    image: PropTypes.string,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
-
-  // optional
-  active: PropTypes.bool,
-  downloaded: PropTypes.bool,
-};
-
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -66,15 +50,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     marginBottom: 4,
   },
-  circleDownloaded: {
-    alignItems: "center",
-    backgroundColor: colors.brandPrimary,
-    borderRadius: 7,
-    height: 14,
-    justifyContent: "center",
-    marginRight: 8,
-    width: 14,
-  },
   artist: {
     ...gStyle.text10,
     color: colors.greyInactive,
@@ -82,7 +57,7 @@ const styles = StyleSheet.create({
   image: {
     height: 40,
     width: 40,
-    borderRadius: 5,
+    borderRadius: 50,
     marginRight: 10,
   },
   containerRight: {

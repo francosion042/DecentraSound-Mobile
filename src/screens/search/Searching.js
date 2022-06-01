@@ -17,7 +17,9 @@ const Searching = ({ navigation }) => {
   const handleSearch = async (searchTerm) => {
     try {
       const response = await search(searchTerm);
-      setSearchResult(response.data.data);
+      if (response && response.data.data) {
+        setSearchResult(response.data.data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +39,9 @@ const Searching = ({ navigation }) => {
           style={styles.input}
           autoFocus={true}
           onChangeText={(searchString) => {
-            handleSearch(searchString);
+            if (searchString) {
+              handleSearch(searchString);
+            }
           }}
           underlineColorAndroid="transparent"
         />
@@ -61,14 +65,14 @@ const Searching = ({ navigation }) => {
                 key={item.song.tokenId}
                 onPress={handlePress}
                 songData={{
-                  songId: item.id,
-                  tokenId: item.tokenId,
-                  contractAddress: item.contractAddress
-                    ? item.contractAddress
+                  songId: item.song.id,
+                  tokenId: item.song.tokenId,
+                  contractAddress: item.song.contractAddress
+                    ? item.song.contractAddress
                     : "Unknown Album",
-                  artist: item.artist.name,
-                  image: item.imageUrl,
-                  title: item.title,
+                  artist: item.song.artist.name,
+                  image: item.song.imageUrl,
+                  title: item.song.title,
                 }}
               />
             );
