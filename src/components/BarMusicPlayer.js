@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
     backgroundColor: colors.blackBlur,
-    borderBottomColor: colors.greyLight,
+    borderBottomColor: colors.greyInactive,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.grey,
     borderTopWidth: StyleSheet.hairlineWidth,
