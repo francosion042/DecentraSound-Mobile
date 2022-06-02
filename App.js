@@ -17,6 +17,7 @@ import {
   ScreenContextProvider,
   PlayingContextProvider,
   LibraryContextProvider,
+  ExploreContextProvider,
 } from "./src/contexts";
 import { createUser } from "./src/api/user";
 
@@ -67,13 +68,15 @@ const app = (props) => {
   return (
     <UserContextProvider>
       <HomeContextProvider>
-        <ScreenContextProvider>
-          <LibraryContextProvider>
-            <PlayingContextProvider>
-              <App navigation={props.navigation} />
-            </PlayingContextProvider>
-          </LibraryContextProvider>
-        </ScreenContextProvider>
+        <ExploreContextProvider>
+          <ScreenContextProvider>
+            <LibraryContextProvider>
+              <PlayingContextProvider>
+                <App navigation={props.navigation} />
+              </PlayingContextProvider>
+            </LibraryContextProvider>
+          </ScreenContextProvider>
+        </ExploreContextProvider>
       </HomeContextProvider>
     </UserContextProvider>
   );

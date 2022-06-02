@@ -44,7 +44,9 @@ const Home = ({ navigation }) => {
       try {
         const response = await getTrendingAlbums();
 
-        updateTrendingAlbums(response?.data.data);
+        if (response && response.data) {
+          updateTrendingAlbums(response.data.data);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -54,7 +56,9 @@ const Home = ({ navigation }) => {
       try {
         const response = await getTrendingArtists();
 
-        updateTrendingArtists(response?.data.data);
+        if (response && response.data) {
+          updateTrendingArtists(response.data.data);
+        }
       } catch (error) {
         console.log(error);
       }
