@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { colors, gStyle } from "../constants";
 

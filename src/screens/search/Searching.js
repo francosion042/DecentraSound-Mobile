@@ -12,12 +12,13 @@ import LineItemSong from "../../components/LineItemSong";
 import LineItemArtist from "../../components/LineItemArtist";
 import { search } from "../../api/search";
 import { PlayingContext } from "../../contexts";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Searching = ({ navigation }) => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
   const [searchResult, setSearchResult] = useState([]);
-  const [searchResultSong, setSearchResultSong] = useState([]);
+  const [searchResultSongs, setSearchResultSongs] = useState([]);
 
   const activeSongTitle = currentSongData ? currentSongData.title : "";
 
@@ -32,24 +33,20 @@ const Searching = ({ navigation }) => {
     }
   };
 
-  const handleAlbumPress = () => {};
-
   const handleSongPress = async (songData) => {
     console.log("called");
-    updateCurrentSongData(songData);
-    await SetupPlayer(searchResultSong, repeat);
-
-    updatePlayingSongs(searchResultSong);
-
-    const songIndex = searchResultSong.findIndex(
+    const songIndex = searchResultSongs.findIndex(
       (song) => song.tokenId === songData.tokenId
     );
 
-    await TrackPlayer.skip(songIndex);
+    updatePlayingSongs([searchResultSongs[songIndex]]);
+    updateCurrentSongData(songData);
+
+    await SetupPlayer([searchResultSongs[songIndex]], repeat);
+
+    // await TrackPlayer.skip(songIndex);
     await TrackPlayer.play();
   };
-
-  const handleArtistPress = () => {};
 
   return (
     <View style={styles.container}>
@@ -73,42 +70,49 @@ const Searching = ({ navigation }) => {
       <FlatList
         contentContainerStyle={styles.containerFlatlist}
         data={searchResult}
+        keyExtractor={(song) => song.tokenId}
         renderItem={({ item }) => {
           if (item.resultType === "album") {
             return (
               <LineItemAlbum
-                key={item.album.id}
-                onPress={handleAlbumPress}
+                key={item.album.contractAddress}
+                onPress={() =>
+                  navigation.navigate("SearchAlbum", { album: item.album })
+                }
                 album={item.album}
               />
             );
           } else if (item.resultType === "song") {
             return (
-              <LineItemSong
-                navigation={navigation}
-                active={activeSongTitle === item.song.title}
+              <TouchableOpacity
                 key={item.song.tokenId}
-                onPress={() => {
-                  setSearchResultSong(item.song);
-                  return handleSongPress;
-                }}
-                songData={{
-                  songId: item.song.id,
-                  tokenId: item.song.tokenId,
-                  contractAddress: item.song.contractAddress
-                    ? item.song.contractAddress
-                    : "Unknown Album",
-                  artist: item.song.artist.name,
-                  image: item.song.imageUrl,
-                  title: item.song.title,
-                }}
-              />
+                onPress={() => setSearchResultSongs([item.song])}
+              >
+                <LineItemSong
+                  navigation={navigation}
+                  active={activeSongTitle === item.song.title}
+                  key={item.song.tokenId}
+                  onPress={handleSongPress}
+                  songData={{
+                    songId: item.song.id,
+                    tokenId: item.song.tokenId,
+                    contractAddress: item.song.contractAddress
+                      ? item.song.contractAddress
+                      : "Unknown Album",
+                    artist: item.song.artist.name,
+                    image: item.song.imageUrl,
+                    title: item.song.title,
+                  }}
+                />
+              </TouchableOpacity>
             );
           } else {
             return (
               <LineItemArtist
                 key={item.artist.id}
-                onPress={handleArtistPress}
+                onPress={() =>
+                  navigation.navigate("SearchArtist", { artist: item.artist })
+                }
                 artist={item.artist}
               />
             );
