@@ -14,7 +14,7 @@ const ScreenHeader = ({ navigation, showBack, title }) => (
     {showBack && (
       <View style={styles.left}>
         <TouchIcon
-          icon={<Feather color={colors.white} name="chevron-left" />}
+          icon={<Feather color={colors.brandPrimary} name="chevron-left" />}
           onPress={() => navigation.goBack(null)}
         />
       </View>

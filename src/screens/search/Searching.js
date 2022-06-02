@@ -1,6 +1,8 @@
 import { View, TextInput, StyleSheet, FlatList } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Feather } from "@expo/vector-icons";
+import TrackPlayer from "react-native-track-player";
+import SetupPlayer from "../playing/SetupPlayer";
 import { colors, device } from "../../constants";
 
 // Components
@@ -9,10 +11,15 @@ import LineItemAlbum from "../../components/LineItemAlbum";
 import LineItemSong from "../../components/LineItemSong";
 import LineItemArtist from "../../components/LineItemArtist";
 import { search } from "../../api/search";
+import { PlayingContext } from "../../contexts";
 
 const Searching = ({ navigation }) => {
-  //   const [searchTerm, setSearchTerm] = useState();
+  const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
+    useContext(PlayingContext);
   const [searchResult, setSearchResult] = useState([]);
+  const [searchResultSong, setSearchResultSong] = useState([]);
+
+  const activeSongTitle = currentSongData ? currentSongData.title : "";
 
   const handleSearch = async (searchTerm) => {
     try {
@@ -25,7 +32,24 @@ const Searching = ({ navigation }) => {
     }
   };
 
-  const handlePress = () => {};
+  const handleAlbumPress = () => {};
+
+  const handleSongPress = async (songData) => {
+    console.log("called");
+    updateCurrentSongData(songData);
+    await SetupPlayer(searchResultSong, repeat);
+
+    updatePlayingSongs(searchResultSong);
+
+    const songIndex = searchResultSong.findIndex(
+      (song) => song.tokenId === songData.tokenId
+    );
+
+    await TrackPlayer.skip(songIndex);
+    await TrackPlayer.play();
+  };
+
+  const handleArtistPress = () => {};
 
   return (
     <View style={styles.container}>
@@ -54,7 +78,7 @@ const Searching = ({ navigation }) => {
             return (
               <LineItemAlbum
                 key={item.album.id}
-                onPress={handlePress}
+                onPress={handleAlbumPress}
                 album={item.album}
               />
             );
@@ -62,8 +86,12 @@ const Searching = ({ navigation }) => {
             return (
               <LineItemSong
                 navigation={navigation}
+                active={activeSongTitle === item.song.title}
                 key={item.song.tokenId}
-                onPress={handlePress}
+                onPress={() => {
+                  setSearchResultSong(item.song);
+                  return handleSongPress;
+                }}
                 songData={{
                   songId: item.song.id,
                   tokenId: item.song.tokenId,
@@ -79,8 +107,8 @@ const Searching = ({ navigation }) => {
           } else {
             return (
               <LineItemArtist
-                key={item.artist.tokenId}
-                onPress={handlePress}
+                key={item.artist.id}
+                onPress={handleArtistPress}
                 artist={item.artist}
               />
             );

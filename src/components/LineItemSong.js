@@ -46,7 +46,11 @@ const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
               toggleSongOptionsModalVisible();
             }}
           >
-            <Feather color={colors.greyLight} name="more-vertical" size={20} />
+            <Feather
+              color={colors.brandPrimary}
+              name="more-vertical"
+              size={20}
+            />
           </TouchableOpacity>
         </View>
       ) : null}

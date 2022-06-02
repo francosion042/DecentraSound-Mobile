@@ -65,11 +65,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   left: {
+    color: colors.brandPrimary,
     alignItems: "flex-start",
     flex: 1,
     justifyContent: "center",
   },
   right: {
+    color: colors.brandPrimary,
     alignItems: "flex-end",
     flex: 1,
     justifyContent: "center",

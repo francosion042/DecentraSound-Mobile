@@ -65,7 +65,7 @@ const LineItemCategory = ({
 
       {disableRightSide ? null : (
         <View style={styles.containerRight}>
-          <Feather color={colors.greyInactive} name="chevron-right" size={20} />
+          <Feather color={colors.brandPrimary} name="chevron-right" size={20} />
         </View>
       )}
     </TouchableOpacity>
