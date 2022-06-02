@@ -31,7 +31,9 @@ const App = () => {
     if (connector.connected && user === null) {
       try {
         const response = await createUser({ address: connector.accounts[0] });
-        storeUser(response.data.data);
+        if (response && response.data) {
+          storeUser(response.data.data);
+        }
       } catch (error) {
         console.log(error);
       }

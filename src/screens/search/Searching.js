@@ -52,7 +52,7 @@ const Searching = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.searchSection}>
         <TouchIcon
-          icon={<Feather color={colors.white} name="chevron-left" />}
+          icon={<Feather color={colors.brandPrimary} name="chevron-left" />}
           onPress={() => navigation.goBack(null)}
           style={styles.backIcon}
         />
@@ -70,12 +70,12 @@ const Searching = ({ navigation }) => {
       <FlatList
         contentContainerStyle={styles.containerFlatlist}
         data={searchResult}
-        keyExtractor={(song) => song.tokenId}
+        keyExtractor={(item) => item.dataId.toString()}
         renderItem={({ item }) => {
           if (item.resultType === "album") {
             return (
               <LineItemAlbum
-                key={item.album.contractAddress}
+                key={item.dataId.toString()}
                 onPress={() =>
                   navigation.navigate("SearchAlbum", { album: item.album })
                 }
@@ -85,13 +85,13 @@ const Searching = ({ navigation }) => {
           } else if (item.resultType === "song") {
             return (
               <TouchableOpacity
-                key={item.song.tokenId}
+                key={item.dataId.toString()}
                 onPress={() => setSearchResultSongs([item.song])}
               >
                 <LineItemSong
                   navigation={navigation}
                   active={activeSongTitle === item.song.title}
-                  key={item.song.tokenId}
+                  key={item.song.tokenId.toString()}
                   onPress={handleSongPress}
                   songData={{
                     songId: item.song.id,
@@ -109,7 +109,7 @@ const Searching = ({ navigation }) => {
           } else {
             return (
               <LineItemArtist
-                key={item.artist.id}
+                key={item.dataId.toString()}
                 onPress={() =>
                   navigation.navigate("SearchArtist", { artist: item.artist })
                 }

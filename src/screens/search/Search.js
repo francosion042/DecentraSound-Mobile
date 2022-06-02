@@ -128,11 +128,11 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   searchPlaceholderText: {
-    ...gStyle.textSpotify16,
+    ...gStyle.text16,
     color: colors.blackBg,
   },
   sectionHeading: {
-    ...gStyle.textSpotifyBold18,
+    ...gStyle.textBold18,
     color: colors.white,
     marginBottom: 24,
     marginLeft: 24,
