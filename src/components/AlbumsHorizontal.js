@@ -25,18 +25,18 @@ const AlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
         <TouchableOpacity
           activeOpacity={gStyle.activeOpacity}
           hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-          onPress={() => navigation.navigate("Album", { title: item.title })}
+          onPress={() => navigation.navigate("Album", { album: item })}
           style={styles.item}
         >
           <View style={styles.image}>
-            {item.image && (
+            {item.coverImageUrl && (
               <Image
-                source={require("../../assets/icon.png")}
+                source={{ uri: item.coverImageUrl }}
                 style={styles.image}
               />
             )}
           </View>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title}>{item.name}</Text>
         </TouchableOpacity>
       )}
       showsHorizontalScrollIndicator={false}

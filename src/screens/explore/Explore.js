@@ -10,6 +10,7 @@ import Loading from "../../components/Loading";
 // components
 import ArtistsHorizontal from "../../components/ArtistsHorizontal";
 import BigAlbumsHorizontal from "../../components/BigAlbumsHorizontal";
+import DoubleRowAlbumsHorizontal from "../../components/DoubleRowAlbumsHorizontal";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenContext } from "../../contexts";
@@ -113,7 +114,10 @@ const Explore = ({ navigation }) => {
       >
         <View style={gStyle.spacer16} />
 
-        <BigAlbumsHorizontal data={trendingAlbums} heading="Top Collections" />
+        <DoubleRowAlbumsHorizontal
+          data={trendingAlbums}
+          heading="Top Collections"
+        />
 
         <ArtistsHorizontal
           data={trendingArtists}

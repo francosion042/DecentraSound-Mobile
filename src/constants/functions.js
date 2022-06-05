@@ -54,10 +54,21 @@ const getRandomColor = () => {
   return `hsl(${h}, ${s}%, ${l}%)`;
 };
 
+const extractTrendingAlbum = (trendings) => {
+  let albums = trendings.map((trending) => trending.album);
+  return albums;
+};
+
+const extractTrendingArtists = (trendings) => {
+  let artists = trendings.map((trending) => trending.artist);
+  return artists;
+};
+
 export default {
   cacheFonts,
   cacheImages,
-  // loadAssetsAsync,
+  extractTrendingAlbum,
+  extractTrendingArtists,
   formatTime,
   getRandomColor,
 };

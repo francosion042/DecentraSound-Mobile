@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {
   FlatList,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -11,42 +12,51 @@ import {
 import { withNavigation } from "react-navigation";
 import { colors, gStyle } from "../constants";
 
-const ArtistsHorizontal = ({ data, heading, navigation, tagline }) => (
+const DoubleRowAlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
   <View style={styles.container}>
     {heading && <Text style={styles.heading}>{heading}</Text>}
     {tagline && <Text style={styles.tagline}>{tagline}</Text>}
 
-    <FlatList
-      contentContainerStyle={styles.containerContent}
-      data={data}
+    <ScrollView
       horizontal
-      keyExtractor={({ id }) => id.toString()}
-      renderItem={({ item }) => (
-        <TouchableOpacity
-          activeOpacity={gStyle.activeOpacity}
-          hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-          onPress={() => navigation.navigate("Artist", { artist: item })}
-          style={styles.item}
-        >
-          <View style={styles.image}>
-            {item.imageUrl && (
-              <Image source={{ uri: item.imageUrl }} style={styles.image} />
-            )}
-          </View>
-          <Text style={styles.title}>{item.name}</Text>
-        </TouchableOpacity>
-      )}
+      showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
-    />
+    >
+      <FlatList
+        contentContainerStyle={styles.containerContent}
+        data={data}
+        numColumns={Math.ceil(data.length / 2)}
+        keyExtractor={({ id }) => id.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            activeOpacity={gStyle.activeOpacity}
+            hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
+            onPress={() => navigation.navigate("Album", { album: item.album })}
+            style={styles.item}
+          >
+            <View style={styles.image}>
+              {item.album.coverImageUrl && (
+                <Image
+                  source={{ uri: item.album.coverImageUrl }}
+                  style={styles.image}
+                />
+              )}
+            </View>
+            <Text style={styles.title}>{item.album.name}</Text>
+          </TouchableOpacity>
+        )}
+        showsHorizontalScrollIndicator={false}
+      />
+    </ScrollView>
   </View>
 );
 
-ArtistsHorizontal.defaultProps = {
+DoubleRowAlbumsHorizontal.defaultProps = {
   heading: null,
   tagline: null,
 };
 
-ArtistsHorizontal.propTypes = {
+DoubleRowAlbumsHorizontal.propTypes = {
   // required
   data: PropTypes.array.isRequired,
   navigation: PropTypes.object.isRequired,
@@ -64,6 +74,9 @@ const styles = StyleSheet.create({
   containerContent: {
     paddingLeft: 16,
   },
+  twoRow: {
+    flexDirection: "column",
+  },
   heading: {
     ...gStyle.textBold18,
     color: colors.white,
@@ -78,13 +91,14 @@ const styles = StyleSheet.create({
   },
   item: {
     marginRight: 16,
+    marginVertical: 10,
     width: 148,
   },
   image: {
     backgroundColor: colors.greyLight,
     height: 148,
     width: 148,
-    borderRadius: 100,
+    borderRadius: 5,
   },
   title: {
     ...gStyle.textBold12,
@@ -94,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(ArtistsHorizontal);
+export default withNavigation(DoubleRowAlbumsHorizontal);

@@ -33,7 +33,7 @@ const ModalFilterOptions = ({ songData }) => {
           }}
         >
           <View style={styles.containerButton}>
-            <Text style={styles.buttonText}>Close</Text>
+            <Text style={styles.buttonText}>Apply Filter</Text>
           </View>
         </TouchableOpacity>
       </View>
