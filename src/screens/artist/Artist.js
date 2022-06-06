@@ -87,7 +87,7 @@ const Artist = ({ navigation }) => {
         />
         {/* <View style={styles.liner} /> */}
         <ArtistAlbumsHorizontal data={artist.albums} heading="Albums" />
-        <View style={styles.liner} />
+        <View style={gStyle.liner} />
         <View style={styles.containerArtistDescription}>
           <Text style={styles.descriptionTitle}>About</Text>
           <Text style={styles.artistDescription}>{artist.description}</Text>
@@ -103,12 +103,6 @@ const styles = StyleSheet.create({
     top: 0,
     width: "100%",
     zIndex: 10,
-  },
-  liner: {
-    ...gStyle.mH5,
-    ...gStyle.mV3,
-    backgroundColor: colors.grey3,
-    height: 1,
   },
   containerBody: {
     marginTop: device.iPhoneNotch ? 88 : 64,

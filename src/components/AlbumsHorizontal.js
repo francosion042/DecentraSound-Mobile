@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
     ...gStyle.textBold18,
     color: colors.white,
     paddingBottom: 6,
-    textAlign: "center",
+    textAlign: "left",
   },
   tagline: {
     ...gStyle.text12,
     color: colors.greyInactive,
     paddingBottom: 6,
-    textAlign: "center",
+    textAlign: "left",
   },
   item: {
     marginRight: 16,

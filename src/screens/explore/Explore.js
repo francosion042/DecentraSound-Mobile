@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Animated, StyleSheet, View, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { colors, device, gStyle } from "../../constants";
+import { colors, device, func, gStyle } from "../../constants";
 import { BlurView } from "expo-blur";
 import { ExploreContext } from "../../contexts";
 import { getTrendingAlbums, getTrendingArtists } from "../../api";
@@ -11,6 +11,7 @@ import Loading from "../../components/Loading";
 import ArtistsHorizontal from "../../components/ArtistsHorizontal";
 import BigAlbumsHorizontal from "../../components/BigAlbumsHorizontal";
 import DoubleRowAlbumsHorizontal from "../../components/DoubleRowAlbumsHorizontal";
+import ArticlesBannerHorizontal from "../../components/ArticlesBannerHorizontal";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenContext } from "../../contexts";
@@ -114,18 +115,28 @@ const Explore = ({ navigation }) => {
       >
         <View style={gStyle.spacer16} />
 
+        <ArticlesBannerHorizontal
+          data={func.extractTrendingAlbum(trendingAlbums)}
+          heading="Top Collections"
+        />
+
+        <View style={gStyle.liner} />
+
         <DoubleRowAlbumsHorizontal
-          data={trendingAlbums}
+          data={func.extractTrendingAlbum(trendingAlbums)}
           heading="Top Collections"
         />
 
         <ArtistsHorizontal
-          data={trendingArtists}
+          data={func.extractTrendingArtists(trendingArtists)}
           heading="Top Artists"
           tagline="Top Artists around the world."
         />
 
-        <BigAlbumsHorizontal data={trendingAlbums} heading="Made For You" />
+        <BigAlbumsHorizontal
+          data={func.extractTrendingAlbum(trendingAlbums)}
+          heading="Made For You"
+        />
       </Animated.ScrollView>
     </Fragment>
   );

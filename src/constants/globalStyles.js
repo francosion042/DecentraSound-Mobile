@@ -180,4 +180,11 @@ export default {
   pH2: { paddingHorizontal: spaceGrid * 2 },
   pH3: { paddingHorizontal: spaceGrid * 3 },
   pH5: { paddingHorizontal: spaceGrid * 5 },
+
+  liner: {
+    marginHorizontal: spaceGrid * 5,
+    marginVertical: spaceGrid * 3,
+    backgroundColor: colors.grey3,
+    height: 1,
+  },
 };
