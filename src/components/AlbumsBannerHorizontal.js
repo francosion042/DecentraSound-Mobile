@@ -30,21 +30,20 @@ const AlbumsBannerHorizontal = ({ data, navigation }) => (
             hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
             onPress={() => navigation.navigate("Album", { album: item })}
           >
-            <View style={styles.image}>
-              {item.coverImageUrl && (
-                <ImageBackground
-                  source={{ uri: item.coverImageUrl }}
-                  style={styles.image}
-                >
-                  <View style={{ ...gStyle.flex1 }} />
-                  <View style={styles.titleContainer}>
-                    <Text style={styles.title}>
-                      {item.description.substring(0, 100)}....
-                    </Text>
-                  </View>
-                </ImageBackground>
-              )}
-            </View>
+            {item.coverImageUrl && (
+              <ImageBackground
+                resizeMode="cover"
+                source={{ uri: item.coverImageUrl }}
+                style={styles.image}
+              >
+                <View style={{ ...gStyle.flex1 }} />
+                <View style={styles.titleContainer}>
+                  <Text style={styles.title}>
+                    {item.description.substring(0, 100)} ....
+                  </Text>
+                </View>
+              </ImageBackground>
+            )}
           </TouchableOpacity>
         </View>
       )}
@@ -96,7 +95,8 @@ const styles = StyleSheet.create({
     marginRight: 15,
     height: 350,
     width: 400,
-    borderRadius: 15,
+    borderRadius: 10,
+    overflow: "hidden",
   },
   title: {
     ...gStyle.textBold14,
