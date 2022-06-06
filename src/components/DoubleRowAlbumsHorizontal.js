@@ -81,14 +81,14 @@ const styles = StyleSheet.create({
     ...gStyle.textBold18,
     color: colors.white,
     paddingBottom: 6,
-    paddingLeft: 30,
+    paddingLeft: 16,
     textAlign: "left",
   },
   tagline: {
     ...gStyle.text12,
     color: colors.greyInactive,
     paddingBottom: 6,
-    paddingLeft: 30,
+    paddingLeft: 16,
     textAlign: "left",
   },
   item: {

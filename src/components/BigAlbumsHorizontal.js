@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     ...gStyle.textBold30,
     color: colors.white,
     paddingBottom: 6,
-    paddingLeft: 30,
+    paddingLeft: 16,
     textAlign: "left",
   },
   item: {
