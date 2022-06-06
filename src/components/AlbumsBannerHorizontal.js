@@ -11,7 +11,7 @@ import {
 import { withNavigation } from "react-navigation";
 import { colors, gStyle } from "../constants";
 
-const ArticlesBannerHorizontal = ({ data, heading, tagline, navigation }) => (
+const AlbumsBannerHorizontal = ({ data, navigation }) => (
   <View style={styles.container}>
     <FlatList
       contentContainerStyle={styles.containerContent}
@@ -20,13 +20,15 @@ const ArticlesBannerHorizontal = ({ data, heading, tagline, navigation }) => (
       keyExtractor={({ id }) => id.toString()}
       renderItem={({ item }) => (
         <View style={styles.itemContainer}>
-          {heading && <Text style={styles.heading}>{heading}</Text>}
-          {tagline && <Text style={styles.tagline}>{tagline}</Text>}
+          {item.name && <Text style={styles.heading}>{item.name}</Text>}
+          {item.artist.name && (
+            <Text style={styles.tagline}>{item.artist.name}</Text>
+          )}
 
           <TouchableOpacity
             activeOpacity={gStyle.activeOpacity}
             hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-            onPress={() => navigation.navigate("Article", { article: item })}
+            onPress={() => navigation.navigate("Album", { album: item })}
           >
             <View style={styles.image}>
               {item.coverImageUrl && (
@@ -36,7 +38,9 @@ const ArticlesBannerHorizontal = ({ data, heading, tagline, navigation }) => (
                 >
                   <View style={{ ...gStyle.flex1 }} />
                   <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{item.name}</Text>
+                    <Text style={styles.title}>
+                      {item.description.substring(0, 100)}....
+                    </Text>
                   </View>
                 </ImageBackground>
               )}
@@ -49,12 +53,12 @@ const ArticlesBannerHorizontal = ({ data, heading, tagline, navigation }) => (
   </View>
 );
 
-ArticlesBannerHorizontal.defaultProps = {
+AlbumsBannerHorizontal.defaultProps = {
   heading: null,
   tagline: null,
 };
 
-ArticlesBannerHorizontal.propTypes = {
+AlbumsBannerHorizontal.propTypes = {
   // required
   data: PropTypes.array.isRequired,
   navigation: PropTypes.object.isRequired,
@@ -106,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(ArticlesBannerHorizontal);
+export default withNavigation(AlbumsBannerHorizontal);

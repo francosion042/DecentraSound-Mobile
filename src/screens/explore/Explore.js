@@ -11,7 +11,7 @@ import Loading from "../../components/Loading";
 import ArtistsHorizontal from "../../components/ArtistsHorizontal";
 import BigAlbumsHorizontal from "../../components/BigAlbumsHorizontal";
 import DoubleRowAlbumsHorizontal from "../../components/DoubleRowAlbumsHorizontal";
-import ArticlesBannerHorizontal from "../../components/ArticlesBannerHorizontal";
+import AlbumsBannerHorizontal from "../../components/AlbumsBannerHorizontal";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenContext } from "../../contexts";
@@ -115,9 +115,8 @@ const Explore = ({ navigation }) => {
       >
         <View style={gStyle.spacer16} />
 
-        <ArticlesBannerHorizontal
+        <AlbumsBannerHorizontal
           data={func.extractTrendingAlbum(trendingAlbums)}
-          heading="Top Collections"
         />
 
         <View style={gStyle.liner} />
