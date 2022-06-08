@@ -204,12 +204,16 @@ const Album = ({ navigation }) => {
               onPress={() => null}
               style={styles.btn}
               styleText={styles.btnText}
+              icon="play"
+              styleIcon={styles.btnIcon}
               text="Play"
             />
             <TouchText
               onPress={handleMarketPlaceRedirect}
               style={styles.btn}
               styleText={styles.btnText}
+              icon="globe"
+              styleIcon={styles.btnIcon}
               text={album.marketPlace}
             />
           </View>
@@ -361,12 +365,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 40,
     width: "40%",
+    flexDirection: "row",
   },
   btnText: {
     ...gStyle.textBold16,
     color: colors.brandPrimary,
     letterSpacing: 1,
     textTransform: "uppercase",
+  },
+  btnIcon: {
+    color: colors.brandPrimary,
+    marginRight: 10,
   },
   containerSongs: {
     alignItems: "center",

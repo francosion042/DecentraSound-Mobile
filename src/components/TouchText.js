@@ -1,15 +1,17 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { Text, TouchableOpacity } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 import { gStyle } from "../constants";
 
-const TouchText = ({ onPress, style, styleText, text }) => (
+const TouchText = ({ onPress, style, styleText, styleIcon, text, icon }) => (
   <TouchableOpacity
     activeOpacity={gStyle.activeOpacity}
     hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
     onPress={onPress}
     style={[gStyle.flexCenter, style]}
   >
+    {icon && <FontAwesome name={icon} style={styleIcon} />}
     <Text style={styleText}>{text}</Text>
   </TouchableOpacity>
 );

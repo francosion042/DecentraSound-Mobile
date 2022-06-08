@@ -12,9 +12,19 @@ const ScreenContextProvider = ({ children }) => {
   //     title: "So It Goes",
   //   };
   const [showTabBarState, setShowTabBarState] = useState(true);
+  const [songOptionsModalVisible, setSongOptionsModalVisible] = useState(false);
+  const [clickedSong, setClickedSong] = useState(null);
 
   const updateShowTabBarState = (bool) => {
     setShowTabBarState(bool);
+  };
+
+  const toggleSongOptionsModalVisible = () => {
+    setSongOptionsModalVisible(!songOptionsModalVisible);
+  };
+
+  const updateClickedSong = (data) => {
+    setClickedSong(data);
   };
 
   const resetScreenData = () => {
@@ -27,6 +37,10 @@ const ScreenContextProvider = ({ children }) => {
         showTabBarState,
         updateShowTabBarState,
         resetScreenData,
+        songOptionsModalVisible,
+        toggleSongOptionsModalVisible,
+        clickedSong,
+        updateClickedSong,
       }}
     >
       {children}

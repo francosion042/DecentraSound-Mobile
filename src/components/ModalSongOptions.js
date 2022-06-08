@@ -7,7 +7,7 @@ import {
   Image,
 } from "react-native";
 import React, { useContext } from "react";
-import { LibraryContext } from "../contexts";
+import { ScreenContext } from "../contexts";
 
 // components
 import LineItemCategory from "./LineItemCategory";
@@ -16,14 +16,14 @@ import LineItemCategory from "./LineItemCategory";
 import menuSongMoreOptions from "../mockdata/menuSongMoreOptions.json";
 import { colors, gStyle } from "../constants";
 
-const ModalSongOptions = ({ songData }) => {
+const ModalSongOptions = () => {
   const {
     songOptionsModalVisible,
     toggleSongOptionsModalVisible,
     clickedSong,
-  } = useContext(LibraryContext);
+  } = useContext(ScreenContext);
 
-  const handlePress = (item) => {};
+  const handlePress = () => {};
   return (
     <Modal
       animationType="slide"

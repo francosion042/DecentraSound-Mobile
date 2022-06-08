@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { colors, gStyle } from "../constants";
-import { LibraryContext } from "../contexts";
+import { ScreenContext } from "../contexts";
 
 const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
   const { toggleSongOptionsModalVisible, updateClickedSong } =
-    useContext(LibraryContext);
+    useContext(ScreenContext);
   const activeColor = active ? colors.brandPrimary : colors.white;
 
   return (

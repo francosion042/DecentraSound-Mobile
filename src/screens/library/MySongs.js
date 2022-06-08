@@ -7,13 +7,11 @@ import LineItemSong from "../../components/LineItemSong";
 import Loading from "../../components/Loading";
 import TrackPlayer from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
-import ModalSongOptions from "../../components/ModalSongOptions";
 
 const MySongs = ({ navigation }) => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
-  const { userOwnedSongs, songOptionsModalVisible } =
-    useContext(LibraryContext);
+  const { userOwnedSongs } = useContext(LibraryContext);
 
   const [downloaded] = useState(false);
 
@@ -66,7 +64,6 @@ const MySongs = ({ navigation }) => {
           )}
         />
       )}
-      {songOptionsModalVisible && <ModalSongOptions />}
     </View>
   );
 };
