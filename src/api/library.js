@@ -53,6 +53,32 @@ export const getUserLikedSongs = async ({ userid }) => {
   }
 };
 
+export const getUserSavedALbums = async ({ userid }) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_BASE_URL}/library/users/${userid}/albums/saved`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserSavedArtists = async ({ userid }) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_BASE_URL}/library/users/${userid}/artists/saved`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const verifySongLike = async ({ userid, songId }) => {
   try {
     const response = await axios.get(
