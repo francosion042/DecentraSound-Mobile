@@ -13,3 +13,14 @@ export const search = async (searchTerm) => {
     console.log(error);
   }
 };
+
+export const getGenres = async () => {
+  try {
+    const response = await axios.get(`${BACKEND_BASE_URL}/genres`);
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

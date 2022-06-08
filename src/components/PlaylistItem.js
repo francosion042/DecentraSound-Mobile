@@ -2,6 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { colors, gStyle } from "../constants";
+import { View } from "react-native-animatable";
 
 const PlaylistItem = ({ bgColor, onPress, title }) => (
   <TouchableOpacity
@@ -9,7 +10,11 @@ const PlaylistItem = ({ bgColor, onPress, title }) => (
     onPress={onPress}
     style={[styles.playlistItem, { backgroundColor: bgColor }]}
   >
-    <Text style={styles.playlistTitle}>{title}</Text>
+    <View
+      style={[styles.playlistItemCover, { backgroundColor: colors.black40 }]}
+    >
+      <Text style={styles.playlistTitle}>{title}</Text>
+    </View>
   </TouchableOpacity>
 );
 
@@ -27,6 +32,11 @@ const styles = StyleSheet.create({
     height: 98,
     marginBottom: 24,
     marginRight: 24,
+  },
+  playlistItemCover: {
+    borderRadius: 6,
+    flex: 1,
+    height: 98,
     paddingLeft: 12,
     paddingTop: 12,
   },

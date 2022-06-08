@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext, Fragment, useEffect } from "react";
 import {
   Animated,
   StyleSheet,
@@ -7,8 +7,9 @@ import {
   View,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { colors, device, gStyle } from "../../constants";
-import { ScreenContext } from "../../contexts";
+import { colors, device, gStyle, func } from "../../constants";
+import { ScreenContext, SearchContext } from "../../contexts";
+import { getGenres } from "../../api";
 
 // components
 import PlaylistItem from "../../components/PlaylistItem";
@@ -17,12 +18,27 @@ import PlaylistItem from "../../components/PlaylistItem";
 // icons
 import SvgSearch from "../../components/icons/Svg.Search";
 
-// mock data
-import browseAll from "../../mockdata/searchBrowseAll.json";
-import topGenres from "../../mockdata/searchTopGenres.json";
-
 const Search = ({ navigation }) => {
   const { updateShowTabBarState } = useContext(ScreenContext);
+  const { genres, updateGenres } = useContext(SearchContext);
+
+  const handleGenres = async () => {
+    if (genres.length === 0) {
+      try {
+        const response = await getGenres();
+        if (response && response.data.data) {
+          updateGenres(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleGenres();
+  });
+
   const [scrollY] = useState(new Animated.Value(0));
   const [searchStart] = useState(device.width - 48);
   const [searchEnd] = useState(searchStart - 40);
@@ -63,34 +79,21 @@ const Search = ({ navigation }) => {
           </Animated.View>
         </View>
 
-        <Text style={styles.sectionHeading}>Your top genres</Text>
-        <View style={styles.containerRow}>
-          {Object.keys(topGenres).map((index) => {
-            const item = topGenres[index];
-
-            return (
-              <View key={item.id} style={styles.containerColumn}>
-                <PlaylistItem
-                  bgColor={item.color}
-                  onPress={() => null}
-                  title={item.title}
-                />
-              </View>
-            );
-          })}
-        </View>
-
         <Text style={styles.sectionHeading}>Browse all</Text>
         <View style={styles.containerRow}>
-          {Object.keys(browseAll).map((index) => {
-            const item = browseAll[index];
-
+          {genres.map((genre) => {
             return (
-              <View key={item.id} style={styles.containerColumn}>
+              <View key={genre.id} style={styles.containerColumn}>
                 <PlaylistItem
-                  bgColor={item.color}
-                  onPress={() => null}
-                  title={item.title}
+                  bgColor={func.getRandomColor()}
+                  onPress={() =>
+                    navigation.navigate("Albums", {
+                      albums: genre.albums,
+                      heading: "Albums",
+                      tagline: `popular ${genre.title} Albums `,
+                    })
+                  }
+                  title={genre.title}
                 />
               </View>
             );

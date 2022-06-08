@@ -7,6 +7,7 @@ import SearchScreen from "../screens/search/Search";
 import Searching from "../screens/search/Searching";
 import Album from "../screens/album/Album";
 import Artist from "../screens/artist/Artist";
+import Albums from "../screens/album/Albums";
 
 // icons
 import SvgTabSearch from "../components/icons/Svg.TabSearch";
@@ -27,6 +28,7 @@ export default createStackNavigator(
     SearchAlbum: {
       screen: Album,
     },
+    Albums,
     SearchArtist: {
       screen: Artist,
     },

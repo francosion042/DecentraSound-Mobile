@@ -10,7 +10,7 @@ import TouchIcon from "../../components/TouchIcon";
 import LineItemAlbum from "../../components/LineItemAlbum";
 import LineItemSong from "../../components/LineItemSong";
 import LineItemArtist from "../../components/LineItemArtist";
-import { search } from "../../api/search";
+import { search } from "../../api";
 import { PlayingContext } from "../../contexts";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
