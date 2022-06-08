@@ -38,7 +38,7 @@ const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
         </View>
       </TouchableOpacity>
 
-      {screen !== "artist" ? (
+      {screen !== "artist" && screen !== "mySongs" ? (
         <View style={styles.containerRight}>
           <TouchableOpacity
             onPress={() => {

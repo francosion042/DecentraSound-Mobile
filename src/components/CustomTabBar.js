@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { BottomTabBar } from "react-navigation-tabs";
 import { ScreenContext, PlayingContext } from "../contexts";
-import ModalSongOptions from "../../components/ModalSongOptions";
+import ModalSongOptions from "./ModalSongOptions";
 
 // components
 import BarMusicPlayer from "./BarMusicPlayer";

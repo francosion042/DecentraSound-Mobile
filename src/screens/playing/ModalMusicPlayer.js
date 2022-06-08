@@ -383,13 +383,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "center",
     elevation: 5,
-    shadowColor: "#ccc",
-    shadowOffset: {
-      height: 5,
-      width: 5,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 3.5,
     overflow: "hidden",
   },
   image: {

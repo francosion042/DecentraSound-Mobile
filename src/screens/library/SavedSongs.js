@@ -1,17 +1,40 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import { device, gStyle } from "../../constants";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
-import { PlayingContext, LibraryContext } from "../../contexts";
+import { PlayingContext, LibraryContext, UserContext } from "../../contexts";
 import LineItemSong from "../../components/LineItemSong";
 import Loading from "../../components/Loading";
 import TrackPlayer from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
+import { getUserSavedSongs } from "../../api";
 
 const SavedSongs = () => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
-  const { userSavedSongs } = useContext(LibraryContext);
+  const { getUser } = useContext(UserContext);
+  const { userSavedSongs, updateUserSavedSongs } = useContext(LibraryContext);
+
+  const handleUserSavedSongs = async () => {
+    const user = await getUser();
+
+    if (userSavedSongs.length === 0) {
+      try {
+        const response = await getUserSavedSongs({ userid: user.id });
+
+        if (response && response.data) {
+          const songs = response.data.data.map((savedSong) => savedSong.song);
+          updateUserSavedSongs(songs);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleUserSavedSongs();
+  });
 
   const [downloaded] = useState(false);
 

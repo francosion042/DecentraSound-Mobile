@@ -67,7 +67,7 @@ const ModalSongOptions = () => {
                 disableRightSide
                 icon={item.icon}
                 iconLibrary={item.lib}
-                onPress={handlePress(item)}
+                onPress={handlePress}
                 title={item.title}
               />
             );
