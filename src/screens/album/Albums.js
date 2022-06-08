@@ -9,26 +9,28 @@ import {
   View,
 } from "react-native";
 import { withNavigation } from "react-navigation";
-import { colors, gStyle } from "../../constants";
+import { colors, device, gStyle } from "../../constants";
+import ScreenHeader from "../../components/ScreenHeader";
 
 const Albums = ({ navigation }) => {
   const [albums, setAlbums] = React.useState([]);
 
   const heading = navigation.getParam("heading");
-  const tagline = navigation.getParam("tagline");
 
   useEffect(() => {
     setAlbums(navigation.getParam("albums") || []);
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      {heading && <Text style={styles.heading}>{heading}</Text>}
-      {tagline && <Text style={styles.tagline}>{tagline}</Text>}
+    <View style={gStyle.container}>
+      <View style={styles.containerHeader}>
+        <ScreenHeader showBack={true} title={heading} />
+      </View>
 
       <FlatList
         contentContainerStyle={styles.containerContent}
         data={albums}
+        numColumns={2}
         keyExtractor={({ id }) => id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -61,7 +63,6 @@ Albums.defaultProps = {
 
 Albums.propTypes = {
   // required
-  data: PropTypes.array.isRequired,
   navigation: PropTypes.object.isRequired,
 
   // optional
@@ -70,29 +71,14 @@ Albums.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 32,
-    width: "100%",
-  },
   containerContent: {
-    paddingHorizontal: 10,
-  },
-  heading: {
-    ...gStyle.textBold18,
-    color: colors.white,
-    paddingBottom: 6,
-    paddingLeft: 16,
-    textAlign: "left",
-  },
-  tagline: {
-    ...gStyle.text12,
-    color: colors.greyInactive,
-    paddingBottom: 6,
-    paddingLeft: 16,
-    textAlign: "left",
+    marginTop: device.iPhoneNotch ? 88 : 64,
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   item: {
-    marginRight: 16,
+    marginHorizontal: 30,
+    marginBottom: 30,
     width: 148,
   },
   image: {

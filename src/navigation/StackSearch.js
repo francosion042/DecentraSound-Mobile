@@ -25,9 +25,7 @@ export default createStackNavigator(
       screen: SearchScreen,
     },
     Searching,
-    SearchAlbum: {
-      screen: Album,
-    },
+    Album,
     Albums,
     SearchArtist: {
       screen: Artist,

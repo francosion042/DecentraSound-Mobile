@@ -89,8 +89,7 @@ const Search = ({ navigation }) => {
                   onPress={() =>
                     navigation.navigate("Albums", {
                       albums: genre.albums,
-                      heading: "Albums",
-                      tagline: `popular ${genre.title} Albums `,
+                      heading: `popular ${genre.title} Albums `,
                     })
                   }
                   title={genre.title}

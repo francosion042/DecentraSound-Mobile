@@ -77,7 +77,7 @@ const Searching = ({ navigation }) => {
               <LineItemAlbum
                 key={item.dataId.toString()}
                 onPress={() =>
-                  navigation.navigate("SearchAlbum", { album: item.album })
+                  navigation.navigate("Album", { album: item.album })
                 }
                 album={item.album}
               />
