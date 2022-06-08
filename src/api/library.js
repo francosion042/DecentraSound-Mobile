@@ -4,7 +4,7 @@ import { BACKEND_BASE_URL } from "@env";
 export const getUserOwnedSongs = async ({ userid }) => {
   try {
     const response = await axios.get(
-      `${BACKEND_BASE_URL}/users/${userid}/songs/owned`
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/owned`
     );
     if (response.status === 200 && response.data) {
       return response;
@@ -17,7 +17,7 @@ export const getUserOwnedSongs = async ({ userid }) => {
 export const likeSong = async ({ userid, songId }) => {
   try {
     const response = await axios.post(
-      `${BACKEND_BASE_URL}/users/${userid}/songs/${songId}/like`
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/${songId}/like`
     );
     if (response.status === 200 && response.data) {
       return response;
@@ -30,7 +30,7 @@ export const likeSong = async ({ userid, songId }) => {
 export const unlikeSong = async ({ userid, songId }) => {
   try {
     const response = await axios.post(
-      `${BACKEND_BASE_URL}/users/${userid}/songs/${songId}/unlike`
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/${songId}/unlike`
     );
     if (response.status === 200 && response.data) {
       return response;
@@ -43,7 +43,7 @@ export const unlikeSong = async ({ userid, songId }) => {
 export const getUserLikedSongs = async ({ userid }) => {
   try {
     const response = await axios.get(
-      `${BACKEND_BASE_URL}/users/${userid}/songs/liked`
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/liked`
     );
     if (response.status === 200 && response.data) {
       return response;
@@ -56,7 +56,7 @@ export const getUserLikedSongs = async ({ userid }) => {
 export const verifySongLike = async ({ userid, songId }) => {
   try {
     const response = await axios.get(
-      `${BACKEND_BASE_URL}/users/${userid}/songs/${songId}/liked/verify`
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/${songId}/liked/verify`
     );
     if (response.status === 200 && response.data) {
       return response;
@@ -69,7 +69,7 @@ export const verifySongLike = async ({ userid, songId }) => {
 export const getUserSavedSongs = async ({ userid }) => {
   try {
     const response = await axios.get(
-      `${BACKEND_BASE_URL}/users/${userid}/songs/saved`
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/saved`
     );
     if (response.status === 200 && response.data) {
       return response;
@@ -82,7 +82,7 @@ export const getUserSavedSongs = async ({ userid }) => {
 export const verifySongSave = async ({ userid, songId }) => {
   try {
     const response = await axios.get(
-      `${BACKEND_BASE_URL}/users/${userid}/songs/${songId}/saved/verify`
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/${songId}/saved/verify`
     );
     if (response.status === 200 && response.data) {
       return response;

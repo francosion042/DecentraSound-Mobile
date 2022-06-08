@@ -4,7 +4,13 @@ import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, func, gStyle } from "../../constants";
 import { BlurView } from "expo-blur";
 import { ExploreContext } from "../../contexts";
-import { getTrendingAlbums, getTrendingArtists } from "../../api";
+import {
+  getArtists,
+  getSpecialAlbums,
+  getLatestAlbums,
+  getSpecialAlbumsByGenre,
+  getAlbumsByBlockchain,
+} from "../../api";
 import Loading from "../../components/Loading";
 
 // components
@@ -20,10 +26,16 @@ import ModalFilterOptions from "../../components/ModalFilterOptions";
 const Explore = ({ navigation }) => {
   const { showTabBarState } = useContext(ScreenContext);
   const {
-    trendingAlbums,
-    updateTrendingAlbums,
-    trendingArtists,
-    updateTrendingArtists,
+    artists,
+    updateArtists,
+    specialAlbums,
+    updateSpecialAlbums,
+    specialAlbumsByGenre,
+    updateSpecialAlbumsByGenres,
+    latestAlbums,
+    updateLatestAlbums,
+    albumsByBlockchain,
+    updateAlbumsByBlockchain,
     filterOptionsModalVisible,
     togglefilterOptionsModalVisible,
   } = useContext(ExploreContext);
@@ -42,25 +54,61 @@ const Explore = ({ navigation }) => {
     extrapolate: "clamp",
   });
 
-  const handleTrending = async () => {
-    if (trendingAlbums.length === 0) {
+  const handleData = async () => {
+    if (specialAlbums.length === 0) {
       try {
-        const response = await getTrendingAlbums();
+        const response = await getSpecialAlbums();
 
         if (response && response.data) {
-          updateTrendingAlbums(response.data.data);
+          updateSpecialAlbums(response.data.data);
         }
       } catch (error) {
         console.log(error);
       }
     }
 
-    if (trendingArtists.length === 0) {
+    if (specialAlbumsByGenre.length === 0) {
       try {
-        const response = await getTrendingArtists();
+        const response = await getSpecialAlbumsByGenre();
 
         if (response && response.data) {
-          updateTrendingArtists(response.data.data);
+          updateSpecialAlbumsByGenres(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (albumsByBlockchain.length === 0) {
+      try {
+        const response = await getAlbumsByBlockchain("ETHEREUM");
+
+        if (response && response.data) {
+          updateAlbumsByBlockchain(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (latestAlbums.length === 0) {
+      try {
+        const response = await getLatestAlbums();
+
+        if (response && response.data) {
+          updateLatestAlbums(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (artists.length === 0) {
+      try {
+        const response = await getArtists();
+
+        if (response && response.data) {
+          updateArtists(response.data.data);
         }
       } catch (error) {
         console.log(error);
@@ -70,7 +118,7 @@ const Explore = ({ navigation }) => {
   };
 
   useEffect(() => {
-    handleTrending();
+    handleData();
   });
 
   if (isLoading) {
@@ -115,27 +163,22 @@ const Explore = ({ navigation }) => {
       >
         <View style={gStyle.spacer16} />
 
-        <AlbumsBannerHorizontal
-          data={func.extractTrendingAlbum(trendingAlbums)}
-        />
+        <AlbumsBannerHorizontal data={specialAlbums} />
 
         <View style={gStyle.liner} />
 
         <DoubleRowAlbumsHorizontal
-          data={func.extractTrendingAlbum(trendingAlbums)}
-          heading="Top Collections"
+          data={latestAlbums}
+          heading="Latest Collections"
         />
 
         <ArtistsHorizontal
-          data={func.extractTrendingArtists(trendingArtists)}
+          data={func.extractTrendingArtists(artists)}
           heading="Top Artists"
           tagline="Top Artists around the world."
         />
 
-        <BigAlbumsHorizontal
-          data={func.extractTrendingAlbum(trendingAlbums)}
-          heading="Made For You"
-        />
+        <BigAlbumsHorizontal data={latestAlbums} heading="Made For You" />
       </Animated.ScrollView>
     </Fragment>
   );

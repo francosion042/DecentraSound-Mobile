@@ -4,17 +4,32 @@ import React, { createContext, useState } from "react";
 const ExploreContext = createContext();
 
 const ExploreContextProvider = ({ children }) => {
-  const [trendingAlbums, setTrendingAlbums] = useState([]);
-  const [trendingArtists, setTrendingArtists] = useState([]);
+  const [specialAlbums, setSpecialAlbums] = useState([]);
+  const [latestAlbums, setLatestAlbums] = useState([]);
+  const [specialAlbumsByGenre, setSpecialAlbumsByGenre] = useState([]);
+  const [albumsByBlockchain, setAlbumsByBlockchain] = useState([]);
+  const [artists, setArtists] = useState([]);
   const [filterOptionsModalVisible, setFilterOptionsModalVisible] =
     useState(false);
 
-  const updateTrendingAlbums = (data) => {
-    setTrendingAlbums(data);
+  const updateSpecialAlbums = (data) => {
+    setSpecialAlbums(data);
   };
 
-  const updateTrendingArtists = (data) => {
-    setTrendingArtists(data);
+  const updateSpecialAlbumsByGenres = (data) => {
+    setSpecialAlbumsByGenre(data);
+  };
+
+  const updateLatestAlbums = (data) => {
+    setLatestAlbums(data);
+  };
+
+  const updateAlbumsByBlockchain = (data) => {
+    setAlbumsByBlockchain(data);
+  };
+
+  const updateArtists = (data) => {
+    setArtists(data);
   };
 
   const togglefilterOptionsModalVisible = () => {
@@ -22,16 +37,22 @@ const ExploreContextProvider = ({ children }) => {
   };
 
   const resetSongData = () => {
-    setTrendingAlbums([]);
+    setSpecialAlbums([]);
   };
 
   return (
     <ExploreContext.Provider
       value={{
-        trendingAlbums,
-        updateTrendingAlbums,
-        trendingArtists,
-        updateTrendingArtists,
+        specialAlbums,
+        updateSpecialAlbums,
+        specialAlbumsByGenre,
+        updateSpecialAlbumsByGenres,
+        latestAlbums,
+        updateLatestAlbums,
+        albumsByBlockchain,
+        updateAlbumsByBlockchain,
+        artists,
+        updateArtists,
         resetSongData,
         filterOptionsModalVisible,
         togglefilterOptionsModalVisible,

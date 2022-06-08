@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import { OPENSEA_BASE_URL, RARIBLE_BASE_URL } from "@env";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import PropTypes from "prop-types";
 import {
   Alert,
@@ -8,6 +9,7 @@ import {
   Switch,
   Text,
   View,
+  Linking,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
@@ -79,6 +81,32 @@ const Album = ({ navigation }) => {
     await TrackPlayer.skip(songIndex);
     await TrackPlayer.play();
   };
+
+  const handleMarketPlaceRedirect = useCallback(async () => {
+    if (album.marketPlace === "OpenSea") {
+      const url = album.marketPlaceAlbumUrl
+        ? album.marketPlaceAlbumUrl
+        : OPENSEA_BASE_URL;
+
+      const supported = await Linking.canOpenURL(url);
+      if (!supported) {
+        return Alert.alert(`Unsupported open this URL: ${url}`);
+      }
+
+      await Linking.openURL(url);
+    } else if (album.marketPlace === "Rarible") {
+      const url = album.marketPlaceAlbumUrl
+        ? album.marketPlaceAlbumUrl
+        : RARIBLE_BASE_URL;
+
+      const supported = await Linking.canOpenURL(url);
+      if (!supported) {
+        return Alert.alert(`Unsupported open this URL: ${url}`);
+      }
+
+      await Linking.openURL(url);
+    }
+  }, [album]);
 
   const stickyArray = device.web ? [] : [0];
   const headingRange = device.web ? [140, 200] : [230, 280];
@@ -179,10 +207,10 @@ const Album = ({ navigation }) => {
               text="Play"
             />
             <TouchText
-              onPress={() => null}
+              onPress={handleMarketPlaceRedirect}
               style={styles.btn}
               styleText={styles.btnText}
-              text="Shuffle"
+              text={album.marketPlace}
             />
           </View>
         </View>
