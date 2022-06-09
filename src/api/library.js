@@ -29,7 +29,7 @@ export const likeSong = async ({ userid, songId }) => {
 
 export const unlikeSong = async ({ userid, songId }) => {
   try {
-    const response = await axios.post(
+    const response = await axios.delete(
       `${BACKEND_BASE_URL}/library/users/${userid}/songs/${songId}/unlike`
     );
     if (response.status === 200 && response.data) {
@@ -53,32 +53,6 @@ export const getUserLikedSongs = async ({ userid }) => {
   }
 };
 
-export const getUserSavedALbums = async ({ userid }) => {
-  try {
-    const response = await axios.get(
-      `${BACKEND_BASE_URL}/library/users/${userid}/albums/saved`
-    );
-    if (response.status === 200 && response.data) {
-      return response;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const getUserSavedArtists = async ({ userid }) => {
-  try {
-    const response = await axios.get(
-      `${BACKEND_BASE_URL}/library/users/${userid}/artists/saved`
-    );
-    if (response.status === 200 && response.data) {
-      return response;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const verifySongLike = async ({ userid, songId }) => {
   try {
     const response = await axios.get(
@@ -91,6 +65,8 @@ export const verifySongLike = async ({ userid, songId }) => {
     console.log(error);
   }
 };
+
+// /////////////////////////////////////////////
 
 export const getUserSavedSongs = async ({ userid }) => {
   try {
@@ -105,10 +81,144 @@ export const getUserSavedSongs = async ({ userid }) => {
   }
 };
 
+export const saveSong = async ({ userid, songId }) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/${songId}/save`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const unsaveSong = async ({ userid, songId }) => {
+  try {
+    const response = await axios.delete(
+      `${BACKEND_BASE_URL}/library/users/${userid}/songs/${songId}/unsave`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const verifySongSave = async ({ userid, songId }) => {
   try {
     const response = await axios.get(
       `${BACKEND_BASE_URL}/library/users/${userid}/songs/${songId}/saved/verify`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// ///////////////////////////////// ALBUMS //////////////////////////////////////
+
+export const getUserSavedAlbums = async ({ userid }) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_BASE_URL}/library/users/${userid}/albums/saved`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const saveAlbum = async ({ userid, albumId }) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_BASE_URL}/library/users/${userid}/albums/${albumId}/save`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const unsaveAlbum = async ({ userid, albumId }) => {
+  try {
+    const response = await axios.delete(
+      `${BACKEND_BASE_URL}/library/users/${userid}/albums/${albumId}/unsave`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const verifyAlbumSave = async ({ userid, albumId }) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_BASE_URL}/library/users/${userid}/albums/${albumId}/saved/verify`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// ///////////////////////////////// ARTISTS //////////////////////////////////////
+
+export const getUserSavedArtists = async ({ userid }) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_BASE_URL}/library/users/${userid}/artists/saved`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const saveArtist = async ({ userid, artistId }) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_BASE_URL}/library/users/${userid}/artists/${artistId}/save`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const unsaveArtist = async ({ userid, artistId }) => {
+  try {
+    const response = await axios.delete(
+      `${BACKEND_BASE_URL}/library/users/${userid}/artists/${artistId}/unsave`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const verifyArtistSave = async ({ userid, artistId }) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_BASE_URL}/library/users/${userid}/artists/${artistId}/saved/verify`
     );
     if (response.status === 200 && response.data) {
       return response;

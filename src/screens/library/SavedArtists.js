@@ -14,22 +14,25 @@ import { useIsFocused } from "@react-navigation/native";
 import { colors, device, gStyle } from "../../constants";
 import ScreenHeader from "../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../contexts";
-import { getUserSavedAlbums } from "../../api";
+import { getUserSavedArtists } from "../../api";
 
-const SavedAlbums = ({ navigation }) => {
+const SavedArtists = ({ navigation }) => {
   const isFocused = useIsFocused();
   const { getUser } = useContext(UserContext);
-  const { userSavedAlbums, updateUserSavedAlbums } = useContext(LibraryContext);
+  const { userSavedArtists, updateUserSavedArtists } =
+    useContext(LibraryContext);
 
-  const handleSavedAlbums = async () => {
+  const handleSavedArtists = async () => {
     const user = await getUser();
 
     try {
-      const response = await getUserSavedAlbums({ userid: user.id });
+      const response = await getUserSavedArtists({ userid: user.id });
 
       if (response && response.data) {
-        const albums = response.data.data.map((savedAlbum) => savedAlbum.album);
-        updateUserSavedAlbums(albums);
+        const artists = response.data.data.map(
+          (savedArtist) => savedArtist.artist
+        );
+        updateUserSavedArtists(artists);
       }
     } catch (error) {
       console.log(error);
@@ -37,7 +40,7 @@ const SavedAlbums = ({ navigation }) => {
   };
 
   useEffect(() => {
-    handleSavedAlbums();
+    handleSavedArtists();
   }, [isFocused]);
   return (
     <View style={gStyle.container}>
@@ -47,7 +50,7 @@ const SavedAlbums = ({ navigation }) => {
 
       <FlatList
         contentContainerStyle={styles.containerContent}
-        data={userSavedAlbums}
+        data={userSavedArtists}
         numColumns={2}
         keyExtractor={({ id }) => id.toString()}
         renderItem={({ item }) => (
@@ -74,7 +77,7 @@ const SavedAlbums = ({ navigation }) => {
   );
 };
 
-SavedAlbums.propTypes = {
+SavedArtists.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
 };
@@ -104,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(SavedAlbums);
+export default withNavigation(SavedArtists);

@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FlatList, StyleSheet, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import { device, gStyle } from "../../constants";
 import React, { useContext, useEffect, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
@@ -10,6 +12,7 @@ import SetupPlayer from "../playing/SetupPlayer";
 import { getUserLikedSongs } from "../../api";
 
 const LikedSongs = () => {
+  const isFocused = useIsFocused();
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
@@ -18,23 +21,21 @@ const LikedSongs = () => {
   const handleUserLikedSongs = async () => {
     const user = await getUser();
 
-    if (userLikedSongs.length === 0) {
-      try {
-        const response = await getUserLikedSongs({ userid: user.id });
+    try {
+      const response = await getUserLikedSongs({ userid: user.id });
 
-        if (response && response.data) {
-          const songs = response.data.data.map((likedSong) => likedSong.song);
-          updateUserLikedSongs(songs);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        const songs = response.data.data.map((likedSong) => likedSong.song);
+        updateUserLikedSongs(songs);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     handleUserLikedSongs();
-  });
+  }, [isFocused]);
 
   const [downloaded] = useState(false);
 

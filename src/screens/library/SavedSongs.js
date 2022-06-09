@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FlatList, StyleSheet, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import { device, gStyle } from "../../constants";
 import React, { useContext, useEffect, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
@@ -10,6 +12,7 @@ import SetupPlayer from "../playing/SetupPlayer";
 import { getUserSavedSongs } from "../../api";
 
 const SavedSongs = () => {
+  const isFocused = useIsFocused();
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
@@ -18,23 +21,21 @@ const SavedSongs = () => {
   const handleUserSavedSongs = async () => {
     const user = await getUser();
 
-    if (userSavedSongs.length === 0) {
-      try {
-        const response = await getUserSavedSongs({ userid: user.id });
+    try {
+      const response = await getUserSavedSongs({ userid: user.id });
 
-        if (response && response.data) {
-          const songs = response.data.data.map((savedSong) => savedSong.song);
-          updateUserSavedSongs(songs);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        const songs = response.data.data.map((savedSong) => savedSong.song);
+        updateUserSavedSongs(songs);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     handleUserSavedSongs();
-  });
+  }, [isFocused]);
 
   const [downloaded] = useState(false);
 

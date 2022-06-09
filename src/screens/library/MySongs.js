@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FlatList, StyleSheet, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import { device, gStyle } from "../../constants";
 import React, { useContext, useEffect, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
@@ -10,6 +12,7 @@ import SetupPlayer from "../playing/SetupPlayer";
 import { getUserOwnedSongs } from "../../api";
 
 const MySongs = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
@@ -18,21 +21,19 @@ const MySongs = ({ navigation }) => {
   const handleUserOwnedSongs = async () => {
     const user = await getUser();
 
-    if (userOwnedSongs.length === 0) {
-      try {
-        const response = await getUserOwnedSongs({ userid: user.id });
-        if (response && response.data) {
-          updateUserOwnedSongs(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+    try {
+      const response = await getUserOwnedSongs({ userid: user.id });
+      if (response && response.data) {
+        updateUserOwnedSongs(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     handleUserOwnedSongs();
-  });
+  }, [isFocused]);
 
   const [downloaded] = useState(false);
 
