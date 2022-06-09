@@ -75,18 +75,9 @@ const SavedAlbums = ({ navigation }) => {
   );
 };
 
-SavedAlbums.defaultProps = {
-  heading: null,
-  tagline: null,
-};
-
 SavedAlbums.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
-
-  // optional
-  heading: PropTypes.string,
-  tagline: PropTypes.string,
 };
 
 const styles = StyleSheet.create({

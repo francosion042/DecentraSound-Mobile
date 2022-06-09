@@ -5,6 +5,6 @@
   { "id": 4, "icon": "save", "title": "Saved Songs", "screen": "SavedSongs" },
   { "id": 5, "icon": "heart", "title": "Liked Songs", "screen": "LikedSongs" },
   { "id": 6, "icon": "radio", "title": "Stations", "screen": "Stations" },
-  { "id": 7, "icon": "disc", "title": "Saved Albums", "screen": "Albums" },
+  { "id": 7, "icon": "disc", "title": "Saved Albums", "screen": "SavedAlbums" },
   { "id": 8, "icon": "user", "title": "Saved Artists", "screen": "Artists" }
 ]

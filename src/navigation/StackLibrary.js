@@ -9,6 +9,7 @@ import MySongs from "../screens/library/MySongs";
 import Artist from "../screens/artist/Artist";
 import LikedSongs from "../screens/library/LikedSongs";
 import SavedSongs from "../screens/library/SavedSongs";
+import SavedAlbums from "../screens/library/SavedAlbums";
 
 // icons
 import SvgTabLibrary from "../components/icons/Svg.TabLibrary";
@@ -27,6 +28,7 @@ export default createStackNavigator(
     },
     Album,
     Artist,
+    SavedAlbums,
     LikedSongs: {
       screen: LikedSongs,
     },
