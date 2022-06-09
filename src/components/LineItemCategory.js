@@ -23,23 +23,23 @@ const LineItemCategory = ({
     default:
     case "Feather":
       iconDisplay = (
-        <Feather color={colors.greyInactive} name={icon} size={24} />
+        <Feather color={colors.brandPrimary} name={icon} size={24} />
       );
       break;
     case "Entypo":
       iconDisplay = (
-        <Entypo color={colors.greyInactive} name={icon} size={24} />
+        <Entypo color={colors.brandPrimary} name={icon} size={24} />
       );
       break;
     case "MaterialIcons":
       iconDisplay = (
-        <MaterialIcons color={colors.greyInactive} name={icon} size={24} />
+        <MaterialIcons color={colors.brandPrimary} name={icon} size={24} />
       );
       break;
     case "MaterialCommunityIcons":
       iconDisplay = (
         <MaterialCommunityIcons
-          color={colors.greyInactive}
+          color={colors.brandPrimary}
           name={icon}
           size={24}
         />
@@ -47,7 +47,7 @@ const LineItemCategory = ({
       break;
     case "FontAwesome":
       iconDisplay = (
-        <FontAwesome color={colors.greyInactive} name={icon} size={24} />
+        <FontAwesome color={colors.brandPrimary} name={icon} size={24} />
       );
       break;
   }

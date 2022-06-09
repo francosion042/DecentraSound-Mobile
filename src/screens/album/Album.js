@@ -212,7 +212,7 @@ const Album = ({ navigation }) => {
               onPress={handleMarketPlaceRedirect}
               style={styles.btn}
               styleText={styles.btnText}
-              icon="globe"
+              icon="external-link"
               styleIcon={styles.btnIcon}
               text={album.marketPlace}
             />
