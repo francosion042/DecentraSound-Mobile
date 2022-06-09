@@ -10,14 +10,12 @@ import {
   View,
 } from "react-native";
 import { withNavigation } from "react-navigation";
-import { useIsFocused } from "@react-navigation/native";
 import { colors, device, gStyle } from "../../constants";
 import ScreenHeader from "../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../contexts";
 import { getUserSavedArtists } from "../../api";
 
 const SavedArtists = ({ navigation }) => {
-  const isFocused = useIsFocused();
   const { getUser } = useContext(UserContext);
   const { userSavedArtists, updateUserSavedArtists } =
     useContext(LibraryContext);
@@ -41,11 +39,11 @@ const SavedArtists = ({ navigation }) => {
 
   useEffect(() => {
     handleSavedArtists();
-  }, [isFocused]);
+  }, []);
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
-        <ScreenHeader showBack={true} title="Saved Albums" />
+        <ScreenHeader showBack={true} title="Saved Artists" />
       </View>
 
       <FlatList
@@ -57,15 +55,12 @@ const SavedArtists = ({ navigation }) => {
           <TouchableOpacity
             activeOpacity={gStyle.activeOpacity}
             hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-            onPress={() => navigation.navigate("Album", { album: item })}
+            onPress={() => navigation.navigate("Artist", { artist: item })}
             style={styles.item}
           >
             <View style={styles.image}>
-              {item.coverImageUrl && (
-                <Image
-                  source={{ uri: item.coverImageUrl }}
-                  style={styles.image}
-                />
+              {item.imageUrl && (
+                <Image source={{ uri: item.imageUrl }} style={styles.image} />
               )}
             </View>
             <Text style={styles.title}>{item.name}</Text>

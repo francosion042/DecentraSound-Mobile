@@ -10,14 +10,12 @@ import {
   View,
 } from "react-native";
 import { withNavigation } from "react-navigation";
-import { useIsFocused } from "@react-navigation/native";
 import { colors, device, gStyle } from "../../constants";
 import ScreenHeader from "../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../contexts";
 import { getUserSavedAlbums } from "../../api";
 
 const SavedAlbums = ({ navigation }) => {
-  const isFocused = useIsFocused();
   const { getUser } = useContext(UserContext);
   const { userSavedAlbums, updateUserSavedAlbums } = useContext(LibraryContext);
 
@@ -38,7 +36,7 @@ const SavedAlbums = ({ navigation }) => {
 
   useEffect(() => {
     handleSavedAlbums();
-  }, [isFocused]);
+  }, []);
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>

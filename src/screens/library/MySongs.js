@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FlatList, StyleSheet, View } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
 import { device, gStyle } from "../../constants";
 import React, { useContext, useEffect, useState } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
@@ -12,7 +11,6 @@ import SetupPlayer from "../playing/SetupPlayer";
 import { getUserOwnedSongs } from "../../api";
 
 const MySongs = ({ navigation }) => {
-  const isFocused = useIsFocused();
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
@@ -33,7 +31,7 @@ const MySongs = ({ navigation }) => {
 
   useEffect(() => {
     handleUserOwnedSongs();
-  }, [isFocused]);
+  }, []);
 
   const [downloaded] = useState(false);
 

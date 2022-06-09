@@ -1,22 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle } from "../../constants";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import TrackPlayer from "react-native-track-player";
 
-import { PlayingContext } from "../../contexts";
+import { PlayingContext, UserContext } from "../../contexts";
 import SetupPlayer from "../playing/SetupPlayer";
 
 // Components
 import ScreenHeader from "../../components/ScreenHeader";
 import ArtistAlbumsHorizontal from "../../components/ArtistAlbumsHorizontal";
 import ArtistSongsHorizontal from "../../components/ArtistSongsHorizontal";
+import { saveArtist, unsaveArtist, verifyArtistSave } from "../../api";
 
 const Artist = ({ navigation }) => {
   const artist = navigation.getParam("artist");
   const { updateCurrentSongData, updatePlayingSongs, playingSongs, repeat } =
     useContext(PlayingContext);
+  const { getUser } = useContext(UserContext);
+  const [isArtistSaved, setIsArtistSave] = useState(false);
 
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
@@ -32,6 +36,55 @@ const Artist = ({ navigation }) => {
     await TrackPlayer.skip(songIndex);
     await TrackPlayer.play();
   };
+
+  const handleSave = async () => {
+    const user = await getUser();
+
+    if (!isArtistSaved) {
+      try {
+        const response = await saveArtist({
+          userid: user.id,
+          artistId: artist.id,
+        });
+
+        if (response && response.data) {
+          setIsArtistSave(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const response = await unsaveArtist({
+          userid: user.id,
+          artistId: artist.id,
+        });
+
+        if (response && response.data) {
+          setIsArtistSave(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(async () => {
+    const user = await getUser();
+    try {
+      const response = await verifyArtistSave({
+        userid: user.id,
+        artistId: artist.id,
+      });
+
+      if (response && response.data) {
+        const isSaved = response.data.data;
+        setIsArtistSave(isSaved);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
     <View style={gStyle.container}>
@@ -69,13 +122,15 @@ const Artist = ({ navigation }) => {
                   {artist.songs.length} Songs
                 </Text>
               </View>
-              <TouchableOpacity style={styles.btnAd}>
+              <TouchableOpacity style={styles.btnAd} onPress={handleSave}>
                 <FontAwesome
-                  name="plus"
+                  name={isArtistSaved ? "minus" : "plus"}
                   color={colors.brandPrimary}
                   size={20}
                 />
-                <Text style={styles.btnAddText}>Save Artist</Text>
+                <Text style={styles.btnAddText}>
+                  {isArtistSaved ? "Unsave Artist" : "Save Artist"}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

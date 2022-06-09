@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, Fragment, useEffect } from "react";
 import {
   Animated,
@@ -23,21 +24,19 @@ const Search = ({ navigation }) => {
   const { genres, updateGenres } = useContext(SearchContext);
 
   const handleGenres = async () => {
-    if (genres.length === 0) {
-      try {
-        const response = await getGenres();
-        if (response && response.data.data) {
-          updateGenres(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+    try {
+      const response = await getGenres();
+      if (response && response.data.data) {
+        updateGenres(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     handleGenres();
-  });
+  }, []);
 
   const [scrollY] = useState(new Animated.Value(0));
   const [searchStart] = useState(device.width - 48);
@@ -89,7 +88,7 @@ const Search = ({ navigation }) => {
                   onPress={() =>
                     navigation.navigate("Albums", {
                       albums: genre.albums,
-                      heading: `popular ${genre.title} Albums `,
+                      heading: `Popular ${genre.title} Albums `,
                     })
                   }
                   title={genre.title}

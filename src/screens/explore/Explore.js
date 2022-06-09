@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Animated, StyleSheet, View, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
@@ -55,71 +56,61 @@ const Explore = ({ navigation }) => {
   });
 
   const handleData = async () => {
-    if (specialAlbums.length === 0) {
-      try {
-        const response = await getSpecialAlbums();
+    try {
+      const response = await getSpecialAlbums();
 
-        if (response && response.data) {
-          updateSpecialAlbums(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        updateSpecialAlbums(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
 
-    if (specialAlbumsByGenre.length === 0) {
-      try {
-        const response = await getSpecialAlbumsByGenre();
+    try {
+      const response = await getSpecialAlbumsByGenre();
 
-        if (response && response.data) {
-          updateSpecialAlbumsByGenres(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        updateSpecialAlbumsByGenres(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
 
-    if (albumsByBlockchain.length === 0) {
-      try {
-        const response = await getAlbumsByBlockchain("ETHEREUM");
+    try {
+      const response = await getAlbumsByBlockchain("ETHEREUM");
 
-        if (response && response.data) {
-          updateAlbumsByBlockchain(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        updateAlbumsByBlockchain(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
 
-    if (latestAlbums.length === 0) {
-      try {
-        const response = await getLatestAlbums();
+    try {
+      const response = await getLatestAlbums();
 
-        if (response && response.data) {
-          updateLatestAlbums(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        updateLatestAlbums(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
 
-    if (artists.length === 0) {
-      try {
-        const response = await getArtists();
+    try {
+      const response = await getArtists();
 
-        if (response && response.data) {
-          updateArtists(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        updateArtists(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
     setIsLoading(false);
   };
 
   useEffect(() => {
     handleData();
-  });
+  }, []);
 
   if (isLoading) {
     return <Loading />;

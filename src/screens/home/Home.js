@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
@@ -39,35 +40,31 @@ const Home = ({ navigation }) => {
   });
 
   const handleTrending = async () => {
-    if (trendingAlbums.length === 0) {
-      try {
-        const response = await getTrendingAlbums();
+    try {
+      const response = await getTrendingAlbums();
 
-        if (response && response.data) {
-          updateTrendingAlbums(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        updateTrendingAlbums(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
 
-    if (trendingArtists.length === 0) {
-      try {
-        const response = await getTrendingArtists();
+    try {
+      const response = await getTrendingArtists();
 
-        if (response && response.data) {
-          updateTrendingArtists(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
+      if (response && response.data) {
+        updateTrendingArtists(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
     }
     setIsLoading(false);
   };
 
   useEffect(() => {
     handleTrending();
-  });
+  }, []);
 
   if (isLoading) {
     return <Loading />;
