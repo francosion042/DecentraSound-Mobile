@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
-    paddingTop: device.iPhoneNotch ? 94 : 50,
+    paddingTop: device.iPhoneNotch ? 70 : 50,
   },
   containerImage: {
     shadowColor: colors.black,

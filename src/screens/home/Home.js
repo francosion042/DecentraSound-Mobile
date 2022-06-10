@@ -88,7 +88,11 @@ const Home = ({ navigation }) => {
             navigation.navigate("ModalAccountOptions");
           }}
         >
-          <FontAwesome color={colors.white} name="user-circle-o" size={28} />
+          <FontAwesome
+            color={colors.brandPrimary}
+            name="user-circle-o"
+            size={28}
+          />
         </TouchableOpacity>
       </Animated.View>
 

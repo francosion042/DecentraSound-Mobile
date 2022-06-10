@@ -11,6 +11,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle, func } from "../../constants";
 import { ScreenContext, SearchContext } from "../../contexts";
 import { getGenres } from "../../api";
+import Loading from "../../components/Loading";
 
 // components
 import PlaylistItem from "../../components/PlaylistItem";
@@ -22,6 +23,7 @@ import SvgSearch from "../../components/icons/Svg.Search";
 const Search = ({ navigation }) => {
   const { updateShowTabBarState } = useContext(ScreenContext);
   const { genres, updateGenres } = useContext(SearchContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleGenres = async () => {
     try {
@@ -29,12 +31,16 @@ const Search = ({ navigation }) => {
       if (response && response.data.data) {
         updateGenres(response.data.data);
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    if (genres.length !== 0) {
+      setIsLoading(false);
+    }
     handleGenres();
   }, []);
 
@@ -80,22 +86,28 @@ const Search = ({ navigation }) => {
 
         <Text style={styles.sectionHeading}>Browse all</Text>
         <View style={styles.containerRow}>
-          {genres.map((genre) => {
-            return (
-              <View key={genre.id} style={styles.containerColumn}>
-                <PlaylistItem
-                  bgColor={func.getRandomColor()}
-                  onPress={() =>
-                    navigation.navigate("Albums", {
-                      albums: genre.albums,
-                      heading: `Popular ${genre.title} Albums `,
-                    })
-                  }
-                  title={genre.title}
-                />
-              </View>
-            );
-          })}
+          {isLoading ? (
+            <View style={styles.loadingContainer}>
+              <Loading />
+            </View>
+          ) : (
+            genres.map((genre) => {
+              return (
+                <View key={genre.id} style={styles.containerColumn}>
+                  <PlaylistItem
+                    bgColor={func.getRandomColor()}
+                    onPress={() =>
+                      navigation.navigate("Albums", {
+                        albums: genre.albums,
+                        heading: `Popular ${genre.title} Albums `,
+                      })
+                    }
+                    title={genre.title}
+                  />
+                </View>
+              );
+            })
+          )}
         </View>
       </Animated.ScrollView>
 
@@ -106,7 +118,11 @@ const Search = ({ navigation }) => {
             navigation.navigate("ModalAccountOptions");
           }}
         >
-          <FontAwesome color={colors.white} name="user-circle-o" size={28} />
+          <FontAwesome
+            color={colors.brandPrimary}
+            name="user-circle-o"
+            size={28}
+          />
         </TouchableOpacity>
       </View>
     </Fragment>
@@ -156,6 +172,11 @@ const styles = StyleSheet.create({
     right: 24,
     top: device.web ? 40 : device.iPhoneNotch ? 75 : 40,
     width: 28,
+  },
+  loadingContainer: {
+    flex: 1,
+    alignItems: "center",
+    paddingTop: "50%",
   },
 });
 
