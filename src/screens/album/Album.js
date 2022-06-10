@@ -31,6 +31,7 @@ const Album = ({ navigation }) => {
     useContext(PlayingContext);
 
   const [album, setAlbum] = useState(null);
+  const [backgroundColor, setBackgroundColor] = useState(null);
   const [downloaded, setDownloaded] = useState(false);
   const [scrollY] = useState(new Animated.Value(0));
 
@@ -38,6 +39,7 @@ const Album = ({ navigation }) => {
 
   useEffect(() => {
     setAlbum(navigation.getParam("album") || null);
+    setBackgroundColor(func.getRandomColor());
   }, [navigation, album]);
 
   const toggleDownloaded = (val) => {
@@ -139,7 +141,7 @@ const Album = ({ navigation }) => {
         <Animated.View
           style={[styles.headerLinear, { opacity: opacityHeading }]}
         >
-          <LinearGradient fill={func.getRandomColor()} height={89} />
+          <LinearGradient fill={backgroundColor} height={89} />
         </Animated.View>
         <View style={styles.header}>
           <TouchIcon

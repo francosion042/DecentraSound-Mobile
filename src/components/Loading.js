@@ -6,7 +6,7 @@ const Loading = () => {
   return (
     <View style={styles.container}>
       {/* <Image source={require("../../assets/network-loading.gif")} /> */}
-      <ActivityIndicator size={60} color={colors.brandPrimary} />
+      <ActivityIndicator size="large" color={colors.brandPrimary} />
     </View>
   );
 };
