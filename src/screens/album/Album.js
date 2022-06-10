@@ -15,7 +15,10 @@ import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { colors, device, gStyle, func } from "../../constants";
 import { ScreenContext, PlayingContext } from "../../contexts";
-import TrackPlayer from "react-native-track-player";
+import TrackPlayer, {
+  usePlaybackState,
+  State,
+} from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
 
 // components
@@ -29,6 +32,7 @@ const Album = ({ navigation }) => {
   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
   const { currentSongData, updateCurrentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
+  const playBackState = usePlaybackState();
 
   const [album, setAlbum] = useState(null);
   const [backgroundColor, setBackgroundColor] = useState(null);
@@ -85,6 +89,22 @@ const Album = ({ navigation }) => {
 
     await TrackPlayer.skip(songIndex);
     await TrackPlayer.play();
+  };
+  const handlePlayAll = async (action) => {
+    if (action === "play") {
+      updateCurrentSongData(album.songs[0]);
+      await SetupPlayer(album.songs, repeat);
+
+      updatePlayingSongs(album.songs);
+
+      await TrackPlayer.play();
+    } else {
+      updateCurrentSongData(null);
+
+      updatePlayingSongs([]);
+
+      await TrackPlayer.stop();
+    }
   };
 
   const handleMarketPlaceRedirect = useCallback(async () => {
@@ -206,12 +226,28 @@ const Album = ({ navigation }) => {
           </Animated.View>
           <View style={styles.containerShuffle}>
             <TouchText
-              onPress={() => null}
+              onPress={() => {
+                handlePlayAll(
+                  playBackState === State.Playing ? "stop" : "play"
+                );
+              }}
               style={styles.btn}
               styleText={styles.btnText}
-              icon="play"
+              icon={
+                playBackState === State.Playing
+                  ? "stop"
+                  : playBackState === State.Buffering
+                  ? "stop"
+                  : "play"
+              }
               styleIcon={styles.btnIcon}
-              text="Play"
+              text={
+                playBackState === State.Playing
+                  ? "Stop"
+                  : playBackState === State.Buffering
+                  ? "Loading"
+                  : "Play"
+              }
             />
             <TouchText
               onPress={handleMarketPlaceRedirect}
