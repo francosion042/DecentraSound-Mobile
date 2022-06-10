@@ -39,8 +39,11 @@ const Album = ({ navigation }) => {
 
   useEffect(() => {
     setAlbum(navigation.getParam("album") || null);
-    setBackgroundColor(func.getRandomColor());
   }, [navigation, album]);
+
+  useEffect(() => {
+    setBackgroundColor(func.getRandomColor());
+  }, []);
 
   const toggleDownloaded = (val) => {
     // if web

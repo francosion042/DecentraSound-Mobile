@@ -1,12 +1,15 @@
 import React from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
-import { colors } from "../constants";
+import { colors, device } from "../constants";
 
 const Loading = () => {
   return (
     <View style={styles.container}>
       {/* <Image source={require("../../assets/network-loading.gif")} /> */}
-      <ActivityIndicator size="large" color={colors.brandPrimary} />
+      <ActivityIndicator
+        size={device.iOS ? "large" : 60}
+        color={colors.brandPrimary}
+      />
     </View>
   );
 };

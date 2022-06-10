@@ -15,6 +15,7 @@ const MySongs = ({ navigation }) => {
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
   const { userOwnedSongs, updateUserOwnedSongs } = useContext(LibraryContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleUserOwnedSongs = async () => {
     const user = await getUser();
@@ -24,12 +25,16 @@ const MySongs = ({ navigation }) => {
       if (response && response.data) {
         updateUserOwnedSongs(response.data.data);
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    if (userOwnedSongs.length !== 0) {
+      setIsLoading(false);
+    }
     handleUserOwnedSongs();
   }, []);
 
@@ -56,7 +61,7 @@ const MySongs = ({ navigation }) => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Your Songs" />
       </View>
-      {userOwnedSongs.length === 0 ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <FlatList

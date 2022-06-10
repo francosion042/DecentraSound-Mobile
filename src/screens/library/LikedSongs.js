@@ -15,6 +15,7 @@ const LikedSongs = () => {
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
   const { userLikedSongs, updateUserLikedSongs } = useContext(LibraryContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleUserLikedSongs = async () => {
     const user = await getUser();
@@ -26,12 +27,16 @@ const LikedSongs = () => {
         const songs = response.data.data.map((likedSong) => likedSong.song);
         updateUserLikedSongs(songs);
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    if (userLikedSongs.length !== 0) {
+      setIsLoading(false);
+    }
     handleUserLikedSongs();
   }, []);
 
@@ -63,7 +68,7 @@ const LikedSongs = () => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Liked Songs" />
       </View>
-      {userLikedSongs.length === 0 ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <FlatList

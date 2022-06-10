@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   FlatList,
@@ -14,11 +14,13 @@ import { colors, device, gStyle } from "../../constants";
 import ScreenHeader from "../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../contexts";
 import { getUserSavedArtists } from "../../api";
+import Loading from "../../components/Loading";
 
 const SavedArtists = ({ navigation }) => {
   const { getUser } = useContext(UserContext);
   const { userSavedArtists, updateUserSavedArtists } =
     useContext(LibraryContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSavedArtists = async () => {
     const user = await getUser();
@@ -32,42 +34,52 @@ const SavedArtists = ({ navigation }) => {
         );
         updateUserSavedArtists(artists);
       }
+
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    if (userSavedArtists.length !== 0) {
+      setIsLoading(false);
+    }
     handleSavedArtists();
   }, []);
+
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Saved Artists" />
       </View>
 
-      <FlatList
-        contentContainerStyle={styles.containerContent}
-        data={userSavedArtists}
-        numColumns={2}
-        keyExtractor={({ id }) => id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            activeOpacity={gStyle.activeOpacity}
-            hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-            onPress={() => navigation.navigate("Artist", { artist: item })}
-            style={styles.item}
-          >
-            <View style={styles.image}>
-              {item.imageUrl && (
-                <Image source={{ uri: item.imageUrl }} style={styles.image} />
-              )}
-            </View>
-            <Text style={styles.title}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-        showsVerticalScrollIndicator={false}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          contentContainerStyle={styles.containerContent}
+          data={userSavedArtists}
+          numColumns={2}
+          keyExtractor={({ id }) => id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              activeOpacity={gStyle.activeOpacity}
+              hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
+              onPress={() => navigation.navigate("Artist", { artist: item })}
+              style={styles.item}
+            >
+              <View style={styles.image}>
+                {item.imageUrl && (
+                  <Image source={{ uri: item.imageUrl }} style={styles.image} />
+                )}
+              </View>
+              <Text style={styles.title}>{item.name}</Text>
+            </TouchableOpacity>
+          )}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </View>
   );
 };

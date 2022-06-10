@@ -15,6 +15,7 @@ const SavedSongs = () => {
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
   const { userSavedSongs, updateUserSavedSongs } = useContext(LibraryContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleUserSavedSongs = async () => {
     const user = await getUser();
@@ -26,12 +27,16 @@ const SavedSongs = () => {
         const songs = response.data.data.map((savedSong) => savedSong.song);
         updateUserSavedSongs(songs);
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    if (userSavedSongs.length !== 0) {
+      setIsLoading(false);
+    }
     handleUserSavedSongs();
   }, []);
 
@@ -63,7 +68,7 @@ const SavedSongs = () => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Your Songs" />
       </View>
-      {userSavedSongs.length === 0 ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <FlatList
