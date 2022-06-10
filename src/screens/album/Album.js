@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { OPENSEA_BASE_URL, RARIBLE_BASE_URL } from "@env";
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import PropTypes from "prop-types";
@@ -20,6 +21,7 @@ import TrackPlayer, {
   State,
 } from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
+import { getArtist } from "../../api";
 
 // components
 import LinearGradient from "../../components/LinearGradient";
@@ -38,12 +40,30 @@ const Album = ({ navigation }) => {
   const [backgroundColor, setBackgroundColor] = useState(null);
   const [downloaded, setDownloaded] = useState(false);
   const [scrollY] = useState(new Animated.Value(0));
+  const [artist, setArtist] = useState(null);
 
   const activeSongTitle = currentSongData ? currentSongData.title : "";
 
   useEffect(() => {
     setAlbum(navigation.getParam("album") || null);
   }, [navigation, album]);
+
+  useEffect(async () => {
+    if (album) {
+      // //////////////get Artist Data ///////////////
+      try {
+        const response = await getArtist({
+          artistId: album.artist.id,
+        });
+
+        if (response && response.data) {
+          setArtist(response.data.data[0]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [album]);
 
   useEffect(() => {
     setBackgroundColor(func.getRandomColor());
@@ -179,8 +199,9 @@ const Album = ({ navigation }) => {
             onPress={() => {
               updateShowTabBarState(false);
 
-              navigation.navigate("ModalMoreOptions", {
+              navigation.navigate("ModalAlbumOptions", {
                 album,
+                artist,
               });
             }}
           />

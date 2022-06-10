@@ -1,4 +1,5 @@
-import React, { useEffect, useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import {
   Text,
@@ -11,18 +12,21 @@ import {
   BackHandler,
 } from "react-native";
 import { device, gStyle, colors, fonts } from "../constants";
-import { ScreenContext } from "../contexts";
+import { ScreenContext, UserContext } from "../contexts";
+import { saveAlbum, verifyAlbumSave, unsaveAlbum } from "../api";
 
 // components
 import LineItemCategory from "./LineItemCategory";
 
 // mock data
-import moreOptions from "../mockdata/menuMoreOptions.json";
+import albumOptions from "../mockdata/menuAlbumOptions.json";
 
-const ModalMoreOptions = ({ navigation }) => {
+const ModalAlbumOptions = ({ navigation }) => {
   const album = navigation.getParam("album");
-
+  const artist = navigation.getParam("artist");
+  const { getUser } = useContext(UserContext);
   const { updateShowTabBarState } = useContext(ScreenContext);
+  const [isAlbumSaved, setIsAlbumSave] = useState(false);
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", () => {
@@ -33,6 +37,61 @@ const ModalMoreOptions = ({ navigation }) => {
 
     return () => BackHandler.removeEventListener("hardwareBackPress", true);
   });
+
+  const handleAction = async (action) => {
+    const user = await getUser();
+    if (action === "saveAlbum") {
+      if (!isAlbumSaved) {
+        try {
+          const response = await saveAlbum({
+            userid: user.id,
+            albumId: album.id,
+          });
+
+          if (response && response.data) {
+            setIsAlbumSave(true);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          const response = await unsaveAlbum({
+            userid: user.id,
+            albumId: album.id,
+          });
+
+          if (response && response.data) {
+            setIsAlbumSave(false);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } else if (action === "viewArtist" && artist !== null) {
+      updateShowTabBarState(true);
+      navigation.navigate("Artist", { artist: artist });
+    } else if (action === "likeAllSongs") {
+      console.log("");
+    }
+  };
+
+  useEffect(async () => {
+    const user = await getUser();
+    try {
+      const response = await verifyAlbumSave({
+        userid: user.id,
+        albumId: album.id,
+      });
+
+      if (response && response.data) {
+        const isSaved = response.data.data;
+        setIsAlbumSave(isSaved);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -68,8 +127,8 @@ const ModalMoreOptions = ({ navigation }) => {
           </Text>
         </View>
 
-        {Object.keys(moreOptions).map((index) => {
-          const item = moreOptions[index];
+        {Object.keys(albumOptions).map((index) => {
+          const item = albumOptions[index];
 
           return (
             <LineItemCategory
@@ -77,8 +136,14 @@ const ModalMoreOptions = ({ navigation }) => {
               disableRightSide
               icon={item.icon}
               iconLibrary={item.lib}
-              onPress={() => null}
-              title={item.title}
+              onPress={() => handleAction(item.action)}
+              title={
+                item.action === "saveAlbum"
+                  ? isAlbumSaved
+                    ? "Unsave Album"
+                    : item.title
+                  : item.title
+              }
             />
           );
         })}
@@ -87,7 +152,7 @@ const ModalMoreOptions = ({ navigation }) => {
   );
 };
 
-ModalMoreOptions.propTypes = {
+ModalAlbumOptions.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
 };
@@ -139,4 +204,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalMoreOptions;
+export default ModalAlbumOptions;

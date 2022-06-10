@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "icon": "playlist-add",
+    "title": "Save Album",
+    "lib": "MaterialIcons",
+    "action": "saveAlbum"
+  },
+  {
+    "id": 2,
+    "icon": "account-music",
+    "title": "View artist",
+    "lib": "MaterialCommunityIcons",
+    "action": "viewArtist"
+  },
+  {
+    "id": 3,
+    "icon": "share-alternative",
+    "title": "Share",
+    "lib": "Entypo",
+    "action": "share"
+  },
+  {
+    "id": 4,
+    "icon": "heart-o",
+    "title": "Like all songs",
+    "lib": "FontAwesome",
+    "action": "likeAllSongs"
+  },
+  {
+    "id": 5,
+    "icon": "queue-music",
+    "title": "Add to playlist",
+    "lib": "MaterialIcons",
+    "action": "addToPlaylist"
+  }
+]

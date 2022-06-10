@@ -28,7 +28,6 @@ const App = () => {
 
   const handleUser = async () => {
     const user = await getUser();
-    console.log(user);
 
     if (connector.connected && user === null) {
       try {

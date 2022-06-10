@@ -122,6 +122,17 @@ export const verifySongSave = async ({ userid, songId }) => {
 
 // ///////////////////////////////// ALBUMS //////////////////////////////////////
 
+export const getAlbum = async ({ albumId }) => {
+  try {
+    const response = await axios.get(`${BACKEND_BASE_URL}/albums/${albumId}`);
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getUserSavedAlbums = async ({ userid }) => {
   try {
     const response = await axios.get(
@@ -175,6 +186,17 @@ export const verifyAlbumSave = async ({ userid, albumId }) => {
 };
 
 // ///////////////////////////////// ARTISTS //////////////////////////////////////
+
+export const getArtist = async ({ artistId }) => {
+  try {
+    const response = await axios.get(`${BACKEND_BASE_URL}/artists/${artistId}`);
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getUserSavedArtists = async ({ userid }) => {
   try {

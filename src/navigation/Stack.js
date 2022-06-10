@@ -6,7 +6,7 @@ import TabNavigation from "./TabNavigation";
 
 // screens
 import ModalMusicPlayer from "../screens/playing/ModalMusicPlayer";
-import ModalMoreOptions from "../components/ModalMoreOptions";
+import ModalAlbumOptions from "../components/ModalAlbumOptions";
 import ModalAccountOptions from "../screens/account/ModalAccountOptions";
 
 const StackNavigator = createStackNavigator(
@@ -37,8 +37,8 @@ const StackNavigator = createStackNavigator(
         }),
       },
     },
-    ModalMoreOptions: {
-      screen: ModalMoreOptions,
+    ModalAlbumOptions: {
+      screen: ModalAlbumOptions,
       navigationOptions: {
         cardStyle: { backgroundColor: "transparent" },
         cardStyleInterpolator: ({ current: { progress } }) => ({
