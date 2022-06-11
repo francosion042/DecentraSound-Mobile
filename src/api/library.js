@@ -249,3 +249,31 @@ export const verifyArtistSave = async ({ userid, artistId }) => {
     console.log(error);
   }
 };
+
+// /////////////////////////////////// Playlist ///////////////////////////////////////////
+export const createPlaylist = async ({ userid, name, description }) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_BASE_URL}/library/users/${userid}/playlists`,
+      { name, description }
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addSongToPlaylist = async ({ playlistId, songId }) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_BASE_URL}/library/playlists/${playlistId}/songs/${songId}/add`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

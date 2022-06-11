@@ -10,26 +10,26 @@ import {
   View,
 } from "react-native";
 import { withNavigation } from "react-navigation";
-import { colors, device, func, gStyle } from "../../constants";
+import { colors, device, gStyle } from "../../constants";
 import ScreenHeader from "../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../contexts";
-import { getUserSavedAlbums } from "../../api";
+import { getUserPlaylists } from "../../api";
 import Loading from "../../components/Loading";
 
-const SavedAlbums = ({ navigation }) => {
+const Playlists = ({ navigation }) => {
   const { getUser } = useContext(UserContext);
-  const { userSavedAlbums, updateUserSavedAlbums } = useContext(LibraryContext);
+  const { userPlaylists, updateUserPlaylists } = useContext(LibraryContext);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleSavedAlbums = async () => {
+  const handlePlaylists = async () => {
     const user = await getUser();
 
     try {
-      const response = await getUserSavedAlbums({ userid: user.id });
+      const response = await getUserPlaylists({ userid: user.id });
 
       if (response && response.data) {
         const albums = response.data.data.map((savedAlbum) => savedAlbum.album);
-        updateUserSavedAlbums(albums);
+        updateUserPlaylists(albums);
       }
       setIsLoading(false);
     } catch (error) {
@@ -38,10 +38,10 @@ const SavedAlbums = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (userSavedAlbums.length !== 0) {
+    if (userPlaylists.length !== 0) {
       setIsLoading(false);
     }
-    handleSavedAlbums();
+    handlePlaylists();
   }, []);
 
   return (
@@ -54,19 +54,14 @@ const SavedAlbums = ({ navigation }) => {
       ) : (
         <FlatList
           contentContainerStyle={styles.containerContent}
-          data={userSavedAlbums}
+          data={userPlaylists}
           numColumns={2}
           keyExtractor={({ id }) => id.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
               activeOpacity={gStyle.activeOpacity}
               hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-              onPress={() =>
-                navigation.navigate("Album", {
-                  album: item,
-                  albumColor: func.getRandomColor(),
-                })
-              }
+              onPress={() => navigation.navigate("Album", { album: item })}
               style={styles.item}
             >
               <View style={styles.image}>
@@ -87,7 +82,7 @@ const SavedAlbums = ({ navigation }) => {
   );
 };
 
-SavedAlbums.propTypes = {
+Playlists.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
 };
@@ -117,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(SavedAlbums);
+export default withNavigation(Playlists);

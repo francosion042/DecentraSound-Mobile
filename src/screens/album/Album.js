@@ -14,11 +14,13 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
-import { colors, device, gStyle, func } from "../../constants";
+import { colors, device, gStyle } from "../../constants";
 import { ScreenContext, PlayingContext } from "../../contexts";
 import TrackPlayer, {
   usePlaybackState,
   State,
+  Event,
+  useTrackPlayerEvents,
 } from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
 import { getArtist } from "../../api";
@@ -32,12 +34,16 @@ import Loading from "../../components/Loading";
 
 const Album = ({ navigation }) => {
   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
-  const { currentSongData, updateCurrentSongData, updatePlayingSongs, repeat } =
-    useContext(PlayingContext);
+  const {
+    currentSongData,
+    updateCurrentSongData,
+    playingSongs,
+    updatePlayingSongs,
+    repeat,
+  } = useContext(PlayingContext);
+  const albumColor = navigation.getParam("albumColor");
   const playBackState = usePlaybackState();
-
   const [album, setAlbum] = useState(null);
-  const [backgroundColor, setBackgroundColor] = useState(null);
   const [downloaded, setDownloaded] = useState(false);
   const [scrollY] = useState(new Animated.Value(0));
   const [artist, setArtist] = useState(null);
@@ -64,10 +70,6 @@ const Album = ({ navigation }) => {
       }
     }
   }, [album]);
-
-  useEffect(() => {
-    setBackgroundColor(func.getRandomColor());
-  }, []);
 
   const toggleDownloaded = (val) => {
     // if web
@@ -96,6 +98,13 @@ const Album = ({ navigation }) => {
       setDownloaded(val);
     }
   };
+
+  // THis is called anytime the a track is changed, either by pressing the next or previous buttons, or auto change
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], (event) => {
+    if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
+      updateCurrentSongData(playingSongs[event.nextTrack]);
+    }
+  });
 
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
@@ -184,7 +193,7 @@ const Album = ({ navigation }) => {
         <Animated.View
           style={[styles.headerLinear, { opacity: opacityHeading }]}
         >
-          <LinearGradient fill={backgroundColor} height={89} />
+          <LinearGradient fill={albumColor} height={89} />
         </Animated.View>
         <View style={styles.header}>
           <TouchIcon
@@ -210,7 +219,7 @@ const Album = ({ navigation }) => {
 
       <View style={styles.containerFixed}>
         <View style={styles.containerLinear}>
-          <LinearGradient fill={func.getRandomColor()} />
+          <LinearGradient fill={albumColor} />
         </View>
         <View style={styles.containerImage}>
           <Image source={{ uri: album.coverImageUrl }} style={styles.image} />

@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 import { withNavigation } from "react-navigation";
-import { colors, device, gStyle } from "../../constants";
+import { colors, device, func, gStyle } from "../../constants";
 import ScreenHeader from "../../components/ScreenHeader";
 
 const Albums = ({ navigation }) => {
@@ -36,7 +36,12 @@ const Albums = ({ navigation }) => {
           <TouchableOpacity
             activeOpacity={gStyle.activeOpacity}
             hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-            onPress={() => navigation.navigate("Album", { album: item })}
+            onPress={() =>
+              navigation.navigate("Album", {
+                album: item,
+                albumColor: func.getRandomColor(),
+              })
+            }
             style={styles.item}
           >
             <View style={styles.image}>

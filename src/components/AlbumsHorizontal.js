@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 import { withNavigation } from "react-navigation";
-import { colors, gStyle } from "../constants";
+import { colors, func, gStyle } from "../constants";
 
 const AlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
   <View style={styles.container}>
@@ -25,7 +25,12 @@ const AlbumsHorizontal = ({ data, heading, navigation, tagline }) => (
         <TouchableOpacity
           activeOpacity={gStyle.activeOpacity}
           hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-          onPress={() => navigation.navigate("Album", { album: item })}
+          onPress={() =>
+            navigation.navigate("Album", {
+              album: item,
+              albumColor: func.getRandomColor(),
+            })
+          }
           style={styles.item}
         >
           <View style={styles.image}>
