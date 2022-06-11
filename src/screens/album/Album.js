@@ -307,6 +307,7 @@ const Album = ({ navigation }) => {
                     : "Unknown Album",
                   album: album.name,
                   artist: album.artist.name,
+                  artistId: album.artist.id,
                   image: song.imageUrl,
                   title: song.title,
                 }}

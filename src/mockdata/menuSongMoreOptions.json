@@ -2,31 +2,36 @@
   {
     "id": 1,
     "icon": "heart-o",
-    "title": "Like",
-    "lib": "FontAwesome"
+    "title": "Like Song",
+    "lib": "FontAwesome",
+    "action": "likeSong"
   },
   {
     "id": 2,
     "icon": "account-music",
     "title": "View artist",
-    "lib": "MaterialCommunityIcons"
+    "lib": "MaterialCommunityIcons",
+    "action": "viewArtist"
   },
   {
     "id": 3,
     "icon": "share-alternative",
-    "title": "Share",
-    "lib": "Entypo"
+    "title": "Share Song",
+    "lib": "Entypo",
+    "action": "shareSong"
   },
   {
     "id": 5,
     "icon": "queue-music",
     "title": "Add to playlist",
-    "lib": "MaterialIcons"
+    "lib": "MaterialIcons",
+    "action": "addToPlaylist"
   },
   {
     "id": 6,
     "icon": "playlist-add",
     "title": "Save Song",
-    "lib": "MaterialIcons"
+    "lib": "MaterialIcons",
+    "action": "saveSong"
   }
 ]

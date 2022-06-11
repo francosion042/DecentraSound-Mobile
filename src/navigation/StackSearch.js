@@ -27,9 +27,7 @@ export default createStackNavigator(
     Searching,
     Album,
     Albums,
-    SearchArtist: {
-      screen: Artist,
-    },
+    Artist,
   },
   {
     headerMode: "none",

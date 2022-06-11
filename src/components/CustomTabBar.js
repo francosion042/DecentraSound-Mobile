@@ -14,7 +14,9 @@ const CustomTabBar = (props) => {
 
   return !showTabBarState ? null : (
     <React.Fragment>
-      {songOptionsModalVisible && <ModalSongOptions />}
+      {songOptionsModalVisible && (
+        <ModalSongOptions navigation={props.navigation} />
+      )}
       {currentSongData ? <BarMusicPlayer /> : null}
       <BottomTabBar {...props} />
     </React.Fragment>

@@ -88,6 +88,7 @@ const LikedSongs = () => {
                   ? item.contractAddress
                   : "Unknown Album",
                 artist: "Artist",
+                artistId: item.artist.id,
                 image: item.imageUrl,
                 length: 4214241,
                 title: item.title,

@@ -73,13 +73,17 @@ const ModalMusicPlayer = ({ navigation }) => {
   useEffect(async () => {
     const user = await getUser();
 
-    const response = await verifySongLike({
-      userid: user.id,
-      songId: currentSongData.songId,
-    });
-    if (response && response.data) {
-      const isliked = response.data.data;
-      setLiked(isliked);
+    try {
+      const response = await verifySongLike({
+        userid: user.id,
+        songId: currentSongData.songId,
+      });
+      if (response && response.data) {
+        const isliked = response.data.data;
+        setLiked(isliked);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 
@@ -115,7 +119,6 @@ const ModalMusicPlayer = ({ navigation }) => {
     const user = await getUser();
 
     if (!liked) {
-      console.log("liked");
       try {
         await likeSong({
           userid: user.id,
@@ -125,7 +128,6 @@ const ModalMusicPlayer = ({ navigation }) => {
         console.log(error);
       }
     } else {
-      console.log("unliked");
       try {
         await unlikeSong({
           userid: user.id,

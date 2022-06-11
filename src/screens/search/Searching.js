@@ -100,6 +100,7 @@ const Searching = ({ navigation }) => {
                       ? item.song.contractAddress
                       : "Unknown Album",
                     artist: item.song.artist.name,
+                    artistId: item.song.artist.id,
                     image: item.song.imageUrl,
                     title: item.song.title,
                   }}
@@ -111,7 +112,7 @@ const Searching = ({ navigation }) => {
               <LineItemArtist
                 key={item.dataId.toString()}
                 onPress={() =>
-                  navigation.navigate("SearchArtist", { artist: item.artist })
+                  navigation.navigate("Artist", { artist: item.artist })
                 }
                 artist={item.artist}
               />

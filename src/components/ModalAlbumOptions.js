@@ -26,7 +26,7 @@ const ModalAlbumOptions = ({ navigation }) => {
   const artist = navigation.getParam("artist");
   const { getUser } = useContext(UserContext);
   const { updateShowTabBarState } = useContext(ScreenContext);
-  const [isAlbumSaved, setIsAlbumSave] = useState(false);
+  const [isAlbumSaved, setIsAlbumSaved] = useState(false);
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", () => {
@@ -49,7 +49,7 @@ const ModalAlbumOptions = ({ navigation }) => {
           });
 
           if (response && response.data) {
-            setIsAlbumSave(true);
+            setIsAlbumSaved(true);
           }
         } catch (error) {
           console.log(error);
@@ -62,7 +62,7 @@ const ModalAlbumOptions = ({ navigation }) => {
           });
 
           if (response && response.data) {
-            setIsAlbumSave(false);
+            setIsAlbumSaved(false);
           }
         } catch (error) {
           console.log(error);
@@ -86,7 +86,7 @@ const ModalAlbumOptions = ({ navigation }) => {
 
       if (response && response.data) {
         const isSaved = response.data.data;
-        setIsAlbumSave(isSaved);
+        setIsAlbumSaved(isSaved);
       }
     } catch (error) {
       console.log(error);

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
   Text,
@@ -6,8 +7,17 @@ import {
   StyleSheet,
   Image,
 } from "react-native";
-import React, { useContext } from "react";
-import { ScreenContext } from "../contexts";
+import React, { useContext, useEffect, useState } from "react";
+import { ScreenContext, UserContext } from "../contexts";
+import {
+  saveSong,
+  verifySongSave,
+  unsaveSong,
+  likeSong,
+  verifySongLike,
+  unlikeSong,
+  getArtist,
+} from "../api";
 
 // components
 import LineItemCategory from "./LineItemCategory";
@@ -16,14 +26,130 @@ import LineItemCategory from "./LineItemCategory";
 import menuSongMoreOptions from "../mockdata/menuSongMoreOptions.json";
 import { colors, gStyle } from "../constants";
 
-const ModalSongOptions = () => {
+const ModalSongOptions = ({ navigation }) => {
+  const { getUser } = useContext(UserContext);
   const {
     songOptionsModalVisible,
     toggleSongOptionsModalVisible,
     clickedSong,
   } = useContext(ScreenContext);
+  const [artist, setArtist] = useState(null);
+  const [isSongSaved, setIsSongSaved] = useState(false);
+  const [liked, setLiked] = useState(false);
 
-  const handlePress = () => {};
+  const handleAction = async (action) => {
+    const user = await getUser();
+    if (action === "saveSong") {
+      if (!isSongSaved) {
+        try {
+          const response = await saveSong({
+            userid: user.id,
+            songId: clickedSong.songId,
+          });
+
+          if (response && response.data) {
+            setIsSongSaved(true);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          const response = await unsaveSong({
+            userid: user.id,
+            songId: clickedSong.songId,
+          });
+
+          if (response && response.data) {
+            setIsSongSaved(false);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } else if (action === "viewArtist" && artist !== null) {
+      navigation.navigate("Artist", { artist: artist });
+      toggleSongOptionsModalVisible();
+    } else if (action === "likeSong") {
+      if (!liked) {
+        try {
+          const response = await likeSong({
+            userid: user.id,
+            songId: clickedSong.songId,
+          });
+          if (response && response.data) {
+            setLiked(true);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          const response = await unlikeSong({
+            userid: user.id,
+            songId: clickedSong.songId,
+          });
+          if (response && response.data) {
+            setLiked(false);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+  };
+
+  useEffect(async () => {
+    const user = await getUser();
+    try {
+      const response = await verifySongSave({
+        userid: user.id,
+        songId: clickedSong.songId,
+      });
+
+      if (response && response.data) {
+        const isSaved = response.data.data;
+        setIsSongSaved(isSaved);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      const response = await verifySongLike({
+        userid: user.id,
+        songId: clickedSong.songId,
+      });
+      if (response && response.data) {
+        const isliked = response.data.data;
+        setLiked(isliked);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    // //////////////get Artist Data ///////////////
+    try {
+      const response = await getArtist({
+        artistId: clickedSong.artistId,
+      });
+
+      if (response && response.data) {
+        setArtist(response.data.data[0]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const setTitle = (item) => {
+    if (item.action === "saveSong") {
+      return isSongSaved ? "Unsave Song" : item.title;
+    }
+    if (item.action === "likeSong") {
+      return liked ? "Unlike Song" : item.title;
+    }
+  };
   return (
     <Modal
       animationType="slide"
@@ -67,8 +193,8 @@ const ModalSongOptions = () => {
                 disableRightSide
                 icon={item.icon}
                 iconLibrary={item.lib}
-                onPress={handlePress}
-                title={item.title}
+                onPress={() => handleAction(item.action)}
+                title={setTitle(item) || item.title}
               />
             );
           })}
