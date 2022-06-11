@@ -1,29 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FlatList, StyleSheet, View } from "react-native";
-import { device, gStyle } from "../../constants";
+import { device, gStyle } from "../../../constants";
 import React, { useContext, useEffect, useState } from "react";
-import ScreenHeader from "../../components/ScreenHeader";
-import { PlayingContext, LibraryContext, UserContext } from "../../contexts";
-import LineItemSong from "../../components/LineItemSong";
-import Loading from "../../components/Loading";
+import ScreenHeader from "../../../components/ScreenHeader";
+import { PlayingContext, LibraryContext, UserContext } from "../../../contexts";
+import LineItemSong from "../../../components/LineItemSong";
+import Loading from "../../../components/Loading";
 import TrackPlayer from "react-native-track-player";
-import SetupPlayer from "../playing/SetupPlayer";
-import { getUserOwnedSongs } from "../../api";
+import SetupPlayer from "../../playing/SetupPlayer";
+import { getUserSavedSongs } from "../../../api";
 
-const MySongs = ({ navigation }) => {
+const SavedSongs = () => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
-  const { userOwnedSongs, updateUserOwnedSongs } = useContext(LibraryContext);
+  const { userSavedSongs, updateUserSavedSongs } = useContext(LibraryContext);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleUserOwnedSongs = async () => {
+  const handleUserSavedSongs = async () => {
     const user = await getUser();
 
     try {
-      const response = await getUserOwnedSongs({ userid: user.id });
+      const response = await getUserSavedSongs({ userid: user.id });
+
       if (response && response.data) {
-        updateUserOwnedSongs(response.data.data);
+        const songs = response.data.data.map((savedSong) => savedSong.song);
+        updateUserSavedSongs(songs);
       }
       setIsLoading(false);
     } catch (error) {
@@ -32,21 +34,26 @@ const MySongs = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (userOwnedSongs.length !== 0) {
+    if (userSavedSongs.length !== 0) {
       setIsLoading(false);
     }
-    handleUserOwnedSongs();
+    handleUserSavedSongs();
   }, []);
 
   const [downloaded] = useState(false);
 
+  /**
+   * @todo the setupPlayer() should be called when a user clicks a song, it checks if there's no active setup for SavedSongs
+   *
+   */
+
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
-    await SetupPlayer(userOwnedSongs, repeat);
+    await SetupPlayer(userSavedSongs, repeat);
 
-    updatePlayingSongs(userOwnedSongs);
+    updatePlayingSongs(userSavedSongs);
 
-    const songIndex = userOwnedSongs.findIndex(
+    const songIndex = userSavedSongs.findIndex(
       (song) => song.tokenId === songData.tokenId
     );
 
@@ -66,24 +73,24 @@ const MySongs = ({ navigation }) => {
       ) : (
         <FlatList
           contentContainerStyle={styles.containerFlatlist}
-          data={userOwnedSongs}
+          data={userSavedSongs}
           keyExtractor={(song) => song.tokenId}
-          renderItem={({ item, index }) => (
+          renderItem={({ item }) => (
             <LineItemSong
-              navigation={navigation}
-              screen="mySongs"
               active={activeSongTitle === item.title}
               downloaded={downloaded}
               key={item.tokenId}
               onPress={handlePress}
               songData={{
-                songId: item.id ? item.id : index,
+                songId: item.id,
                 tokenId: item.tokenId,
                 contractAddress: item.contractAddress
                   ? item.contractAddress
                   : "Unknown Album",
                 artist: "Artist",
+                artistId: item.artist.id,
                 image: item.imageUrl,
+                length: 4214241,
                 title: item.title,
               }}
             />
@@ -106,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MySongs;
+export default SavedSongs;

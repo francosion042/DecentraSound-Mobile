@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FlatList, StyleSheet, View } from "react-native";
-import { device, gStyle } from "../../constants";
+import { device, gStyle } from "../../../constants";
 import React, { useContext, useEffect, useState } from "react";
-import ScreenHeader from "../../components/ScreenHeader";
-import { PlayingContext, LibraryContext, UserContext } from "../../contexts";
-import LineItemSong from "../../components/LineItemSong";
-import Loading from "../../components/Loading";
+import ScreenHeader from "../../../components/ScreenHeader";
+import { PlayingContext, LibraryContext, UserContext } from "../../../contexts";
+import LineItemSong from "../../../components/LineItemSong";
+import Loading from "../../../components/Loading";
 import TrackPlayer from "react-native-track-player";
-import SetupPlayer from "../playing/SetupPlayer";
-import { getUserLikedSongs } from "../../api";
+import SetupPlayer from "../../playing/SetupPlayer";
+import { getUserLikedSongs } from "../../../api";
 
 const LikedSongs = () => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =

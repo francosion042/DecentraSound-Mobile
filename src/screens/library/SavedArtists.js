@@ -74,7 +74,9 @@ const SavedArtists = ({ navigation }) => {
                   <Image source={{ uri: item.imageUrl }} style={styles.image} />
                 )}
               </View>
-              <Text style={styles.title}>{item.name}</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                {item.name}
+              </Text>
             </TouchableOpacity>
           )}
           showsVerticalScrollIndicator={false}
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   title: {
-    ...gStyle.textBold12,
+    ...gStyle.textBold14,
     color: colors.white,
     marginTop: 4,
     textAlign: "center",

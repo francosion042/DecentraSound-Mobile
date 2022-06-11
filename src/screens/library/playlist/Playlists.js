@@ -9,12 +9,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 import { withNavigation } from "react-navigation";
-import { colors, device, gStyle } from "../../constants";
-import ScreenHeader from "../../components/ScreenHeader";
-import { LibraryContext, UserContext } from "../../contexts";
-import { getUserPlaylists } from "../../api";
-import Loading from "../../components/Loading";
+import { colors, device, gStyle } from "../../../constants";
+import ScreenHeader from "../../../components/ScreenHeader";
+import { LibraryContext, UserContext } from "../../../contexts";
+import { getUserPlaylists } from "../../../api";
+import Loading from "../../../components/Loading";
 
 const Playlists = ({ navigation }) => {
   const { getUser } = useContext(UserContext);
@@ -38,6 +39,14 @@ const Playlists = ({ navigation }) => {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handlePress = (item) => {
+    if (item.id === 0) {
+      console.log("create");
+    } else {
+      navigation.navigate("Playlist", { playlist: item });
     }
   };
 
@@ -65,20 +74,26 @@ const Playlists = ({ navigation }) => {
             <TouchableOpacity
               activeOpacity={gStyle.activeOpacity}
               hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-              onPress={() =>
-                navigation.navigate("Playlist", { playlist: item })
-              }
+              onPress={() => handlePress(item)}
               style={styles.item}
             >
-              <View style={styles.image}>
-                {item.coverImageUrl && (
-                  <Image
-                    source={{ uri: item.coverImageUrl }}
-                    style={styles.image}
-                  />
-                )}
-              </View>
-              <Text style={styles.title}>{item.name}</Text>
+              {item.id === 0 ? (
+                <View style={styles.image}>
+                  <FontAwesome name="plus" size={60} style={styles.addIcon} />
+                </View>
+              ) : (
+                <View style={styles.image}>
+                  {item.imageUrl && (
+                    <Image
+                      source={{ uri: item.imageUrl }}
+                      style={styles.image}
+                    />
+                  )}
+                </View>
+              )}
+              <Text style={styles.title} numberOfLines={1}>
+                {item.name}
+              </Text>
             </TouchableOpacity>
           )}
           showsVerticalScrollIndicator={false}
@@ -110,8 +125,13 @@ const styles = StyleSheet.create({
     width: 148,
     borderRadius: 5,
   },
+  addIcon: {
+    color: colors.greyOff,
+    alignSelf: "center",
+    marginTop: "30%",
+  },
   title: {
-    ...gStyle.textBold12,
+    ...gStyle.textBold14,
     color: colors.white,
     marginTop: 4,
     textAlign: "center",

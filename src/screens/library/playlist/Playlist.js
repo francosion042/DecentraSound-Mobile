@@ -11,22 +11,22 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
-import { colors, device, gStyle } from "../../constants";
-import { ScreenContext, PlayingContext } from "../../contexts";
+import { colors, device, gStyle } from "../../../constants";
+import { ScreenContext, PlayingContext } from "../../../contexts";
 import TrackPlayer, {
   usePlaybackState,
   State,
   Event,
   useTrackPlayerEvents,
 } from "react-native-track-player";
-import SetupPlayer from "../playing/SetupPlayer";
+import SetupPlayer from "../../playing/SetupPlayer";
 
 // components
-import LinearGradient from "../../components/LinearGradient";
-import LineItemSong from "../../components/LineItemSong";
-import TouchIcon from "../../components/TouchIcon";
-import TouchText from "../../components/TouchText";
-import Loading from "../../components/Loading";
+import LinearGradient from "../../../components/LinearGradient";
+import LineItemSong from "../../../components/LineItemSong";
+import TouchIcon from "../../../components/TouchIcon";
+import TouchText from "../../../components/TouchText";
+import Loading from "../../../components/Loading";
 
 const Playlist = ({ navigation }) => {
   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);

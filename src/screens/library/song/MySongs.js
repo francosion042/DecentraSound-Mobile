@@ -1,31 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FlatList, StyleSheet, View } from "react-native";
-import { device, gStyle } from "../../constants";
+import { device, gStyle } from "../../../constants";
 import React, { useContext, useEffect, useState } from "react";
-import ScreenHeader from "../../components/ScreenHeader";
-import { PlayingContext, LibraryContext, UserContext } from "../../contexts";
-import LineItemSong from "../../components/LineItemSong";
-import Loading from "../../components/Loading";
+import ScreenHeader from "../../../components/ScreenHeader";
+import { PlayingContext, LibraryContext, UserContext } from "../../../contexts";
+import LineItemSong from "../../../components/LineItemSong";
+import Loading from "../../../components/Loading";
 import TrackPlayer from "react-native-track-player";
-import SetupPlayer from "../playing/SetupPlayer";
-import { getUserSavedSongs } from "../../api";
+import SetupPlayer from "../../playing/SetupPlayer";
+import { getUserOwnedSongs } from "../../../api";
 
-const SavedSongs = () => {
+const MySongs = ({ navigation }) => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
-  const { userSavedSongs, updateUserSavedSongs } = useContext(LibraryContext);
+  const { userOwnedSongs, updateUserOwnedSongs } = useContext(LibraryContext);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleUserSavedSongs = async () => {
+  const handleUserOwnedSongs = async () => {
     const user = await getUser();
 
     try {
-      const response = await getUserSavedSongs({ userid: user.id });
-
+      const response = await getUserOwnedSongs({ userid: user.id });
       if (response && response.data) {
-        const songs = response.data.data.map((savedSong) => savedSong.song);
-        updateUserSavedSongs(songs);
+        updateUserOwnedSongs(response.data.data);
       }
       setIsLoading(false);
     } catch (error) {
@@ -34,26 +32,21 @@ const SavedSongs = () => {
   };
 
   useEffect(() => {
-    if (userSavedSongs.length !== 0) {
+    if (userOwnedSongs.length !== 0) {
       setIsLoading(false);
     }
-    handleUserSavedSongs();
+    handleUserOwnedSongs();
   }, []);
 
   const [downloaded] = useState(false);
 
-  /**
-   * @todo the setupPlayer() should be called when a user clicks a song, it checks if there's no active setup for SavedSongs
-   *
-   */
-
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
-    await SetupPlayer(userSavedSongs, repeat);
+    await SetupPlayer(userOwnedSongs, repeat);
 
-    updatePlayingSongs(userSavedSongs);
+    updatePlayingSongs(userOwnedSongs);
 
-    const songIndex = userSavedSongs.findIndex(
+    const songIndex = userOwnedSongs.findIndex(
       (song) => song.tokenId === songData.tokenId
     );
 
@@ -73,24 +66,24 @@ const SavedSongs = () => {
       ) : (
         <FlatList
           contentContainerStyle={styles.containerFlatlist}
-          data={userSavedSongs}
+          data={userOwnedSongs}
           keyExtractor={(song) => song.tokenId}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <LineItemSong
+              navigation={navigation}
+              screen="mySongs"
               active={activeSongTitle === item.title}
               downloaded={downloaded}
               key={item.tokenId}
               onPress={handlePress}
               songData={{
-                songId: item.id,
+                songId: item.id ? item.id : index,
                 tokenId: item.tokenId,
                 contractAddress: item.contractAddress
                   ? item.contractAddress
                   : "Unknown Album",
                 artist: "Artist",
-                artistId: item.artist.id,
                 image: item.imageUrl,
-                length: 4214241,
                 title: item.title,
               }}
             />
@@ -113,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SavedSongs;
+export default MySongs;

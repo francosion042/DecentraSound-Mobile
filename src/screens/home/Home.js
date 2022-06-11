@@ -12,6 +12,7 @@ import Loading from "../../components/Loading";
 // import AlbumsHorizontal from "../../components/AlbumsHorizontal";
 import ArtistsHorizontal from "../../components/ArtistsHorizontal";
 import BigAlbumsHorizontal from "../../components/BigAlbumsHorizontal";
+import AlbumsHorizontal from "../../components/AlbumsHorizontal";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenContext } from "../../contexts";
@@ -110,6 +111,11 @@ const Home = ({ navigation }) => {
         <BigAlbumsHorizontal
           data={func.extractTrendingAlbum(trendingAlbums)}
           heading="Top Collections"
+        />
+
+        <AlbumsHorizontal
+          data={func.extractTrendingAlbum(trendingAlbums)}
+          heading="Made For You"
         />
 
         <ArtistsHorizontal
