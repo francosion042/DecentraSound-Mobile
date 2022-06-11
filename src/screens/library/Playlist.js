@@ -1,6 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { OPENSEA_BASE_URL, RARIBLE_BASE_URL } from "@env";
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import {
   Alert,
@@ -10,7 +8,6 @@ import {
   Switch,
   Text,
   View,
-  Linking,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
@@ -23,7 +20,6 @@ import TrackPlayer, {
   useTrackPlayerEvents,
 } from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
-import { getArtist } from "../../api";
 
 // components
 import LinearGradient from "../../components/LinearGradient";
@@ -32,7 +28,7 @@ import TouchIcon from "../../components/TouchIcon";
 import TouchText from "../../components/TouchText";
 import Loading from "../../components/Loading";
 
-const Album = ({ navigation }) => {
+const Playlist = ({ navigation }) => {
   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
   const {
     currentSongData,
@@ -41,35 +37,17 @@ const Album = ({ navigation }) => {
     updatePlayingSongs,
     repeat,
   } = useContext(PlayingContext);
-  const albumColor = navigation.getParam("albumColor");
+  const playlistColor = navigation.getParam("playlistColor");
   const playBackState = usePlaybackState();
-  const [album, setAlbum] = useState(null);
+  const [playlist, setPlaylist] = useState(null);
   const [downloaded, setDownloaded] = useState(false);
   const [scrollY] = useState(new Animated.Value(0));
-  const [artist, setArtist] = useState(null);
 
   const activeSongTitle = currentSongData ? currentSongData.title : "";
 
   useEffect(() => {
-    setAlbum(navigation.getParam("album") || null);
-  }, [navigation, album]);
-
-  useEffect(async () => {
-    if (album) {
-      // //////////////get Artist Data ///////////////
-      try {
-        const response = await getArtist({
-          artistId: album.artist.id,
-        });
-
-        if (response && response.data) {
-          setArtist(response.data.data[0]);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [album]);
+    setPlaylist(navigation.getParam("playlist") || null);
+  }, [navigation, playlist]);
 
   const toggleDownloaded = (val) => {
     // if web
@@ -108,11 +86,11 @@ const Album = ({ navigation }) => {
 
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
-    await SetupPlayer(album.songs, repeat);
+    await SetupPlayer(playlist.songs, repeat);
 
-    updatePlayingSongs(album.songs);
+    updatePlayingSongs(playlist.songs);
 
-    const songIndex = album.songs.findIndex(
+    const songIndex = playlist.songs.findIndex(
       (song) => song.tokenId === songData.tokenId
     );
 
@@ -121,10 +99,10 @@ const Album = ({ navigation }) => {
   };
   const handlePlayAll = async (action) => {
     if (action === "play") {
-      updateCurrentSongData(album.songs[0]);
-      await SetupPlayer(album.songs, "Queue");
+      updateCurrentSongData(playlist.songs[0]);
+      await SetupPlayer(playlist.songs, repeat);
 
-      updatePlayingSongs(album.songs);
+      updatePlayingSongs(playlist.songs);
 
       await TrackPlayer.play();
     } else {
@@ -135,32 +113,6 @@ const Album = ({ navigation }) => {
       await TrackPlayer.stop();
     }
   };
-
-  const handleMarketPlaceRedirect = useCallback(async () => {
-    if (album.marketPlace === "OpenSea") {
-      const url = album.marketPlaceAlbumUrl
-        ? album.marketPlaceAlbumUrl
-        : OPENSEA_BASE_URL;
-
-      const supported = await Linking.canOpenURL(url);
-      if (!supported) {
-        return Alert.alert(`Unsupported open this URL: ${url}`);
-      }
-
-      await Linking.openURL(url);
-    } else if (album.marketPlace === "Rarible") {
-      const url = album.marketPlaceAlbumUrl
-        ? album.marketPlaceAlbumUrl
-        : RARIBLE_BASE_URL;
-
-      const supported = await Linking.canOpenURL(url);
-      if (!supported) {
-        return Alert.alert(`Unsupported open this URL: ${url}`);
-      }
-
-      await Linking.openURL(url);
-    }
-  }, [album]);
 
   const stickyArray = device.web ? [] : [0];
   const headingRange = device.web ? [140, 200] : [230, 280];
@@ -178,8 +130,8 @@ const Album = ({ navigation }) => {
     extrapolate: "clamp",
   });
 
-  // album data not set?
-  if (album === null) {
+  // Playlist data not set?
+  if (Playlist === null) {
     return <Loading />;
   }
 
@@ -193,7 +145,7 @@ const Album = ({ navigation }) => {
         <Animated.View
           style={[styles.headerLinear, { opacity: opacityHeading }]}
         >
-          <LinearGradient fill={albumColor} height={89} />
+          <LinearGradient fill={playlistColor} height={89} />
         </Animated.View>
         <View style={styles.header}>
           <TouchIcon
@@ -201,16 +153,15 @@ const Album = ({ navigation }) => {
             onPress={() => navigation.goBack(null)}
           />
           <Animated.View style={{ opacity: opacityShuffle }}>
-            <Text style={styles.headerTitle}>{album.title}</Text>
+            <Text style={styles.headerTitle}>{Playlist.title}</Text>
           </Animated.View>
           <TouchIcon
             icon={<Feather color={colors.white} name="more-vertical" />}
             onPress={() => {
               updateShowTabBarState(false);
 
-              navigation.navigate("ModalAlbumOptions", {
-                album,
-                artist,
+              navigation.navigate("ModalPlaylistOptions", {
+                playlist,
               });
             }}
           />
@@ -219,21 +170,14 @@ const Album = ({ navigation }) => {
 
       <View style={styles.containerFixed}>
         <View style={styles.containerLinear}>
-          <LinearGradient fill={albumColor} />
+          <LinearGradient fill={playlistColor} />
         </View>
         <View style={styles.containerImage}>
-          <Image source={{ uri: album.coverImageUrl }} style={styles.image} />
+          <Image source={{ uri: playlist.imageUrl }} style={styles.image} />
         </View>
         <View style={styles.containerTitle}>
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
-            {album.name}
-          </Text>
-        </View>
-        <View style={styles.containerAlbum}>
-          <Text style={styles.albumInfo}>
-            {`Album by ${album.artist.name} · ${
-              album.releaseDate.split("T")[0]
-            }`}
+            {playlist.name}
           </Text>
         </View>
       </View>
@@ -280,12 +224,12 @@ const Album = ({ navigation }) => {
               }
             />
             <TouchText
-              onPress={handleMarketPlaceRedirect}
+              onPress={() => {}}
               style={styles.btn}
               styleText={styles.btnText}
-              icon="external-link"
+              icon="shuffle"
               styleIcon={styles.btnIcon}
-              text={album.marketPlace}
+              text="Shuffle"
             />
           </View>
         </View>
@@ -301,8 +245,8 @@ const Album = ({ navigation }) => {
             />
           </View>
 
-          {album.songs &&
-            album.songs.map((song, index) => (
+          {playlist.songs &&
+            playlist.songs.map((song, index) => (
               <LineItemSong
                 active={activeSongTitle === song.title}
                 downloaded={downloaded}
@@ -313,10 +257,10 @@ const Album = ({ navigation }) => {
                   tokenId: song.tokenId,
                   contractAddress: song.contractAddress
                     ? song.contractAddress
-                    : "Unknown Album",
-                  album: album.name,
-                  artist: album.artist.name,
-                  artistId: album.artist.id,
+                    : "Unknown Playlist",
+                  album: playlist.name,
+                  artist: song.artist.name,
+                  artistId: song.artist.id,
                   image: song.imageUrl,
                   title: song.title,
                 }}
@@ -329,7 +273,7 @@ const Album = ({ navigation }) => {
   );
 };
 
-Album.propTypes = {
+Playlist.propTypes = {
   // required
   navigation: PropTypes.object.isRequired,
 };
@@ -403,10 +347,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     textAlign: "center",
   },
-  containerAlbum: {
+  containerPlaylist: {
     zIndex: device.web ? 20 : 0,
   },
-  albumInfo: {
+  PlaylistInfo: {
     ...gStyle.text12,
     color: colors.greyInactive,
     marginBottom: 48,
@@ -467,4 +411,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Album;
+export default Playlist;

@@ -21,6 +21,11 @@ const Playlists = ({ navigation }) => {
   const { userPlaylists, updateUserPlaylists } = useContext(LibraryContext);
   const [isLoading, setIsLoading] = useState(true);
 
+  const createPlaylistButton = {
+    id: 0,
+    name: "Create Playlist",
+    imageUrl: "",
+  };
   const handlePlaylists = async () => {
     const user = await getUser();
 
@@ -28,8 +33,7 @@ const Playlists = ({ navigation }) => {
       const response = await getUserPlaylists({ userid: user.id });
 
       if (response && response.data) {
-        const albums = response.data.data.map((savedAlbum) => savedAlbum.album);
-        updateUserPlaylists(albums);
+        updateUserPlaylists([createPlaylistButton, ...response.data.data]);
       }
       setIsLoading(false);
     } catch (error) {
@@ -47,7 +51,7 @@ const Playlists = ({ navigation }) => {
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
-        <ScreenHeader showBack={true} title="Saved Albums" />
+        <ScreenHeader showBack={true} title="Playlists" />
       </View>
       {isLoading ? (
         <Loading />
@@ -61,7 +65,9 @@ const Playlists = ({ navigation }) => {
             <TouchableOpacity
               activeOpacity={gStyle.activeOpacity}
               hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
-              onPress={() => navigation.navigate("Album", { album: item })}
+              onPress={() =>
+                navigation.navigate("Playlist", { playlist: item })
+              }
               style={styles.item}
             >
               <View style={styles.image}>

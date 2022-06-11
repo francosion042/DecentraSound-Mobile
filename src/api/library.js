@@ -265,6 +265,19 @@ export const createPlaylist = async ({ userid, name, description }) => {
   }
 };
 
+export const getUserPlaylists = async ({ userid }) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_BASE_URL}/library/users/${userid}/playlists`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addSongToPlaylist = async ({ playlistId, songId }) => {
   try {
     const response = await axios.post(
