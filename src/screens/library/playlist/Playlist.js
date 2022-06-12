@@ -227,9 +227,9 @@ const Playlist = ({ navigation }) => {
               onPress={() => {}}
               style={styles.btn}
               styleText={styles.btnText}
-              icon="shuffle"
+              icon="plus"
               styleIcon={styles.btnIcon}
-              text="Shuffle"
+              text="Add Song"
             />
           </View>
         </View>

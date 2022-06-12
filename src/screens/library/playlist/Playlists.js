@@ -44,7 +44,7 @@ const Playlists = ({ navigation }) => {
 
   const handlePress = (item) => {
     if (item.id === 0) {
-      console.log("create");
+      navigation.navigate("CreatePlaylist");
     } else {
       navigation.navigate("Playlist", { playlist: item });
     }
@@ -91,7 +91,13 @@ const Playlists = ({ navigation }) => {
                   )}
                 </View>
               )}
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={[
+                  styles.title,
+                  { color: item.id === 0 ? colors.brandPrimary : colors.white },
+                ]}
+                numberOfLines={1}
+              >
                 {item.name}
               </Text>
             </TouchableOpacity>
@@ -132,7 +138,6 @@ const styles = StyleSheet.create({
   },
   title: {
     ...gStyle.textBold14,
-    color: colors.white,
     marginTop: 4,
     textAlign: "center",
   },

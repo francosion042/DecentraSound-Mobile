@@ -68,13 +68,15 @@ const styles = StyleSheet.create({
     ...gStyle.textBold18,
     color: colors.white,
     paddingBottom: 6,
-    textAlign: "center",
+    paddingLeft: 16,
+    textAlign: "left",
   },
   tagline: {
     ...gStyle.text12,
     color: colors.greyInactive,
     paddingBottom: 6,
-    textAlign: "center",
+    paddingLeft: 16,
+    textAlign: "left",
   },
   item: {
     marginRight: 16,
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.greyLight,
     height: 148,
     width: 148,
-    borderRadius: 100,
+    borderRadius: 5,
   },
   title: {
     ...gStyle.textBold12,
