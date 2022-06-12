@@ -150,6 +150,15 @@ const ModalSongOptions = ({ navigation }) => {
       return liked ? "Unlike Song" : item.title;
     }
   };
+
+  const setIcon = (item) => {
+    if (item.action === "saveSong") {
+      return isSongSaved ? "playlist-add-check" : item.icon;
+    }
+    if (item.action === "likeSong") {
+      return liked ? "heart" : item.icon;
+    }
+  };
   return (
     <Modal
       animationType="slide"
@@ -191,7 +200,7 @@ const ModalSongOptions = ({ navigation }) => {
               <LineItemCategory
                 key={item.id}
                 disableRightSide
-                icon={item.icon}
+                icon={setIcon(item) || item.icon}
                 iconLibrary={item.lib}
                 onPress={() => handleAction(item.action)}
                 title={setTitle(item) || item.title}

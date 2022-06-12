@@ -197,6 +197,7 @@ const Album = ({ navigation }) => {
         </Animated.View>
         <View style={styles.header}>
           <TouchIcon
+            style={styles.headerBtn}
             icon={<Feather color={colors.white} name="chevron-left" />}
             onPress={() => navigation.goBack(null)}
           />
@@ -204,6 +205,7 @@ const Album = ({ navigation }) => {
             <Text style={styles.headerTitle}>{album.title}</Text>
           </Animated.View>
           <TouchIcon
+            style={styles.headerBtn}
             icon={<Feather color={colors.white} name="more-vertical" />}
             onPress={() => {
               updateShowTabBarState(false);
@@ -359,6 +361,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
+  },
+  headerBtn: {
+    height: 50,
+    justifyContent: "flex-start",
   },
   headerTitle: {
     ...gStyle.textBold16,

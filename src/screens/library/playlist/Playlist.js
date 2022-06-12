@@ -131,7 +131,7 @@ const Playlist = ({ navigation }) => {
   });
 
   // Playlist data not set?
-  if (Playlist === null) {
+  if (playlist === null) {
     return <Loading />;
   }
 
@@ -149,6 +149,7 @@ const Playlist = ({ navigation }) => {
         </Animated.View>
         <View style={styles.header}>
           <TouchIcon
+            style={styles.headerBtn}
             icon={<Feather color={colors.white} name="chevron-left" />}
             onPress={() => navigation.goBack(null)}
           />
@@ -156,6 +157,7 @@ const Playlist = ({ navigation }) => {
             <Text style={styles.headerTitle}>{Playlist.title}</Text>
           </Animated.View>
           <TouchIcon
+            style={styles.headerBtn}
             icon={<Feather color={colors.white} name="more-vertical" />}
             onPress={() => {
               updateShowTabBarState(false);
@@ -173,7 +175,13 @@ const Playlist = ({ navigation }) => {
           <LinearGradient fill={playlistColor} />
         </View>
         <View style={styles.containerImage}>
-          <Image source={{ uri: playlist.imageUrl }} style={styles.image} />
+          {playlist.imageUrl ? (
+            <Image source={{ uri: playlist.imageUrl }} style={styles.image} />
+          ) : (
+            <View
+              style={[styles.image, { backgroundColor: colors.greyInactive }]}
+            />
+          )}
         </View>
         <View style={styles.containerTitle}>
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
@@ -303,6 +311,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
+  },
+  headerBtn: {
+    height: 50,
+    justifyContent: "flex-start",
   },
   headerTitle: {
     ...gStyle.textBold16,

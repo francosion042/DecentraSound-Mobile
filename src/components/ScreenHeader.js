@@ -14,6 +14,7 @@ const ScreenHeader = ({ navigation, showBack, title }) => (
     {showBack && (
       <View style={styles.left}>
         <TouchIcon
+          style={styles.backIcon}
           icon={<Feather color={colors.brandPrimary} name="chevron-left" />}
           onPress={() => navigation.goBack(null)}
         />
@@ -62,6 +63,10 @@ const styles = StyleSheet.create({
   },
   left: {
     ...gStyle.flex1,
+    alignItems: "flex-start",
+  },
+  backIcon: {
+    width: "80%",
     alignItems: "flex-start",
   },
 });

@@ -7,6 +7,7 @@ import Home from "../screens/home/Home";
 import Album from "../screens/album/Album";
 import Artist from "../screens/artist/Artist";
 import Playlists from "../screens/library/playlist/Playlists";
+import Playlist from "../screens/library/playlist/Playlist";
 
 // icons
 import SvgTabHome from "../components/icons/Svg.TabHome";
@@ -24,6 +25,7 @@ export default createStackNavigator(
     Album,
     Artist,
     Playlists,
+    Playlist,
   },
   {
     headerMode: "none",

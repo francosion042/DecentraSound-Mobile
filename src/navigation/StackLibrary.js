@@ -12,6 +12,7 @@ import SavedSongs from "../screens/library/song/SavedSongs";
 import SavedAlbums from "../screens/library/SavedAlbums";
 import SavedArtists from "../screens/library/SavedArtists";
 import Playlists from "../screens/library/playlist/Playlists";
+import Playlist from "../screens/library/playlist/Playlist";
 import CreatePlaylist from "../screens/library/playlist/CreatePlaylist";
 
 // icons
@@ -34,6 +35,7 @@ export default createStackNavigator(
     SavedAlbums,
     SavedArtists,
     Playlists,
+    Playlist,
     CreatePlaylist,
     LikedSongs,
     SavedSongs,

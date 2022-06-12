@@ -41,6 +41,7 @@ const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
       {screen !== "artist" && screen !== "mySongs" ? (
         <View style={styles.containerRight}>
           <TouchableOpacity
+            style={styles.optionIcon}
             onPress={() => {
               updateClickedSong(songData);
               toggleSongOptionsModalVisible();
@@ -116,6 +117,10 @@ const styles = StyleSheet.create({
   containerRight: {
     alignItems: "flex-end",
     flex: 1,
+  },
+  optionIcon: {
+    width: "70%",
+    alignItems: "flex-end",
   },
   itemStyle: {
     borderBottomColor: colors.greyLight,

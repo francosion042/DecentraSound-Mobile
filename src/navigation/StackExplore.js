@@ -7,6 +7,7 @@ import Explore from "../screens/explore/Explore";
 import Artist from "../screens/artist/Artist";
 import Album from "../screens/album/Album";
 import Playlists from "../screens/library/playlist/Playlists";
+import Playlist from "../screens/library/playlist/Playlist";
 
 // icons
 import SvgTabExplore from "../components/icons/Svg.TabExplore";
@@ -26,6 +27,7 @@ export default createStackNavigator(
     Artist,
     Album,
     Playlists,
+    Playlist,
   },
   {
     headerMode: "none",
