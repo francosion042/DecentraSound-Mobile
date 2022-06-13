@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "icon": "share-alternative",
+    "title": "Share",
+    "lib": "Entypo",
+    "action": "share"
+  },
+  {
+    "id": 2,
+    "icon": "heart-o",
+    "title": "Like all songs",
+    "lib": "FontAwesome",
+    "action": "likeAllSongs"
+  },
+  {
+    "id": 3,
+    "icon": "queue-music",
+    "title": "Delete playlist",
+    "lib": "MaterialIcons",
+    "action": "deletePlaylist"
+  }
+]

@@ -8,6 +8,7 @@ import TabNavigation from "./TabNavigation";
 import ModalMusicPlayer from "../screens/playing/ModalMusicPlayer";
 import ModalAlbumOptions from "../components/ModalAlbumOptions";
 import ModalAccountOptions from "../screens/account/ModalAccountOptions";
+import ModalPlaylistOptions from "../components/ModalPlaylistOptions";
 
 const StackNavigator = createStackNavigator(
   {
@@ -39,6 +40,27 @@ const StackNavigator = createStackNavigator(
     },
     ModalAlbumOptions: {
       screen: ModalAlbumOptions,
+      navigationOptions: {
+        cardStyle: { backgroundColor: "transparent" },
+        cardStyleInterpolator: ({ current: { progress } }) => ({
+          cardStyle: {
+            opacity: progress.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 1],
+            }),
+          },
+          overlayStyle: {
+            opacity: progress.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 0.5],
+              extrapolate: "clamp",
+            }),
+          },
+        }),
+      },
+    },
+    ModalPlaylistOptions: {
+      screen: ModalPlaylistOptions,
       navigationOptions: {
         cardStyle: { backgroundColor: "transparent" },
         cardStyleInterpolator: ({ current: { progress } }) => ({
