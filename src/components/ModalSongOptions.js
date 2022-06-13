@@ -70,6 +70,9 @@ const ModalSongOptions = ({ navigation }) => {
     } else if (action === "viewArtist" && artist !== null) {
       navigation.navigate("Artist", { artist: artist });
       toggleSongOptionsModalVisible();
+    } else if (action === "addToPlaylist") {
+      navigation.navigate("Playlists", { addSongToPlaylist: clickedSong });
+      toggleSongOptionsModalVisible();
     } else if (action === "likeSong") {
       if (!liked) {
         try {

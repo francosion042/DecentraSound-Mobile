@@ -46,7 +46,12 @@ const Playlists = ({ navigation }) => {
     if (item.id === 0) {
       navigation.navigate("CreatePlaylist");
     } else {
-      navigation.navigate("Playlist", { playlist: item });
+      const addSongToPlaylist = navigation.getParam("addSongToPlaylist");
+      if (addSongToPlaylist) {
+        console.log("Add Song");
+      } else {
+        navigation.navigate("Playlist", { playlist: item });
+      }
     }
   };
 
