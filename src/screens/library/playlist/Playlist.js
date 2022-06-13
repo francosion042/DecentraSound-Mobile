@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import {
@@ -12,13 +13,14 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { colors, device, gStyle } from "../../../constants";
-import { ScreenContext, PlayingContext } from "../../../contexts";
+import { ScreenContext, PlayingContext, UserContext } from "../../../contexts";
 import TrackPlayer, {
   usePlaybackState,
   State,
   Event,
   useTrackPlayerEvents,
 } from "react-native-track-player";
+import { getUserPlaylistById } from "../../../api";
 import SetupPlayer from "../../playing/SetupPlayer";
 
 // components
@@ -29,6 +31,7 @@ import TouchText from "../../../components/TouchText";
 import Loading from "../../../components/Loading";
 
 const Playlist = ({ navigation }) => {
+  const { getUser } = useContext(UserContext);
   const { showTabBarState, updateShowTabBarState } = useContext(ScreenContext);
   const {
     currentSongData,
@@ -45,8 +48,31 @@ const Playlist = ({ navigation }) => {
 
   const activeSongTitle = currentSongData ? currentSongData.title : "";
 
-  useEffect(() => {
-    setPlaylist(navigation.getParam("playlist") || null);
+  useEffect(async () => {
+    const playlistParam = navigation.getParam("playlist");
+
+    const user = await getUser();
+
+    try {
+      const response = await getUserPlaylistById({
+        userid: user.id,
+        playlistId: playlistParam.id,
+      });
+
+      if (response && response.data) {
+        const playlists = response.data.data.map((playlistRec) => {
+          return {
+            ...playlistRec,
+            songs: playlistRec.userPlaylistSongs.map(
+              (userPlaylistSong) => userPlaylistSong.song
+            ),
+          };
+        });
+        setPlaylist(playlists[0]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }, [navigation, playlist]);
 
   const toggleDownloaded = (val) => {

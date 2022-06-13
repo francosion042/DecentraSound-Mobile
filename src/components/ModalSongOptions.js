@@ -68,11 +68,11 @@ const ModalSongOptions = ({ navigation }) => {
         }
       }
     } else if (action === "viewArtist" && artist !== null) {
+      await toggleSongOptionsModalVisible();
       navigation.navigate("Artist", { artist: artist });
-      toggleSongOptionsModalVisible();
     } else if (action === "addToPlaylist") {
+      await toggleSongOptionsModalVisible();
       navigation.navigate("Playlists", { addSongToPlaylist: clickedSong });
-      toggleSongOptionsModalVisible();
     } else if (action === "likeSong") {
       if (!liked) {
         try {

@@ -66,7 +66,7 @@ const SavedSongs = () => {
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
-        <ScreenHeader showBack={true} title="Your Songs" />
+        <ScreenHeader showBack={true} title="Saved Songs" />
       </View>
       {isLoading ? (
         <Loading />

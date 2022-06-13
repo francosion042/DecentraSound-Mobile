@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { withNavigation } from "react-navigation";
-import { colors, device, gStyle } from "../../../constants";
+import { colors, device, func, gStyle } from "../../../constants";
 import ScreenHeader from "../../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../../contexts";
 import { getUserPlaylists, addSongToPlaylist } from "../../../api";
@@ -55,9 +55,8 @@ const Playlists = ({ navigation }) => {
     if (item.id === 0) {
       navigation.navigate("CreatePlaylist");
     } else {
-      const addSong = navigation.getParam("addSongToPlaylist");
+      let addSong = navigation.getParam("addSongToPlaylist");
       if (addSong) {
-        console.log("Add Song");
         try {
           const response = await addSongToPlaylist({
             playlistId: item.id,
@@ -65,15 +64,21 @@ const Playlists = ({ navigation }) => {
           });
 
           if (response && response.data) {
-            handlePlaylists();
-            navigation.navigate("Playlist", { playlist: item });
+            navigation.setParams({ addSongToPlaylist: null });
+            navigation.navigate("Playlist", {
+              playlist: item,
+              playlistColor: func.getRandomColor(),
+            });
           }
           setIsLoading(false);
         } catch (error) {
           console.log(error);
         }
       } else {
-        navigation.navigate("Playlist", { playlist: item });
+        navigation.navigate("Playlist", {
+          playlist: item,
+          playlistColor: func.getRandomColor(),
+        });
       }
     }
   };
