@@ -14,7 +14,7 @@ import { withNavigation } from "react-navigation";
 import { colors, device, gStyle } from "../../../constants";
 import ScreenHeader from "../../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../../contexts";
-import { getUserPlaylists } from "../../../api";
+import { getUserPlaylists, addSongToPlaylist } from "../../../api";
 import Loading from "../../../components/Loading";
 
 const Playlists = ({ navigation }) => {
@@ -34,7 +34,16 @@ const Playlists = ({ navigation }) => {
       const response = await getUserPlaylists({ userid: user.id });
 
       if (response && response.data) {
-        updateUserPlaylists([createPlaylistButton, ...response.data.data]);
+        const playlists = response.data.data.map((playlist) => {
+          return {
+            ...playlist,
+            songs: playlist.userPlaylistSongs.map(
+              (userPlaylistSong) => userPlaylistSong.song
+            ),
+          };
+        });
+
+        updateUserPlaylists([createPlaylistButton, ...playlists]);
       }
       setIsLoading(false);
     } catch (error) {
@@ -42,13 +51,27 @@ const Playlists = ({ navigation }) => {
     }
   };
 
-  const handlePress = (item) => {
+  const handlePress = async (item) => {
     if (item.id === 0) {
       navigation.navigate("CreatePlaylist");
     } else {
-      const addSongToPlaylist = navigation.getParam("addSongToPlaylist");
-      if (addSongToPlaylist) {
+      const addSong = navigation.getParam("addSongToPlaylist");
+      if (addSong) {
         console.log("Add Song");
+        try {
+          const response = await addSongToPlaylist({
+            playlistId: item.id,
+            songId: addSong.songId,
+          });
+
+          if (response && response.data) {
+            handlePlaylists();
+            navigation.navigate("Playlist", { playlist: item });
+          }
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
       } else {
         navigation.navigate("Playlist", { playlist: item });
       }

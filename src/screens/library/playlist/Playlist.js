@@ -208,6 +208,7 @@ const Playlist = ({ navigation }) => {
           </Animated.View>
           <View style={styles.containerShuffle}>
             <TouchText
+              disabled={playlist.songs ? false : true}
               onPress={() => {
                 handlePlayAll(
                   playBackState === State.Playing ? "stop" : "play"
@@ -235,9 +236,9 @@ const Playlist = ({ navigation }) => {
               onPress={() => {}}
               style={styles.btn}
               styleText={styles.btnText}
-              icon="plus"
+              icon="random"
               styleIcon={styles.btnIcon}
-              text="Add Song"
+              text="Shuffle"
             />
           </View>
         </View>
