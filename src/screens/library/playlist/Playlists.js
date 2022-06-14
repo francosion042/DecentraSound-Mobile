@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { withNavigation } from "react-navigation";
+import { withNavigation, NavigationEvents } from "react-navigation";
 import { colors, device, func, gStyle } from "../../../constants";
 import ScreenHeader from "../../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../../contexts";
@@ -87,7 +87,6 @@ const Playlists = ({ navigation }) => {
     if (userPlaylists.length !== 0) {
       setIsLoading(false);
     }
-    handlePlaylists();
   }, []);
 
   return (
@@ -95,6 +94,12 @@ const Playlists = ({ navigation }) => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Playlists" />
       </View>
+      <NavigationEvents
+        onWillFocus={() => {
+          // Do your things here
+          handlePlaylists();
+        }}
+      />
       {isLoading ? (
         <Loading />
       ) : (

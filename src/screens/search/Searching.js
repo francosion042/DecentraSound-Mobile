@@ -34,7 +34,6 @@ const Searching = ({ navigation }) => {
   };
 
   const handleSongPress = async (songData) => {
-    console.log("called");
     const songIndex = searchResultSongs.findIndex(
       (song) => song.tokenId === songData.tokenId
     );
@@ -44,7 +43,6 @@ const Searching = ({ navigation }) => {
 
     await SetupPlayer([searchResultSongs[songIndex]], repeat);
 
-    // await TrackPlayer.skip(songIndex);
     await TrackPlayer.play();
   };
 

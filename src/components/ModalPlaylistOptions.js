@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import {
   Text,
@@ -13,13 +12,14 @@ import {
 } from "react-native";
 import { device, gStyle, colors, fonts } from "../constants";
 import { ScreenContext, UserContext } from "../contexts";
-import {} from "../api";
+import { deletePlaylist } from "../api";
 
 // components
 import LineItemCategory from "./LineItemCategory";
 
 // mock data
 import playlistOptions from "../mockdata/menuPlaylistOptions.json";
+import Loading from "./Loading";
 
 const ModalPlaylistOptions = ({ navigation }) => {
   const playlist = navigation.getParam("playlist");
@@ -38,11 +38,25 @@ const ModalPlaylistOptions = ({ navigation }) => {
 
   const handleAction = async (action) => {
     const user = await getUser();
+
+    if (action === "deletePlaylist") {
+      await updateShowTabBarState(true);
+      navigation.navigate("Playlists");
+      try {
+        await deletePlaylist({
+          userid: user.id,
+          playlistId: playlist.id,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
-  useEffect(async () => {
-    const user = await getUser();
-  }, []);
+  // Playlist data not set?
+  if (!playlist) {
+    return <Loading />;
+  }
 
   return (
     <React.Fragment>

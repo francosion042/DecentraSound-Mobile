@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { NavigationEvents } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle, func } from "../../constants";
 import { ScreenContext, SearchContext } from "../../contexts";
@@ -41,7 +42,6 @@ const Search = ({ navigation }) => {
     if (genres.length !== 0) {
       setIsLoading(false);
     }
-    handleGenres();
   }, []);
 
   const [scrollY] = useState(new Animated.Value(0));
@@ -56,6 +56,12 @@ const Search = ({ navigation }) => {
 
   return (
     <Fragment>
+      <NavigationEvents
+        onWillFocus={() => {
+          // Do your things here
+          handleGenres();
+        }}
+      />
       <Animated.ScrollView
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],

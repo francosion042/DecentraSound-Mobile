@@ -2,6 +2,7 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import { device, gStyle } from "../../../constants";
 import React, { useContext, useEffect, useState } from "react";
+import { NavigationEvents } from "react-navigation";
 import ScreenHeader from "../../../components/ScreenHeader";
 import { PlayingContext, LibraryContext, UserContext } from "../../../contexts";
 import LineItemSong from "../../../components/LineItemSong";
@@ -37,7 +38,6 @@ const SavedSongs = () => {
     if (userSavedSongs.length !== 0) {
       setIsLoading(false);
     }
-    handleUserSavedSongs();
   }, []);
 
   const [downloaded] = useState(false);
@@ -68,6 +68,12 @@ const SavedSongs = () => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Saved Songs" />
       </View>
+      <NavigationEvents
+        onWillFocus={() => {
+          // Do your things here
+          handleUserSavedSongs();
+        }}
+      />
       {isLoading ? (
         <Loading />
       ) : (
@@ -87,7 +93,7 @@ const SavedSongs = () => {
                 contractAddress: item.contractAddress
                   ? item.contractAddress
                   : "Unknown Album",
-                artist: "Artist",
+                artist: item.artist.name,
                 artistId: item.artist.id,
                 image: item.imageUrl,
                 length: 4214241,

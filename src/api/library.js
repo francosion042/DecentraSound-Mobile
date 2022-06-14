@@ -303,3 +303,16 @@ export const addSongToPlaylist = async ({ playlistId, songId }) => {
     console.log(error);
   }
 };
+
+export const deletePlaylist = async ({ userid, playlistId }) => {
+  try {
+    const response = await axios.delete(
+      `${BACKEND_BASE_URL}/library/users/${userid}/playlists/${playlistId}`
+    );
+    if (response.status === 200 && response.data) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

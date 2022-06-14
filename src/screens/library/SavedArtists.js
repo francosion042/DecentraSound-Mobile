@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { withNavigation } from "react-navigation";
+import { withNavigation, NavigationEvents } from "react-navigation";
 import { colors, device, gStyle } from "../../constants";
 import ScreenHeader from "../../components/ScreenHeader";
 import { LibraryContext, UserContext } from "../../contexts";
@@ -45,7 +45,6 @@ const SavedArtists = ({ navigation }) => {
     if (userSavedArtists.length !== 0) {
       setIsLoading(false);
     }
-    handleSavedArtists();
   }, []);
 
   return (
@@ -53,7 +52,12 @@ const SavedArtists = ({ navigation }) => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Saved Artists" />
       </View>
-
+      <NavigationEvents
+        onWillFocus={() => {
+          // Do your things here
+          handleSavedArtists();
+        }}
+      />
       {isLoading ? (
         <Loading />
       ) : (

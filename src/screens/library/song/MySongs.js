@@ -2,6 +2,7 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import { device, gStyle } from "../../../constants";
 import React, { useContext, useEffect, useState } from "react";
+import { NavigationEvents } from "react-navigation";
 import ScreenHeader from "../../../components/ScreenHeader";
 import { PlayingContext, LibraryContext, UserContext } from "../../../contexts";
 import LineItemSong from "../../../components/LineItemSong";
@@ -35,7 +36,6 @@ const MySongs = ({ navigation }) => {
     if (userOwnedSongs.length !== 0) {
       setIsLoading(false);
     }
-    handleUserOwnedSongs();
   }, []);
 
   const [downloaded] = useState(false);
@@ -61,6 +61,12 @@ const MySongs = ({ navigation }) => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Your Songs" />
       </View>
+      <NavigationEvents
+        onWillFocus={() => {
+          // Do your things here
+          handleUserOwnedSongs();
+        }}
+      />
       {isLoading ? (
         <Loading />
       ) : (
