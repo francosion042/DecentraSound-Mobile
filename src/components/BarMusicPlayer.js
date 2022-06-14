@@ -78,7 +78,7 @@ const BarMusicPlayer = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={gStyle.activeOpacity}
           hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
-          onPress={() => {}}
+          onPress={togglePlay}
         >
           <AnimatedFontAwesome
             name="refresh"

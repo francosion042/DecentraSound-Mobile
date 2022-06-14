@@ -289,7 +289,7 @@ const ModalMusicPlayer = ({ navigation }) => {
                 {playBackState === State.Buffering ? (
                   <TouchIcon
                     iconSize={80}
-                    onPress={() => {}}
+                    onPress={togglePlay}
                     icon={
                       <AnimatedFontAwesome
                         name="refresh"

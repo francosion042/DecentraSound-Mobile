@@ -19,7 +19,7 @@ const AlbumsBannerHorizontal = ({ data, navigation }) => (
       horizontal
       keyExtractor={({ id }) => id.toString()}
       renderItem={({ item }) => (
-        <View style={styles.itemContainer}>
+        <View style={styles.itemContainer} key={item.id}>
           {item.name && <Text style={styles.heading}>{item.name}</Text>}
           {item.artist.name && (
             <Text style={styles.tagline}>{item.artist.name}</Text>

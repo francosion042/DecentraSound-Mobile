@@ -22,6 +22,7 @@ const ArtistAlbumsHorizontal = ({ data, heading, navigation }) => (
       keyExtractor={({ id }) => id.toString()}
       renderItem={({ item }) => (
         <TouchableOpacity
+          key={item.id}
           activeOpacity={gStyle.activeOpacity}
           hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
           onPress={() =>
