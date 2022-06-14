@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Animated, StyleSheet, View } from "react-native";
+import { NavigationEvents } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, gStyle, func } from "../../constants";
 import { BlurView } from "expo-blur";
@@ -76,6 +77,13 @@ const Home = ({ navigation }) => {
       {device.iPhoneNotch && (
         <Animated.View style={[styles.iPhoneNotch, { opacity: opacityIn }]} />
       )}
+
+      <NavigationEvents
+        onWillFocus={() => {
+          // Do your things here
+          handleTrending();
+        }}
+      />
 
       {showTabBarState ? (
         <BlurView intensity={99} style={styles.blurview} tint="dark" />

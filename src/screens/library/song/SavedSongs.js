@@ -87,18 +87,7 @@ const SavedSongs = () => {
               downloaded={downloaded}
               key={item.tokenId}
               onPress={handlePress}
-              songData={{
-                songId: item.id,
-                tokenId: item.tokenId,
-                contractAddress: item.contractAddress
-                  ? item.contractAddress
-                  : "Unknown Album",
-                artist: item.artist.name,
-                artistId: item.artist.id,
-                image: item.imageUrl,
-                length: 4214241,
-                title: item.title,
-              }}
+              songData={item}
             />
           )}
         />

@@ -58,8 +58,8 @@ const BarMusicPlayer = ({ navigation }) => {
     >
       <Image
         source={
-          currentSongData.image
-            ? { uri: currentSongData.image }
+          currentSongData.imageUrl
+            ? { uri: currentSongData.imageUrl }
             : require("../../assets/icon.png")
         }
         style={styles.image}

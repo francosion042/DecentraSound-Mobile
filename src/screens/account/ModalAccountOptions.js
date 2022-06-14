@@ -12,6 +12,7 @@ import {
   BackHandler,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import TrackPlayer from "react-native-track-player";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { device, gStyle, colors, fonts } from "../../constants";
 import ModalHeader from "../../components/ModalHeader";
@@ -52,6 +53,7 @@ const ModalAccountOptions = ({ navigation }) => {
                 {
                   onPress: () => {
                     connector.killSession();
+                    TrackPlayer.reset();
                     resetScreenData();
                     resetSongData();
                     clearUser();
@@ -92,9 +94,6 @@ const ModalAccountOptions = ({ navigation }) => {
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
             Your Account
           </Text>
-          {/* <Text style={styles.albumInfo}>
-            {`Album by ${album.artist} · ${album.released}`}
-          </Text> */}
         </View>
 
         {Object.keys(accountOptions).map((index) => {

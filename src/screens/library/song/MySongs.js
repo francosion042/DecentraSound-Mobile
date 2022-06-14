@@ -82,16 +82,7 @@ const MySongs = ({ navigation }) => {
               downloaded={downloaded}
               key={item.tokenId}
               onPress={handlePress}
-              songData={{
-                songId: item.id ? item.id : index,
-                tokenId: item.tokenId,
-                contractAddress: item.contractAddress
-                  ? item.contractAddress
-                  : "Unknown Album",
-                artist: "Artist",
-                image: item.imageUrl,
-                title: item.title,
-              }}
+              songData={item}
             />
           )}
         />

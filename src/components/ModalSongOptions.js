@@ -44,7 +44,7 @@ const ModalSongOptions = ({ navigation }) => {
         try {
           const response = await saveSong({
             userid: user.id,
-            songId: clickedSong.songId,
+            songId: clickedSong.id,
           });
 
           if (response && response.data) {
@@ -57,7 +57,7 @@ const ModalSongOptions = ({ navigation }) => {
         try {
           const response = await unsaveSong({
             userid: user.id,
-            songId: clickedSong.songId,
+            songId: clickedSong.id,
           });
 
           if (response && response.data) {
@@ -78,7 +78,7 @@ const ModalSongOptions = ({ navigation }) => {
         try {
           const response = await likeSong({
             userid: user.id,
-            songId: clickedSong.songId,
+            songId: clickedSong.id,
           });
           if (response && response.data) {
             setLiked(true);
@@ -90,7 +90,7 @@ const ModalSongOptions = ({ navigation }) => {
         try {
           const response = await unlikeSong({
             userid: user.id,
-            songId: clickedSong.songId,
+            songId: clickedSong.id,
           });
           if (response && response.data) {
             setLiked(false);
@@ -107,7 +107,7 @@ const ModalSongOptions = ({ navigation }) => {
     try {
       const response = await verifySongSave({
         userid: user.id,
-        songId: clickedSong.songId,
+        songId: clickedSong.id,
       });
 
       if (response && response.data) {
@@ -121,7 +121,7 @@ const ModalSongOptions = ({ navigation }) => {
     try {
       const response = await verifySongLike({
         userid: user.id,
-        songId: clickedSong.songId,
+        songId: clickedSong.id,
       });
       if (response && response.data) {
         const isliked = response.data.data;
@@ -177,8 +177,8 @@ const ModalSongOptions = ({ navigation }) => {
           <View style={styles.container}>
             <Image
               source={
-                clickedSong.image
-                  ? { uri: clickedSong.image }
+                clickedSong.imageUrl
+                  ? { uri: clickedSong.imageUrl }
                   : require("../../assets/icon.png")
               }
               style={styles.image}
@@ -192,7 +192,7 @@ const ModalSongOptions = ({ navigation }) => {
                 {clickedSong.title}
               </Text>
               <View style={gStyle.flexRow}>
-                <Text style={styles.artist}>{clickedSong.artist}</Text>
+                <Text style={styles.artist}>{clickedSong.artist.name}</Text>
               </View>
             </TouchableOpacity>
           </View>

@@ -287,18 +287,7 @@ const Playlist = ({ navigation }) => {
                 downloaded={downloaded}
                 key={index.toString()}
                 onPress={handlePress}
-                songData={{
-                  songId: song.id,
-                  tokenId: song.tokenId,
-                  contractAddress: song.contractAddress
-                    ? song.contractAddress
-                    : "Unknown Playlist",
-                  album: playlist.name,
-                  artist: song.artist.name,
-                  artistId: song.artist.id,
-                  image: song.imageUrl,
-                  title: song.title,
-                }}
+                songData={song}
               />
             ))}
         </View>

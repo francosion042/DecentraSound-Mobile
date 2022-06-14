@@ -91,17 +91,7 @@ const Searching = ({ navigation }) => {
                   active={activeSongTitle === item.song.title}
                   key={item.song.tokenId.toString()}
                   onPress={handleSongPress}
-                  songData={{
-                    songId: item.song.id,
-                    tokenId: item.song.tokenId,
-                    contractAddress: item.song.contractAddress
-                      ? item.song.contractAddress
-                      : "Unknown Album",
-                    artist: item.song.artist.name,
-                    artistId: item.song.artist.id,
-                    image: item.song.imageUrl,
-                    title: item.song.title,
-                  }}
+                  songData={item.song}
                 />
               </TouchableOpacity>
             );

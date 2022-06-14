@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Animated, StyleSheet, View, Text } from "react-native";
+import { NavigationEvents } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, device, func, gStyle } from "../../constants";
 import { BlurView } from "expo-blur";
@@ -56,6 +57,7 @@ const Explore = ({ navigation }) => {
   });
 
   const handleData = async () => {
+    // Get Special Albums
     try {
       const response = await getSpecialAlbums();
 
@@ -66,6 +68,7 @@ const Explore = ({ navigation }) => {
       console.log(error);
     }
 
+    // Get Special ALbums by Genre
     try {
       const response = await getSpecialAlbumsByGenre();
 
@@ -76,6 +79,7 @@ const Explore = ({ navigation }) => {
       console.log(error);
     }
 
+    // Get ALbums By Blockchain
     try {
       const response = await getAlbumsByBlockchain("ETHEREUM");
 
@@ -86,6 +90,7 @@ const Explore = ({ navigation }) => {
       console.log(error);
     }
 
+    // Get Latest ALbums
     try {
       const response = await getLatestAlbums();
 
@@ -96,6 +101,7 @@ const Explore = ({ navigation }) => {
       console.log(error);
     }
 
+    // Get Top Artists
     try {
       const response = await getArtists();
 
@@ -121,6 +127,13 @@ const Explore = ({ navigation }) => {
       {device.iPhoneNotch && (
         <Animated.View style={[styles.iPhoneNotch, { opacity: opacityIn }]} />
       )}
+
+      <NavigationEvents
+        onWillFocus={() => {
+          // Do your things here
+          handleData();
+        }}
+      />
 
       {showTabBarState ? (
         <BlurView intensity={99} style={styles.blurview} tint="dark" />

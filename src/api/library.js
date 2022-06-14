@@ -122,7 +122,7 @@ export const verifySongSave = async ({ userid, songId }) => {
 
 // ///////////////////////////////// ALBUMS //////////////////////////////////////
 
-export const getAlbum = async ({ albumId }) => {
+export const getAlbumById = async ({ albumId }) => {
   try {
     const response = await axios.get(`${BACKEND_BASE_URL}/albums/${albumId}`);
     if (response.status === 200 && response.data) {

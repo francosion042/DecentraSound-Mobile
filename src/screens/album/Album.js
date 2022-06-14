@@ -23,7 +23,7 @@ import TrackPlayer, {
   useTrackPlayerEvents,
 } from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
-import { getArtist } from "../../api";
+import { getAlbumById, getArtist } from "../../api";
 
 // components
 import LinearGradient from "../../components/LinearGradient";
@@ -48,13 +48,19 @@ const Album = ({ navigation }) => {
   const [scrollY] = useState(new Animated.Value(0));
   const [artist, setArtist] = useState(null);
 
-  const activeSongTitle = currentSongData ? currentSongData.title : "";
-
-  useEffect(() => {
-    setAlbum(navigation.getParam("album") || null);
-  }, [navigation, album]);
-
   useEffect(async () => {
+    const albumParam = navigation.getParam("album");
+    try {
+      const response = await getAlbumById({
+        albumId: albumParam.id,
+      });
+
+      if (response && response.data) {
+        setAlbum(response.data.data[0]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
     if (album) {
       // //////////////get Artist Data ///////////////
       try {
@@ -69,7 +75,7 @@ const Album = ({ navigation }) => {
         console.log(error);
       }
     }
-  }, [album]);
+  }, []);
 
   const toggleDownloaded = (val) => {
     // if web
@@ -178,6 +184,8 @@ const Album = ({ navigation }) => {
     extrapolate: "clamp",
   });
 
+  const activeSongTitle = currentSongData ? currentSongData.title : "";
+
   // album data not set?
   if (album === null) {
     return <Loading />;
@@ -265,21 +273,9 @@ const Album = ({ navigation }) => {
               }}
               style={styles.btn}
               styleText={styles.btnText}
-              icon={
-                playBackState === State.Playing
-                  ? "stop"
-                  : playBackState === State.Buffering
-                  ? "stop"
-                  : "play"
-              }
+              icon={playBackState === State.Playing ? "stop" : "play"}
               styleIcon={styles.btnIcon}
-              text={
-                playBackState === State.Playing
-                  ? "Stop"
-                  : playBackState === State.Buffering
-                  ? "Loading"
-                  : "Play"
-              }
+              text={playBackState === State.Playing ? "Stop" : "Play"}
             />
             <TouchText
               onPress={handleMarketPlaceRedirect}
@@ -310,18 +306,7 @@ const Album = ({ navigation }) => {
                 downloaded={downloaded}
                 key={index.toString()}
                 onPress={handlePress}
-                songData={{
-                  songId: song.id,
-                  tokenId: song.tokenId,
-                  contractAddress: song.contractAddress
-                    ? song.contractAddress
-                    : "Unknown Album",
-                  album: album.name,
-                  artist: album.artist.name,
-                  artistId: album.artist.id,
-                  image: song.imageUrl,
-                  title: song.title,
-                }}
+                songData={song}
               />
             ))}
         </View>

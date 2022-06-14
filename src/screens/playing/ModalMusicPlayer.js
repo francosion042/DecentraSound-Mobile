@@ -49,6 +49,7 @@ const ModalMusicPlayer = ({ navigation }) => {
   // THis is called anytime the a track is changed, either by pressing the next or previous buttons, or auto change
   useTrackPlayerEvents([Event.PlaybackTrackChanged], (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
+      console.log(playingSongs[event.nextTrack]);
       updateCurrentSongData(playingSongs[event.nextTrack]);
     }
   });
@@ -76,7 +77,7 @@ const ModalMusicPlayer = ({ navigation }) => {
     try {
       const response = await verifySongLike({
         userid: user.id,
-        songId: currentSongData.songId,
+        songId: currentSongData.id,
       });
       if (response && response.data) {
         const isliked = response.data.data;
@@ -122,7 +123,7 @@ const ModalMusicPlayer = ({ navigation }) => {
       try {
         await likeSong({
           userid: user.id,
-          songId: currentSongData.songId,
+          songId: currentSongData.id,
         });
       } catch (error) {
         console.log(error);
@@ -131,7 +132,7 @@ const ModalMusicPlayer = ({ navigation }) => {
       try {
         await unlikeSong({
           userid: user.id,
-          songId: currentSongData.songId,
+          songId: currentSongData.id,
         });
       } catch (error) {
         console.log(error);
@@ -211,9 +212,9 @@ const ModalMusicPlayer = ({ navigation }) => {
 
         <View style={gStyle.p3}>
           <View style={styles.imageContainer}>
-            {currentSongData.image ? (
+            {currentSongData.imageUrl ? (
               <Image
-                source={{ uri: currentSongData.image }}
+                source={{ uri: currentSongData.imageUrl }}
                 style={styles.image}
               />
             ) : (
@@ -232,7 +233,7 @@ const ModalMusicPlayer = ({ navigation }) => {
               <Text ellipsizeMode="tail" numberOfLines={1} style={styles.song}>
                 {currentSongData.title}
               </Text>
-              <Text style={styles.artist}>{currentSongData.artist}</Text>
+              <Text style={styles.artist}>{currentSongData.artist.name}</Text>
             </View>
             <View style={styles.containerFavorite}>
               <TouchIcon

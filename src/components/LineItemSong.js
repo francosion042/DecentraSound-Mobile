@@ -14,8 +14,8 @@ const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
     <View style={styles.container}>
       <Image
         source={
-          songData.image
-            ? { uri: songData.image }
+          songData.imageUrl
+            ? { uri: songData.imageUrl }
             : require("../../assets/icon.png")
         }
         style={styles.image}
@@ -34,7 +34,7 @@ const LineItemSong = ({ active, downloaded, onPress, songData, screen }) => {
               <Ionicons color={colors.blackBg} name="arrow-down" size={14} />
             </View>
           )}
-          <Text style={styles.artist}>{songData.artist}</Text>
+          <Text style={styles.artist}>{songData.artist.name}</Text>
         </View>
       </TouchableOpacity>
 
@@ -67,13 +67,6 @@ LineItemSong.defaultProps = {
 LineItemSong.propTypes = {
   // required
   onPress: PropTypes.func.isRequired,
-  songData: PropTypes.shape({
-    songId: PropTypes.number.isRequired,
-    contractAddress: PropTypes.string.isRequired,
-    artist: PropTypes.string.isRequired,
-    image: PropTypes.string,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
 
   // optional
   active: PropTypes.bool,
