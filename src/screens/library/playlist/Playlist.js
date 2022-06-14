@@ -132,7 +132,7 @@ const Playlist = ({ navigation }) => {
     } else if (action === "shufflePlay") {
       await SetupPlayer(func.shuffle(playlist.songs), repeat);
 
-      updatePlayingSongs(playlist.songs);
+      updatePlayingSongs(func.shuffle(playlist.songs));
 
       await TrackPlayer.play();
     } else {
@@ -252,9 +252,7 @@ const Playlist = ({ navigation }) => {
             />
             <TouchText
               onPress={() => {
-                handlePlayAll(
-                  playBackState === State.Playing ? "stop" : "shufflePlay"
-                );
+                handlePlayAll("shufflePlay");
               }}
               style={styles.btn}
               styleText={styles.btnText}
