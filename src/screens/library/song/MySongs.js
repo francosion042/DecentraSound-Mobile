@@ -59,7 +59,7 @@ const MySongs = ({ navigation }) => {
   return (
     <View style={gStyle.container}>
       <View style={styles.containerHeader}>
-        <ScreenHeader showBack={true} title="Your Songs" />
+        <ScreenHeader showBack={true} title="Songs In Your Wallet" />
       </View>
       <NavigationEvents
         onWillFocus={() => {

@@ -13,14 +13,20 @@ import SetupPlayer from "../playing/SetupPlayer";
 import ScreenHeader from "../../components/ScreenHeader";
 import ArtistAlbumsHorizontal from "../../components/ArtistAlbumsHorizontal";
 import ArtistSongsHorizontal from "../../components/ArtistSongsHorizontal";
-import { saveArtist, unsaveArtist, verifyArtistSave } from "../../api";
+import {
+  getArtist,
+  saveArtist,
+  unsaveArtist,
+  verifyArtistSave,
+} from "../../api";
+import Loading from "../../components/Loading";
 
 const Artist = ({ navigation }) => {
-  const artist = navigation.getParam("artist");
   const { updateCurrentSongData, updatePlayingSongs, playingSongs, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
   const [isArtistSaved, setIsArtistSave] = useState(false);
+  const [artist, setArtist] = useState(null);
 
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
@@ -31,7 +37,6 @@ const Artist = ({ navigation }) => {
     const songIndex = playingSongs.findIndex(
       (song) => song.tokenId === songData.tokenId
     );
-    console.log(songIndex);
 
     await TrackPlayer.skip(songIndex);
     await TrackPlayer.play();
@@ -71,15 +76,30 @@ const Artist = ({ navigation }) => {
 
   useEffect(async () => {
     const user = await getUser();
+    const artistParam = navigation.getParam("artist");
+
     try {
       const response = await verifyArtistSave({
         userid: user.id,
-        artistId: artist.id,
+        artistId: artistParam.id,
       });
 
       if (response && response.data) {
         const isSaved = response.data.data;
         setIsArtistSave(isSaved);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    / /; /////////////get Artist Data ///////////////
+    try {
+      const response = await getArtist({
+        artistId: artistParam.id,
+      });
+
+      if (response && response.data) {
+        setArtist(response.data.data[0]);
       }
     } catch (error) {
       console.log(error);
@@ -91,63 +111,67 @@ const Artist = ({ navigation }) => {
       <View style={styles.containerHeader}>
         <ScreenHeader showBack={true} title="Artist" />
       </View>
-      <ScrollView style={styles.containerBody}>
-        <View style={styles.artistHeader}>
-          <View style={styles.artistIntro}>
-            <Text style={styles.artistName} numberOfLines={1}>
-              {artist.name}
-            </Text>
-            <FontAwesome
-              name="play-circle"
-              color={colors.brandPrimary}
-              size={40}
-              style={styles.playIcon}
-            />
-          </View>
-          <View style={styles.artistIntro2}>
-            <View style={styles.containerImage}>
-              {artist.imageUrl && (
-                <Image
-                  source={{ uri: artist.imageUrl }}
-                  style={styles.artistImage}
-                />
-              )}
+      {!artist ? (
+        <Loading />
+      ) : (
+        <ScrollView style={styles.containerBody}>
+          <View style={styles.artistHeader}>
+            <View style={styles.artistIntro}>
+              <Text style={styles.artistName} numberOfLines={1}>
+                {artist.name}
+              </Text>
+              <FontAwesome
+                name="play-circle"
+                color={colors.brandPrimary}
+                size={40}
+                style={styles.playIcon}
+              />
             </View>
-            <View>
-              <View style={styles.artistStat}>
-                <Text style={styles.greyText}>
-                  {artist.createdAt.split("T")[0]}
-                </Text>
-                <Text style={styles.whiteText}>
-                  {artist.songs.length} Songs
-                </Text>
+            <View style={styles.artistIntro2}>
+              <View style={styles.containerImage}>
+                {artist.imageUrl && (
+                  <Image
+                    source={{ uri: artist.imageUrl }}
+                    style={styles.artistImage}
+                  />
+                )}
               </View>
-              <TouchableOpacity style={styles.btnAd} onPress={handleSave}>
-                <FontAwesome
-                  name={isArtistSaved ? "minus" : "plus"}
-                  color={colors.brandPrimary}
-                  size={20}
-                />
-                <Text style={styles.btnAddText}>
-                  {isArtistSaved ? "Unsave Artist" : "Save Artist"}
-                </Text>
-              </TouchableOpacity>
+              <View>
+                <View style={styles.artistStat}>
+                  <Text style={styles.greyText}>
+                    {artist.createdAt.split("T")[0]}
+                  </Text>
+                  <Text style={styles.whiteText}>
+                    {artist.songs.length} Songs
+                  </Text>
+                </View>
+                <TouchableOpacity style={styles.btnAd} onPress={handleSave}>
+                  <FontAwesome
+                    name={isArtistSaved ? "minus" : "plus"}
+                    color={colors.brandPrimary}
+                    size={20}
+                  />
+                  <Text style={styles.btnAddText}>
+                    {isArtistSaved ? "Unsave Artist" : "Save Artist"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-        <ArtistSongsHorizontal
-          data={artist.albums}
-          heading="Songs"
-          handlePress={handlePress}
-        />
-        {/* <View style={styles.liner} /> */}
-        <ArtistAlbumsHorizontal data={artist.albums} heading="Albums" />
-        <View style={gStyle.liner} />
-        <View style={styles.containerArtistDescription}>
-          <Text style={styles.descriptionTitle}>About</Text>
-          <Text style={styles.artistDescription}>{artist.description}</Text>
-        </View>
-      </ScrollView>
+          <ArtistSongsHorizontal
+            data={artist.albums}
+            heading="Songs"
+            handlePress={handlePress}
+          />
+          {/* <View style={styles.liner} /> */}
+          <ArtistAlbumsHorizontal data={artist.albums} heading="Albums" />
+          <View style={gStyle.liner} />
+          <View style={styles.containerArtistDescription}>
+            <Text style={styles.descriptionTitle}>About</Text>
+            <Text style={styles.artistDescription}>{artist.description}</Text>
+          </View>
+        </ScrollView>
+      )}
     </View>
   );
 };

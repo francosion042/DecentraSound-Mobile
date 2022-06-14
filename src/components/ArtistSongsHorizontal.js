@@ -32,16 +32,7 @@ const ArtistSongsHorizontal = ({ data, heading, navigation, handlePress }) => {
                   key={song.tokenId}
                   onPress={handlePress}
                   screen="artist"
-                  songData={{
-                    songId: song.id,
-                    tokenId: song.tokenId,
-                    contractAddress: song.contractAddress
-                      ? song.contractAddress
-                      : "Unknown Album",
-                    artist: item.artist.name,
-                    image: song.imageUrl,
-                    title: song.title,
-                  }}
+                  songData={song}
                 />
               </View>
             ))}

@@ -49,7 +49,6 @@ const ModalMusicPlayer = ({ navigation }) => {
   // THis is called anytime the a track is changed, either by pressing the next or previous buttons, or auto change
   useTrackPlayerEvents([Event.PlaybackTrackChanged], (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
-      console.log(playingSongs[event.nextTrack]);
       updateCurrentSongData(playingSongs[event.nextTrack]);
     }
   });
@@ -207,7 +206,9 @@ const ModalMusicPlayer = ({ navigation }) => {
           left={<Feather color={colors.greyLight} name="chevron-down" />}
           leftPress={() => navigation.goBack(null)}
           right={<Feather color={colors.greyLight} name="more-vertical" />}
-          text={currentSongData.contractAddress}
+          text={
+            currentSongData.album ? currentSongData.album.name : "Unknown Album"
+          }
         />
 
         <View style={gStyle.p3}>
@@ -233,7 +234,11 @@ const ModalMusicPlayer = ({ navigation }) => {
               <Text ellipsizeMode="tail" numberOfLines={1} style={styles.song}>
                 {currentSongData.title}
               </Text>
-              <Text style={styles.artist}>{currentSongData.artist.name}</Text>
+              <Text style={styles.artist}>
+                {currentSongData.artist
+                  ? currentSongData.artist.name
+                  : "Unknown Artist"}
+              </Text>
             </View>
             <View style={styles.containerFavorite}>
               <TouchIcon
