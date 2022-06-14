@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
-import { colors, device, gStyle } from "../../../constants";
+import { colors, device, func, gStyle } from "../../../constants";
 import { ScreenContext, PlayingContext, UserContext } from "../../../contexts";
 import TrackPlayer, {
   usePlaybackState,
@@ -111,7 +111,6 @@ const Playlist = ({ navigation }) => {
   });
 
   const handlePress = async (songData) => {
-    updateCurrentSongData(songData);
     await SetupPlayer(playlist.songs, repeat);
 
     updatePlayingSongs(playlist.songs);
@@ -125,8 +124,13 @@ const Playlist = ({ navigation }) => {
   };
   const handlePlayAll = async (action) => {
     if (action === "play") {
-      updateCurrentSongData(playlist.songs[0]);
       await SetupPlayer(playlist.songs, repeat);
+
+      updatePlayingSongs(playlist.songs);
+
+      await TrackPlayer.play();
+    } else if (action === "shufflePlay") {
+      await SetupPlayer(func.shuffle(playlist.songs), repeat);
 
       updatePlayingSongs(playlist.songs);
 
@@ -242,24 +246,16 @@ const Playlist = ({ navigation }) => {
               }}
               style={styles.btn}
               styleText={styles.btnText}
-              icon={
-                playBackState === State.Playing
-                  ? "stop"
-                  : playBackState === State.Buffering
-                  ? "stop"
-                  : "play"
-              }
+              icon={playBackState === State.Playing ? "stop" : "play"}
               styleIcon={styles.btnIcon}
-              text={
-                playBackState === State.Playing
-                  ? "Stop"
-                  : playBackState === State.Buffering
-                  ? "Loading"
-                  : "Play"
-              }
+              text={playBackState === State.Playing ? "Stop" : "Play"}
             />
             <TouchText
-              onPress={() => {}}
+              onPress={() => {
+                handlePlayAll(
+                  playBackState === State.Playing ? "stop" : "shufflePlay"
+                );
+              }}
               style={styles.btn}
               styleText={styles.btnText}
               icon="random"

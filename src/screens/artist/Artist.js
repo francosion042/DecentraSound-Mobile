@@ -22,7 +22,7 @@ import {
 import Loading from "../../components/Loading";
 
 const Artist = ({ navigation }) => {
-  const { updateCurrentSongData, updatePlayingSongs, playingSongs, repeat } =
+  const { updateCurrentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
   const { getUser } = useContext(UserContext);
   const [isArtistSaved, setIsArtistSave] = useState(false);
@@ -30,15 +30,10 @@ const Artist = ({ navigation }) => {
 
   const handlePress = async (songData) => {
     updateCurrentSongData(songData);
-    await SetupPlayer(artist.songs, repeat);
+    await SetupPlayer([songData], repeat);
 
-    updatePlayingSongs(artist.songs);
+    updatePlayingSongs([songData]);
 
-    const songIndex = playingSongs.findIndex(
-      (song) => song.tokenId === songData.tokenId
-    );
-
-    await TrackPlayer.skip(songIndex);
     await TrackPlayer.play();
   };
 

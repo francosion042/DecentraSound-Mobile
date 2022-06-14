@@ -26,7 +26,7 @@ const SetupPlayer = async (songs, repeat) => {
     const track = {
       url: song.audioUrl,
       title: song.title,
-      artist: "Track Artist",
+      artist: song.artist ? song.artist.name : "Unknown Artist",
       artwork: song.imageUrl
         ? song.imageUrl
         : require("../../../assets/icon.png"),

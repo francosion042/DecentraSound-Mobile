@@ -113,7 +113,6 @@ const Album = ({ navigation }) => {
   });
 
   const handlePress = async (songData) => {
-    updateCurrentSongData(songData);
     await SetupPlayer(album.songs, repeat);
 
     updatePlayingSongs(album.songs);
@@ -127,7 +126,6 @@ const Album = ({ navigation }) => {
   };
   const handlePlayAll = async (action) => {
     if (action === "play") {
-      updateCurrentSongData(album.songs[0]);
       await SetupPlayer(album.songs, "Queue");
 
       updatePlayingSongs(album.songs);

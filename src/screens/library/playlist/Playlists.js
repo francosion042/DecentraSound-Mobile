@@ -60,7 +60,7 @@ const Playlists = ({ navigation }) => {
         try {
           const response = await addSongToPlaylist({
             playlistId: item.id,
-            songId: addSong.songId,
+            songId: addSong.id,
           });
 
           if (response && response.data) {

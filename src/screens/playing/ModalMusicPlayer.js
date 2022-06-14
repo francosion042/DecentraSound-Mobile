@@ -22,11 +22,11 @@ import SystemSetting from "react-native-system-setting";
 import * as Animatable from "react-native-animatable";
 import { colors, device, func, gStyle } from "../../constants";
 import { PlayingContext, UserContext } from "../../contexts";
+import { likeSong, unlikeSong, verifySongLike } from "../../api";
 
 // components
 import ModalHeader from "../../components/ModalHeader";
 import TouchIcon from "../../components/TouchIcon";
-import { likeSong, unlikeSong, verifySongLike } from "../../api";
 
 // custom component
 const AnimatedFontAwesome = Animatable.createAnimatableComponent(FontAwesome);
@@ -93,21 +93,29 @@ const ModalMusicPlayer = ({ navigation }) => {
     const intervalId = setInterval(() => {
       Animated.timing(animation, {
         toValue: 1,
-        duration: 5000,
+        duration: 10000,
       }).start(() => {
         Animated.timing(animation, {
           toValue: 0,
-          duration: 5000,
+          duration: 10000,
         }).start();
       });
-    }, 10000);
+    }, 20000);
 
     return () => clearInterval(intervalId);
   }, []);
 
   const boxInterpolation = animation.interpolate({
     inputRange: [0, 0.1, 0.3, 0.5, 0.7, 0.9, 1],
-    outputRange: ["black", "gray", "yellow", "orange", "pink", "white", "red"],
+    outputRange: [
+      "black",
+      "gray",
+      "yellow",
+      "orange",
+      "pink",
+      "white",
+      "lightblue",
+    ],
   });
   const animatedStyle = {
     backgroundColor: boxInterpolation,
@@ -378,7 +386,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerCover: {
-    backgroundColor: colors.black90,
+    backgroundColor: colors.black80,
     height: "100%",
   },
   imageContainer: {
