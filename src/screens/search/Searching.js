@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { View, TextInput, StyleSheet, FlatList } from "react-native";
+import { View, TextInput, StyleSheet, FlatList, Text } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 import { Feather } from "@expo/vector-icons";
 import TrackPlayer from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
-import { colors, device } from "../../constants";
+import { colors, device, gStyle } from "../../constants";
 
 // Components
 import TouchIcon from "../../components/TouchIcon";
@@ -14,13 +14,16 @@ import LineItemArtist from "../../components/LineItemArtist";
 import { search } from "../../api";
 import { PlayingContext, SearchContext } from "../../contexts";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import TouchText from "../../components/TouchText";
 
 const Searching = ({ navigation }) => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
-  const { getSearchHistory, storeSearchHistory } = useContext(SearchContext);
+  const { getSearchHistory, storeSearchHistory, clearSearchHistory } =
+    useContext(SearchContext);
   const [searchResult, setSearchResult] = useState([]);
   const [searchResultSongs, setSearchResultSongs] = useState([]);
+  const [recentlySearched, setRecentlySearched] = useState([]);
 
   const activeSongTitle = currentSongData ? currentSongData.title : "";
 
@@ -29,6 +32,7 @@ const Searching = ({ navigation }) => {
       const response = await search(searchTerm);
       if (response && response.data.data) {
         setSearchResult(response.data.data);
+        setRecentlySearched([]);
       }
     } catch (error) {
       console.log(error);
@@ -51,6 +55,7 @@ const Searching = ({ navigation }) => {
   useEffect(async () => {
     const searchHistory = await getSearchHistory();
 
+    setRecentlySearched(searchHistory);
     setSearchResult(searchHistory);
   }, []);
 
@@ -73,6 +78,21 @@ const Searching = ({ navigation }) => {
           underlineColorAndroid="transparent"
         />
       </View>
+      {recentlySearched.length !== 0 ? (
+        <View style={styles.clearBtnContainer}>
+          <Text style={styles.clearSearchText}>Recently Searched</Text>
+          <TouchText
+            text="Clear"
+            onPress={() => {
+              clearSearchHistory();
+              setSearchResult([]);
+              setRecentlySearched([]);
+            }}
+            style={styles.btn}
+            styleText={styles.btnText}
+          />
+        </View>
+      ) : null}
       <FlatList
         contentContainerStyle={styles.containerFlatlist}
         data={searchResult}
@@ -93,7 +113,10 @@ const Searching = ({ navigation }) => {
             return (
               <TouchableOpacity
                 key={item.dataId.toString()}
-                onPress={() => setSearchResultSongs([item.song])}
+                onPress={() => {
+                  storeSearchHistory(item);
+                  setSearchResultSongs([item.song]);
+                }}
               >
                 <LineItemSong
                   navigation={navigation}
@@ -150,6 +173,33 @@ const styles = StyleSheet.create({
     width: "90%",
     backgroundColor: "#424242",
     color: "#fff",
+  },
+  clearBtnContainer: {
+    marginTop: 20,
+    marginBottom: 10,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingHorizontal: 25,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.grey,
+  },
+  clearSearchText: {
+    ...gStyle.textBold18,
+    color: colors.white,
+  },
+  btn: {
+    backgroundColor: colors.grey,
+    borderRadius: 5,
+    height: 20,
+    width: "20%",
+    flexDirection: "row",
+  },
+  btnText: {
+    ...gStyle.textBold12,
+    color: colors.red,
+    letterSpacing: 1,
+    textTransform: "uppercase",
   },
 });
 

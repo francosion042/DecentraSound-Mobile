@@ -11,8 +11,13 @@ const SearchContextProvider = ({ children }) => {
   };
   const storeSearchHistory = async (value) => {
     const history = await getSearchHistory();
+
+    const filterExistingItem = history.filter(
+      (item) => item.dataId !== value.dataId
+    );
+
     try {
-      const jsonValue = JSON.stringify([value, ...history]);
+      const jsonValue = JSON.stringify([value, ...filterExistingItem]);
       await AsyncStorage.setItem("searchHistory", jsonValue);
     } catch (e) {
       // saving error
