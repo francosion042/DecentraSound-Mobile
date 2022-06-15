@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { View, TextInput, StyleSheet, FlatList } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Feather } from "@expo/vector-icons";
 import TrackPlayer from "react-native-track-player";
 import SetupPlayer from "../playing/SetupPlayer";
@@ -11,12 +12,13 @@ import LineItemAlbum from "../../components/LineItemAlbum";
 import LineItemSong from "../../components/LineItemSong";
 import LineItemArtist from "../../components/LineItemArtist";
 import { search } from "../../api";
-import { PlayingContext } from "../../contexts";
+import { PlayingContext, SearchContext } from "../../contexts";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Searching = ({ navigation }) => {
   const { updateCurrentSongData, currentSongData, updatePlayingSongs, repeat } =
     useContext(PlayingContext);
+  const { getSearchHistory, storeSearchHistory } = useContext(SearchContext);
   const [searchResult, setSearchResult] = useState([]);
   const [searchResultSongs, setSearchResultSongs] = useState([]);
 
@@ -46,6 +48,12 @@ const Searching = ({ navigation }) => {
     await TrackPlayer.play();
   };
 
+  useEffect(async () => {
+    const searchHistory = await getSearchHistory();
+
+    setSearchResult(searchHistory);
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.searchSection}>
@@ -74,9 +82,10 @@ const Searching = ({ navigation }) => {
             return (
               <LineItemAlbum
                 key={item.dataId.toString()}
-                onPress={() =>
-                  navigation.navigate("Album", { album: item.album })
-                }
+                onPress={() => {
+                  storeSearchHistory(item);
+                  navigation.navigate("Album", { album: item.album });
+                }}
                 album={item.album}
               />
             );
@@ -99,9 +108,10 @@ const Searching = ({ navigation }) => {
             return (
               <LineItemArtist
                 key={item.dataId.toString()}
-                onPress={() =>
-                  navigation.navigate("Artist", { artist: item.artist })
-                }
+                onPress={() => {
+                  storeSearchHistory(item);
+                  navigation.navigate("Artist", { artist: item.artist });
+                }}
                 artist={item.artist}
               />
             );
