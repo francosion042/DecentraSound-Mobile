@@ -30,7 +30,7 @@ const SearchContextProvider = ({ children }) => {
 
   const clearSearchHistory = async () => {
     try {
-      await AsyncStorage.removeItem("user");
+      await AsyncStorage.removeItem("searchHistory");
     } catch (e) {
       // saving error
     }
